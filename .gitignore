@@ -9,3 +9,4 @@ data/raw/
 data/processed/
 evals/results/*.json
 evals/results/*.csv
+.env.example
