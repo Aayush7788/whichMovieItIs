@@ -1,0 +1,1 @@
+using the docker for postgresql and pgvector
