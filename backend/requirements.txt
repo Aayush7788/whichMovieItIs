@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic
+psycopg
+sqlalchemy 
+pgvector 
+python-dotenv
+pytest 
+httpx
+ruff
