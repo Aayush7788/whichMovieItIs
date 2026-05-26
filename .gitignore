@@ -5,3 +5,4 @@ dist/
 data/raw/
 data/processed/
 .env.example
+__pycache__
