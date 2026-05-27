@@ -4,10 +4,10 @@ services:
     container_name: whichmovie-postgres
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: whichmovie123!
       POSTGRES_DB: whichmovie
     ports:
-      - "5432:5432"
+      - "55432:5432"
     volumes:
       - whichmovie_pgdata:/var/lib/postgresql/data
 
