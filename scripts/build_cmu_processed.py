@@ -66,6 +66,22 @@ def read_movie_metadata(path: Path) -> dict[str, dict[str, object]]:
             }
     return movies
 
+def read_plot_summaries(path: Path) ->dict[str, str]:
+    plots = {}
+
+    with path.open("r", encoding="utf-8") as file:
+        for line in file:
+            parts = line.rstrip("\n").split("\t", 1)
+
+            if len(parts) != 2:
+                continue
+
+            wikipedia_movie_id, plot_summary = parts
+            plots[wikipedia_movie_id] = plot_summary
+        
+    return plots
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=500)
@@ -73,14 +89,22 @@ def main() -> None:
     args = parser.parse_args()
 
     metadata_path = Raw_dir / "movie.metadata.tsv"
+    plot_path = Raw_dir / "plot_summaries.txt"
+    
     movies = read_movie_metadata(metadata_path)
     print(f"metadata records loaded: {len(movies)}")
-    plot_path = Raw_dir / "plot_summaries.txt"
+    plots = read_plot_summaries(plot_path)
+    joined_ids = set(movies) & set(plots)
+   
 
     print(f"metadata path exits: {metadata_path.exists()}")
     print(f"plot path exits: {plot_path.exists()}")
     print(f"limit: {args.limit}")
     print(f"output: {args.output}")
+    print()
+    print(f"metadata records loaded: {len(movies)}")
+    print(f"plot record loaded: {len(plots)}")
+    print(f"joined records: {len(joined_ids)}")
 
 if __name__ == "__main__":
     main()
