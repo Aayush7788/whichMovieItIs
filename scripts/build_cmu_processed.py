@@ -2,6 +2,7 @@ from __future__ import annotations
 import ast
 import csv
 import argparse
+import json
 from pathlib import Path
 
 Raw_dir = Path("data/raw/MovieSummaries/MovieSummaries")
@@ -113,6 +114,13 @@ def build_records(limit: int, english_us_only:bool) ->list[dict[str, object]]:
             break
     return records   
 
+def write_jsonl(records: list[dict[str, object]], output_path:Path) -> None:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with output_path.open("w", encoding="utf-8") as file:
+        for record in records:
+            file.write(json.dumps(records, ensure_ascii=False) + "\n")
+        
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=500)
@@ -124,6 +132,10 @@ def main() -> None:
         limit=args.limit, 
         english_us_only=not args.include_non_us_english,
     )
+
+    write_jsonl(records, args.output)
+    print(f"records written: {len(records)}")
+    print(f"output: {args.output}")
 
     metadata_path = Raw_dir / "movie.metadata.tsv"
     plot_path = Raw_dir / "plot_summaries.txt"
