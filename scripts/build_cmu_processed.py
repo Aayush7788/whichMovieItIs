@@ -81,16 +81,53 @@ def read_plot_summaries(path: Path) ->dict[str, str]:
         
     return plots
 
+def build_records(limit: int, english_us_only:bool) ->list[dict[str, object]]:
+    metadata_path = Raw_dir / "movie.metadata.tsv"
+    plot_path = Raw_dir / "plot_summaries.txt"
+
+    movies = read_movie_metadata(metadata_path)
+    plots = read_plot_summaries(plot_path)
+
+    records = []
+
+    for wikipedia_movie_id, plot_summary in plots.items():
+        movie = movies.get(wikipedia_movie_id)
+
+        if movie is None:
+            continue
+        if english_us_only:
+            if "English Language" not in movie["languages"]:
+                continue
+            if "United States of America" not in movie["countries"]:
+                continue
+        
+        record = {
+            **movie, 
+            "plot_summary": plot_summary,
+            "source": "cmu_movie_summary_corpus",
+        }
+
+        records.append(record)
+        
+        if limit > 0 and len(records) >= limit:
+            break
+    return records   
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=500)
     parser.add_argument("--output", type=Path, default=default_output)
+    parser.add_argument("--include-non-us-english", action="store_true")
     args = parser.parse_args()
+
+    records = build_records(
+        limit=args.limit, 
+        english_us_only=not args.include_non_us_english,
+    )
 
     metadata_path = Raw_dir / "movie.metadata.tsv"
     plot_path = Raw_dir / "plot_summaries.txt"
-    
+
     movies = read_movie_metadata(metadata_path)
     print(f"metadata records loaded: {len(movies)}")
     plots = read_plot_summaries(plot_path)
@@ -105,6 +142,10 @@ def main() -> None:
     print(f"metadata records loaded: {len(movies)}")
     print(f"plot record loaded: {len(plots)}")
     print(f"joined records: {len(joined_ids)}")
+    print()
+    print(f"records built: {len(records)}")
+    if records:
+        print(f"first title: {records[0]['title']}")
 
 if __name__ == "__main__":
     main()
