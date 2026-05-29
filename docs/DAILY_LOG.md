@@ -10,7 +10,7 @@ and database health endpoint with pydantic, psycopg
 
 learn the database connetion in postgresql with docker with fastapi
 
-## 28/5/26
+## 28-29/5/26
 output in cmu inspection, 
 
 movie metadata rows:81741
@@ -27,3 +27,20 @@ joined ids: 42207
 plot ids without metadata: 99
 metadata ids without plot: 39534
 first unmatched plot ids: ['10083650', '10153756', '10873999', '12651534', '13255982', '133671', '14481527', '14851642', '16758721', '16803295']
+
+- cmu_data_processing
+metadata records loaded: 81741
+metadata path exits: True
+plot path exits: True
+limit: 500
+output: data\processed\cmu_movies_sample.jsonl
+
+- join cmu metadata with plots for processing
+metadata records loaded: 81741
+plot record loaded: 42306
+joined records: 42207
+
+- filter cmu movie for english sample
+
+records built: 500
+first title: The Hunger Games
