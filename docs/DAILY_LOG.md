@@ -44,3 +44,14 @@ joined records: 42207
 
 records built: 500
 first title: The Hunger Games
+
+## 30/5/26
+- make sure that all ports and password are consistent
+- created movie table
+movies table ready
+- loaded cmu sample data into database
+movies loaded: 500
+- added basic movie database search on sample
+(.venv) D:\WhichMovieItIs> python.exe -c "from backend.app.services.search import search_movies; print([m['title'] for m in search_movies('Hunger Games', 3)])"
+['The Hunger Games']
+- added the search (/search) api endpoint
