@@ -118,7 +118,7 @@ def write_jsonl(records: list[dict[str, object]], output_path:Path) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with output_path.open("w", encoding="utf-8") as file:
         for record in records:
-            file.write(json.dumps(records, ensure_ascii=False) + "\n")
+            file.write(json.dumps(record, ensure_ascii=False) + "\n")
         
 
 def main() -> None:
