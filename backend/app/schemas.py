@@ -3,10 +3,10 @@ from pydantic import BaseModel
 class MovieSearchResult(BaseModel):
     wikipedia_movie_id: str
     title: str
-    release_date = str | None
+    release_date: str | None = None
     genres: list[str]
     plot_summary: str
-    score: float | None
+    score: float | None = None
 
 class MovieSearchResponse(BaseModel):
     query: str
