@@ -6,10 +6,10 @@ class Settings(BaseSettings):
     database_url: PostgresDsn | None=None
 
     db_host: str = "localhost"
-    db_port: int = 5433
+    db_port: int = 55433
     db_name: str = "whichmovie"
     db_user: str = "postgres"
-    db_password: str = "postgres"
+    db_password: str = "whichmovie123!"
 
     def build_database_url(self) -> str:
         if self.database_url:
