@@ -41,6 +41,10 @@ h1 {
     color: #000000;
 }
 
+.search-form input:focus {
+    outline: 3px solid rgba(255, 102, 0, 0.2);
+}
+
 .search-form button {
     padding: 14px 20px;
     border: 0;
@@ -49,6 +53,11 @@ h1 {
     color: #082f49;
     font-weight: 700;
     cursor: pointer;
+}
+
+.search-form button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
 }
 
 .results-section {
