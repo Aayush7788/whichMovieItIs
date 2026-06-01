@@ -1,9 +1,15 @@
 import json 
+import argparse
 from pathlib import Path
 from backend.app.db import get_connection
 from psycopg.types.json import Jsonb
 
 default_input = Path("data/processed/cmu_movies_sample.jsonl")
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", type=Path, default=default_input)
+    return parser.parse_args()
 
 insert_movie_sql = """
     insert into movies (
@@ -55,7 +61,8 @@ def read_json(path: Path) -> list[dict[str, object]]:
     return records
 
 def main() -> None:
-    records = read_json(default_input)
+    args = parse_args()
+    records = read_json(args.input)
 
     with get_connection() as conn:
         with conn.cursor() as cur:
@@ -67,6 +74,7 @@ def main() -> None:
                 cur.execute(insert_movie_sql, db_record)
         conn.commit()
     print(f"movies loaded: {len(records)}")
+    print(f"input: {args.input}")
 
 if __name__ == "__main__":
     main()
