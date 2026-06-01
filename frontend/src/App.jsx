@@ -15,7 +15,7 @@ function App(){
     if(!cleanedQuery){
       setStatus("error");
       setErrorMessage("Search for a movie or scene first");
-      setResults([]);
+      setResult([]);
       return;
     }
     setStatus("loading");
@@ -27,13 +27,13 @@ function App(){
         limit: "5",
       });
 
-      const response = await fetch(`\api\search?${params.toString()}`);
+      const response = await fetch(`/api/search?${params.toString()}`);
       if(!response.ok){
         throw new Error(`Search failed with status ${response.status}`)
       }
 
       const data = await response.json();
-      setResult(data.result);
+      setResult(data.results);
       setStatus("success");
     } catch (error) {
       setResult([]);
@@ -65,10 +65,28 @@ function App(){
       </section>
 
       <section className="results-section">
-        {errorMessage ? 
-        (<p className="error-message">{errorMessage}</p>) :
-        (<p className="mutted">Foundings!</p>)
-        }
+        { status === "idle" && (
+          <p className="muted"> Search results </p>
+        )}
+        {status === "loading" && (
+          <p className="muted">Searching movies...</p>
+        )}
+        {status === "error" && (
+          <p className="error-message">{errorMessage}</p>
+        )}
+        {status === "success" && result.length === 0 && (
+          <p className="muted">No matches found in the current sample data</p>
+        )}
+        {status === "success" && result.length > 0 && (
+          <div className="result-list">
+            {result.map((movie)=>(
+              <article className="movie-card" key={movie.wikipedia_movie_id}>
+                <h2>{movie.title}</h2>
+                {movie.release_date && <p>{movie.release_date}</p>}
+              </article>
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );
