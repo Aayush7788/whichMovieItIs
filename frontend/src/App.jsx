@@ -4,10 +4,18 @@ import "./App.css"
 function App(){
 
   const [query, setQuery] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   function handleSearch(event) {
     event.preventDefault();
-    console.log(query);
+
+    const cleanedQuery = query.trim();
+    if(!cleanedQuery){
+      setErrorMessage("Search for a movie or scene first");
+      return;
+    }
+    setErrorMessage("");
+    console.log(cleanedQuery);
   }
 
   return(
@@ -30,7 +38,10 @@ function App(){
       </section>
 
       <section className="results-section">
-        <p className="mutted">Foundings!</p>
+        {errorMessage ? 
+        (<p className="error-message">{errorMessage}</p>) :
+        (<p className="mutted">Foundings!</p>)
+        }
       </section>
     </main>
   );
