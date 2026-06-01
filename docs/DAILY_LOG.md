@@ -55,3 +55,8 @@ movies loaded: 500
 (.venv) D:\WhichMovieItIs> python.exe -c "from backend.app.services.search import search_movies; print([m['title'] for m in search_movies('Hunger Games', 3)])"
 ['The Hunger Games']
 - added the search (/search) api endpoint
+
+## 1/6/26
+- make the frontend 
+- connected the search api to the frontend
+(![bacis frontend for the checking search api](image.png))
