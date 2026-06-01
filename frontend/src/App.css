@@ -9,7 +9,7 @@
     margin: 0 0 12px;
     color: #ff6600;
     font-weight: 800;
-    letter-spacing: 0.0.8em;
+    letter-spacing: 0.08em;
 }
 
 h1 {
@@ -98,7 +98,7 @@ h1 {
 
 @media (max-width: 700px) {
     .app-shell {
-        width: min(100%,, calc(100% - 24px));
+        width: min(100%, calc(100% - 24px));
         padding: 32px 0;
     }
 
