@@ -20,6 +20,9 @@ movie_metadata_columns = [
     "genres",
 ]
 
+def clean_text(value: str) -> str:
+    return value.encode("utf-16", "surrogatepass").decode("utf-16", "replace")
+
 def parse_map_values(value: str) -> list[str]:
     if value == "":
         return []
@@ -32,7 +35,7 @@ def parse_map_values(value: str) -> list[str]:
     if not isinstance(parsed, dict):
         return []
 
-    return [str(item) for item in parsed.values()]
+    return [clean_text(str(item)) for item in parsed.values()]
 
 def parse_float(value: str) -> float | None:
     if value == "":
