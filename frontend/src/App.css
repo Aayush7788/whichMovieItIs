@@ -17,7 +17,6 @@
     color: #ff6600;
     font-weight: 800;
     letter-spacing: 0.0.8em;
-    /* text-transform: ; */
 }
 
 h1 {
@@ -26,9 +25,9 @@ h1 {
     line-height: 1;
 }
 
-.subtile {
+.subtitle {
     max-width: 640px;
-    color: #cbd5e1;
+    color: #000000;
     font-size:  1.1rem;
     line-height: 1.6;
 }
@@ -59,7 +58,7 @@ h1 {
     cursor: pointer;
 }
 
-.result-section {
+.results-section {
     margin-top: 28px;
 }
 
