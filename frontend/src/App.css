@@ -68,10 +68,31 @@ h1 {
     color: #94a3b8;
 }
 
-.examples {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 16px;
+.error-message {
+    color: #b91c1c;
+    font-weight: 700;
+}
+
+.result-list {
+    display: grid;
+    gap: 16px;
+}
+
+.movie-card {
+    padding: 20px;
+    border: 1px solid #fed7aa;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+.movie-card h2 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+}
+
+.movie-card p {
+    margin: 0;
+    color: #475569;
 }
 
