@@ -60,3 +60,22 @@ movies loaded: 500
 - make the frontend 
 - connected the search api to the frontend
 (![bacis frontend for the checking search api](image.png))
+
+- loaded full 42k+ movies in database
+records written: 42207
+output: data\processed\cmu_movies_full.jsonl
+metadata records loaded: 81741
+metadata path exits: True
+plot path exits: True
+limit: 0
+output: data\processed\cmu_movies_full.jsonl
+
+metadata records loaded: 81741
+plot record loaded: 42306
+joined records: 42207
+
+records built: 42207
+first title: Taxi Blues
+
+- verified the search still work
+![verfied search still work](image-1.png)
