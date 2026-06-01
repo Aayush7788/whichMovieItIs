@@ -5,16 +5,41 @@ function App(){
 
   const [query, setQuery] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [result, setResult] = useState([]);
+  const [status, setStatus] = useState("idle");
 
-  function handleSearch(event) {
+  async function handleSearch(event) {
     event.preventDefault();
 
     const cleanedQuery = query.trim();
     if(!cleanedQuery){
+      setStatus("error");
       setErrorMessage("Search for a movie or scene first");
+      setResults([]);
       return;
     }
+    setStatus("loading");
     setErrorMessage("");
+
+    try{
+      const params = new URLSearchParams({
+        q: cleanedQuery,
+        limit: "5",
+      });
+
+      const response = await fetch(`\api\search?${params.toString()}`);
+      if(!response.ok){
+        throw new Error(`Search failed with status ${response.status}`)
+      }
+
+      const data = await response.json();
+      setResult(data.result);
+      setStatus("success");
+    } catch (error) {
+      setResult([]);
+      setStatus("error");
+      setErrorMessage(error.message);
+    }
     console.log(cleanedQuery);
   }
 
@@ -33,7 +58,9 @@ function App(){
             onChange={(event) => setQuery(event.target.value)} 
             placeholder="Example: Spaceship enter in wormhole." 
           />
-          <button type="submit">Search</button>
+          <button type="submit" disabled={status === "loading"}>
+            {status === "loading" ? "searching...": "search"}  
+          </button>
         </form>
       </section>
 
