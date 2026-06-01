@@ -5,13 +5,6 @@
     padding: 64px 140px;
 }
 
-.hero {
-    padding: 40px;
-    border: 1px solid #334155;
-    border-radius: 24px;
-    background: #000000;
-}
-
 .eyebrow {
     margin: 0 0 12px;
     color: #ff6600;
@@ -43,7 +36,7 @@ h1 {
     min-width: 0;
     padding: 14px 16px;
     border: 1px solid #475569;
-    border-radius: 12px;
+    border-radius: 3px;
     background: #fff5e9;
     color: #000000;
 }
@@ -51,7 +44,7 @@ h1 {
 .search-form button {
     padding: 14px 20px;
     border: 0;
-    border-radius: 12px;
+    border-radius: 3px;
     background: #ff6600;
     color: #082f49;
     font-weight: 700;
@@ -65,3 +58,11 @@ h1 {
 .muted {
     color: #94a3b8;
 }
+
+.examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
