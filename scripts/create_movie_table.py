@@ -23,11 +23,27 @@ create table if not exists movies (
 );
 """
 
+add_search_vector_column_sql = """
+    alter table movies
+    add column if not exists search_vector tsvector
+    generated always as (
+        setweight(to_tsvector('english', coalesce(title, '')), 'A') ||
+        setweight(to_tsvector('english', coalesce(plot_summary, '')), 'B')
+    ) stored;
+"""
+
+create_search_vector_index_sql = """
+    create index  if not exists movies_search_vector_idx
+    on movies using gin (search_vector);
+"""
+
 def main()-> None:
     with get_connection() as conn:
         with conn.cursor() as cur:
             cur.execute(create_vector_extension_sql)
             cur.execute(create_movie_table_sql) 
+            cur.execute(add_search_vector_column_sql)
+            cur.execute(create_search_vector_index_sql)
         conn.commit()
 
     print("movies table ready")
