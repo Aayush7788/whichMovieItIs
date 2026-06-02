@@ -79,3 +79,15 @@ first title: Taxi Blues
 
 - verified the search still work
 ![verfied search still work](image-1.png)
+
+## 2/6/26
+- implemented the full-text search 
+- added genrated search_vector column with weight title and plot summay
+- gin index for faster text search
+- output:
+
+love => [('Bodyguard', 14.400001), ('God of Love', 12.2), ('Orange', 6.8), ('Pyaar Ishq Aur Mohabbat', 6.8), ('Kadhir', 6.4), ('Mohabbatein', 6.0), ('Moulin Rouge!', 6.0), ('Saawariya', 6.0), ('Save The Last Dance for Me', 6.0), ('Summer Wars', 6.0), ('When in Rome', 6.0), ('All About Love', 5.8), ('Love Actually', 5.8), ('Cyrano de Bergerac', 5.6), ('Down with Love', 5.4), ('Albela', 5.2), ('Dil To Pagal Hai', 5.2), ('Kurt & Courtney', 5.2), ('Pasión de gavilanes', 5.2), ('Super Star', 5.2)]
+war => [('Oh! What a Lovely War', 5.0), ('Breaker Morant', 4.8), ("The War You Don't See", 4.6), ('Born on the Fourth of July', 4.4), ('North and South', 4.4), ('The Life and Death of Colonel Blimp', 4.4), ('Hiroshima', 4.0), ('InuYasha the Movie: Fire on the Mystic Island', 4.0), ('The Weight of Chains', 4.0), ('Prelude to War', 3.8), ('Robot Chicken: Star Wars Episode II', 3.8), ('War Horse', 3.8), ('Birthday Boy', 3.6), ('Einstein and Eddington', 3.6), ('Iluminados Por El Fuego', 3.6), ('Mother Night', 3.6), ('The Young Lions', 3.6), ('Week-End at the Waldorf', 3.6), ('American Drug War: The Last White Hope', 3.4), ('Babylon 5: In the Beginning', 3.2)]
+lightsaber => [('The Formula', 3.2), ('LEGO Star Wars: Revenge of the Brick', 1.6), ('Star Wars Episode III: Revenge of the Sith', 1.2), ('Duality', 0.8), ('Starcrash', 0.8), ('Star Wars Episode IV: A New Hope', 0.8), ('Star Wars Episode V: The Empire Strikes Back', 0.8), ('Star Wars: The Clone Wars', 0.8), ('Hardware Wars', 0.4), ('Keroro Gunso the Super Movie 3: Keroro vs. Keroro Great Sky Duel', 0.4), ('Lego Star Wars: The Quest for R2-D2', 0.4), ('Leprechaun 4: In Space', 0.4), ('Robot Chicken: Star Wars Episode II', 0.4), ('Something, Something, Something Dark Side', 0.4), ('Star Wars Episode II: Attack of the Clones', 0.4), ('Star Wars Episode I: The Phantom Menace', 0.4), ('Star Wars Episode VI: Return of the Jedi', 0.4)]
+hunger games => [('The Hunger Games: Catching Fire', 2.375), ('The Hunger Games', 1.815271), ('Iluminados Por El Fuego', 0.008696), ('The Aqua Teen Hunger Force Movie Film for Theatres', 0.004938), ('Resurrection of the Little Match Girl', 0.004444), ('Darling', 0.00396), ('Winnie the Pooh and a Day for Eeyore', 0.003618), ('Kaal', 0.002128), ('Crusade in Jeans', 0.00113), ('Shorts', 0.000881)]
+zzzxxy => []
