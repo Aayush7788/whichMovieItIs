@@ -1,34 +1,33 @@
 from backend.app.db import get_connection
 
 search_movie_sql = """
-    select
-        wikipedia_movie_id, 
-        title, 
-        release_date, 
-        genres, 
-        plot_summary
-    from movies
-    where
-        title ilike %(pattern)s
-        or plot_summary ilike %(pattern)s
-    order by
-        case
-            when title ilike %(pattern)s then 0
-            else 1
-        end,
-        title
+    with search_query as (
+        select websearch_to_tsquery('english', %(query)s) as query
+    )
+    select 
+        m.wikipedia_movie_id, 
+        m.title, 
+        m.release_date,
+        m.genres,
+        m.plot_summary,
+        ts_rank_cd(m.search_vector, search_query.query) as score
+    from movies m 
+    cross join search_query
+    where m.search_vector @@ search_query.query
+    order by 
+        score desc, 
+        m.title
     limit %(limit)s;
 """
 
 def search_movies(query: str, limit: int = 5) -> list[dict[str, object]]:
-    pattern = f"%{query}%"
 
     with get_connection() as conn:
         with conn.cursor() as cur:
             cur.execute(
                 search_movie_sql, 
                 {
-                    "pattern": pattern, 
+                    "query": query, 
                     "limit": limit,
                 },
             )
@@ -43,7 +42,7 @@ def search_movies(query: str, limit: int = 5) -> list[dict[str, object]]:
                 "release_date": row[2],
                 "genres": row[3],
                 "plot_summary": row[4],
-                "score": None,
+                "score": float(row[5]) if row[5] is not None else None,
             }
         )
     return results
