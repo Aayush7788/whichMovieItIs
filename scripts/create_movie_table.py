@@ -37,6 +37,21 @@ create_search_vector_index_sql = """
     on movies using gin (search_vector);
 """
 
+add_search_embedding_column_sql = """
+    alter table movies
+    add column if not exists search_embedding vector(384);
+"""
+
+add_embedding_model_column_sql = """
+    alter table movies
+    add column if not exists embedding_model text;
+"""
+
+create_search_embedding_index_sql = """
+    create index if not exists movies_search_embedding_hnsw_idx
+    on movies using hnsw (search_embedding vector_cosine_ops);
+"""
+
 def main()-> None:
     with get_connection() as conn:
         with conn.cursor() as cur:
@@ -44,6 +59,10 @@ def main()-> None:
             cur.execute(create_movie_table_sql) 
             cur.execute(add_search_vector_column_sql)
             cur.execute(create_search_vector_index_sql)
+            cur.execute(add_search_embedding_column_sql)
+            cur.execute(add_search_embedding_column_sql)
+            cur.execute(add_embedding_model_column_sql)
+            cur.execute(create_search_embedding_index_sql)
         conn.commit()
 
     print("movies table ready")
