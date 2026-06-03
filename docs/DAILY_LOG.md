@@ -93,3 +93,34 @@ hunger games => [('The Hunger Games: Catching Fire', 2.375), ('The Hunger Games'
 zzzxxy => []
 
 - added search evaluation scripts
+
+
+## 3/6/26
+- installed sentence-transformer embedding dependency
+- apended embedding movie column using pgvector
+- added embedding servise for movie and query text
+- write the script to genrate embeddings for full cmu movie data
+- added vector search service and `/search/vector` endpoint
+- also write the script for the comparing the both search
+
+-final output, vector search working:
+query: hunger games
+full-text: The Hunger Games: Catching Fire | The Hunger Games | Iluminados Por El Fuego | The Aqua Teen Hunger Force Movie Film for Theatres | Resurrection of the Little Match Girl
+vector: The Hunger | The Hunger Games: Catching Fire | The Hunger Games | Games Men Play | Hunger
+
+query: lightsaber
+full-text: The Formula | LEGO Star Wars: Revenge of the Brick | Star Wars Episode III: Revenge of the Sith | Duality | Starcrash
+vector: The Lightning Warrior | Bushido Blade | Masters of Menace | 3 Ninjas | Duel to the Death
+
+query: god of love
+full-text: Late One Night | The Love God? | Winter Light | God of Love | The Color of Paradise
+vector: Man of God | Oh, God! Book II | Saving God | Salvation! | And Thou Shalt Love
+
+query: oh what a lovely war
+full-text: Oh! What a Lovely War | Khan Kluay 2 | Oh Shucks! Here Comes UNTAG | Merlin | The Hand of Fear
+vector: Oh! What a Lovely War | In Love and War | Le Jeu | The Invaders | Gordon's War
+
+query: zzzxxy
+full-text: <no result>
+vector: Zyzzyx Road | Macross Dynamite 7 | Decalogue VIII | Zzyzx | Zona Zamfirova
+
