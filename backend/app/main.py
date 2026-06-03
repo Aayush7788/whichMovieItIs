@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 import psycopg
 from .schemas import MovieSearchResponse
 from .services.search import search_movies
+from .services.vector_search import search_movies_by_embedding
 from .db import get_connection
 app = FastAPI()
 
@@ -41,4 +42,19 @@ def search(q:str, limit: int = 5):
     return {
         "query": cleaned_query, 
         "results": results,
+    }
+
+@app.get("/search/vector", response_model=MovieSearchResponse)
+def vector_search(q: str, limit: int = 5):
+    cleaned_query = q.strip()
+
+    if cleaned_query == "":
+        raise HTTPException(status_code=400, detail="query cannot be empty")
+    if limit < 1 or limit > 20:
+        raise HTTPException(status_code=400, detail="limit must be between 1 to 20")
+    
+    result = search_movies_by_embedding(cleaned_query, limit=limit)
+    return {
+        "query": cleaned_query, 
+        "results": result,
     }
