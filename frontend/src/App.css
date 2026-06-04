@@ -81,7 +81,7 @@ h1 {
 .movie-card {
     padding: 20px;
     border: 1px solid #fed7aa;
-    border-radius: 18px;
+    border-radius: 6px;
     background: #ffffff;
     box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
 }
