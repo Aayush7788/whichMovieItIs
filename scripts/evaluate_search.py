@@ -1,10 +1,23 @@
 import json
 from pathlib import Path
-
+import argparse
+from backend.app.services.hybrid_search import search_movies_hybrid
+from backend.app.services.vector_search import search_movies_by_embedding
 from backend.app.services.search import search_movies
 
 eval_file = Path("data/evaluation/search_queries.jsonl")
 limit = 5
+
+search_modes = {
+    "full-text": search_movies,
+    "vector": search_movies_by_embedding,
+    "hybrid": search_movies_hybrid,
+}
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--mode", choices=search_modes.keys(), default="full-text")
+    return parser.parse_args()
 
 def load_cases():
     cases = []
@@ -27,12 +40,12 @@ def load_cases():
     
     return cases
 
-def evaluate_case(case):
+def evaluate_case(case, search_function):
     query = case["query"]
     expected_any = case["expected_any"]
     must_find = case.get("must_find", bool(expected_any))
 
-    results = search_movies(query, limit)
+    results = search_function(query, limit)
     titles = [movie["title"] for movie in results]
     expected_titles = set(expected_any)
 
@@ -53,7 +66,13 @@ def evaluate_case(case):
     }
 
 def main():
-    reports = [evaluate_case(case) for case in load_cases()]
+    args = parse_args()
+    search_function = search_modes[args.mode]
+
+    print(f"mode: {args.mode}")
+    print()
+
+    reports = [evaluate_case(case, search_function) for case in load_cases()]
 
     for report in reports:
         status = "pass" if report["passed"] else "fail"
