@@ -1,5 +1,5 @@
 {"query":"hunger games", "expected_any":["The Hunger Games", "The Hunger Games: Catching Fire"], "must_find": true}
-{"query":"lightsaber", "expected_any":["Star Wars Episode III: Revenge of the Sith", "LEGO Stars Wars: Revenge of the Brick"], "must_find":true}
+{"query":"lightsaber", "expected_any":["Star Wars Episode III: Revenge of the Sith", "LEGO Star Wars: Revenge of the Brick"], "must_find":true}
 {"query":"god of love", "expected_any":["God of Love"], "must_find":true}
 {"query":"oh what a lovely war", "expected_any":["Oh! What a Lovely War"], "must_find":true}
 {"query":"zzzxxy", "expected_any":[], "must_find": false}
