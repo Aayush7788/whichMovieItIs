@@ -27,7 +27,7 @@ function App(){
         limit: "5",
       });
 
-      const response = await fetch(`/api/search?${params.toString()}`);
+      const response = await fetch(`/api/search/hybrid?${params.toString()}`);
       if(!response.ok){
         throw new Error(`Search failed with status ${response.status}`)
       }
