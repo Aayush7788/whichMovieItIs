@@ -124,3 +124,17 @@ query: zzzxxy
 full-text: <no result>
 vector: Zyzzyx Road | Macross Dynamite 7 | Decalogue VIII | Zzyzx | Zona Zamfirova
 
+## 4-5/6/26
+- added hybrid search, by using the rrf hybrid ranking
+- by combining full-text search and vector search
+- added `/search/hybrid` endpoint in Fastapi
+- updated `scripts/compare_search_modes.pu` to compare:
+    - full-text search
+    - vector search 
+    - hybrid search
+- updated `scripts/evaluate_search.py` to support search modes:
+    - full text
+    - vector
+    - hybrid
+- fixed respone key "results" to "results"
+- fixed f-string quote bug in  `compare_search_modes.py`
