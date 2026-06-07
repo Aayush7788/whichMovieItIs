@@ -6,7 +6,7 @@ from backend.app.services.vector_search import search_movies_by_embedding
 from backend.app.services.search import search_movies
 
 eval_file = Path("data/evaluation/search_queries.jsonl")
-limit = 5
+default_limit = 5
 
 search_modes = {
     "full-text": search_movies,
@@ -17,6 +17,7 @@ search_modes = {
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=search_modes.keys(), default="full-text")
+    parser.add_argument("--limit", type=int, default=default_limit)
     return parser.parse_args()
 
 def load_cases():
@@ -40,12 +41,12 @@ def load_cases():
     
     return cases
 
-def evaluate_case(case, search_function):
+def evaluate_case(case, search_function, result_limit):
     query = case["query"]
     expected_any = case["expected_any"]
     must_find = case.get("must_find", bool(expected_any))
 
-    results = search_function(query, limit)
+    results = search_function(query, result_limit)
     titles = [movie["title"] for movie in results]
     expected_titles = set(expected_any)
 
@@ -69,10 +70,10 @@ def main():
     args = parse_args()
     search_function = search_modes[args.mode]
 
-    print(f"mode: {args.mode}")
+    print(f"mode: {args.limit}")
     print()
 
-    reports = [evaluate_case(case, search_function) for case in load_cases()]
+    reports = [evaluate_case(case, search_function, args.limit) for case in load_cases()]
 
     for report in reports:
         status = "pass" if report["passed"] else "fail"
