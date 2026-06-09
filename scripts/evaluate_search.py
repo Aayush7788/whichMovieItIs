@@ -4,6 +4,7 @@ import argparse
 from backend.app.services.hybrid_search import search_movies_hybrid
 from backend.app.services.vector_search import search_movies_by_embedding
 from backend.app.services.search import search_movies
+from backend.app.services.reranker import search_movies_reranked
 
 eval_file = Path("data/evaluation/search_queries.jsonl")
 default_limit = 5
@@ -12,6 +13,7 @@ search_modes = {
     "full-text": search_movies,
     "vector": search_movies_by_embedding,
     "hybrid": search_movies_hybrid,
+    "reranked": search_movies_reranked
 }
 
 def parse_args():
