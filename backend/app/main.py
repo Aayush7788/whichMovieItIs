@@ -5,6 +5,7 @@ from .services.search import search_movies
 from .services.vector_search import search_movies_by_embedding
 from .db import get_connection
 from .services.hybrid_search import search_movies_hybrid
+from .services.reranker import search_movies_reranked
 app = FastAPI()
 
 @app.get("/health")
@@ -74,4 +75,20 @@ def hybrid_search(q: str, limit: int = 5):
     return {
         "query": cleaned_query, 
         "results": results,
+    }
+
+@app.get("/search/reranked", response_model=MovieSearchResponse)
+def reranked_search(q: str, limit: int = 5):
+    cleaned_query = q.strip()
+
+    if cleaned_query == "":
+        raise HTTPException(status_code=400, detail="query cannot be empty")
+    if limit < 1 or limit > 20:
+        raise HTTPException(status_code=400, detail="limit must be between 1 to 20")
+    
+    results = search_movies_reranked(cleaned_query, limit=limit)
+
+    return {
+        "query": cleaned_query, 
+        "results": results, 
     }
