@@ -2,6 +2,7 @@ from backend.app.services.search import search_movies
 from backend.app.services.vector_search import search_movies_by_embedding
 from scripts.evaluate_search import load_cases
 from backend.app.services.hybrid_search import search_movies_hybrid
+from backend.app.services.reranker import search_movies_reranked
 
 limit = 5
 
@@ -9,6 +10,7 @@ search_modes = [
     ("full-text", search_movies), 
     ("vector", search_movies_by_embedding), 
     ("hybrid", search_movies_hybrid),
+    ("reranked", search_movies_reranked),
 ]
 
 def format_titles(results):
