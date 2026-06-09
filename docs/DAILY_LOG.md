@@ -138,3 +138,10 @@ vector: Zyzzyx Road | Macross Dynamite 7 | Decalogue VIII | Zzyzx | Zona Zamfiro
     - hybrid
 - fixed respone key "results" to "results"
 - fixed f-string quote bug in  `compare_search_modes.py`
+
+## 7-9/6/26
+- done the reranked work
+- added the cross-encoder on hybrid search
+- added `/search/reranked` backend endpoint
+- added `reranked` mode in search evaluation
+- added reranked output to compare script
