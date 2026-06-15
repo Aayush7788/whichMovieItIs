@@ -56,6 +56,59 @@ def relevance_by_movie_id(case):
             
     }
 
+def result_movie_id(movie):
+    return set(movie["wikipedia_movie_id"])
+
+def hit_at(results, relevance, k):
+    return any(
+        relevance.get(result_movie_id(movie), 0) >=
+        binary_relevance_grade
+        for movie in results[:k]
+    )
+
+def reciprocal_rank_at(results, relevance, k):
+    for rank, movie in enumerate(results[:k], start=1):
+        if relevance.get(result_movie_id(movie), 0) >= binary_relevance_grade:
+            return 1 / rank
+    return 0.0
+
+def recall_at(results, relevance, k):
+    relevant_ids = {
+        movie_id 
+        for movie_id, grade in relevance.items()
+        if grade >=binary_relevance_grade
+    }
+
+    if not relevant_ids:
+        return None
+    
+    found_ids = {
+        result_movie_id(movie)
+        for movie in results[:k]
+        if relevance.get(result_movie_id(movie), 0) >=
+        binary_relevance_grade
+    }
+    return len(found_ids) / len(relevant_ids)
+
+def dcg(grades):
+    return sum(
+        ((2 ** grade) - 1) / log2(rank + 1)
+        for rank, grade in enumerate(grades, start=1)
+    )
+
+def ndcg_at(results, relevance, k):
+    actual_grades = [
+        relevance.get(result_movie_id(movie), 0)
+        for movie in results[:k]
+    ]
+    ideal_grades = sorted(relevance.values(), reverse=True)[:k]
+    ideal = dcg(ideal_grades)
+
+    if ideal == 0:
+        return None
+    
+    return dcg(actual_grades) / ideal
+
 def evaluate_case(case, search_function, result_limit):
     query = case["query"]
     expected_any = case["expected_any"]
