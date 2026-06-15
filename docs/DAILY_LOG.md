@@ -145,3 +145,22 @@ vector: Zyzzyx Road | Macross Dynamite 7 | Decalogue VIII | Zzyzx | Zona Zamfiro
 - added `/search/reranked` backend endpoint
 - added `reranked` mode in search evaluation
 - added reranked output to compare script
+
+## 15/6/26
+- completed ranked search evaluation baseline
+- updated `scripts/evaluate_search.py` from simple pass/fail output to ranked
+retrieval metrics:
+- `hit@5`
+- `mrr@10`
+- `recall@10`
+- `ndcg@10`
+- `no_result_correct`
+- `avg_latency_ms`
+- `p95_latency_ms`
+- added support for running all search modes in one command:
+- `full-text`
+- `vector`
+- `hybrid`
+- `reranked`
+- generated the result file:
+- `evals/search-evaluation.json`
