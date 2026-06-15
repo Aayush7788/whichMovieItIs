@@ -5,9 +5,12 @@ from backend.app.services.hybrid_search import search_movies_hybrid
 from backend.app.services.vector_search import search_movies_by_embedding
 from backend.app.services.search import search_movies
 from backend.app.services.reranker import search_movies_reranked
+from math import log2
+from time import perf_counter
 
-eval_file = Path("data/evaluation/search_queries.jsonl")
-default_limit = 5
+eval_file = Path("data/evaluation/search_qrels.jsonl")
+default_limit = 10
+binary_relevance_grade = 2
 
 search_modes = {
     "full-text": search_movies,
@@ -18,8 +21,11 @@ search_modes = {
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", choices=search_modes.keys(), default="full-text")
+    parser.add_argument("--mode", choices=search_modes.keys(), default="reranked")
+    parser.add_argument("--all", action="store_true")
     parser.add_argument("--limit", type=int, default=default_limit)
+    parser.add_argument("--qrels", type=Path, default=eval_file)
+    parser.add_argument("--json-out", type=Path)
     return parser.parse_args()
 
 def load_cases():
