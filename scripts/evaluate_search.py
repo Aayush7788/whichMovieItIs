@@ -40,14 +40,21 @@ def load_cases():
 
             case  = json.loads(line)
 
-            if "query" not in case or "expected_any" not in case:
+            if "id" not in case or "query" not in case or "relevant" not in case:
                 raise ValueError(
-                    f"{eval_file}:{line_number} must include query and expected_any"
-                )
+                        f"{path}:{line_number} must include id, query and relevant"
+                    )
             
             cases.append(case)
     
     return cases
+
+def relevance_by_movie_id(case):
+    return{
+        str(item["movie_id"]): int(item["grade"])
+        for item in case["relevant"]
+            
+    }
 
 def evaluate_case(case, search_function, result_limit):
     query = case["query"]
