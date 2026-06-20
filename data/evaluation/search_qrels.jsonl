@@ -39,3 +39,12 @@
 {"id":"q039_no_result_random_token","query":"zzqvplm cinema memory","intent":"no_result","relevant":[]}
 {"id":"q040_no_result_mixed_scene","query":"banana spaceship courtroom","intent":"no_result","relevant":[]}
 {"id":"q041_no_result_impossible_job","query":"invisible penguin tax office","intent":"no_result","relevant":[]}
+{"id":"q042_dialogue_force","query":"may the force be with you","intent":"dialogue_memory","relevant":[{"movie_id":"52549","title":"Star Wars Episode IV: A New Hope","grade":3},{"movie_id":"53964","title":"Star Wars Episode V: The Empire Strikes Back","grade":2},{"movie_id":"50744","title":"Star Wars Episode VI: Return of the Jedi","grade":2}]}
+{"id":"q043_dialogue_ill_be_back","query":"ill be back","intent":"dialogue_memory","relevant":[{"movie_id":"30327","title":"The Terminator","grade":3},{"movie_id":"34344124","title":"Terminator 2: Judgment Day","grade":2}]}
+{"id":"q044_dialogue_truth","query":"you cant handle the truth","intent":"dialogue_memory","relevant":[{"movie_id":"20691749","title":"A Few Good Men","grade":3}]}
+{"id":"q045_dialogue_chocolates","query":"life is like a box of chocolates","intent":"dialogue_memory","relevant":[{"movie_id":"41528","title":"Forrest Gump","grade":3}]}
+{"id":"q046_dialogue_baby_corner","query":"nobody puts baby in a corner","intent":"dialogue_memory","relevant":[{"movie_id":"680361","title":"Dirty Dancing","grade":3}]}
+{"id":"q047_character_archaeologist","query":"archaeologist whip fedora","intent":"character_memory","relevant":[{"movie_id":"54166","title":"Indiana Jones and the Raiders of the Lost Ark","grade":3},{"movie_id":"51888","title":"Indiana Jones and the Last Crusade","grade":2},{"movie_id":"81503","title":"Indiana Jones and the Temple of Doom","grade":2}]}
+{"id":"q048_character_gotham_billionaire","query":"masked vigilante gotham billionaire","intent":"character_memory","relevant":[{"movie_id":"4276475","title":"The Dark Knight","grade":3},{"movie_id":"481605","title":"Batman Begins","grade":2},{"movie_id":"4726","title":"Batman","grade":1}]}
+{"id":"q049_character_ogre_donkey","query":"ogre donkey princess","intent":"character_memory","relevant":[{"movie_id":"18717177","title":"Shrek","grade":3},{"movie_id":"525314","title":"Shrek 2","grade":2},{"movie_id":"903383","title":"Shrek the Third","grade":1},{"movie_id":"27193568","title":"Shrek Forever After","grade":1}]}
+{"id":"q050_character_chianti","query":"serial killer chianti fava beans","intent":"character_memory","relevant":[{"movie_id":"30006","title":"The Silence of the Lambs","grade":3}]}
