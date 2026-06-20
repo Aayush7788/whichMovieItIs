@@ -21,7 +21,7 @@ search_modes = {
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", choices=search_modes.keys(), default="reranked")
+    parser.add_argument("--mode", choices=search_modes.keys(), default="hybrid")
     parser.add_argument("--all", action="store_true")
     parser.add_argument("--limit", type=int, default=default_limit)
     parser.add_argument("--qrels", type=Path, default=eval_file)

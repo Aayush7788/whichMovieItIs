@@ -1,0 +1,1076 @@
+{
+  "result_limit": 10,
+  "candidate_limit": 50,
+  "tested_configurations": 240,
+  "recommendation": "keep_current_config",
+  "baseline": {
+    "config": {
+      "rrf_k": 60,
+      "minimum_vector_score": 0.4,
+      "full_text_weight": 2.0,
+      "vector_weight": 1.0
+    },
+    "summary": {
+      "cases": 13,
+      "hit@5": 0.8461538461538461,
+      "mrr@10": 0.676923076923077,
+      "recall@10": 0.8472222222222223,
+      "ndcg@10": 0.680571507439406,
+      "no_result_correct": 1.0
+    },
+    "spotlight": {
+      "q005_no_result_noise": {
+        "query": "zzzxxy",
+        "result_ids": [],
+        "result_titles": [],
+        "hit@5": false,
+        "mrr@10": 0.0,
+        "ndcg@10": null,
+        "no_result_correct": true
+      },
+      "q009_event_ship_iceberg": {
+        "query": "ship hits iceberg",
+        "result_ids": [
+          "9049407",
+          "27405104",
+          "2052143",
+          "23761430",
+          "1203778",
+          "1101306",
+          "27359584",
+          "33462689",
+          "14573581",
+          "6524086"
+        ],
+        "result_titles": [
+          "Souls at Sea",
+          "Titanic II",
+          "Titanic",
+          "No Greater Love",
+          "Titanic",
+          "The Wild",
+          "Titanic: The Animated Movie",
+          "The Legend of the Titanic",
+          "Yogi Bear and the Magical Flight of the Spruce Goose",
+          "A Night to Remember"
+        ],
+        "hit@5": false,
+        "mrr@10": 0.1,
+        "ndcg@10": 0.09751658939953338,
+        "no_result_correct": null
+      },
+      "q013_semantic_time_car": {
+        "query": "time travel car",
+        "result_ids": [
+          "42993",
+          "10753947",
+          "1128175",
+          "1061565",
+          "34025191",
+          "8572609",
+          "7855965",
+          "362719",
+          "201448",
+          "18901478"
+        ],
+        "result_titles": [
+          "Back to the Future",
+          "The Time Traveler's Wife",
+          "A Sound of Thunder",
+          "All the Little Animals",
+          "Toki o Kakeru Sh\u014djo",
+          "That Night",
+          "Limit of Love: Umizaru",
+          "Superman",
+          "The Rescuers",
+          "Butterfly Effect: Revelation"
+        ],
+        "hit@5": true,
+        "mrr@10": 1.0,
+        "ndcg@10": 0.7871546029909718,
+        "no_result_correct": null
+      }
+    }
+  },
+  "best": {
+    "config": {
+      "rrf_k": 20,
+      "minimum_vector_score": 0.4,
+      "full_text_weight": 2.0,
+      "vector_weight": 1.5
+    },
+    "summary": {
+      "cases": 13,
+      "hit@5": 0.8461538461538461,
+      "mrr@10": 0.6777777777777777,
+      "recall@10": 0.8472222222222223,
+      "ndcg@10": 0.6809078802296326,
+      "no_result_correct": 1.0
+    },
+    "spotlight": {
+      "q005_no_result_noise": {
+        "query": "zzzxxy",
+        "result_ids": [],
+        "result_titles": [],
+        "hit@5": false,
+        "mrr@10": 0.0,
+        "ndcg@10": null,
+        "no_result_correct": true
+      },
+      "q009_event_ship_iceberg": {
+        "query": "ship hits iceberg",
+        "result_ids": [
+          "9049407",
+          "27405104",
+          "2052143",
+          "23761430",
+          "1203778",
+          "1101306",
+          "27359584",
+          "33462689",
+          "6524086",
+          "14573581"
+        ],
+        "result_titles": [
+          "Souls at Sea",
+          "Titanic II",
+          "Titanic",
+          "No Greater Love",
+          "Titanic",
+          "The Wild",
+          "Titanic: The Animated Movie",
+          "The Legend of the Titanic",
+          "A Night to Remember",
+          "Yogi Bear and the Magical Flight of the Spruce Goose"
+        ],
+        "hit@5": false,
+        "mrr@10": 0.1111111111111111,
+        "ndcg@10": 0.10155306288225219,
+        "no_result_correct": null
+      },
+      "q013_semantic_time_car": {
+        "query": "time travel car",
+        "result_ids": [
+          "42993",
+          "10753947",
+          "1128175",
+          "1061565",
+          "34025191",
+          "8572609",
+          "7855965",
+          "362719",
+          "201448",
+          "2821933"
+        ],
+        "result_titles": [
+          "Back to the Future",
+          "The Time Traveler's Wife",
+          "A Sound of Thunder",
+          "All the Little Animals",
+          "Toki o Kakeru Sh\u014djo",
+          "That Night",
+          "Limit of Love: Umizaru",
+          "Superman",
+          "The Rescuers",
+          "The Time Machine"
+        ],
+        "hit@5": true,
+        "mrr@10": 1.0,
+        "ndcg@10": 0.7871546029909718,
+        "no_result_correct": null
+      }
+    }
+  },
+  "top_10": [
+    {
+      "config": {
+        "rrf_k": 20,
+        "minimum_vector_score": 0.4,
+        "full_text_weight": 2.0,
+        "vector_weight": 1.5
+      },
+      "summary": {
+        "cases": 13,
+        "hit@5": 0.8461538461538461,
+        "mrr@10": 0.6777777777777777,
+        "recall@10": 0.8472222222222223,
+        "ndcg@10": 0.6809078802296326,
+        "no_result_correct": 1.0
+      },
+      "spotlight": {
+        "q005_no_result_noise": {
+          "query": "zzzxxy",
+          "result_ids": [],
+          "result_titles": [],
+          "hit@5": false,
+          "mrr@10": 0.0,
+          "ndcg@10": null,
+          "no_result_correct": true
+        },
+        "q009_event_ship_iceberg": {
+          "query": "ship hits iceberg",
+          "result_ids": [
+            "9049407",
+            "27405104",
+            "2052143",
+            "23761430",
+            "1203778",
+            "1101306",
+            "27359584",
+            "33462689",
+            "6524086",
+            "14573581"
+          ],
+          "result_titles": [
+            "Souls at Sea",
+            "Titanic II",
+            "Titanic",
+            "No Greater Love",
+            "Titanic",
+            "The Wild",
+            "Titanic: The Animated Movie",
+            "The Legend of the Titanic",
+            "A Night to Remember",
+            "Yogi Bear and the Magical Flight of the Spruce Goose"
+          ],
+          "hit@5": false,
+          "mrr@10": 0.1111111111111111,
+          "ndcg@10": 0.10155306288225219,
+          "no_result_correct": null
+        },
+        "q013_semantic_time_car": {
+          "query": "time travel car",
+          "result_ids": [
+            "42993",
+            "10753947",
+            "1128175",
+            "1061565",
+            "34025191",
+            "8572609",
+            "7855965",
+            "362719",
+            "201448",
+            "2821933"
+          ],
+          "result_titles": [
+            "Back to the Future",
+            "The Time Traveler's Wife",
+            "A Sound of Thunder",
+            "All the Little Animals",
+            "Toki o Kakeru Sh\u014djo",
+            "That Night",
+            "Limit of Love: Umizaru",
+            "Superman",
+            "The Rescuers",
+            "The Time Machine"
+          ],
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "ndcg@10": 0.7871546029909718,
+          "no_result_correct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "rrf_k": 20,
+        "minimum_vector_score": 0.4,
+        "full_text_weight": 1.5,
+        "vector_weight": 1.0
+      },
+      "summary": {
+        "cases": 13,
+        "hit@5": 0.8461538461538461,
+        "mrr@10": 0.676923076923077,
+        "recall@10": 0.8472222222222223,
+        "ndcg@10": 0.680571507439406,
+        "no_result_correct": 1.0
+      },
+      "spotlight": {
+        "q005_no_result_noise": {
+          "query": "zzzxxy",
+          "result_ids": [],
+          "result_titles": [],
+          "hit@5": false,
+          "mrr@10": 0.0,
+          "ndcg@10": null,
+          "no_result_correct": true
+        },
+        "q009_event_ship_iceberg": {
+          "query": "ship hits iceberg",
+          "result_ids": [
+            "9049407",
+            "27405104",
+            "2052143",
+            "23761430",
+            "1203778",
+            "1101306",
+            "27359584",
+            "33462689",
+            "14573581",
+            "6524086"
+          ],
+          "result_titles": [
+            "Souls at Sea",
+            "Titanic II",
+            "Titanic",
+            "No Greater Love",
+            "Titanic",
+            "The Wild",
+            "Titanic: The Animated Movie",
+            "The Legend of the Titanic",
+            "Yogi Bear and the Magical Flight of the Spruce Goose",
+            "A Night to Remember"
+          ],
+          "hit@5": false,
+          "mrr@10": 0.1,
+          "ndcg@10": 0.09751658939953338,
+          "no_result_correct": null
+        },
+        "q013_semantic_time_car": {
+          "query": "time travel car",
+          "result_ids": [
+            "42993",
+            "10753947",
+            "1128175",
+            "1061565",
+            "34025191",
+            "8572609",
+            "7855965",
+            "362719",
+            "201448",
+            "18901478"
+          ],
+          "result_titles": [
+            "Back to the Future",
+            "The Time Traveler's Wife",
+            "A Sound of Thunder",
+            "All the Little Animals",
+            "Toki o Kakeru Sh\u014djo",
+            "That Night",
+            "Limit of Love: Umizaru",
+            "Superman",
+            "The Rescuers",
+            "Butterfly Effect: Revelation"
+          ],
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "ndcg@10": 0.7871546029909718,
+          "no_result_correct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "rrf_k": 40,
+        "minimum_vector_score": 0.4,
+        "full_text_weight": 1.5,
+        "vector_weight": 1.0
+      },
+      "summary": {
+        "cases": 13,
+        "hit@5": 0.8461538461538461,
+        "mrr@10": 0.676923076923077,
+        "recall@10": 0.8472222222222223,
+        "ndcg@10": 0.680571507439406,
+        "no_result_correct": 1.0
+      },
+      "spotlight": {
+        "q005_no_result_noise": {
+          "query": "zzzxxy",
+          "result_ids": [],
+          "result_titles": [],
+          "hit@5": false,
+          "mrr@10": 0.0,
+          "ndcg@10": null,
+          "no_result_correct": true
+        },
+        "q009_event_ship_iceberg": {
+          "query": "ship hits iceberg",
+          "result_ids": [
+            "9049407",
+            "27405104",
+            "2052143",
+            "23761430",
+            "1203778",
+            "1101306",
+            "27359584",
+            "33462689",
+            "14573581",
+            "6524086"
+          ],
+          "result_titles": [
+            "Souls at Sea",
+            "Titanic II",
+            "Titanic",
+            "No Greater Love",
+            "Titanic",
+            "The Wild",
+            "Titanic: The Animated Movie",
+            "The Legend of the Titanic",
+            "Yogi Bear and the Magical Flight of the Spruce Goose",
+            "A Night to Remember"
+          ],
+          "hit@5": false,
+          "mrr@10": 0.1,
+          "ndcg@10": 0.09751658939953338,
+          "no_result_correct": null
+        },
+        "q013_semantic_time_car": {
+          "query": "time travel car",
+          "result_ids": [
+            "42993",
+            "10753947",
+            "1128175",
+            "1061565",
+            "34025191",
+            "8572609",
+            "7855965",
+            "362719",
+            "201448",
+            "18901478"
+          ],
+          "result_titles": [
+            "Back to the Future",
+            "The Time Traveler's Wife",
+            "A Sound of Thunder",
+            "All the Little Animals",
+            "Toki o Kakeru Sh\u014djo",
+            "That Night",
+            "Limit of Love: Umizaru",
+            "Superman",
+            "The Rescuers",
+            "Butterfly Effect: Revelation"
+          ],
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "ndcg@10": 0.7871546029909718,
+          "no_result_correct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "rrf_k": 40,
+        "minimum_vector_score": 0.4,
+        "full_text_weight": 2.0,
+        "vector_weight": 1.0
+      },
+      "summary": {
+        "cases": 13,
+        "hit@5": 0.8461538461538461,
+        "mrr@10": 0.676923076923077,
+        "recall@10": 0.8472222222222223,
+        "ndcg@10": 0.680571507439406,
+        "no_result_correct": 1.0
+      },
+      "spotlight": {
+        "q005_no_result_noise": {
+          "query": "zzzxxy",
+          "result_ids": [],
+          "result_titles": [],
+          "hit@5": false,
+          "mrr@10": 0.0,
+          "ndcg@10": null,
+          "no_result_correct": true
+        },
+        "q009_event_ship_iceberg": {
+          "query": "ship hits iceberg",
+          "result_ids": [
+            "9049407",
+            "27405104",
+            "2052143",
+            "23761430",
+            "1203778",
+            "1101306",
+            "27359584",
+            "33462689",
+            "14573581",
+            "6524086"
+          ],
+          "result_titles": [
+            "Souls at Sea",
+            "Titanic II",
+            "Titanic",
+            "No Greater Love",
+            "Titanic",
+            "The Wild",
+            "Titanic: The Animated Movie",
+            "The Legend of the Titanic",
+            "Yogi Bear and the Magical Flight of the Spruce Goose",
+            "A Night to Remember"
+          ],
+          "hit@5": false,
+          "mrr@10": 0.1,
+          "ndcg@10": 0.09751658939953338,
+          "no_result_correct": null
+        },
+        "q013_semantic_time_car": {
+          "query": "time travel car",
+          "result_ids": [
+            "42993",
+            "10753947",
+            "1128175",
+            "1061565",
+            "34025191",
+            "8572609",
+            "7855965",
+            "362719",
+            "201448",
+            "18901478"
+          ],
+          "result_titles": [
+            "Back to the Future",
+            "The Time Traveler's Wife",
+            "A Sound of Thunder",
+            "All the Little Animals",
+            "Toki o Kakeru Sh\u014djo",
+            "That Night",
+            "Limit of Love: Umizaru",
+            "Superman",
+            "The Rescuers",
+            "Butterfly Effect: Revelation"
+          ],
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "ndcg@10": 0.7871546029909718,
+          "no_result_correct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "rrf_k": 40,
+        "minimum_vector_score": 0.4,
+        "full_text_weight": 2.0,
+        "vector_weight": 1.5
+      },
+      "summary": {
+        "cases": 13,
+        "hit@5": 0.8461538461538461,
+        "mrr@10": 0.676923076923077,
+        "recall@10": 0.8472222222222223,
+        "ndcg@10": 0.680571507439406,
+        "no_result_correct": 1.0
+      },
+      "spotlight": {
+        "q005_no_result_noise": {
+          "query": "zzzxxy",
+          "result_ids": [],
+          "result_titles": [],
+          "hit@5": false,
+          "mrr@10": 0.0,
+          "ndcg@10": null,
+          "no_result_correct": true
+        },
+        "q009_event_ship_iceberg": {
+          "query": "ship hits iceberg",
+          "result_ids": [
+            "9049407",
+            "27405104",
+            "2052143",
+            "23761430",
+            "1203778",
+            "1101306",
+            "27359584",
+            "33462689",
+            "14573581",
+            "6524086"
+          ],
+          "result_titles": [
+            "Souls at Sea",
+            "Titanic II",
+            "Titanic",
+            "No Greater Love",
+            "Titanic",
+            "The Wild",
+            "Titanic: The Animated Movie",
+            "The Legend of the Titanic",
+            "Yogi Bear and the Magical Flight of the Spruce Goose",
+            "A Night to Remember"
+          ],
+          "hit@5": false,
+          "mrr@10": 0.1,
+          "ndcg@10": 0.09751658939953338,
+          "no_result_correct": null
+        },
+        "q013_semantic_time_car": {
+          "query": "time travel car",
+          "result_ids": [
+            "42993",
+            "10753947",
+            "1128175",
+            "1061565",
+            "34025191",
+            "8572609",
+            "7855965",
+            "362719",
+            "201448",
+            "18901478"
+          ],
+          "result_titles": [
+            "Back to the Future",
+            "The Time Traveler's Wife",
+            "A Sound of Thunder",
+            "All the Little Animals",
+            "Toki o Kakeru Sh\u014djo",
+            "That Night",
+            "Limit of Love: Umizaru",
+            "Superman",
+            "The Rescuers",
+            "Butterfly Effect: Revelation"
+          ],
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "ndcg@10": 0.7871546029909718,
+          "no_result_correct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "rrf_k": 60,
+        "minimum_vector_score": 0.4,
+        "full_text_weight": 1.5,
+        "vector_weight": 1.0
+      },
+      "summary": {
+        "cases": 13,
+        "hit@5": 0.8461538461538461,
+        "mrr@10": 0.676923076923077,
+        "recall@10": 0.8472222222222223,
+        "ndcg@10": 0.680571507439406,
+        "no_result_correct": 1.0
+      },
+      "spotlight": {
+        "q005_no_result_noise": {
+          "query": "zzzxxy",
+          "result_ids": [],
+          "result_titles": [],
+          "hit@5": false,
+          "mrr@10": 0.0,
+          "ndcg@10": null,
+          "no_result_correct": true
+        },
+        "q009_event_ship_iceberg": {
+          "query": "ship hits iceberg",
+          "result_ids": [
+            "9049407",
+            "27405104",
+            "2052143",
+            "23761430",
+            "1203778",
+            "1101306",
+            "27359584",
+            "33462689",
+            "14573581",
+            "6524086"
+          ],
+          "result_titles": [
+            "Souls at Sea",
+            "Titanic II",
+            "Titanic",
+            "No Greater Love",
+            "Titanic",
+            "The Wild",
+            "Titanic: The Animated Movie",
+            "The Legend of the Titanic",
+            "Yogi Bear and the Magical Flight of the Spruce Goose",
+            "A Night to Remember"
+          ],
+          "hit@5": false,
+          "mrr@10": 0.1,
+          "ndcg@10": 0.09751658939953338,
+          "no_result_correct": null
+        },
+        "q013_semantic_time_car": {
+          "query": "time travel car",
+          "result_ids": [
+            "42993",
+            "10753947",
+            "1128175",
+            "1061565",
+            "34025191",
+            "8572609",
+            "7855965",
+            "362719",
+            "201448",
+            "18901478"
+          ],
+          "result_titles": [
+            "Back to the Future",
+            "The Time Traveler's Wife",
+            "A Sound of Thunder",
+            "All the Little Animals",
+            "Toki o Kakeru Sh\u014djo",
+            "That Night",
+            "Limit of Love: Umizaru",
+            "Superman",
+            "The Rescuers",
+            "Butterfly Effect: Revelation"
+          ],
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "ndcg@10": 0.7871546029909718,
+          "no_result_correct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "rrf_k": 60,
+        "minimum_vector_score": 0.4,
+        "full_text_weight": 2.0,
+        "vector_weight": 1.0
+      },
+      "summary": {
+        "cases": 13,
+        "hit@5": 0.8461538461538461,
+        "mrr@10": 0.676923076923077,
+        "recall@10": 0.8472222222222223,
+        "ndcg@10": 0.680571507439406,
+        "no_result_correct": 1.0
+      },
+      "spotlight": {
+        "q005_no_result_noise": {
+          "query": "zzzxxy",
+          "result_ids": [],
+          "result_titles": [],
+          "hit@5": false,
+          "mrr@10": 0.0,
+          "ndcg@10": null,
+          "no_result_correct": true
+        },
+        "q009_event_ship_iceberg": {
+          "query": "ship hits iceberg",
+          "result_ids": [
+            "9049407",
+            "27405104",
+            "2052143",
+            "23761430",
+            "1203778",
+            "1101306",
+            "27359584",
+            "33462689",
+            "14573581",
+            "6524086"
+          ],
+          "result_titles": [
+            "Souls at Sea",
+            "Titanic II",
+            "Titanic",
+            "No Greater Love",
+            "Titanic",
+            "The Wild",
+            "Titanic: The Animated Movie",
+            "The Legend of the Titanic",
+            "Yogi Bear and the Magical Flight of the Spruce Goose",
+            "A Night to Remember"
+          ],
+          "hit@5": false,
+          "mrr@10": 0.1,
+          "ndcg@10": 0.09751658939953338,
+          "no_result_correct": null
+        },
+        "q013_semantic_time_car": {
+          "query": "time travel car",
+          "result_ids": [
+            "42993",
+            "10753947",
+            "1128175",
+            "1061565",
+            "34025191",
+            "8572609",
+            "7855965",
+            "362719",
+            "201448",
+            "18901478"
+          ],
+          "result_titles": [
+            "Back to the Future",
+            "The Time Traveler's Wife",
+            "A Sound of Thunder",
+            "All the Little Animals",
+            "Toki o Kakeru Sh\u014djo",
+            "That Night",
+            "Limit of Love: Umizaru",
+            "Superman",
+            "The Rescuers",
+            "Butterfly Effect: Revelation"
+          ],
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "ndcg@10": 0.7871546029909718,
+          "no_result_correct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "rrf_k": 80,
+        "minimum_vector_score": 0.4,
+        "full_text_weight": 2.0,
+        "vector_weight": 1.0
+      },
+      "summary": {
+        "cases": 13,
+        "hit@5": 0.8461538461538461,
+        "mrr@10": 0.676923076923077,
+        "recall@10": 0.8472222222222223,
+        "ndcg@10": 0.680571507439406,
+        "no_result_correct": 1.0
+      },
+      "spotlight": {
+        "q005_no_result_noise": {
+          "query": "zzzxxy",
+          "result_ids": [],
+          "result_titles": [],
+          "hit@5": false,
+          "mrr@10": 0.0,
+          "ndcg@10": null,
+          "no_result_correct": true
+        },
+        "q009_event_ship_iceberg": {
+          "query": "ship hits iceberg",
+          "result_ids": [
+            "9049407",
+            "27405104",
+            "2052143",
+            "23761430",
+            "1203778",
+            "1101306",
+            "27359584",
+            "33462689",
+            "14573581",
+            "6524086"
+          ],
+          "result_titles": [
+            "Souls at Sea",
+            "Titanic II",
+            "Titanic",
+            "No Greater Love",
+            "Titanic",
+            "The Wild",
+            "Titanic: The Animated Movie",
+            "The Legend of the Titanic",
+            "Yogi Bear and the Magical Flight of the Spruce Goose",
+            "A Night to Remember"
+          ],
+          "hit@5": false,
+          "mrr@10": 0.1,
+          "ndcg@10": 0.09751658939953338,
+          "no_result_correct": null
+        },
+        "q013_semantic_time_car": {
+          "query": "time travel car",
+          "result_ids": [
+            "42993",
+            "10753947",
+            "1128175",
+            "1061565",
+            "34025191",
+            "8572609",
+            "7855965",
+            "362719",
+            "201448",
+            "18901478"
+          ],
+          "result_titles": [
+            "Back to the Future",
+            "The Time Traveler's Wife",
+            "A Sound of Thunder",
+            "All the Little Animals",
+            "Toki o Kakeru Sh\u014djo",
+            "That Night",
+            "Limit of Love: Umizaru",
+            "Superman",
+            "The Rescuers",
+            "Butterfly Effect: Revelation"
+          ],
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "ndcg@10": 0.7871546029909718,
+          "no_result_correct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "rrf_k": 60,
+        "minimum_vector_score": 0.4,
+        "full_text_weight": 2.0,
+        "vector_weight": 1.5
+      },
+      "summary": {
+        "cases": 13,
+        "hit@5": 0.8461538461538461,
+        "mrr@10": 0.676923076923077,
+        "recall@10": 0.8472222222222223,
+        "ndcg@10": 0.6793395050396512,
+        "no_result_correct": 1.0
+      },
+      "spotlight": {
+        "q005_no_result_noise": {
+          "query": "zzzxxy",
+          "result_ids": [],
+          "result_titles": [],
+          "hit@5": false,
+          "mrr@10": 0.0,
+          "ndcg@10": null,
+          "no_result_correct": true
+        },
+        "q009_event_ship_iceberg": {
+          "query": "ship hits iceberg",
+          "result_ids": [
+            "9049407",
+            "27405104",
+            "2052143",
+            "23761430",
+            "1203778",
+            "1101306",
+            "27359584",
+            "33462689",
+            "14573581",
+            "6524086"
+          ],
+          "result_titles": [
+            "Souls at Sea",
+            "Titanic II",
+            "Titanic",
+            "No Greater Love",
+            "Titanic",
+            "The Wild",
+            "Titanic: The Animated Movie",
+            "The Legend of the Titanic",
+            "Yogi Bear and the Magical Flight of the Spruce Goose",
+            "A Night to Remember"
+          ],
+          "hit@5": false,
+          "mrr@10": 0.1,
+          "ndcg@10": 0.09751658939953338,
+          "no_result_correct": null
+        },
+        "q013_semantic_time_car": {
+          "query": "time travel car",
+          "result_ids": [
+            "42993",
+            "10753947",
+            "1128175",
+            "1061565",
+            "34025191",
+            "8572609",
+            "7855965",
+            "362719",
+            "201448",
+            "18901478"
+          ],
+          "result_titles": [
+            "Back to the Future",
+            "The Time Traveler's Wife",
+            "A Sound of Thunder",
+            "All the Little Animals",
+            "Toki o Kakeru Sh\u014djo",
+            "That Night",
+            "Limit of Love: Umizaru",
+            "Superman",
+            "The Rescuers",
+            "Butterfly Effect: Revelation"
+          ],
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "ndcg@10": 0.7871546029909718,
+          "no_result_correct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "rrf_k": 80,
+        "minimum_vector_score": 0.4,
+        "full_text_weight": 1.5,
+        "vector_weight": 1.0
+      },
+      "summary": {
+        "cases": 13,
+        "hit@5": 0.8461538461538461,
+        "mrr@10": 0.676923076923077,
+        "recall@10": 0.8472222222222223,
+        "ndcg@10": 0.6793395050396512,
+        "no_result_correct": 1.0
+      },
+      "spotlight": {
+        "q005_no_result_noise": {
+          "query": "zzzxxy",
+          "result_ids": [],
+          "result_titles": [],
+          "hit@5": false,
+          "mrr@10": 0.0,
+          "ndcg@10": null,
+          "no_result_correct": true
+        },
+        "q009_event_ship_iceberg": {
+          "query": "ship hits iceberg",
+          "result_ids": [
+            "9049407",
+            "27405104",
+            "2052143",
+            "23761430",
+            "1203778",
+            "1101306",
+            "27359584",
+            "33462689",
+            "14573581",
+            "6524086"
+          ],
+          "result_titles": [
+            "Souls at Sea",
+            "Titanic II",
+            "Titanic",
+            "No Greater Love",
+            "Titanic",
+            "The Wild",
+            "Titanic: The Animated Movie",
+            "The Legend of the Titanic",
+            "Yogi Bear and the Magical Flight of the Spruce Goose",
+            "A Night to Remember"
+          ],
+          "hit@5": false,
+          "mrr@10": 0.1,
+          "ndcg@10": 0.09751658939953338,
+          "no_result_correct": null
+        },
+        "q013_semantic_time_car": {
+          "query": "time travel car",
+          "result_ids": [
+            "42993",
+            "10753947",
+            "1128175",
+            "1061565",
+            "34025191",
+            "8572609",
+            "7855965",
+            "362719",
+            "201448",
+            "18901478"
+          ],
+          "result_titles": [
+            "Back to the Future",
+            "The Time Traveler's Wife",
+            "A Sound of Thunder",
+            "All the Little Animals",
+            "Toki o Kakeru Sh\u014djo",
+            "That Night",
+            "Limit of Love: Umizaru",
+            "Superman",
+            "The Rescuers",
+            "Butterfly Effect: Revelation"
+          ],
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "ndcg@10": 0.7871546029909718,
+          "no_result_correct": null
+        }
+      }
+    }
+  ]
+}

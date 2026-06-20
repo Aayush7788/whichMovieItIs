@@ -66,3 +66,14 @@ full-text is fast and handles no-result queries correctly, but it misses semanti
 vector search alone is not ready. It helps some semantic cases, but it returns results for input like zzzxxy.
 
 so, hybrid gives the best quality/speed balance.
+
+## default
+hybrid search is now product default.
+
+## hybrid
+added a cached parameter sweep:
+
+- `scripts/tune_hybrid_search.py`
+- `evals/hybrid-tuning-results.json`
+
+the sweep evaluates ranking configurations without repeating expensive database and embedding retri.

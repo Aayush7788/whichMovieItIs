@@ -164,3 +164,8 @@ retrieval metrics:
 - `reranked`
 - generated the result file:
 - `evals/search-evaluation.json`
+
+## 18-20/6/26
+- make the hybrid as the default search
+- added the cached hybrid parameter tuning
+- changed backend `/search` to hybrid retrieval
