@@ -1,7 +1,6 @@
 from fastapi import FastAPI, HTTPException
 import psycopg
 from .schemas import MovieSearchResponse
-from .services.search import search_movies
 from .services.vector_search import search_movies_by_embedding
 from .db import get_connection
 from .services.hybrid_search import search_movies_hybrid
@@ -39,7 +38,7 @@ def search(q:str, limit: int = 5):
     if limit< 1 or limit>20:
         raise HTTPException(status_code=400, detail="limit must be between 1 to 20")
     
-    results = search_movies(cleaned_query, limit=limit)
+    results = search_movies_hybrid(cleaned_query, limit=limit)
 
     return {
         "query": cleaned_query, 
