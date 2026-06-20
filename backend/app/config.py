@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     database_url: PostgresDsn | None=None
 
     db_host: str = "localhost"
-    db_port: int = 55433
+    db_port: int = 15432
     db_name: str = "whichmovie"
     db_user: str = "postgres"
     db_password: str = "whichmovie123!"

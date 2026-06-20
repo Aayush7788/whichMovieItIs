@@ -17,7 +17,7 @@ grades are
 - `mrr@10`: how early the first relevant movie appears in the top 10
 - `recall@10`: how many known relevant movies appear in the top 10
 - `ndcg@10`: ranking quality using graded relevance
-- `no_result_correct`: whether nonsense queries correctly return no results
+- `no_result_correct`: whether nonsense queries correctly return no results   
 - `avg_latency_ms`: average query latency
 - `p95_latency_ms`: high-end latency for slower cases
 
@@ -63,6 +63,6 @@ hybrid is the current best mode.
 
 full-text is fast and handles no-result queries correctly, but it misses semantic memory queries like time travel car and toys come alive.
 
-vector search alone is not ready. It helps some semantic cases, but it returns results for nonsense input like zzzxxy.
+vector search alone is not ready. It helps some semantic cases, but it returns results for input like zzzxxy.
 
 so, hybrid gives the best quality/speed balance.
