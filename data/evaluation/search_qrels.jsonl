@@ -25,3 +25,17 @@
 {"id":"q025_object_glass_slipper","query":"glass slipper pumpkin carriage","intent":"object_scene","relevant":[{"movie_id":"399402","title":"Cinderella","grade":3},{"movie_id":"1303197","title":"Cinderella","grade":2}]}
 {"id":"q026_object_magic_carpet","query":"magic carpet genie","intent":"object_scene","relevant":[{"movie_id":"73170","title":"Aladdin","grade":3}]}
 {"id":"q027_object_hockey_mask","query":"hockey mask summer camp","intent":"object_scene","relevant":[{"movie_id":"168958","title":"Friday the 13th","grade":3},{"movie_id":"13053911","title":"Friday the 13th","grade":2}]}
+{"id":"q028_semantic_island_volleyball","query":"man stranded island volleyball","intent":"semantic_plot","relevant":[{"movie_id":"44501","title":"Cast Away","grade":3}]}
+{"id":"q029_semantic_dinosaur_park","query":"dinosaurs escape theme park","intent":"semantic_plot","relevant":[{"movie_id":"68485","title":"Jurassic Park","grade":3}]}
+{"id":"q030_semantic_simulated_reality","query":"hacker discovers reality simulation","intent":"semantic_plot","relevant":[{"movie_id":"30007","title":"The Matrix","grade":3},{"movie_id":"180606","title":"The Animatrix","grade":1}]}
+{"id":"q031_semantic_fish_father","query":"fish father searches ocean son","intent":"semantic_plot","relevant":[{"movie_id":"239587","title":"Finding Nemo","grade":3}]}
+{"id":"q032_semantic_flying_house","query":"old man flying house balloons","intent":"semantic_plot","relevant":[{"movie_id":"11659396","title":"Up","grade":3}]}
+{"id":"q033_semantic_memory_tattoos","query":"man tattoos clues memory loss","intent":"semantic_plot","relevant":[{"movie_id":"2750041","title":"Memento","grade":3}]}
+{"id":"q034_semantic_beast_castle","query":"woman loves beast enchanted castle","intent":"semantic_plot","relevant":[{"movie_id":"133462","title":"Beauty and the Beast","grade":3},{"movie_id":"1226363","title":"Beauty and the Beast","grade":2}]}
+{"id":"q035_semantic_lion_father","query":"young lion avenges father","intent":"semantic_plot","relevant":[{"movie_id":"88678","title":"The Lion King","grade":3}]}
+{"id":"q036_semantic_russian_boxer","query":"boxer fights russian champion","intent":"semantic_plot","relevant":[{"movie_id":"104984","title":"Rocky IV","grade":3}]}
+{"id":"q037_semantic_alien_bicycle","query":"alien child bicycle moon","intent":"semantic_plot","relevant":[{"movie_id":"73441","title":"E.T. the Extra-Terrestrial","grade":3}]}
+{"id":"q038_no_result_nonsense_objects","query":"purple toaster moon detective","intent":"no_result","relevant":[]}
+{"id":"q039_no_result_random_token","query":"zzqvplm cinema memory","intent":"no_result","relevant":[]}
+{"id":"q040_no_result_mixed_scene","query":"banana spaceship courtroom","intent":"no_result","relevant":[]}
+{"id":"q041_no_result_impossible_job","query":"invisible penguin tax office","intent":"no_result","relevant":[]}
