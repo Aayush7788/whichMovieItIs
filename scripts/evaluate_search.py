@@ -1,4 +1,5 @@
 import json
+import sys
 from pathlib import Path
 import argparse
 from backend.app.services.hybrid_search import search_movies_hybrid
@@ -7,6 +8,13 @@ from backend.app.services.search import search_movies
 from backend.app.services.reranker import search_movies_reranked
 from math import log2
 from time import perf_counter
+
+for stream in (sys.stdout, sys.stderr):
+    if hasattr(stream, "reconfigure"):
+        stream.reconfigure(
+            encoding="utf-8",
+            errors="replace",
+        )
 
 eval_file = Path("data/evaluation/search_qrels.jsonl")
 default_limit = 10
@@ -131,21 +139,89 @@ def format_metric(value):
     return f"{value:.4f}"
 
 def summarize_reports(mode_name, reports):
+    ranked_reports = [
+        report
+        for report in reports
+        if report["no_result_correct"] is None
+    ]
+
+    no_result_reports = [
+        report
+        for report in reports
+        if report["no_result_correct"] is not None
+    ]
+
     return {
-        "mode": mode_name, 
-        "cases": len(reports), 
-        "hit@5": average([float(report["hit@5"]) for report in reports]),
-        "mrr@10": average([report["mrr@10"] for report in reports]), 
-        "recall@10": average([report["recall@10"] for report in reports]),
-        "ndcg@10": average([report["ndcg@10"] for report in reports]),
+        "mode": mode_name,
+        "cases": len(reports),
+        "ranked_cases": len(ranked_reports),
+        "no_result_cases": len(no_result_reports),
+        "hit@5": average([
+            float(report["hit@5"])
+            for report in ranked_reports
+        ]),
+        "mrr@10": average([
+            report["mrr@10"]
+            for report in ranked_reports
+        ]),
+        "recall@10": average([
+            report["recall@10"]
+            for report in ranked_reports
+        ]),
+        "ndcg@10": average([
+            report["ndcg@10"]
+            for report in ranked_reports
+        ]),
         "no_result_correct": average([
             float(report["no_result_correct"])
-            for report in reports
-            if report["no_result_correct"] is not None
+            for report in no_result_reports
         ]),
-        "avg_latency_ms": average([report["latency_ms"] for report in reports]),
-        "p95_latency_ms": percentile_95([report["latency_ms"] for report in reports]), 
+        "avg_latency_ms": average([
+            report["latency_ms"]
+            for report in reports
+        ]),
+        "p95_latency_ms": percentile_95([
+            report["latency_ms"]
+            for report in reports
+        ]),
     }
+
+def summarize_reports_by_intent(mode_name, reports):
+    reports_by_intent = {}
+
+    for report in reports:
+        intent = report["intent"]
+
+        if intent not in reports_by_intent:
+            reports_by_intent[intent] = []
+
+        reports_by_intent[intent].append(report)
+
+    return {
+        intent: summarize_reports(
+            mode_name=mode_name,
+            reports=intent_reports,
+        )
+        for intent, intent_reports
+        in sorted(reports_by_intent.items())
+    }
+
+
+def print_intent_summaries(intent_summaries):
+    print("intent summaries:")
+
+    for intent, summary in intent_summaries.items():
+        print(
+            f" {intent}: "
+            f"cases={summary['cases']}, "
+            f"hit@5={format_metric(summary['hit@5'])}, "
+            f"mrr@10={format_metric(summary['mrr@10'])}, "
+            f"recall@10={format_metric(summary['recall@10'])}, "
+            f"ndcg@10={format_metric(summary['ndcg@10'])}, "
+            f"no_result={format_metric(summary['no_result_correct'])}"
+        )
+
+    print()
 
 def evaluate_case(case, search_function, result_limit):
     relevance = relevance_by_movie_id(case)
@@ -210,6 +286,11 @@ def run_mode(mode_name, cases, result_limit):
 
     summary = summarize_reports(mode_name, reports)
 
+    intent_summaries = summarize_reports_by_intent(
+        mode_name=mode_name,
+        reports=reports,
+    )
+
     print(
         "summary: "
         f"hit@5={format_metric(summary['hit@5'])}, "
@@ -220,10 +301,12 @@ def run_mode(mode_name, cases, result_limit):
         f"avg_latency_ms={format_metric(summary['avg_latency_ms'])}, "
         f"p95_latency_ms={format_metric(summary['p95_latency_ms'])}"
     )
+    print_intent_summaries(intent_summaries)
     print()
 
     return {
         "summary": summary,
+        "intent_summaries": intent_summaries,
         "reports": reports,
     }
 

@@ -21,12 +21,12 @@ search_modes = [
 def format_expected(case):
     relevant_movies = case["relevant"]
     if not relevant_movies:
-        return "<mo result expected>"
+        return "<no result expected>"
     
     return " | ".join(
         (
-            f"{movie['title']}"
-            f"#{movie['movie_id']}"
+            f"{movie['title']} "
+            f"#{movie['movie_id']} "
             f"grade={movie['grade']}"
         )
         for movie in relevant_movies
