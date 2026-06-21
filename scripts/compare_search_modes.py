@@ -1,3 +1,4 @@
+import argparse
 from backend.app.services.search import search_movies
 from backend.app.services.vector_search import search_movies_by_embedding
 from scripts.evaluate_search import (
@@ -9,7 +10,7 @@ from scripts.evaluate_search import (
 from backend.app.services.hybrid_search import search_movies_hybrid
 from backend.app.services.reranker import search_movies_reranked
 
-limit = 5
+default_limit = 5
 
 search_modes = [
     ("full-text", search_movies), 
@@ -17,6 +18,20 @@ search_modes = [
     ("hybrid", search_movies_hybrid),
     ("reranked", search_movies_reranked),
 ]
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--case-id")
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=default_limit,
+    )
+    parser.add_argument(
+        "--skip-reranked",
+        action="store_true",
+    )
+    return parser.parse_args()
 
 def format_expected(case):
     relevant_movies = case["relevant"]
@@ -75,21 +90,55 @@ def hit_status(relevance, results):
     return "pass" if found_relevant_movie else "fail"
 
 def main():
+    args = parse_args()
     cases = load_cases()
+
+    if args.case_id:
+        cases = [
+            case
+            for case in cases
+            if case["id"] == args.case_id
+        ]
+
+        if not cases:
+            raise ValueError(
+                f"qrel case not found: {args.case_id}"
+            )
+
+    selected_search_modes = [
+        mode
+        for mode in search_modes
+        if not (
+            args.skip_reranked
+            and mode[0] == "reranked"
+        )
+    ]
 
     for case in cases:
         query = case["query"]
         relevance = relevance_by_movie_id(case)
 
+        print(f"case: {case['id']}")
         print(f"query: {query}")
         print(f"expected: {format_expected(case)}")
 
-        for mode_name, search_function in search_modes:
-            results = search_function(query, limit)
-            status = hit_status(relevance, results)
-            formatted_result = format_results(results, relevance)
-            print(f"{mode_name} [{status}]: {formatted_result}")
-
+        for mode_name, search_function in selected_search_modes:
+            results = search_function(
+                query,
+                args.limit,
+            )
+            status = hit_status(
+                relevance,
+                results,
+            )
+            formatted_result = format_results(
+                results,
+                relevance,
+            )
+            print(
+                f"{mode_name} [{status}]: "
+                f"{formatted_result}"
+            )
 
         print()
 
