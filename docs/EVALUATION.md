@@ -77,3 +77,15 @@ added a cached parameter sweep:
 - `evals/hybrid-tuning-results.json`
 
 the sweep evaluates ranking configurations without repeating expensive database and embedding retri.
+
+## Handling edge cases
+- hybrid and reranked search returned unrelated results for three of five no result queries
+- false positive: 
+   full text find nothing 
+   but vector retrival return weak similarities with confidence
+
+Rules:
+
+- individual vector candidates still require score `0.40`
+- when full-text returns no candidates, the top vector score must be at least `0.50`
+- otherwise the search returns no results

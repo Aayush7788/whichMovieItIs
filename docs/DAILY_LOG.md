@@ -169,3 +169,20 @@ retrieval metrics:
 - make the hybrid as the default search
 - added the cached hybrid parameter tuning
 - changed backend `/search` to hybrid retrieval
+- expanded the evaluation quires from 13 to 50
+- added dialogue-memory and character-memory intents
+- verified all 75 referenced movie IDs and titles against PostgreSQL
+- generated the expanded search evaluation baseline
+
+## 21/6/25
+- improved the no-result precision without reducing ranked retrieval quality.
+- analyzed raw full-text and vector evidence for all 50 qrels
+- identified no-result false positives as weak vector-only matches
+- tested vector-only confidence thresholds
+- selected threshold `0.50`
+- added a query-level no-result guard to hybrid search
+- updated the hybrid tuning script to model the production guard
+- verified all five no-result qrels return no results
+- verified ranked metrics remain unchanged
+- improved hybrid no-result accuracy from `0.40` to `1.00`
+- improved reranked no-result accuracy from `0.40` to `1.00`
