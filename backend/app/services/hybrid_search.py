@@ -1,5 +1,6 @@
 from backend.app.services.search import search_movies
 from backend.app.services.vector_search import search_movies_by_embedding
+from backend.app.services.broad_search import search_movies_broad_full_text
 
 rrf_k = 60
 candidate_multiplier = 5
@@ -110,16 +111,19 @@ def search_movies_hybrid(query: str, limit: int = 5) -> list[dict[str, object]]:
 
     full_text_results = search_movies(query, candidate_limit)
     vector_results = search_movies_by_embedding(query, candidate_limit)
+    broad_results = search_movies_broad_full_text(query, candidate_limit)
 
     if should_return_no_results(
     full_text_results=full_text_results,
     vector_results=vector_results,
+    broad_results=broad_results
     ):
         return []
 
     return rank_hybrid_results(
         full_text_results=full_text_results,
         vector_results=vector_results,
+        broad_results=broad_results,
         limit=limit,
     )
 

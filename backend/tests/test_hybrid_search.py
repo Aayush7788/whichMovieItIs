@@ -66,3 +66,46 @@ def test_rank_hybrid_results_fuses_three_sources():
     assert result_ids[0] == "1"
     assert set(result_ids) == {"1", "2", "3"}
     assert len(result_ids) == len(set(result_ids))
+
+
+def test_search_movies_hybrid_queries_broad_source(
+    monkeypatch,
+):
+    broad_calls = []
+
+    monkeypatch.setattr(
+        hybrid_search,
+        "search_movies",
+        lambda query, limit: [],
+    )
+    monkeypatch.setattr(
+        hybrid_search,
+        "search_movies_by_embedding",
+        lambda query, limit: [],
+    )
+
+    def fake_broad_search(query, limit):
+        broad_calls.append((query, limit))
+        return [
+            build_movie(
+                "13053911",
+                "Friday the 13th",
+                0.3,
+            ),
+        ]
+
+    monkeypatch.setattr(
+        hybrid_search,
+        "search_movies_broad_full_text",
+        fake_broad_search,
+    )
+
+    results = hybrid_search.search_movies_hybrid(
+        "hockey mask summer camp",
+        limit=5,
+    )
+
+    assert broad_calls == [
+        ("hockey mask summer camp", 25),
+    ]
+    assert results[0]["wikipedia_movie_id"] == "13053911"
