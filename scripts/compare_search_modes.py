@@ -9,11 +9,15 @@ from scripts.evaluate_search import (
 )   
 from backend.app.services.hybrid_search import search_movies_hybrid
 from backend.app.services.reranker import search_movies_reranked
+from backend.app.services.broad_search import (
+    search_movies_broad_full_text,
+)
 
 default_limit = 5
 
 search_modes = [
     ("full-text", search_movies), 
+    ("broad-full-text", search_movies_broad_full_text),
     ("vector", search_movies_by_embedding), 
     ("hybrid", search_movies_hybrid),
     ("reranked", search_movies_reranked),
