@@ -9,6 +9,7 @@ minimum_vector_score = 0.40
 minimum_vector_only_score = 0.50
 full_text_weight = 2.0
 vector_weight = 1.0
+broad_weight = 3.0
 
 def get_candidate_limit(limit: int) -> int:
     candidate_limit = limit * candidate_multiplier
@@ -18,9 +19,10 @@ def get_candidate_limit(limit: int) -> int:
 def should_return_no_results(
     full_text_results: list[dict[str, object]],
     vector_results: list[dict[str, object]],
+    broad_results: list[dict[str, object]] | None = None,
     minimum_vector_only_score_value: float = minimum_vector_only_score,
 ) -> bool:
-    if full_text_results:
+    if full_text_results or broad_results:
         return False
 
     if not vector_results:
@@ -62,10 +64,12 @@ def rank_hybrid_results(
     full_text_results: list[dict[str, object]],
     vector_results: list[dict[str, object]],
     limit: int,
+    broad_results: list[dict[str, object]] | None = None,
     rrf_k_value: int = rrf_k,
     minimum_vector_score_value: float = minimum_vector_score,
     full_text_weight_value: float = full_text_weight,
     vector_weight_value: float = vector_weight,
+    broad_weight_value: float = broad_weight,
 ) -> list[dict[str, object]]:
     combined: dict[str, dict[str, object]] = {}
 
@@ -83,7 +87,13 @@ def rank_hybrid_results(
         weight=vector_weight_value,
         rrf_k_value=rrf_k_value,
     )
-
+    if broad_results:
+        add_ranked_results(
+            combined=combined,
+            results=broad_results,
+            weight=broad_weight_value,
+            rrf_k_value=rrf_k_value,
+        )
     ranked_results = sorted(
         combined.values(),
         key=lambda movie: (
