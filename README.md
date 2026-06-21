@@ -12,7 +12,13 @@ vector search: pgvector
 keyword search: Postgresql full-text search
 
 ## current status
-Project setup in progress.
+The project currently supports:
+
+- PostgreSQL full-text search
+- semantic vector search using pgvector
+- hybrid retrieval using weighted reciprocal-rank fusion
+- experimental cross-encoder reranking
+- graded ranked-retrieval evaluation
 
 ## how to run
 to be added after steup
