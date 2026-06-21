@@ -101,6 +101,12 @@ def search_movies_hybrid(query: str, limit: int = 5) -> list[dict[str, object]]:
     full_text_results = search_movies(query, candidate_limit)
     vector_results = search_movies_by_embedding(query, candidate_limit)
 
+    if should_return_no_results(
+    full_text_results=full_text_results,
+    vector_results=vector_results,
+    ):
+        return []
+
     return rank_hybrid_results(
         full_text_results=full_text_results,
         vector_results=vector_results,

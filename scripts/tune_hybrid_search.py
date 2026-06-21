@@ -6,8 +6,10 @@ from backend.app.services.hybrid_search import (
     full_text_weight,
     get_candidate_limit,
     minimum_vector_score,
+    minimum_vector_only_score,
     rank_hybrid_results,
     rrf_k,
+    should_return_no_results,
     vector_weight,
 )
 from backend.app.services.search import search_movies
@@ -99,21 +101,35 @@ def collect_candidates(cases):
 def evaluate_cached_case(cached_case, config):
     case = cached_case["case"]
 
-    results = rank_hybrid_results(
-        full_text_results=cached_case["full_text_results"],
-        vector_results=cached_case["vector_results"],
-        limit=result_limit,
-        rrf_k_value=config["rrf_k"],
-        minimum_vector_score_value=config[
-            "minimum_vector_score"
-        ],
-        full_text_weight_value=config[
-            "full_text_weight"
-        ],
-        vector_weight_value=config[
-            "vector_weight"
-        ],
-    )
+    full_text_results = cached_case[
+        "full_text_results"
+    ]
+
+    vector_results = cached_case[
+        "vector_results"
+    ] 
+
+    if should_return_no_results(
+        full_text_results=full_text_results,
+        vector_results=vector_results,
+    ):
+        results = []
+    else:
+        results = rank_hybrid_results(
+            full_text_results=full_text_results,
+            vector_results=vector_results,
+            limit=result_limit,
+            rrf_k_value=config["rrf_k"],
+            minimum_vector_score_value=config[
+                "minimum_vector_score"
+            ],
+            full_text_weight_value=config[
+                "full_text_weight"
+            ],
+            vector_weight_value=config[
+                "vector_weight"
+            ],
+        )
 
     relevance = relevance_by_movie_id(case)
     no_result_expected = len(relevance) == 0
@@ -335,6 +351,7 @@ def main():
     output = {
         "result_limit": result_limit,
         "candidate_limit": candidate_limit,
+        "minimum_vector_only_score": minimum_vector_only_score,
         "tested_configurations": len(configs),
         "recommendation": recommendation,
         "baseline": baseline_row,
