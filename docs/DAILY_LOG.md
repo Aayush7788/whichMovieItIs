@@ -187,7 +187,7 @@ retrieval metrics:
 - improved hybrid no-result accuracy from `0.40` to `1.00`
 - improved reranked no-result accuracy from `0.40` to `1.00`
 
-## 21/6/26 - Day 16
+## 21/6/26
 
 - created a reusable candidate recall analysis script
 - analyzed all 50 search qrels at candidate depth 50
@@ -204,4 +204,19 @@ retrieval metrics:
 - added targeted case inspection to the comparison script
 - documented which failures are retrieval problems and which require
   additional dialogue data
+- kept production hybrid behavior unchanged
+
+## 21/6/26
+
+- implemented strict minimum-match lexical retrieval
+- used PostgreSQL term normalization and stemming
+- cached full-text, vector, and broad candidates for evaluation
+- tested broad RRF weights from 0.5 to 4.0
+- selected experimental broad weight 3.0
+- improved candidate recall@50 from 0.7111 to 0.8000
+- improved hybrid Hit@5 from 0.6000 to 0.6667
+- improved MRR@10 from 0.4926 to 0.5557
+- preserved no-result accuracy at 1.0000
+- improved three previously failed queries
+- recorded zero Hit@5 regressions
 - kept production hybrid behavior unchanged
