@@ -1,0 +1,321 @@
+{
+  "result_limit": 10,
+  "tested_thresholds": [
+    0.4,
+    0.45,
+    0.46,
+    0.47,
+    0.48,
+    0.5,
+    0.52,
+    0.54,
+    0.56
+  ],
+  "baseline": {
+    "threshold": 0.4,
+    "summary": {
+      "cases": 50,
+      "ranked_cases": 45,
+      "no_result_cases": 5,
+      "hit@5": 0.6,
+      "mrr@10": 0.4925573192239859,
+      "recall@10": 0.6185185185185186,
+      "ndcg@10": 0.5064076420960559,
+      "no_result_correct": 0.4
+    },
+    "no_result_failures": [
+      "q038_no_result_nonsense_objects",
+      "q040_no_result_mixed_scene",
+      "q041_no_result_impossible_job"
+    ],
+    "suppressed_cases": [
+      "q005_no_result_noise",
+      "q039_no_result_random_token"
+    ],
+    "suppressed_relevant_cases": []
+  },
+  "recommendation": {
+    "threshold": 0.5,
+    "summary": {
+      "cases": 50,
+      "ranked_cases": 45,
+      "no_result_cases": 5,
+      "hit@5": 0.6,
+      "mrr@10": 0.4925573192239859,
+      "recall@10": 0.6185185185185186,
+      "ndcg@10": 0.5064076420960559,
+      "no_result_correct": 1.0
+    },
+    "no_result_failures": [],
+    "suppressed_cases": [
+      "q005_no_result_noise",
+      "q033_semantic_memory_tattoos",
+      "q037_semantic_alien_bicycle",
+      "q038_no_result_nonsense_objects",
+      "q039_no_result_random_token",
+      "q040_no_result_mixed_scene",
+      "q041_no_result_impossible_job",
+      "q047_character_archaeologist"
+    ],
+    "suppressed_relevant_cases": [
+      "q033_semantic_memory_tattoos",
+      "q037_semantic_alien_bicycle",
+      "q047_character_archaeologist"
+    ]
+  },
+  "results": [
+    {
+      "threshold": 0.4,
+      "summary": {
+        "cases": 50,
+        "ranked_cases": 45,
+        "no_result_cases": 5,
+        "hit@5": 0.6,
+        "mrr@10": 0.4925573192239859,
+        "recall@10": 0.6185185185185186,
+        "ndcg@10": 0.5064076420960559,
+        "no_result_correct": 0.4
+      },
+      "no_result_failures": [
+        "q038_no_result_nonsense_objects",
+        "q040_no_result_mixed_scene",
+        "q041_no_result_impossible_job"
+      ],
+      "suppressed_cases": [
+        "q005_no_result_noise",
+        "q039_no_result_random_token"
+      ],
+      "suppressed_relevant_cases": []
+    },
+    {
+      "threshold": 0.45,
+      "summary": {
+        "cases": 50,
+        "ranked_cases": 45,
+        "no_result_cases": 5,
+        "hit@5": 0.6,
+        "mrr@10": 0.4925573192239859,
+        "recall@10": 0.6185185185185186,
+        "ndcg@10": 0.5064076420960559,
+        "no_result_correct": 0.6
+      },
+      "no_result_failures": [
+        "q038_no_result_nonsense_objects",
+        "q041_no_result_impossible_job"
+      ],
+      "suppressed_cases": [
+        "q005_no_result_noise",
+        "q039_no_result_random_token",
+        "q040_no_result_mixed_scene",
+        "q047_character_archaeologist"
+      ],
+      "suppressed_relevant_cases": [
+        "q047_character_archaeologist"
+      ]
+    },
+    {
+      "threshold": 0.46,
+      "summary": {
+        "cases": 50,
+        "ranked_cases": 45,
+        "no_result_cases": 5,
+        "hit@5": 0.6,
+        "mrr@10": 0.4925573192239859,
+        "recall@10": 0.6185185185185186,
+        "ndcg@10": 0.5064076420960559,
+        "no_result_correct": 0.8
+      },
+      "no_result_failures": [
+        "q038_no_result_nonsense_objects"
+      ],
+      "suppressed_cases": [
+        "q005_no_result_noise",
+        "q039_no_result_random_token",
+        "q040_no_result_mixed_scene",
+        "q041_no_result_impossible_job",
+        "q047_character_archaeologist"
+      ],
+      "suppressed_relevant_cases": [
+        "q047_character_archaeologist"
+      ]
+    },
+    {
+      "threshold": 0.47,
+      "summary": {
+        "cases": 50,
+        "ranked_cases": 45,
+        "no_result_cases": 5,
+        "hit@5": 0.6,
+        "mrr@10": 0.4925573192239859,
+        "recall@10": 0.6185185185185186,
+        "ndcg@10": 0.5064076420960559,
+        "no_result_correct": 0.8
+      },
+      "no_result_failures": [
+        "q038_no_result_nonsense_objects"
+      ],
+      "suppressed_cases": [
+        "q005_no_result_noise",
+        "q039_no_result_random_token",
+        "q040_no_result_mixed_scene",
+        "q041_no_result_impossible_job",
+        "q047_character_archaeologist"
+      ],
+      "suppressed_relevant_cases": [
+        "q047_character_archaeologist"
+      ]
+    },
+    {
+      "threshold": 0.48,
+      "summary": {
+        "cases": 50,
+        "ranked_cases": 45,
+        "no_result_cases": 5,
+        "hit@5": 0.6,
+        "mrr@10": 0.4925573192239859,
+        "recall@10": 0.6185185185185186,
+        "ndcg@10": 0.5064076420960559,
+        "no_result_correct": 0.8
+      },
+      "no_result_failures": [
+        "q038_no_result_nonsense_objects"
+      ],
+      "suppressed_cases": [
+        "q005_no_result_noise",
+        "q033_semantic_memory_tattoos",
+        "q039_no_result_random_token",
+        "q040_no_result_mixed_scene",
+        "q041_no_result_impossible_job",
+        "q047_character_archaeologist"
+      ],
+      "suppressed_relevant_cases": [
+        "q033_semantic_memory_tattoos",
+        "q047_character_archaeologist"
+      ]
+    },
+    {
+      "threshold": 0.5,
+      "summary": {
+        "cases": 50,
+        "ranked_cases": 45,
+        "no_result_cases": 5,
+        "hit@5": 0.6,
+        "mrr@10": 0.4925573192239859,
+        "recall@10": 0.6185185185185186,
+        "ndcg@10": 0.5064076420960559,
+        "no_result_correct": 1.0
+      },
+      "no_result_failures": [],
+      "suppressed_cases": [
+        "q005_no_result_noise",
+        "q033_semantic_memory_tattoos",
+        "q037_semantic_alien_bicycle",
+        "q038_no_result_nonsense_objects",
+        "q039_no_result_random_token",
+        "q040_no_result_mixed_scene",
+        "q041_no_result_impossible_job",
+        "q047_character_archaeologist"
+      ],
+      "suppressed_relevant_cases": [
+        "q033_semantic_memory_tattoos",
+        "q037_semantic_alien_bicycle",
+        "q047_character_archaeologist"
+      ]
+    },
+    {
+      "threshold": 0.52,
+      "summary": {
+        "cases": 50,
+        "ranked_cases": 45,
+        "no_result_cases": 5,
+        "hit@5": 0.6,
+        "mrr@10": 0.4925573192239859,
+        "recall@10": 0.6185185185185186,
+        "ndcg@10": 0.5064076420960559,
+        "no_result_correct": 1.0
+      },
+      "no_result_failures": [],
+      "suppressed_cases": [
+        "q005_no_result_noise",
+        "q033_semantic_memory_tattoos",
+        "q037_semantic_alien_bicycle",
+        "q038_no_result_nonsense_objects",
+        "q039_no_result_random_token",
+        "q040_no_result_mixed_scene",
+        "q041_no_result_impossible_job",
+        "q047_character_archaeologist"
+      ],
+      "suppressed_relevant_cases": [
+        "q033_semantic_memory_tattoos",
+        "q037_semantic_alien_bicycle",
+        "q047_character_archaeologist"
+      ]
+    },
+    {
+      "threshold": 0.54,
+      "summary": {
+        "cases": 50,
+        "ranked_cases": 45,
+        "no_result_cases": 5,
+        "hit@5": 0.6,
+        "mrr@10": 0.4900881834215168,
+        "recall@10": 0.5962962962962963,
+        "ndcg@10": 0.49971808663685635,
+        "no_result_correct": 1.0
+      },
+      "no_result_failures": [],
+      "suppressed_cases": [
+        "q005_no_result_noise",
+        "q033_semantic_memory_tattoos",
+        "q035_semantic_lion_father",
+        "q036_semantic_russian_boxer",
+        "q037_semantic_alien_bicycle",
+        "q038_no_result_nonsense_objects",
+        "q039_no_result_random_token",
+        "q040_no_result_mixed_scene",
+        "q041_no_result_impossible_job",
+        "q047_character_archaeologist"
+      ],
+      "suppressed_relevant_cases": [
+        "q033_semantic_memory_tattoos",
+        "q035_semantic_lion_father",
+        "q036_semantic_russian_boxer",
+        "q037_semantic_alien_bicycle",
+        "q047_character_archaeologist"
+      ]
+    },
+    {
+      "threshold": 0.56,
+      "summary": {
+        "cases": 50,
+        "ranked_cases": 45,
+        "no_result_cases": 5,
+        "hit@5": 0.6,
+        "mrr@10": 0.4900881834215168,
+        "recall@10": 0.5962962962962963,
+        "ndcg@10": 0.49971808663685635,
+        "no_result_correct": 1.0
+      },
+      "no_result_failures": [],
+      "suppressed_cases": [
+        "q005_no_result_noise",
+        "q033_semantic_memory_tattoos",
+        "q035_semantic_lion_father",
+        "q036_semantic_russian_boxer",
+        "q037_semantic_alien_bicycle",
+        "q038_no_result_nonsense_objects",
+        "q039_no_result_random_token",
+        "q040_no_result_mixed_scene",
+        "q041_no_result_impossible_job",
+        "q047_character_archaeologist"
+      ],
+      "suppressed_relevant_cases": [
+        "q033_semantic_memory_tattoos",
+        "q035_semantic_lion_father",
+        "q036_semantic_russian_boxer",
+        "q037_semantic_alien_bicycle",
+        "q047_character_archaeologist"
+      ]
+    }
+  ]
+}
