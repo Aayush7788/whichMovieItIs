@@ -186,3 +186,22 @@ retrieval metrics:
 - verified ranked metrics remain unchanged
 - improved hybrid no-result accuracy from `0.40` to `1.00`
 - improved reranked no-result accuracy from `0.40` to `1.00`
+
+## 21/6/26 - Day 16
+
+- created a reusable candidate recall analysis script
+- analyzed all 50 search qrels at candidate depth 50
+- separated failures into:
+  - ranking failures
+  - candidate recall failures
+  - vector-threshold filtered failures
+  - no-result cases
+- measured accepted candidate recall@50 at 0.7111
+- measured raw candidate recall@50 at 0.7333
+- identified 12 failures where the relevant movie never entered either
+  candidate source
+- identified one relevant movie filtered by the vector score threshold
+- added targeted case inspection to the comparison script
+- documented which failures are retrieval problems and which require
+  additional dialogue data
+- kept production hybrid behavior unchanged
