@@ -206,7 +206,7 @@ retrieval metrics:
   additional dialogue data
 - kept production hybrid behavior unchanged
 
-## 21/6/26
+## 21-22/6/26
 
 - implemented strict minimum-match lexical retrieval
 - used PostgreSQL term normalization and stemming
@@ -220,3 +220,19 @@ retrieval metrics:
 - improved three previously failed queries
 - recorded zero Hit@5 regressions
 - kept production hybrid behavior unchanged
+
+## 21-23/6/26
+
+- promoted minimum-match broad lexical retrieval into production hybrid search
+- added broad retrieval weight `3.0`
+- extended reciprocal-rank fusion from two sources to three sources
+- updated the no-result guard to recognize broad lexical evidence
+- added unit tests for fusion, deduplication, and no-result behavior
+- added FastAPI blank-query regression coverage
+- added PostgreSQL integration tests for broad retrieval
+- updated candidate-recall analysis for all production sources
+- reproduced candidate recall@50 of `0.8000`
+- reproduced hybrid Hit@5 of `0.6667`
+- preserved no-result accuracy at `1.0000`
+- documented the production retrieval architecture
+- kept reranking experimental

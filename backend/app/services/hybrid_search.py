@@ -1,5 +1,6 @@
 from backend.app.services.search import search_movies
 from backend.app.services.vector_search import search_movies_by_embedding
+from backend.app.services.broad_search import search_movies_broad_full_text
 
 rrf_k = 60
 candidate_multiplier = 5
@@ -9,6 +10,7 @@ minimum_vector_score = 0.40
 minimum_vector_only_score = 0.50
 full_text_weight = 2.0
 vector_weight = 1.0
+broad_weight = 3.0
 
 def get_candidate_limit(limit: int) -> int:
     candidate_limit = limit * candidate_multiplier
@@ -18,9 +20,10 @@ def get_candidate_limit(limit: int) -> int:
 def should_return_no_results(
     full_text_results: list[dict[str, object]],
     vector_results: list[dict[str, object]],
+    broad_results: list[dict[str, object]] | None = None,
     minimum_vector_only_score_value: float = minimum_vector_only_score,
 ) -> bool:
-    if full_text_results:
+    if full_text_results or broad_results:
         return False
 
     if not vector_results:
@@ -62,10 +65,12 @@ def rank_hybrid_results(
     full_text_results: list[dict[str, object]],
     vector_results: list[dict[str, object]],
     limit: int,
+    broad_results: list[dict[str, object]] | None = None,
     rrf_k_value: int = rrf_k,
     minimum_vector_score_value: float = minimum_vector_score,
     full_text_weight_value: float = full_text_weight,
     vector_weight_value: float = vector_weight,
+    broad_weight_value: float = broad_weight,
 ) -> list[dict[str, object]]:
     combined: dict[str, dict[str, object]] = {}
 
@@ -83,7 +88,13 @@ def rank_hybrid_results(
         weight=vector_weight_value,
         rrf_k_value=rrf_k_value,
     )
-
+    if broad_results:
+        add_ranked_results(
+            combined=combined,
+            results=broad_results,
+            weight=broad_weight_value,
+            rrf_k_value=rrf_k_value,
+        )
     ranked_results = sorted(
         combined.values(),
         key=lambda movie: (
@@ -100,16 +111,19 @@ def search_movies_hybrid(query: str, limit: int = 5) -> list[dict[str, object]]:
 
     full_text_results = search_movies(query, candidate_limit)
     vector_results = search_movies_by_embedding(query, candidate_limit)
+    broad_results = search_movies_broad_full_text(query, candidate_limit)
 
     if should_return_no_results(
     full_text_results=full_text_results,
     vector_results=vector_results,
+    broad_results=broad_results
     ):
         return []
 
     return rank_hybrid_results(
         full_text_results=full_text_results,
         vector_results=vector_results,
+        broad_results=broad_results,
         limit=limit,
     )
 

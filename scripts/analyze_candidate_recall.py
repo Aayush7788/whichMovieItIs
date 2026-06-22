@@ -4,13 +4,16 @@ import re
 import sys
 from collections import Counter
 from pathlib import Path
-
-from backend.app.db import get_connection
+from backend.app.services.broad_search import (
+    search_movies_broad_full_text,
+)
 from backend.app.services.hybrid_search import (
+    broad_weight,
     minimum_vector_score,
     rank_hybrid_results,
     should_return_no_results,
 )
+from backend.app.db import get_connection
 from backend.app.services.search import search_movies
 from backend.app.services.vector_search import search_movies_by_embedding
 
@@ -267,6 +270,7 @@ def classify_case(
     case,
     production_rank,
     full_text_matches,
+    broad_matches,
     accepted_vector_matches,
     raw_vector_matches,
     guard_suppressed,
@@ -279,7 +283,9 @@ def classify_case(
         return "success"
 
     accepted_candidate_present = bool(
-        full_text_matches or accepted_vector_matches
+        full_text_matches
+        or broad_matches
+        or accepted_vector_matches
     )
 
     if guard_suppressed and accepted_candidate_present:
@@ -303,7 +309,7 @@ def review_hint(classification):
             "Inspect fusion and ranking."
         ),
         "candidate_recall_failure": (
-            "The relevant movie was absent from both candidate sources. "
+            "The relevant movie was absent from every production candidate source. "
             "Reranking cannot fix this."
         ),
         "vector_threshold_filtered": (
@@ -331,6 +337,10 @@ def analyze_case(
         query,
         candidate_limit,
     )
+    broad_results = search_movies_broad_full_text(
+        query,
+        candidate_limit,
+    )
     raw_vector_results = search_movies_by_embedding(
         query,
         candidate_limit,
@@ -346,11 +356,13 @@ def analyze_case(
     guard_suppressed = should_return_no_results(
         full_text_results=full_text_results,
         vector_results=raw_vector_results,
+        broad_results=broad_results,
     )
 
     unguarded_hybrid_results = rank_hybrid_results(
         full_text_results=full_text_results,
         vector_results=raw_vector_results,
+        broad_results=broad_results,
         limit=candidate_limit,
     )
 
@@ -362,6 +374,10 @@ def analyze_case(
 
     full_text_matches = find_relevant_matches(
         full_text_results,
+        relevance,
+    )
+    broad_matches = find_relevant_matches(
+        broad_results,
         relevance,
     )
     raw_vector_matches = find_relevant_matches(
@@ -383,6 +399,7 @@ def analyze_case(
         case=case,
         production_rank=production_rank,
         full_text_matches=full_text_matches,
+        broad_matches=broad_matches,
         accepted_vector_matches=accepted_vector_matches,
         raw_vector_matches=raw_vector_matches,
         guard_suppressed=guard_suppressed,
@@ -390,10 +407,14 @@ def analyze_case(
     )
 
     accepted_candidate_present = bool(
-        full_text_matches or accepted_vector_matches
+        full_text_matches
+        or broad_matches
+        or accepted_vector_matches
     )
     raw_candidate_present = bool(
-        full_text_matches or raw_vector_matches
+        full_text_matches
+        or broad_matches
+        or raw_vector_matches
     )
 
     return {
@@ -408,6 +429,7 @@ def analyze_case(
         ),
         "candidate_presence": {
             "full_text": bool(full_text_matches),
+            "broad_full_text": bool(broad_matches),
             "accepted_vector": bool(accepted_vector_matches),
             "raw_vector": bool(raw_vector_matches),
             "accepted_candidate_pool": accepted_candidate_present,
@@ -415,6 +437,7 @@ def analyze_case(
         },
         "relevant_ranks": {
             "full_text": first_rank(full_text_matches),
+            "broad_full_text": first_rank(broad_matches),
             "raw_vector": first_rank(raw_vector_matches),
             "accepted_vector": first_rank(
                 accepted_vector_matches
@@ -423,6 +446,7 @@ def analyze_case(
         },
         "relevant_matches": {
             "full_text": full_text_matches,
+            "broad_full_text": broad_matches,
             "raw_vector": raw_vector_matches,
             "accepted_vector": accepted_vector_matches,
             "production_hybrid": hybrid_matches,
@@ -435,6 +459,7 @@ def analyze_case(
         ),
         "top_results": {
             "full_text": result_snapshot(full_text_results),
+            "broad_full_text": result_snapshot(broad_results),
             "raw_vector": result_snapshot(raw_vector_results),
             "production_hybrid": result_snapshot(
                 production_hybrid_results
@@ -541,7 +566,7 @@ def main():
 
     cases = load_cases(args.qrels)
     relevant_movies = fetch_relevant_movies(cases)
-
+    
     analyses = [
         analyze_case(
             case=case,
@@ -564,6 +589,7 @@ def main():
         "minimum_vector_score": minimum_vector_score,
         "summary": summary,
         "cases": analyses,
+        "broad_weight": broad_weight,
     }
 
     args.json_out.parent.mkdir(
