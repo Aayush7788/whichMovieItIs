@@ -7,6 +7,7 @@ function App(){
   const [errorMessage, setErrorMessage] = useState("");
   const [result, setResult] = useState([]);
   const [status, setStatus] = useState("idle");
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "/api";
 
   async function handleSearch(event) {
     event.preventDefault();
@@ -27,9 +28,16 @@ function App(){
         limit: "5",
       });
 
-      const response = await fetch(`/api/search?${params.toString()}`);
-      if(!response.ok){
-        throw new Error(`Search failed with status ${response.status}`)
+      const response = await fetch(`${apiBaseUrl}/search?${params.toString()}`);
+      if (!response.ok) {
+        const errorData = await response
+        .json()
+        .catch(() => null);
+
+      throw new Error(
+        errorData?.detail ||
+        `Search failed with status ${response.status}`
+      );
       }
 
       const data = await response.json();
@@ -40,7 +48,7 @@ function App(){
       setStatus("error");
       setErrorMessage(error.message);
     }
-    console.log(cleanedQuery);
+    
   }
 
   return(
@@ -75,18 +83,68 @@ function App(){
           <p className="error-message">{errorMessage}</p>
         )}
         {status === "success" && result.length === 0 && (
-          <p className="muted">No matches found in the current sample data</p>
+          <p className="muted">No confident match found in the current movie database.</p>
         )}
         {status === "success" && result.length > 0 && (
           <div className="result-list">
-            {result.map((movie)=>(
-              <article className="movie-card" key={movie.wikipedia_movie_id}>
-                <h2>{movie.title}</h2>
-                {movie.release_date && <p>{movie.release_date}</p>}
-              </article>
-            ))}
-          </div>
-        )}
+            {result.map((movie, index) => (
+            <article
+            className="movie-card"
+            key={movie.wikipedia_movie_id}
+            >
+                <div className="poster-frame">
+                  {movie.poster_url ? (
+                    <img
+                      className="movie-poster"
+                      src={movie.poster_url}
+                      alt={`${movie.title} poster`}
+                      loading="lazy"
+                    />
+                  ) : (
+                  <div className="poster-placeholder">
+                    Poster unavailable
+                  </div>
+                )}
+              </div>
+
+              <div className="movie-content">
+                <div className="movie-title-row">
+                  <span className="result-rank">
+                    {index + 1}
+                  </span>
+
+                  <div>
+                    <h2>{movie.title}</h2>
+
+                    {movie.release_date && (
+                      <p className="release-year">
+                        {movie.release_date.slice(0, 4)}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {movie.genres?.length > 0 && (
+                  <div className="genre-list">
+                    {movie.genres.slice(0, 4).map((genre) => (
+                      <span
+                        className="genre-chip"
+                        key={genre}
+                      >
+                        {genre}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                <p className="plot-summary">
+                  {movie.plot_summary}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
       </section>
     </main>
   );

@@ -1,6 +1,3 @@
-import sys
-from pathlib import Path
-
 from backend.app.db import get_connection
 
 create_vector_extension_sql = "create extension if not exists vector;"
@@ -51,6 +48,20 @@ create_search_embedding_index_sql = """
     create index if not exists movies_search_embedding_hnsw_idx
     on movies using hnsw (search_embedding vector_cosine_ops);
 """
+add_tmdb_metadata_columns_sql = """
+    alter table movies
+    add column if not exists tmdb_id bigint,
+    add column if not exists poster_path text,
+    add column if not exists metadata_source text,
+    add column if not exists metadata_match_status text,
+    add column if not exists metadata_updated_at timestamptz;
+"""
+
+create_tmdb_id_index_sql = """
+    create index if not exists movies_tmdb_id_idx
+    on movies (tmdb_id)
+    where tmdb_id is not null;
+"""
 
 def main()-> None:
     with get_connection() as conn:
@@ -60,9 +71,11 @@ def main()-> None:
             cur.execute(add_search_vector_column_sql)
             cur.execute(create_search_vector_index_sql)
             cur.execute(add_search_embedding_column_sql)
-            cur.execute(add_search_embedding_column_sql)
             cur.execute(add_embedding_model_column_sql)
             cur.execute(create_search_embedding_index_sql)
+            cur.execute(add_tmdb_metadata_columns_sql)
+            cur.execute(create_tmdb_id_index_sql)
+            
         conn.commit()
 
     print("movies table ready")
