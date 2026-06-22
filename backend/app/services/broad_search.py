@@ -1,7 +1,9 @@
 import re
 
 from backend.app.db import get_connection
-
+from backend.app.services.movie_results import (
+    movie_result_from_row,
+)
 
 maximum_required_matches = 3
 
@@ -43,6 +45,9 @@ broad_search_sql = """
         movie.release_date,
         movie.genres,
         movie.plot_summary,
+        movie.tmdb_id,
+        movie.poster_path,
+        movie.metadata_source,
         candidate_matches.score
     from candidate_matches
     join movies movie
@@ -90,18 +95,22 @@ def search_movies_broad_full_text(
             )
             rows = cursor.fetchall()
 
+    # return [
+    #     {
+    #         "wikipedia_movie_id": row[0],
+    #         "title": row[1],
+    #         "release_date": row[2],
+    #         "genres": row[3],
+    #         "plot_summary": row[4],
+    #         "score": (
+    #             float(row[5])
+    #             if row[5] is not None
+    #             else None
+    #         ),
+    #     }
+    #     for row in rows
+    # ]
     return [
-        {
-            "wikipedia_movie_id": row[0],
-            "title": row[1],
-            "release_date": row[2],
-            "genres": row[3],
-            "plot_summary": row[4],
-            "score": (
-                float(row[5])
-                if row[5] is not None
-                else None
-            ),
-        }
+        movie_result_from_row(row)
         for row in rows
     ]

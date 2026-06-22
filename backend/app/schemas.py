@@ -6,6 +6,10 @@ class MovieSearchResult(BaseModel):
     release_date: str | None = None
     genres: list[str]
     plot_summary: str
+    tmdb_id: int | None = None
+    poster_path: str | None = None
+    poster_url: str | None = None
+    metadata_source: str | None = None
     score: float | None = None
 
 class MovieSearchResponse(BaseModel):
