@@ -5,7 +5,17 @@ from .services.vector_search import search_movies_by_embedding
 from .db import get_connection
 from .services.hybrid_search import search_movies_hybrid
 from .services.reranker import search_movies_reranked
+from fastapi.middleware.cors import CORSMiddleware
+from .config import settings
+
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.get_frontend_origins(),
+    allow_credentials=False,
+    allow_methods=["GET"],
+    allow_headers=["*"],
+)
 
 @app.get("/health")
 def health():

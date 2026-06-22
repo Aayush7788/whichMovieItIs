@@ -10,9 +10,13 @@ body {
 
 }
 
-button {
-    input {
-        font: inherit;
-    }
+button,
+input {
+    font: inherit;
+}
+
+img {
+    display: block;
+    max-width: 100%;
 }
 
