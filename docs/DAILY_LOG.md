@@ -236,3 +236,14 @@ retrieval metrics:
 - preserved no-result accuracy at `1.0000`
 - documented the production retrieval architecture
 - kept reranking experimental
+
+## 22-23/6/26
+
+- added TMDB metadata columns to the movie catalog
+- added safe title and release-year TMDB matching
+- added cached poster enrichment for the existing 42,207 movies
+- returned TMDB poster metadata through every retrieval source
+- added poster URL construction without storing duplicated URLs
+- added poster, genre, release year, and plot result cards
+- added missing-poster fallback behavior
+- verified metadata integration did not change retrieval metrics
