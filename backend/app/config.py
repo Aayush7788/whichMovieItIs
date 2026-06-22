@@ -10,6 +10,20 @@ class Settings(BaseSettings):
     db_name: str = "whichmovie"
     db_user: str = "postgres"
     db_password: str = "whichmovie123!"
+    tmdb_read_access_token: str | None = None
+    tmdb_api_base_url: str = "https://api.themoviedb.org/3"
+    tmdb_image_base_url: str = "https://image.tmdb.org/t/p"
+    tmdb_poster_size: str = "w342"
+    tmdb_timeout_seconds: float = 10.0
+
+    frontend_origins: str = "http://localhost:5173"
+
+    def get_frontend_origins(self) -> list[str]:
+        return [
+            origin.strip()
+            for origin in self.frontend_origins.split(",")
+            if origin.strip()
+        ]
 
     def build_database_url(self) -> str:
         if self.database_url:
