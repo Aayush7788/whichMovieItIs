@@ -8,6 +8,7 @@ from backend.app.services.search import search_movies
 from backend.app.services.reranker import search_movies_reranked
 from math import log2
 from time import perf_counter
+from backend.app.services.document_search import search_movies_document_hybrid
 
 for stream in (sys.stdout, sys.stderr):
     if hasattr(stream, "reconfigure"):
@@ -24,7 +25,8 @@ search_modes = {
     "full-text": search_movies,
     "vector": search_movies_by_embedding,
     "hybrid": search_movies_hybrid,
-    "reranked": search_movies_reranked
+    "reranked": search_movies_reranked,
+    "document-hybrid": search_movies_document_hybrid,
 }
 
 def parse_args():
