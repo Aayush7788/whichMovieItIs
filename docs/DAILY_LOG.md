@@ -247,3 +247,14 @@ retrieval metrics:
 - added poster, genre, release year, and plot result cards
 - added missing-poster fallback behavior
 - verified metadata integration did not change retrieval metrics
+
+## 26/6/26
+
+- added document-level search tables for production retrieval experiments
+- indexed CMU plot summaries as first-class search documents
+- parsed CMU CoreNLP files into entity, action, keyword, and coreference search signals
+- indexed CMU character metadata as cast and character search documents
+- added document embedding backfill for the new search document index
+- added `/search/documents` as an experimental v2 retrieval endpoint
+- kept `/search` stable on the existing production hybrid pipeline
+- added evaluation support for `document-hybrid`
