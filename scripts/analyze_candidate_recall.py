@@ -12,10 +12,14 @@ from backend.app.services.hybrid_search import (
     minimum_vector_score,
     rank_hybrid_results,
     should_return_no_results,
+    clue_weight,
 )
 from backend.app.db import get_connection
 from backend.app.services.search import search_movies
 from backend.app.services.vector_search import search_movies_by_embedding
+from backend.app.services.clue_search import (
+    search_movies_by_memory_clues,
+)
 
 
 for stream in (sys.stdout, sys.stderr):
@@ -275,6 +279,7 @@ def classify_case(
     raw_vector_matches,
     guard_suppressed,
     hit_k,
+    clue_matches
 ):
     if not case["relevant"]:
         return "no_result_case"
@@ -285,6 +290,7 @@ def classify_case(
     accepted_candidate_present = bool(
         full_text_matches
         or broad_matches
+        or clue_matches
         or accepted_vector_matches
     )
 
@@ -341,6 +347,10 @@ def analyze_case(
         query,
         candidate_limit,
     )
+    clue_results = search_movies_by_memory_clues(
+        query,
+        candidate_limit,
+    )
     raw_vector_results = search_movies_by_embedding(
         query,
         candidate_limit,
@@ -353,8 +363,13 @@ def analyze_case(
         and float(movie["score"]) >= minimum_vector_score
     ]
 
+    lexical_results = [
+        *full_text_results,
+        *clue_results,
+    ]
+
     guard_suppressed = should_return_no_results(
-        full_text_results=full_text_results,
+        full_text_results=lexical_results,
         vector_results=raw_vector_results,
         broad_results=broad_results,
     )
@@ -364,6 +379,7 @@ def analyze_case(
         vector_results=raw_vector_results,
         broad_results=broad_results,
         limit=candidate_limit,
+        clue_results=clue_results,
     )
 
     production_hybrid_results = (
@@ -378,6 +394,10 @@ def analyze_case(
     )
     broad_matches = find_relevant_matches(
         broad_results,
+        relevance,
+    )
+    clue_matches = find_relevant_matches(
+        clue_results,
         relevance,
     )
     raw_vector_matches = find_relevant_matches(
@@ -404,16 +424,19 @@ def analyze_case(
         raw_vector_matches=raw_vector_matches,
         guard_suppressed=guard_suppressed,
         hit_k=hit_k,
+        clue_matches=clue_matches,
     )
 
     accepted_candidate_present = bool(
         full_text_matches
         or broad_matches
+        or clue_matches
         or accepted_vector_matches
     )
     raw_candidate_present = bool(
         full_text_matches
         or broad_matches
+        or clue_matches
         or raw_vector_matches
     )
 
@@ -434,6 +457,7 @@ def analyze_case(
             "raw_vector": bool(raw_vector_matches),
             "accepted_candidate_pool": accepted_candidate_present,
             "raw_candidate_pool": raw_candidate_present,
+            "memory_clue": bool(clue_matches),
         },
         "relevant_ranks": {
             "full_text": first_rank(full_text_matches),
@@ -443,6 +467,7 @@ def analyze_case(
                 accepted_vector_matches
             ),
             "production_hybrid": production_rank,
+            "memory_clue": first_rank(clue_matches),
         },
         "relevant_matches": {
             "full_text": full_text_matches,
@@ -450,6 +475,7 @@ def analyze_case(
             "raw_vector": raw_vector_matches,
             "accepted_vector": accepted_vector_matches,
             "production_hybrid": hybrid_matches,
+            "memory_clue": clue_matches,
         },
         "relevant_movie_evidence": (
             build_relevant_movie_evidence(
@@ -464,6 +490,7 @@ def analyze_case(
             "production_hybrid": result_snapshot(
                 production_hybrid_results
             ),
+            "memory_clue": result_snapshot(clue_results),
         },
     }
 
@@ -590,6 +617,7 @@ def main():
         "summary": summary,
         "cases": analyses,
         "broad_weight": broad_weight,
+        "clue_weight": clue_weight,
     }
 
     args.json_out.parent.mkdir(
