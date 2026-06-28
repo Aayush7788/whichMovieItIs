@@ -8,20 +8,17 @@
     "ranked_cases": 45,
     "no_result_cases": 5,
     "classification_counts": {
-      "candidate_recall_failure": 9,
       "no_result_case": 5,
-      "ranking_failure": 6,
-      "success": 30
+      "ranking_failure": 1,
+      "success": 44
     },
     "classification_counts_by_intent": {
       "character_memory": {
-        "candidate_recall_failure": 2,
-        "ranking_failure": 1,
-        "success": 1
+        "success": 4
       },
       "dialogue_memory": {
-        "candidate_recall_failure": 4,
-        "success": 1
+        "ranking_failure": 1,
+        "success": 4
       },
       "exact_title": {
         "success": 8
@@ -33,29 +30,26 @@
         "no_result_case": 5
       },
       "object_scene": {
-        "candidate_recall_failure": 1,
-        "success": 7
+        "success": 8
       },
       "semantic_plot": {
-        "candidate_recall_failure": 2,
-        "ranking_failure": 5,
-        "success": 8
+        "success": 15
       }
     },
     "accepted_candidate_recall": {
-      "numerator": 36,
+      "numerator": 45,
       "denominator": 45,
-      "value": 0.8
+      "value": 1.0
     },
     "raw_candidate_recall": {
-      "numerator": 36,
+      "numerator": 45,
       "denominator": 45,
-      "value": 0.8
+      "value": 1.0
     },
     "production_hit@5": {
-      "numerator": 30,
+      "numerator": 44,
       "denominator": 45,
-      "value": 0.6666666666666666
+      "value": 0.9777777777777777
     },
     "no_result_correct": {
       "numerator": 5,
@@ -78,14 +72,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 1,
         "raw_vector": 2,
         "accepted_vector": 2,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -167,7 +163,8 @@
             "grade": 2,
             "score": 0.09730301427815971
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -445,7 +442,8 @@
             "title": "Kaal",
             "score": 0.0722689075630252
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -462,14 +460,16 @@
         "accepted_vector": false,
         "raw_vector": false,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": 2,
         "broad_full_text": 2,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": 2
+        "production_hybrid": 1,
+        "memory_clue": 2
       },
       "relevant_matches": {
         "full_text": [
@@ -508,18 +508,27 @@
         "accepted_vector": [],
         "production_hybrid": [
           {
-            "rank": 2,
+            "rank": 1,
+            "movie_id": "55447",
+            "title": "Star Wars Episode III: Revenge of the Sith",
+            "grade": 3,
+            "score": 0.14388120839733742
+          },
+          {
+            "rank": 5,
             "movie_id": "1883373",
             "title": "LEGO Star Wars: Revenge of the Brick",
             "grade": 2,
             "score": 0.08064516129032258
-          },
+          }
+        ],
+        "memory_clue": [
           {
-            "rank": 3,
+            "rank": 2,
             "movie_id": "55447",
             "title": "Star Wars Episode III: Revenge of the Sith",
             "grade": 3,
-            "score": 0.07936507936507936
+            "score": 1.0
           }
         ]
       },
@@ -751,63 +760,83 @@
         "production_hybrid": [
           {
             "rank": 1,
+            "movie_id": "55447",
+            "title": "Star Wars Episode III: Revenge of the Sith",
+            "score": 0.14388120839733742
+          },
+          {
+            "rank": 2,
+            "movie_id": "50957",
+            "title": "Star Wars Episode II: Attack of the Clones",
+            "score": 0.13224043715846995
+          },
+          {
+            "rank": 3,
+            "movie_id": "50793",
+            "title": "Star Wars Episode I: The Phantom Menace",
+            "score": 0.129281537176274
+          },
+          {
+            "rank": 4,
             "movie_id": "4300779",
             "title": "The Formula",
             "score": 0.0819672131147541
           },
           {
-            "rank": 2,
+            "rank": 5,
             "movie_id": "1883373",
             "title": "LEGO Star Wars: Revenge of the Brick",
             "score": 0.08064516129032258
           },
           {
-            "rank": 3,
-            "movie_id": "55447",
-            "title": "Star Wars Episode III: Revenge of the Sith",
-            "score": 0.07936507936507936
-          },
-          {
-            "rank": 4,
+            "rank": 6,
             "movie_id": "10157628",
             "title": "Duality",
             "score": 0.078125
           },
           {
-            "rank": 5,
+            "rank": 7,
             "movie_id": "3185702",
             "title": "Starcrash",
             "score": 0.07692307692307693
           },
           {
-            "rank": 6,
+            "rank": 8,
             "movie_id": "52549",
             "title": "Star Wars Episode IV: A New Hope",
             "score": 0.07575757575757576
           },
           {
-            "rank": 7,
+            "rank": 9,
             "movie_id": "53964",
             "title": "Star Wars Episode V: The Empire Strikes Back",
             "score": 0.07462686567164178
           },
           {
-            "rank": 8,
+            "rank": 10,
             "movie_id": "15726696",
             "title": "Star Wars: The Clone Wars",
             "score": 0.07352941176470588
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "50957",
+            "title": "Star Wars Episode II: Attack of the Clones",
+            "score": 1.0
           },
           {
-            "rank": 9,
-            "movie_id": "2041686",
-            "title": "Hardware Wars",
-            "score": 0.07246376811594203
+            "rank": 2,
+            "movie_id": "55447",
+            "title": "Star Wars Episode III: Revenge of the Sith",
+            "score": 1.0
           },
           {
-            "rank": 10,
-            "movie_id": "21768047",
-            "title": "Keroro Gunso the Super Movie 3: Keroro vs. Keroro Great Sky Duel",
-            "score": 0.07142857142857142
+            "rank": 3,
+            "movie_id": "50793",
+            "title": "Star Wars Episode I: The Phantom Menace",
+            "score": 1.0
           }
         ]
       }
@@ -826,14 +855,16 @@
         "accepted_vector": false,
         "raw_vector": false,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 4,
         "broad_full_text": 1,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -864,7 +895,8 @@
             "grade": 3,
             "score": 0.08043032786885246
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -1129,7 +1161,8 @@
             "title": "Minnesota Cuke and The Search For Noah's Umbrella",
             "score": 0.06349206349206349
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -1146,14 +1179,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 1,
         "raw_vector": 1,
         "accepted_vector": 1,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -1200,7 +1235,8 @@
             "grade": 3,
             "score": 0.09836065573770492
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -1425,7 +1461,8 @@
             "title": "Le Jeu",
             "score": 0.015873015873015872
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -1442,21 +1479,24 @@
         "accepted_vector": false,
         "raw_vector": false,
         "accepted_candidate_pool": false,
-        "raw_candidate_pool": false
+        "raw_candidate_pool": false,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": null
+        "production_hybrid": null,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [],
         "raw_vector": [],
         "accepted_vector": [],
-        "production_hybrid": []
+        "production_hybrid": [],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [],
       "top_results": {
@@ -1524,7 +1564,8 @@
             "score": 0.30880226983996995
           }
         ],
-        "production_hybrid": []
+        "production_hybrid": [],
+        "memory_clue": []
       }
     },
     {
@@ -1541,14 +1582,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": 2,
         "broad_full_text": 2,
         "raw_vector": 1,
         "accepted_vector": 1,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [
@@ -1635,7 +1678,7 @@
             "movie_id": "30007",
             "title": "The Matrix",
             "grade": 3,
-            "score": 0.0970386039132734
+            "score": 0.1626123744050767
           },
           {
             "rank": 4,
@@ -1650,6 +1693,15 @@
             "title": "The Matrix Revolutions",
             "grade": 2,
             "score": 0.07692307692307693
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "30007",
+            "title": "The Matrix",
+            "grade": 3,
+            "score": 1.0
           }
         ]
       },
@@ -1895,7 +1947,7 @@
             "rank": 1,
             "movie_id": "30007",
             "title": "The Matrix",
-            "score": 0.0970386039132734
+            "score": 0.1626123744050767
           },
           {
             "rank": 2,
@@ -1951,6 +2003,14 @@
             "title": "Looker",
             "score": 0.07142857142857142
           }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "30007",
+            "title": "The Matrix",
+            "score": 1.0
+          }
         ]
       }
     },
@@ -1968,14 +2028,16 @@
         "accepted_vector": false,
         "raw_vector": false,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 4,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": 2
+        "production_hybrid": 2,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -2027,7 +2089,8 @@
             "grade": 2,
             "score": 0.07841191066997519
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -2260,7 +2323,8 @@
             "title": "If...",
             "score": 0.015625
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -2277,14 +2341,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 2,
         "broad_full_text": 4,
         "raw_vector": 4,
         "accepted_vector": 4,
-        "production_hybrid": 2
+        "production_hybrid": 2,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -2359,7 +2425,8 @@
             "grade": 2,
             "score": 0.07173174872665534
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -2664,31 +2731,34 @@
             "title": "Twin Peaks: Fire Walk With Me",
             "score": 0.060714285714285714
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
       "id": "q009_event_ship_iceberg",
       "query": "ship hits iceberg",
       "intent": "semantic_plot",
-      "classification": "ranking_failure",
-      "review_hint": "The relevant movie was retrieved but ranked below Hit@K. Inspect fusion and ranking.",
+      "classification": "success",
+      "review_hint": "No investigation required.",
       "guard_suppressed": false,
-      "production_result_count": 46,
+      "production_result_count": 47,
       "candidate_presence": {
         "full_text": false,
         "broad_full_text": false,
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": 1,
         "accepted_vector": 1,
-        "production_hybrid": 10
+        "production_hybrid": 4,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [],
@@ -2713,11 +2783,34 @@
         ],
         "production_hybrid": [
           {
-            "rank": 10,
+            "rank": 4,
             "movie_id": "6524086",
             "title": "A Night to Remember",
             "grade": 2,
-            "score": 0.01639344262295082
+            "score": 0.0819672131147541
+          },
+          {
+            "rank": 11,
+            "movie_id": "52371",
+            "title": "Titanic",
+            "grade": 3,
+            "score": 0.06451612903225806
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "6524086",
+            "title": "A Night to Remember",
+            "grade": 2,
+            "score": 1.0
+          },
+          {
+            "rank": 2,
+            "movie_id": "52371",
+            "title": "Titanic",
+            "grade": 3,
+            "score": 1.0
           }
         ]
       },
@@ -2815,7 +2908,7 @@
             "rank": 1,
             "movie_id": "33462689",
             "title": "The Legend of the Titanic",
-            "score": 5.200000286102295
+            "score": 5.199999809265137
           },
           {
             "rank": 2,
@@ -2825,15 +2918,15 @@
           },
           {
             "rank": 3,
-            "movie_id": "1203778",
+            "movie_id": "2052143",
             "title": "Titanic",
             "score": 2.8000001907348633
           },
           {
             "rank": 4,
-            "movie_id": "2052143",
+            "movie_id": "1203778",
             "title": "Titanic",
-            "score": 2.799999952316284
+            "score": 2.8000001907348633
           },
           {
             "rank": 5,
@@ -2945,13 +3038,13 @@
             "rank": 3,
             "movie_id": "2052143",
             "title": "Titanic",
-            "score": 0.08961925287356322
+            "score": 0.09036330049261083
           },
           {
             "rank": 4,
-            "movie_id": "1203778",
-            "title": "Titanic",
-            "score": 0.07987711213517665
+            "movie_id": "6524086",
+            "title": "A Night to Remember",
+            "score": 0.0819672131147541
           },
           {
             "rank": 5,
@@ -2961,33 +3054,47 @@
           },
           {
             "rank": 6,
+            "movie_id": "1203778",
+            "title": "Titanic",
+            "score": 0.07913306451612903
+          },
+          {
+            "rank": 7,
             "movie_id": "33462689",
             "title": "The Legend of the Titanic",
             "score": 0.07903107413750918
           },
           {
-            "rank": 7,
+            "rank": 8,
             "movie_id": "23761430",
             "title": "No Greater Love",
             "score": 0.07626514611546686
           },
           {
-            "rank": 8,
+            "rank": 9,
             "movie_id": "27359584",
             "title": "Titanic: The Animated Movie",
             "score": 0.07507914970601537
           },
           {
-            "rank": 9,
+            "rank": 10,
             "movie_id": "14573581",
             "title": "Yogi Bear and the Magical Flight of the Spruce Goose",
             "score": 0.07310315430520034
-          },
+          }
+        ],
+        "memory_clue": [
           {
-            "rank": 10,
+            "rank": 1,
             "movie_id": "6524086",
             "title": "A Night to Remember",
-            "score": 0.01639344262295082
+            "score": 1.0
+          },
+          {
+            "rank": 2,
+            "movie_id": "52371",
+            "title": "Titanic",
+            "score": 1.0
           }
         ]
       }
@@ -3006,14 +3113,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 1,
         "raw_vector": 6,
         "accepted_vector": 6,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -3060,7 +3169,8 @@
             "grade": 2,
             "score": 0.0819672131147541
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -3341,7 +3451,8 @@
             "title": "Dagon",
             "score": 0.05594135802469136
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -3358,14 +3469,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 12,
         "broad_full_text": 1,
         "raw_vector": 15,
         "accepted_vector": 15,
-        "production_hybrid": 2
+        "production_hybrid": 2,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -3412,7 +3525,8 @@
             "grade": 3,
             "score": 0.09029143897996357
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -3519,7 +3633,7 @@
             "rank": 2,
             "movie_id": "11450530",
             "title": "Demonic Toys",
-            "score": 7.400000095367432
+            "score": 7.399999618530273
           },
           {
             "rank": 3,
@@ -3547,20 +3661,20 @@
           },
           {
             "rank": 7,
+            "movie_id": "24048670",
+            "title": "Skull Heads",
+            "score": 3.200000286102295
+          },
+          {
+            "rank": 8,
             "movie_id": "534792",
             "title": "Child's Play",
             "score": 3.200000047683716
           },
           {
-            "rank": 8,
+            "rank": 9,
             "movie_id": "21768047",
             "title": "Keroro Gunso the Super Movie 3: Keroro vs. Keroro Great Sky Duel",
-            "score": 3.200000047683716
-          },
-          {
-            "rank": 9,
-            "movie_id": "24048670",
-            "title": "Skull Heads",
             "score": 3.200000047683716
           },
           {
@@ -3667,7 +3781,7 @@
             "rank": 6,
             "movie_id": "534792",
             "title": "Child's Play",
-            "score": 0.07554535017221584
+            "score": 0.07488687782805431
           },
           {
             "rank": 7,
@@ -3693,7 +3807,8 @@
             "title": "Amusement",
             "score": 0.06871035940803383
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -3710,14 +3825,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 1,
         "raw_vector": 4,
         "accepted_vector": 4,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -3799,7 +3916,8 @@
             "grade": 2,
             "score": 0.09072871572871573
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -4077,7 +4195,8 @@
             "title": "Deep Blood",
             "score": 0.07830154000928649
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -4094,14 +4213,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 12,
         "broad_full_text": 14,
         "raw_vector": 6,
         "accepted_vector": 6,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -4155,7 +4276,8 @@
             "grade": 3,
             "score": 0.08346983346983347
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -4255,7 +4377,7 @@
             "rank": 1,
             "movie_id": "1128175",
             "title": "A Sound of Thunder",
-            "score": 12.40000057220459
+            "score": 12.399999618530273
           },
           {
             "rank": 2,
@@ -4279,7 +4401,7 @@
             "rank": 5,
             "movie_id": "3927125",
             "title": "Wind Chill",
-            "score": 9.59999942779541
+            "score": 9.600000381469727
           },
           {
             "rank": 6,
@@ -4291,7 +4413,7 @@
             "rank": 7,
             "movie_id": "8160760",
             "title": "Olsenbanden tar gull",
-            "score": 7.199999809265137
+            "score": 7.200000286102295
           },
           {
             "rank": 8,
@@ -4419,15 +4541,15 @@
           },
           {
             "rank": 8,
-            "movie_id": "10771836",
-            "title": "Ajnabee",
-            "score": 0.062259923175416135
+            "movie_id": "28986107",
+            "title": "Gingerdead Man 3: Saturday Night Cleaver",
+            "score": 0.06328320802005012
           },
           {
             "rank": 9,
-            "movie_id": "28986107",
-            "title": "Gingerdead Man 3: Saturday Night Cleaver",
-            "score": 0.06178420735382761
+            "movie_id": "10771836",
+            "title": "Ajnabee",
+            "score": 0.062259923175416135
           },
           {
             "rank": 10,
@@ -4435,7 +4557,8 @@
             "title": "Love Story 2050",
             "score": 0.0589247311827957
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -4452,14 +4575,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 12,
         "raw_vector": 1,
         "accepted_vector": 1,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [
@@ -4504,7 +4629,16 @@
             "movie_id": "4276475",
             "title": "The Dark Knight",
             "grade": 3,
-            "score": 0.09084699453551912
+            "score": 0.15642076502732238
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "4276475",
+            "title": "The Dark Knight",
+            "grade": 3,
+            "score": 1.0
           }
         ]
       },
@@ -4715,7 +4849,7 @@
             "rank": 1,
             "movie_id": "4276475",
             "title": "The Dark Knight",
-            "score": 0.09084699453551912
+            "score": 0.15642076502732238
           },
           {
             "rank": 2,
@@ -4771,6 +4905,14 @@
             "title": "Season of the Witch",
             "score": 0.0691663633054241
           }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "4276475",
+            "title": "The Dark Knight",
+            "score": 1.0
+          }
         ]
       }
     },
@@ -4788,14 +4930,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 3,
         "raw_vector": 1,
         "accepted_vector": 1,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -4842,7 +4986,8 @@
             "grade": 3,
             "score": 0.09679937548790007
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -5107,7 +5252,8 @@
             "title": "Meet the Deedles",
             "score": 0.07151490733279614
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -5124,14 +5270,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 2,
         "broad_full_text": 1,
         "raw_vector": 1,
         "accepted_vector": 1,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -5178,7 +5326,8 @@
             "grade": 3,
             "score": 0.09783183500793231
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -5371,7 +5520,8 @@
             "title": "Dinoshark",
             "score": 0.014285714285714285
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -5388,14 +5538,16 @@
         "accepted_vector": false,
         "raw_vector": false,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 1,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -5426,7 +5578,8 @@
             "grade": 3,
             "score": 0.0819672131147541
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -5595,7 +5748,8 @@
             "title": "The Tortured",
             "score": 0.014705882352941176
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -5612,14 +5766,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 1,
         "raw_vector": 1,
         "accepted_vector": 1,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -5666,7 +5822,8 @@
             "grade": 3,
             "score": 0.09836065573770492
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -5825,7 +5982,8 @@
             "title": "Man Behind the Sun",
             "score": 0.014285714285714285
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -5842,14 +6000,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": 12,
         "broad_full_text": 4,
         "raw_vector": 8,
         "accepted_vector": 8,
-        "production_hybrid": 4
+        "production_hybrid": 1,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [
@@ -5942,28 +6102,28 @@
             "score": 0.49812501702457457
           },
           {
-            "rank": 13,
+            "rank": 12,
             "movie_id": "52549",
             "title": "Star Wars Episode IV: A New Hope",
             "grade": 3,
             "score": 0.47804016136644345
           },
           {
-            "rank": 18,
+            "rank": 17,
             "movie_id": "55447",
             "title": "Star Wars Episode III: Revenge of the Sith",
             "grade": 2,
             "score": 0.4573554124024273
           },
           {
-            "rank": 28,
+            "rank": 26,
             "movie_id": "50744",
             "title": "Star Wars Episode VI: Return of the Jedi",
             "grade": 2,
             "score": 0.4367510118036867
           },
           {
-            "rank": 30,
+            "rank": 27,
             "movie_id": "50793",
             "title": "Star Wars Episode I: The Phantom Menace",
             "grade": 2,
@@ -5979,28 +6139,28 @@
             "score": 0.49812501702457457
           },
           {
-            "rank": 13,
+            "rank": 12,
             "movie_id": "52549",
             "title": "Star Wars Episode IV: A New Hope",
             "grade": 3,
             "score": 0.47804016136644345
           },
           {
-            "rank": 18,
+            "rank": 17,
             "movie_id": "55447",
             "title": "Star Wars Episode III: Revenge of the Sith",
             "grade": 2,
             "score": 0.4573554124024273
           },
           {
-            "rank": 28,
+            "rank": 26,
             "movie_id": "50744",
             "title": "Star Wars Episode VI: Return of the Jedi",
             "grade": 2,
             "score": 0.4367510118036867
           },
           {
-            "rank": 30,
+            "rank": 27,
             "movie_id": "50793",
             "title": "Star Wars Episode I: The Phantom Menace",
             "grade": 2,
@@ -6009,46 +6169,90 @@
         ],
         "production_hybrid": [
           {
+            "rank": 1,
+            "movie_id": "52549",
+            "title": "Star Wars Episode IV: A New Hope",
+            "grade": 3,
+            "score": 0.1506611491628615
+          },
+          {
+            "rank": 2,
+            "movie_id": "50744",
+            "title": "Star Wars Episode VI: Return of the Jedi",
+            "grade": 2,
+            "score": 0.14149970184853905
+          },
+          {
+            "rank": 3,
+            "movie_id": "53964",
+            "title": "Star Wars Episode V: The Empire Strikes Back",
+            "grade": 2,
+            "score": 0.1401267577738166
+          },
+          {
+            "rank": 4,
+            "movie_id": "55447",
+            "title": "Star Wars Episode III: Revenge of the Sith",
+            "grade": 2,
+            "score": 0.13642762714512918
+          },
+          {
+            "rank": 5,
+            "movie_id": "50957",
+            "title": "Star Wars Episode II: Attack of the Clones",
+            "grade": 2,
+            "score": 0.12418182909986189
+          },
+          {
+            "rank": 6,
+            "movie_id": "50793",
+            "title": "Star Wars Episode I: The Phantom Menace",
+            "grade": 2,
+            "score": 0.10030277206182923
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "50957",
+            "title": "Star Wars Episode II: Attack of the Clones",
+            "grade": 2,
+            "score": 1.0
+          },
+          {
+            "rank": 2,
+            "movie_id": "55447",
+            "title": "Star Wars Episode III: Revenge of the Sith",
+            "grade": 2,
+            "score": 1.0
+          },
+          {
+            "rank": 3,
+            "movie_id": "50793",
+            "title": "Star Wars Episode I: The Phantom Menace",
+            "grade": 2,
+            "score": 1.0
+          },
+          {
             "rank": 4,
             "movie_id": "52549",
             "title": "Star Wars Episode IV: A New Hope",
             "grade": 3,
-            "score": 0.0879708904109589
+            "score": 1.0
           },
           {
-            "rank": 9,
+            "rank": 5,
             "movie_id": "50744",
             "title": "Star Wars Episode VI: Return of the Jedi",
             "grade": 2,
-            "score": 0.0796969696969697
+            "score": 1.0
           },
           {
-            "rank": 10,
+            "rank": 6,
             "movie_id": "53964",
             "title": "Star Wars Episode V: The Empire Strikes Back",
             "grade": 2,
-            "score": 0.07952069716775599
-          },
-          {
-            "rank": 16,
-            "movie_id": "55447",
-            "title": "Star Wars Episode III: Revenge of the Sith",
-            "grade": 2,
-            "score": 0.07174499794637093
-          },
-          {
-            "rank": 20,
-            "movie_id": "50957",
-            "title": "Star Wars Episode II: Attack of the Clones",
-            "grade": 2,
-            "score": 0.05860805860805861
-          },
-          {
-            "rank": 35,
-            "movie_id": "50793",
-            "title": "Star Wars Episode I: The Phantom Menace",
-            "grade": 2,
-            "score": 0.03642756680731364
+            "score": 1.0
           }
         ]
       },
@@ -6321,77 +6525,115 @@
           },
           {
             "rank": 9,
-            "movie_id": "14881706",
-            "title": "The Enemy",
-            "score": 0.48734250815600055
-          },
-          {
-            "rank": 10,
             "movie_id": "31453709",
             "title": "Star Odyssey",
             "score": 0.4844875344939519
+          },
+          {
+            "rank": 10,
+            "movie_id": "7906288",
+            "title": "Star Warp'd",
+            "score": 0.48388195133912937
           }
         ],
         "production_hybrid": [
           {
             "rank": 1,
-            "movie_id": "20644472",
-            "title": "Robot Chicken: Star Wars Episode II",
-            "score": 0.0951251078515962
+            "movie_id": "52549",
+            "title": "Star Wars Episode IV: A New Hope",
+            "score": 0.1506611491628615
           },
           {
             "rank": 2,
+            "movie_id": "50744",
+            "title": "Star Wars Episode VI: Return of the Jedi",
+            "score": 0.14149970184853905
+          },
+          {
+            "rank": 3,
+            "movie_id": "53964",
+            "title": "Star Wars Episode V: The Empire Strikes Back",
+            "score": 0.1401267577738166
+          },
+          {
+            "rank": 4,
+            "movie_id": "55447",
+            "title": "Star Wars Episode III: Revenge of the Sith",
+            "score": 0.13642762714512918
+          },
+          {
+            "rank": 5,
+            "movie_id": "50957",
+            "title": "Star Wars Episode II: Attack of the Clones",
+            "score": 0.12418182909986189
+          },
+          {
+            "rank": 6,
+            "movie_id": "50793",
+            "title": "Star Wars Episode I: The Phantom Menace",
+            "score": 0.10030277206182923
+          },
+          {
+            "rank": 7,
+            "movie_id": "20644472",
+            "title": "Robot Chicken: Star Wars Episode II",
+            "score": 0.09530054644808744
+          },
+          {
+            "rank": 8,
             "movie_id": "4300779",
             "title": "The Formula",
             "score": 0.09502934341644019
           },
           {
-            "rank": 3,
+            "rank": 9,
             "movie_id": "1861566",
             "title": "Saving Star Wars",
             "score": 0.09309722535528987
           },
           {
+            "rank": 10,
+            "movie_id": "30325035",
+            "title": "Robot Chicken: Star Wars Episode III",
+            "score": 0.08712905452035886
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "50957",
+            "title": "Star Wars Episode II: Attack of the Clones",
+            "score": 1.0
+          },
+          {
+            "rank": 2,
+            "movie_id": "55447",
+            "title": "Star Wars Episode III: Revenge of the Sith",
+            "score": 1.0
+          },
+          {
+            "rank": 3,
+            "movie_id": "50793",
+            "title": "Star Wars Episode I: The Phantom Menace",
+            "score": 1.0
+          },
+          {
             "rank": 4,
             "movie_id": "52549",
             "title": "Star Wars Episode IV: A New Hope",
-            "score": 0.0879708904109589
+            "score": 1.0
           },
           {
             "rank": 5,
-            "movie_id": "30325035",
-            "title": "Robot Chicken: Star Wars Episode III",
-            "score": 0.08685219959234114
+            "movie_id": "50744",
+            "title": "Star Wars Episode VI: Return of the Jedi",
+            "score": 1.0
           },
           {
             "rank": 6,
-            "movie_id": "30385795",
-            "title": "Lego Star Wars: Bombad Bounty",
-            "score": 0.08676967408585057
-          },
-          {
-            "rank": 7,
-            "movie_id": "185264",
-            "title": "The Star Wars Holiday Special",
-            "score": 0.08396330038121083
-          },
-          {
-            "rank": 8,
-            "movie_id": "32427108",
-            "title": "From Star Wars to Jedi: The Making of a Saga",
-            "score": 0.08370760275941362
-          },
-          {
-            "rank": 9,
-            "movie_id": "50744",
-            "title": "Star Wars Episode VI: Return of the Jedi",
-            "score": 0.0796969696969697
-          },
-          {
-            "rank": 10,
             "movie_id": "53964",
             "title": "Star Wars Episode V: The Empire Strikes Back",
-            "score": 0.07952069716775599
+            "score": 1.0
           }
         ]
       }
@@ -6410,14 +6652,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 2,
         "broad_full_text": 1,
         "raw_vector": 1,
         "accepted_vector": 1,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -6639,7 +6883,8 @@
             "grade": 2,
             "score": 0.08905886368572935
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -6969,7 +7214,8 @@
             "title": "Alone in the Dark",
             "score": 0.07014492753623189
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -6986,14 +7232,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": 2,
         "broad_full_text": 1,
         "raw_vector": 2,
         "accepted_vector": 2,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [
@@ -7119,31 +7367,54 @@
         "production_hybrid": [
           {
             "rank": 1,
-            "movie_id": "54166",
-            "title": "Indiana Jones and the Raiders of the Lost Ark",
-            "grade": 3,
-            "score": 0.0958225745110991
+            "movie_id": "51888",
+            "title": "Indiana Jones and the Last Crusade",
+            "grade": 2,
+            "score": 0.16060239777849508
           },
           {
             "rank": 2,
+            "movie_id": "54166",
+            "title": "Indiana Jones and the Raiders of the Lost Ark",
+            "grade": 3,
+            "score": 0.16033870354335716
+          },
+          {
+            "rank": 3,
+            "movie_id": "81503",
+            "title": "Indiana Jones and the Temple of Doom",
+            "grade": 2,
+            "score": 0.157746095750128
+          },
+          {
+            "rank": 4,
             "movie_id": "1252914",
             "title": "Indiana Jones and the Kingdom of the Crystal Skull",
             "grade": 2,
             "score": 0.09551774390484068
-          },
+          }
+        ],
+        "memory_clue": [
           {
-            "rank": 3,
+            "rank": 1,
             "movie_id": "51888",
             "title": "Indiana Jones and the Last Crusade",
             "grade": 2,
-            "score": 0.0950286272866918
+            "score": 1.0
           },
           {
-            "rank": 5,
+            "rank": 2,
+            "movie_id": "54166",
+            "title": "Indiana Jones and the Raiders of the Lost Ark",
+            "grade": 3,
+            "score": 1.0
+          },
+          {
+            "rank": 3,
             "movie_id": "81503",
             "title": "Indiana Jones and the Temple of Doom",
             "grade": 2,
-            "score": 0.09425403225806452
+            "score": 1.0
           }
         ]
       },
@@ -7391,33 +7662,33 @@
         "production_hybrid": [
           {
             "rank": 1,
-            "movie_id": "54166",
-            "title": "Indiana Jones and the Raiders of the Lost Ark",
-            "score": 0.0958225745110991
+            "movie_id": "51888",
+            "title": "Indiana Jones and the Last Crusade",
+            "score": 0.16060239777849508
           },
           {
             "rank": 2,
+            "movie_id": "54166",
+            "title": "Indiana Jones and the Raiders of the Lost Ark",
+            "score": 0.16033870354335716
+          },
+          {
+            "rank": 3,
+            "movie_id": "81503",
+            "title": "Indiana Jones and the Temple of Doom",
+            "score": 0.157746095750128
+          },
+          {
+            "rank": 4,
             "movie_id": "1252914",
             "title": "Indiana Jones and the Kingdom of the Crystal Skull",
             "score": 0.09551774390484068
           },
           {
-            "rank": 3,
-            "movie_id": "51888",
-            "title": "Indiana Jones and the Last Crusade",
-            "score": 0.0950286272866918
-          },
-          {
-            "rank": 4,
+            "rank": 5,
             "movie_id": "17314883",
             "title": "Lego Indiana Jones and the Raiders of the Lost Brick",
             "score": 0.0945657313997478
-          },
-          {
-            "rank": 5,
-            "movie_id": "81503",
-            "title": "Indiana Jones and the Temple of Doom",
-            "score": 0.09425403225806452
           },
           {
             "rank": 6,
@@ -7449,6 +7720,26 @@
             "title": "Lego Star Wars: Bombad Bounty",
             "score": 0.07352941176470588
           }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "51888",
+            "title": "Indiana Jones and the Last Crusade",
+            "score": 1.0
+          },
+          {
+            "rank": 2,
+            "movie_id": "54166",
+            "title": "Indiana Jones and the Raiders of the Lost Ark",
+            "score": 1.0
+          },
+          {
+            "rank": 3,
+            "movie_id": "81503",
+            "title": "Indiana Jones and the Temple of Doom",
+            "score": 1.0
+          }
         ]
       }
     },
@@ -7466,14 +7757,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 1,
         "raw_vector": 3,
         "accepted_vector": 3,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -7625,7 +7918,8 @@
             "grade": 2,
             "score": 0.09051916221033868
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -7929,7 +8223,8 @@
             "title": "Captain Ron",
             "score": 0.07212121212121213
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -7946,14 +8241,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 1,
         "raw_vector": 1,
         "accepted_vector": 1,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -8000,7 +8297,8 @@
             "grade": 3,
             "score": 0.09836065573770492
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -8206,38 +8504,58 @@
             "title": "Dream",
             "score": 0.015151515151515152
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
       "id": "q024_object_red_blue_pill",
       "query": "red pill blue pill",
       "intent": "object_scene",
-      "classification": "candidate_recall_failure",
-      "review_hint": "The relevant movie was absent from every production candidate source. Reranking cannot fix this.",
+      "classification": "success",
+      "review_hint": "No investigation required.",
       "guard_suppressed": false,
-      "production_result_count": 3,
+      "production_result_count": 4,
       "candidate_presence": {
         "full_text": false,
         "broad_full_text": false,
         "accepted_vector": false,
         "raw_vector": false,
-        "accepted_candidate_pool": false,
-        "raw_candidate_pool": false
+        "accepted_candidate_pool": true,
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": null
+        "production_hybrid": 3,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [],
         "raw_vector": [],
         "accepted_vector": [],
-        "production_hybrid": []
+        "production_hybrid": [
+          {
+            "rank": 3,
+            "movie_id": "30007",
+            "title": "The Matrix",
+            "grade": 3,
+            "score": 0.06557377049180328
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "30007",
+            "title": "The Matrix",
+            "grade": 3,
+            "score": 1.0
+          }
+        ]
       },
       "relevant_movie_evidence": [
         {
@@ -8277,7 +8595,7 @@
             "rank": 1,
             "movie_id": "154635",
             "title": "Three Colors: Blue",
-            "score": 2.5999999046325684
+            "score": 2.6000001430511475
           },
           {
             "rank": 2,
@@ -8363,9 +8681,23 @@
           },
           {
             "rank": 3,
+            "movie_id": "30007",
+            "title": "The Matrix",
+            "score": 0.06557377049180328
+          },
+          {
+            "rank": 4,
             "movie_id": "9552709",
             "title": "Blue Sunshine",
             "score": 0.01639344262295082
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "30007",
+            "title": "The Matrix",
+            "score": 1.0
           }
         ]
       }
@@ -8384,14 +8716,16 @@
         "accepted_vector": false,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 1,
         "raw_vector": 27,
         "accepted_vector": null,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -8451,7 +8785,8 @@
             "grade": 2,
             "score": 0.08064516129032258
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -8661,7 +8996,8 @@
             "title": "The Glass Slipper",
             "score": 0.01639344262295082
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -8678,14 +9014,16 @@
         "accepted_vector": false,
         "raw_vector": false,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 2,
         "broad_full_text": 1,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -8716,7 +9054,8 @@
             "grade": 3,
             "score": 0.08143839238498149
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -8778,7 +9117,7 @@
             "rank": 3,
             "movie_id": "3406838",
             "title": "The Thief of Bagdad",
-            "score": 5.199999809265137
+            "score": 5.200000286102295
           },
           {
             "rank": 4,
@@ -8910,7 +9249,8 @@
             "title": "Mr. Magorium's Wonder Emporium",
             "score": 0.015151515151515152
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -8927,14 +9267,16 @@
         "accepted_vector": false,
         "raw_vector": false,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": 3,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": 3
+        "production_hybrid": 3,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [],
@@ -8957,7 +9299,8 @@
             "grade": 2,
             "score": 0.047619047619047616
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -9181,38 +9524,58 @@
             "title": "The Mask",
             "score": 0.01639344262295082
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
       "id": "q028_semantic_island_volleyball",
       "query": "man stranded island volleyball",
       "intent": "semantic_plot",
-      "classification": "candidate_recall_failure",
-      "review_hint": "The relevant movie was absent from every production candidate source. Reranking cannot fix this.",
+      "classification": "success",
+      "review_hint": "No investigation required.",
       "guard_suppressed": false,
-      "production_result_count": 46,
+      "production_result_count": 47,
       "candidate_presence": {
         "full_text": false,
         "broad_full_text": false,
         "accepted_vector": false,
         "raw_vector": false,
-        "accepted_candidate_pool": false,
-        "raw_candidate_pool": false
+        "accepted_candidate_pool": true,
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": null
+        "production_hybrid": 2,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [],
         "raw_vector": [],
         "accepted_vector": [],
-        "production_hybrid": []
+        "production_hybrid": [
+          {
+            "rank": 2,
+            "movie_id": "44501",
+            "title": "Cast Away",
+            "grade": 3,
+            "score": 0.06557377049180328
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "44501",
+            "title": "Cast Away",
+            "grade": 3,
+            "score": 1.0
+          }
+        ]
       },
       "relevant_movie_evidence": [
         {
@@ -9258,7 +9621,7 @@
             "rank": 3,
             "movie_id": "3913231",
             "title": "The Missing Link",
-            "score": 6.0
+            "score": 6.000000476837158
           },
           {
             "rank": 4,
@@ -9294,7 +9657,7 @@
             "rank": 9,
             "movie_id": "99948",
             "title": "Cabin Boy",
-            "score": 3.200000047683716
+            "score": 3.200000286102295
           },
           {
             "rank": 10,
@@ -9374,57 +9737,65 @@
           },
           {
             "rank": 2,
+            "movie_id": "44501",
+            "title": "Cast Away",
+            "score": 0.06557377049180328
+          },
+          {
+            "rank": 3,
             "movie_id": "2928949",
             "title": "Die Stra\u00dfe",
             "score": 0.04838709677419355
           },
           {
-            "rank": 3,
+            "rank": 4,
             "movie_id": "3913231",
             "title": "The Missing Link",
             "score": 0.047619047619047616
           },
           {
-            "rank": 4,
+            "rank": 5,
             "movie_id": "13899957",
             "title": "Conquest",
             "score": 0.046875
           },
           {
-            "rank": 5,
+            "rank": 6,
             "movie_id": "13990745",
             "title": "Crusoe",
             "score": 0.046153846153846156
           },
           {
-            "rank": 6,
+            "rank": 7,
             "movie_id": "2524297",
             "title": "Island of Terror",
             "score": 0.045454545454545456
           },
           {
-            "rank": 7,
+            "rank": 8,
             "movie_id": "6954737",
             "title": "Justice League: New Frontier",
             "score": 0.04477611940298507
           },
           {
-            "rank": 8,
+            "rank": 9,
             "movie_id": "10745657",
             "title": "Rabbitson Crusoe",
             "score": 0.04411764705882353
           },
           {
-            "rank": 9,
+            "rank": 10,
             "movie_id": "99948",
             "title": "Cabin Boy",
             "score": 0.043478260869565216
-          },
+          }
+        ],
+        "memory_clue": [
           {
-            "rank": 10,
-            "movie_id": "5516824",
-            "title": "20,000 Leagues Under the Sea",
-            "score": 0.04285714285714286
+            "rank": 1,
+            "movie_id": "44501",
+            "title": "Cast Away",
+            "score": 1.0
           }
         ]
       }
@@ -9443,14 +9814,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 1,
         "raw_vector": 7,
         "accepted_vector": 7,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -9497,7 +9870,8 @@
             "grade": 3,
             "score": 0.09689258624908245
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -9560,7 +9934,7 @@
             "rank": 5,
             "movie_id": "3222136",
             "title": "Alvin and the Chipmunks Meet Frankenstein",
-            "score": 3.5999999046325684
+            "score": 3.6000001430511475
           },
           {
             "rank": 6,
@@ -9590,7 +9964,7 @@
             "rank": 10,
             "movie_id": "1318335",
             "title": "Twilight Zone: The Movie",
-            "score": 2.8000001907348633
+            "score": 2.799999952316284
           }
         ],
         "raw_vector": [
@@ -9716,7 +10090,8 @@
             "title": "House on Haunted Hill",
             "score": 0.04411764705882353
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
@@ -9733,14 +10108,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": 4,
         "raw_vector": 3,
         "accepted_vector": 3,
-        "production_hybrid": 2
+        "production_hybrid": 2,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [],
@@ -9779,7 +10156,8 @@
             "grade": 3,
             "score": 0.06274801587301587
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -10008,15 +10386,16 @@
             "title": "Summer Wars",
             "score": 0.04285714285714286
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
       "id": "q031_semantic_fish_father",
       "query": "fish father searches ocean son",
       "intent": "semantic_plot",
-      "classification": "ranking_failure",
-      "review_hint": "The relevant movie was retrieved but ranked below Hit@K. Inspect fusion and ranking.",
+      "classification": "success",
+      "review_hint": "No investigation required.",
       "guard_suppressed": false,
       "production_result_count": 50,
       "candidate_presence": {
@@ -10025,14 +10404,16 @@
         "accepted_vector": false,
         "raw_vector": false,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": 13,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": 15
+        "production_hybrid": 1,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [],
@@ -10049,11 +10430,20 @@
         "accepted_vector": [],
         "production_hybrid": [
           {
-            "rank": 15,
+            "rank": 1,
             "movie_id": "239587",
             "title": "Finding Nemo",
             "grade": 3,
-            "score": 0.0410958904109589
+            "score": 0.10666966090276218
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "239587",
+            "title": "Finding Nemo",
+            "grade": 3,
+            "score": 1.0
           }
         ]
       },
@@ -10236,63 +10626,71 @@
         "production_hybrid": [
           {
             "rank": 1,
+            "movie_id": "239587",
+            "title": "Finding Nemo",
+            "score": 0.10666966090276218
+          },
+          {
+            "rank": 2,
             "movie_id": "99948",
             "title": "Cabin Boy",
             "score": 0.0819672131147541
           },
           {
-            "rank": 2,
+            "rank": 3,
             "movie_id": "3214698",
             "title": "Warlords of Atlantis",
             "score": 0.07987711213517665
           },
           {
-            "rank": 3,
+            "rank": 4,
             "movie_id": "9617369",
             "title": "Journey to the Center of the Earth",
             "score": 0.07915632754342432
           },
           {
-            "rank": 4,
+            "rank": 5,
             "movie_id": "4409408",
             "title": "The House of Sand",
             "score": 0.07862103174603174
           },
           {
-            "rank": 5,
+            "rank": 6,
             "movie_id": "16963505",
             "title": "The Last Airbender",
             "score": 0.07740384615384616
           },
           {
-            "rank": 6,
+            "rank": 7,
             "movie_id": "25750288",
             "title": "Ocean Heaven",
             "score": 0.056818181818181816
           },
           {
-            "rank": 7,
+            "rank": 8,
             "movie_id": "19936431",
             "title": "Mermaid Got Married",
             "score": 0.05560271646859083
           },
           {
-            "rank": 8,
+            "rank": 9,
             "movie_id": "31887671",
             "title": "Mother Fish",
             "score": 0.049360475589983785
           },
           {
-            "rank": 9,
+            "rank": 10,
             "movie_id": "10418324",
             "title": "Michael Madhana Kamarajan",
             "score": 0.045454545454545456
-          },
+          }
+        ],
+        "memory_clue": [
           {
-            "rank": 10,
-            "movie_id": "28147804",
-            "title": "Urumi",
-            "score": 0.04477611940298507
+            "rank": 1,
+            "movie_id": "239587",
+            "title": "Finding Nemo",
+            "score": 1.0
           }
         ]
       }
@@ -10301,8 +10699,8 @@
       "id": "q032_semantic_flying_house",
       "query": "old man flying house balloons",
       "intent": "semantic_plot",
-      "classification": "ranking_failure",
-      "review_hint": "The relevant movie was retrieved but ranked below Hit@K. Inspect fusion and ranking.",
+      "classification": "success",
+      "review_hint": "No investigation required.",
       "guard_suppressed": false,
       "production_result_count": 50,
       "candidate_presence": {
@@ -10311,14 +10709,16 @@
         "accepted_vector": false,
         "raw_vector": false,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": 11,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": 11
+        "production_hybrid": 1,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [],
@@ -10335,11 +10735,20 @@
         "accepted_vector": [],
         "production_hybrid": [
           {
-            "rank": 11,
+            "rank": 1,
             "movie_id": "11659396",
             "title": "Up",
             "grade": 3,
-            "score": 0.04225352112676056
+            "score": 0.10782729161856384
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "11659396",
+            "title": "Up",
+            "grade": 3,
+            "score": 1.0
           }
         ]
       },
@@ -10522,63 +10931,71 @@
         "production_hybrid": [
           {
             "rank": 1,
+            "movie_id": "11659396",
+            "title": "Up",
+            "score": 0.10782729161856384
+          },
+          {
+            "rank": 2,
             "movie_id": "33592211",
             "title": "Tom and Jerry and the Wizard of Oz",
             "score": 0.08117398202009518
           },
           {
-            "rank": 2,
+            "rank": 3,
             "movie_id": "35099643",
             "title": "Banned From Television",
             "score": 0.07994955863808323
           },
           {
-            "rank": 3,
+            "rank": 4,
             "movie_id": "1854612",
             "title": "Casper: A Spirited Beginning",
             "score": 0.07886904761904762
           },
           {
-            "rank": 4,
+            "rank": 5,
             "movie_id": "3654231",
             "title": "L'eclisse",
             "score": 0.07862103174603174
           },
           {
-            "rank": 5,
+            "rank": 6,
             "movie_id": "3511101",
             "title": "Skidoo",
             "score": 0.07841191066997519
           },
           {
-            "rank": 6,
+            "rank": 7,
             "movie_id": "1520023",
             "title": "Ninja Resurrection",
             "score": 0.045454545454545456
           },
           {
-            "rank": 7,
+            "rank": 8,
             "movie_id": "9260315",
             "title": "Message from Space",
             "score": 0.04477611940298507
           },
           {
-            "rank": 8,
+            "rank": 9,
             "movie_id": "18735140",
             "title": "Barefoot Gen",
             "score": 0.04411764705882353
           },
           {
-            "rank": 9,
+            "rank": 10,
             "movie_id": "32424995",
             "title": "Haunted",
             "score": 0.043478260869565216
-          },
+          }
+        ],
+        "memory_clue": [
           {
-            "rank": 10,
-            "movie_id": "25431279",
-            "title": "Shake, Rattle & Roll XI",
-            "score": 0.04285714285714286
+            "rank": 1,
+            "movie_id": "11659396",
+            "title": "Up",
+            "score": 1.0
           }
         ]
       }
@@ -10587,8 +11004,8 @@
       "id": "q033_semantic_memory_tattoos",
       "query": "man tattoos clues memory loss",
       "intent": "semantic_plot",
-      "classification": "ranking_failure",
-      "review_hint": "The relevant movie was retrieved but ranked below Hit@K. Inspect fusion and ranking.",
+      "classification": "success",
+      "review_hint": "No investigation required.",
       "guard_suppressed": false,
       "production_result_count": 50,
       "candidate_presence": {
@@ -10597,14 +11014,16 @@
         "accepted_vector": false,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": 23,
         "raw_vector": 14,
         "accepted_vector": null,
-        "production_hybrid": 24
+        "production_hybrid": 1,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [],
@@ -10629,11 +11048,20 @@
         "accepted_vector": [],
         "production_hybrid": [
           {
-            "rank": 24,
+            "rank": 1,
             "movie_id": "2750041",
             "title": "Memento",
             "grade": 3,
-            "score": 0.03614457831325301
+            "score": 0.10171834880505629
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "2750041",
+            "title": "Memento",
+            "grade": 3,
+            "score": 1.0
           }
         ]
       },
@@ -10785,63 +11213,71 @@
         "production_hybrid": [
           {
             "rank": 1,
+            "movie_id": "2750041",
+            "title": "Memento",
+            "score": 0.10171834880505629
+          },
+          {
+            "rank": 2,
             "movie_id": "24269284",
             "title": "The Memory Thief",
             "score": 0.05265151515151515
           },
           {
-            "rank": 2,
+            "rank": 3,
             "movie_id": "3050395",
             "title": "Ghajini",
             "score": 0.04918032786885246
           },
           {
-            "rank": 3,
+            "rank": 4,
             "movie_id": "18640799",
             "title": "Ghajini",
             "score": 0.04838709677419355
           },
           {
-            "rank": 4,
+            "rank": 5,
             "movie_id": "793025",
             "title": "Gothika",
             "score": 0.047619047619047616
           },
           {
-            "rank": 5,
+            "rank": 6,
             "movie_id": "35487517",
             "title": "Hammer of the Gods",
             "score": 0.046875
           },
           {
-            "rank": 6,
+            "rank": 7,
             "movie_id": "667372",
             "title": "Harry Potter and the Goblet of Fire",
             "score": 0.046153846153846156
           },
           {
-            "rank": 7,
+            "rank": 8,
             "movie_id": "21918632",
             "title": "The Hangover",
             "score": 0.045454545454545456
           },
           {
-            "rank": 8,
+            "rank": 9,
             "movie_id": "2243769",
             "title": "The FBI Story",
             "score": 0.04477611940298507
           },
           {
-            "rank": 9,
+            "rank": 10,
             "movie_id": "23321343",
             "title": "Murderer",
             "score": 0.04411764705882353
-          },
+          }
+        ],
+        "memory_clue": [
           {
-            "rank": 10,
-            "movie_id": "11527681",
-            "title": "ELI",
-            "score": 0.04365196803788103
+            "rank": 1,
+            "movie_id": "2750041",
+            "title": "Memento",
+            "score": 1.0
           }
         ]
       }
@@ -10860,14 +11296,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": 2,
         "raw_vector": 3,
         "accepted_vector": 3,
-        "production_hybrid": 2
+        "production_hybrid": 2,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [],
@@ -10920,7 +11358,8 @@
             "grade": 2,
             "score": 0.046875
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -11152,15 +11591,16 @@
             "title": "The Swan Princess III: The Mystery of the Enchanted Kingdom",
             "score": 0.045763760049474335
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
       "id": "q035_semantic_lion_father",
       "query": "young lion avenges father",
       "intent": "semantic_plot",
-      "classification": "ranking_failure",
-      "review_hint": "The relevant movie was retrieved but ranked below Hit@K. Inspect fusion and ranking.",
+      "classification": "success",
+      "review_hint": "No investigation required.",
       "guard_suppressed": false,
       "production_result_count": 50,
       "candidate_presence": {
@@ -11169,14 +11609,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": 9,
         "accepted_vector": 9,
-        "production_hybrid": null
+        "production_hybrid": 1,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [],
@@ -11199,7 +11641,24 @@
             "score": 0.4698600172996521
           }
         ],
-        "production_hybrid": []
+        "production_hybrid": [
+          {
+            "rank": 1,
+            "movie_id": "88678",
+            "title": "The Lion King",
+            "grade": 3,
+            "score": 0.08006652411499168
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "88678",
+            "title": "The Lion King",
+            "grade": 3,
+            "score": 1.0
+          }
+        ]
       },
       "relevant_movie_evidence": [
         {
@@ -11348,63 +11807,71 @@
         "production_hybrid": [
           {
             "rank": 1,
+            "movie_id": "88678",
+            "title": "The Lion King",
+            "score": 0.08006652411499168
+          },
+          {
+            "rank": 2,
             "movie_id": "307553",
             "title": "The Lion King II: Simba's Pride",
             "score": 0.05969551282051282
           },
           {
-            "rank": 2,
+            "rank": 3,
             "movie_id": "27683146",
             "title": "African Cats",
             "score": 0.05458937198067633
           },
           {
-            "rank": 3,
+            "rank": 4,
             "movie_id": "26181579",
             "title": "For the Term of his Natural Life",
             "score": 0.05295815295815296
           },
           {
-            "rank": 4,
+            "rank": 5,
             "movie_id": "8619888",
             "title": "Next Avengers: Heroes of Tomorrow",
             "score": 0.04918032786885246
           },
           {
-            "rank": 5,
+            "rank": 6,
             "movie_id": "536521",
             "title": "Creepshow",
             "score": 0.04838709677419355
           },
           {
-            "rank": 6,
+            "rank": 7,
             "movie_id": "10644072",
             "title": "Bhagwan Dada",
             "score": 0.047619047619047616
           },
           {
-            "rank": 7,
+            "rank": 8,
             "movie_id": "3653120",
             "title": "The Young Lions",
-            "score": 0.04700568752091
+            "score": 0.04669647292598113
           },
           {
-            "rank": 8,
+            "rank": 9,
             "movie_id": "7454401",
             "title": "Alraune",
             "score": 0.046153846153846156
           },
           {
-            "rank": 9,
+            "rank": 10,
             "movie_id": "5210039",
             "title": "Khan Kluay",
             "score": 0.045454545454545456
-          },
+          }
+        ],
+        "memory_clue": [
           {
-            "rank": 10,
-            "movie_id": "1944643",
-            "title": "Duma",
-            "score": 0.04491228070175439
+            "rank": 1,
+            "movie_id": "88678",
+            "title": "The Lion King",
+            "score": 1.0
           }
         ]
       }
@@ -11423,14 +11890,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": 10,
         "raw_vector": 22,
         "accepted_vector": 22,
-        "production_hybrid": 5
+        "production_hybrid": 5,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [],
@@ -11469,7 +11938,8 @@
             "grade": 3,
             "score": 0.05505226480836237
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -11518,15 +11988,15 @@
           },
           {
             "rank": 5,
-            "movie_id": "27702708",
-            "title": "Real Steel",
+            "movie_id": "1585387",
+            "title": "Street Fighter II: The Animated Movie",
             "score": 5.600000381469727
           },
           {
             "rank": 6,
-            "movie_id": "1585387",
-            "title": "Street Fighter II: The Animated Movie",
-            "score": 5.600000381469727
+            "movie_id": "27702708",
+            "title": "Real Steel",
+            "score": 5.599999904632568
           },
           {
             "rank": 7,
@@ -11638,7 +12108,7 @@
             "rank": 4,
             "movie_id": "1585387",
             "title": "Street Fighter II: The Animated Movie",
-            "score": 0.05735930735930736
+            "score": 0.05805860805860806
           },
           {
             "rank": 5,
@@ -11656,7 +12126,7 @@
             "rank": 7,
             "movie_id": "7999304",
             "title": "Duel of Fists",
-            "score": 0.05148819705781731
+            "score": 0.05101351351351351
           },
           {
             "rank": 8,
@@ -11674,40 +12144,60 @@
             "rank": 10,
             "movie_id": "27702708",
             "title": "Real Steel",
-            "score": 0.046153846153846156
+            "score": 0.045454545454545456
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
       "id": "q037_semantic_alien_bicycle",
       "query": "alien child bicycle moon",
       "intent": "semantic_plot",
-      "classification": "candidate_recall_failure",
-      "review_hint": "The relevant movie was absent from every production candidate source. Reranking cannot fix this.",
+      "classification": "success",
+      "review_hint": "No investigation required.",
       "guard_suppressed": false,
-      "production_result_count": 29,
+      "production_result_count": 30,
       "candidate_presence": {
         "full_text": false,
         "broad_full_text": false,
         "accepted_vector": false,
         "raw_vector": false,
-        "accepted_candidate_pool": false,
-        "raw_candidate_pool": false
+        "accepted_candidate_pool": true,
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": null
+        "production_hybrid": 1,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [],
         "raw_vector": [],
         "accepted_vector": [],
-        "production_hybrid": []
+        "production_hybrid": [
+          {
+            "rank": 1,
+            "movie_id": "73441",
+            "title": "E.T. the Extra-Terrestrial",
+            "grade": 3,
+            "score": 0.06557377049180328
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "73441",
+            "title": "E.T. the Extra-Terrestrial",
+            "grade": 3,
+            "score": 1.0
+          }
+        ]
       },
       "relevant_movie_evidence": [
         {
@@ -11832,63 +12322,71 @@
         "production_hybrid": [
           {
             "rank": 1,
+            "movie_id": "73441",
+            "title": "E.T. the Extra-Terrestrial",
+            "score": 0.06557377049180328
+          },
+          {
+            "rank": 2,
             "movie_id": "29471340",
             "title": "Arthur Christmas",
             "score": 0.04918032786885246
           },
           {
-            "rank": 2,
+            "rank": 3,
             "movie_id": "6276691",
             "title": "Enemy Mine",
             "score": 0.04838709677419355
           },
           {
-            "rank": 3,
+            "rank": 4,
             "movie_id": "23941708",
             "title": "2001: A Space Odyssey",
             "score": 0.047619047619047616
           },
           {
-            "rank": 4,
+            "rank": 5,
             "movie_id": "8977593",
             "title": "American Flyers",
             "score": 0.046875
           },
           {
-            "rank": 5,
+            "rank": 6,
             "movie_id": "2707684",
             "title": "Supernova",
             "score": 0.046153846153846156
           },
           {
-            "rank": 6,
+            "rank": 7,
             "movie_id": "12126877",
             "title": "Iczer Reborn",
             "score": 0.045454545454545456
           },
           {
-            "rank": 7,
+            "rank": 8,
             "movie_id": "34707165",
             "title": "The Europa Report",
             "score": 0.01639344262295082
           },
           {
-            "rank": 8,
+            "rank": 9,
             "movie_id": "22141846",
             "title": "Pontiac Moon",
             "score": 0.016129032258064516
           },
           {
-            "rank": 9,
+            "rank": 10,
             "movie_id": "34400393",
             "title": "Alabama Moon",
             "score": 0.015873015873015872
-          },
+          }
+        ],
+        "memory_clue": [
           {
-            "rank": 10,
-            "movie_id": "26438397",
-            "title": "Moonchild",
-            "score": 0.015625
+            "rank": 1,
+            "movie_id": "73441",
+            "title": "E.T. the Extra-Terrestrial",
+            "score": 1.0
           }
         ]
       }
@@ -11907,21 +12405,24 @@
         "accepted_vector": false,
         "raw_vector": false,
         "accepted_candidate_pool": false,
-        "raw_candidate_pool": false
+        "raw_candidate_pool": false,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": null
+        "production_hybrid": null,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [],
         "raw_vector": [],
         "accepted_vector": [],
-        "production_hybrid": []
+        "production_hybrid": [],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [],
       "top_results": {
@@ -11989,7 +12490,8 @@
             "score": 0.4017745256423979
           }
         ],
-        "production_hybrid": []
+        "production_hybrid": [],
+        "memory_clue": []
       }
     },
     {
@@ -12006,21 +12508,24 @@
         "accepted_vector": false,
         "raw_vector": false,
         "accepted_candidate_pool": false,
-        "raw_candidate_pool": false
+        "raw_candidate_pool": false,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": null
+        "production_hybrid": null,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [],
         "raw_vector": [],
         "accepted_vector": [],
-        "production_hybrid": []
+        "production_hybrid": [],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [],
       "top_results": {
@@ -12088,7 +12593,8 @@
             "score": 0.30204640018663453
           }
         ],
-        "production_hybrid": []
+        "production_hybrid": [],
+        "memory_clue": []
       }
     },
     {
@@ -12105,21 +12611,24 @@
         "accepted_vector": false,
         "raw_vector": false,
         "accepted_candidate_pool": false,
-        "raw_candidate_pool": false
+        "raw_candidate_pool": false,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": null
+        "production_hybrid": null,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [],
         "raw_vector": [],
         "accepted_vector": [],
-        "production_hybrid": []
+        "production_hybrid": [],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [],
       "top_results": {
@@ -12187,7 +12696,8 @@
             "score": 0.37141217334125365
           }
         ],
-        "production_hybrid": []
+        "production_hybrid": [],
+        "memory_clue": []
       }
     },
     {
@@ -12204,21 +12714,24 @@
         "accepted_vector": false,
         "raw_vector": false,
         "accepted_candidate_pool": false,
-        "raw_candidate_pool": false
+        "raw_candidate_pool": false,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": null
+        "production_hybrid": null,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [],
         "raw_vector": [],
         "accepted_vector": [],
-        "production_hybrid": []
+        "production_hybrid": [],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [],
       "top_results": {
@@ -12286,15 +12799,16 @@
             "score": 0.3144645128611607
           }
         ],
-        "production_hybrid": []
+        "production_hybrid": [],
+        "memory_clue": []
       }
     },
     {
       "id": "q042_dialogue_force",
       "query": "may the force be with you",
       "intent": "dialogue_memory",
-      "classification": "candidate_recall_failure",
-      "review_hint": "The relevant movie was absent from every production candidate source. Reranking cannot fix this.",
+      "classification": "ranking_failure",
+      "review_hint": "The relevant movie was retrieved but ranked below Hit@K. Inspect fusion and ranking.",
       "guard_suppressed": false,
       "production_result_count": 50,
       "candidate_presence": {
@@ -12302,22 +12816,69 @@
         "broad_full_text": false,
         "accepted_vector": false,
         "raw_vector": false,
-        "accepted_candidate_pool": false,
-        "raw_candidate_pool": false
+        "accepted_candidate_pool": true,
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": null
+        "production_hybrid": 7,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [],
         "raw_vector": [],
         "accepted_vector": [],
-        "production_hybrid": []
+        "production_hybrid": [
+          {
+            "rank": 7,
+            "movie_id": "52549",
+            "title": "Star Wars Episode IV: A New Hope",
+            "grade": 3,
+            "score": 0.06557377049180328
+          },
+          {
+            "rank": 10,
+            "movie_id": "50744",
+            "title": "Star Wars Episode VI: Return of the Jedi",
+            "grade": 2,
+            "score": 0.06451612903225806
+          },
+          {
+            "rank": 12,
+            "movie_id": "53964",
+            "title": "Star Wars Episode V: The Empire Strikes Back",
+            "grade": 2,
+            "score": 0.06349206349206349
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "52549",
+            "title": "Star Wars Episode IV: A New Hope",
+            "grade": 3,
+            "score": 0.5
+          },
+          {
+            "rank": 2,
+            "movie_id": "50744",
+            "title": "Star Wars Episode VI: Return of the Jedi",
+            "grade": 2,
+            "score": 0.5
+          },
+          {
+            "rank": 3,
+            "movie_id": "53964",
+            "title": "Star Wars Episode V: The Empire Strikes Back",
+            "grade": 2,
+            "score": 0.5
+          }
+        ]
       },
       "relevant_movie_evidence": [
         {
@@ -12592,27 +13153,47 @@
           },
           {
             "rank": 7,
+            "movie_id": "52549",
+            "title": "Star Wars Episode IV: A New Hope",
+            "score": 0.06557377049180328
+          },
+          {
+            "rank": 8,
             "movie_id": "1024792",
             "title": "Police Story 3: Super Cop",
             "score": 0.06547619047619047
           },
           {
-            "rank": 8,
+            "rank": 9,
             "movie_id": "76387",
             "title": "The Thing",
             "score": 0.06512820512820514
           },
           {
-            "rank": 9,
-            "movie_id": "2768565",
-            "title": "Police Story 2",
-            "score": 0.06439024390243903
+            "rank": 10,
+            "movie_id": "50744",
+            "title": "Star Wars Episode VI: Return of the Jedi",
+            "score": 0.06451612903225806
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "52549",
+            "title": "Star Wars Episode IV: A New Hope",
+            "score": 0.5
           },
           {
-            "rank": 10,
-            "movie_id": "961659",
-            "title": "Battle of the Bulge",
-            "score": 0.0608294930875576
+            "rank": 2,
+            "movie_id": "50744",
+            "title": "Star Wars Episode VI: Return of the Jedi",
+            "score": 0.5
+          },
+          {
+            "rank": 3,
+            "movie_id": "53964",
+            "title": "Star Wars Episode V: The Empire Strikes Back",
+            "score": 0.5
           }
         ]
       }
@@ -12621,8 +13202,8 @@
       "id": "q043_dialogue_ill_be_back",
       "query": "ill be back",
       "intent": "dialogue_memory",
-      "classification": "candidate_recall_failure",
-      "review_hint": "The relevant movie was absent from every production candidate source. Reranking cannot fix this.",
+      "classification": "success",
+      "review_hint": "No investigation required.",
       "guard_suppressed": false,
       "production_result_count": 50,
       "candidate_presence": {
@@ -12630,22 +13211,55 @@
         "broad_full_text": false,
         "accepted_vector": false,
         "raw_vector": false,
-        "accepted_candidate_pool": false,
-        "raw_candidate_pool": false
+        "accepted_candidate_pool": true,
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": null
+        "production_hybrid": 2,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [],
         "raw_vector": [],
         "accepted_vector": [],
-        "production_hybrid": []
+        "production_hybrid": [
+          {
+            "rank": 2,
+            "movie_id": "34344124",
+            "title": "Terminator 2: Judgment Day",
+            "grade": 2,
+            "score": 0.06557377049180328
+          },
+          {
+            "rank": 3,
+            "movie_id": "30327",
+            "title": "The Terminator",
+            "grade": 3,
+            "score": 0.06451612903225806
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "34344124",
+            "title": "Terminator 2: Judgment Day",
+            "grade": 2,
+            "score": 0.5
+          },
+          {
+            "rank": 2,
+            "movie_id": "30327",
+            "title": "The Terminator",
+            "grade": 3,
+            "score": 0.5
+          }
+        ]
       },
       "relevant_movie_evidence": [
         {
@@ -12811,57 +13425,57 @@
           },
           {
             "rank": 2,
+            "movie_id": "6674887",
+            "title": "Going Back",
+            "score": 0.2309240859196139
+          },
+          {
+            "rank": 3,
             "movie_id": "34992096",
             "title": "Lover Come Back",
             "score": 0.22901347529727512
           },
           {
-            "rank": 3,
+            "rank": 4,
+            "movie_id": "34088384",
+            "title": "Return",
+            "score": 0.2255108520084116
+          },
+          {
+            "rank": 5,
             "movie_id": "23896772",
             "title": "Back to Back",
             "score": 0.2253571018363777
           },
           {
-            "rank": 4,
+            "rank": 6,
             "movie_id": "1722134",
             "title": "Return from Witch Mountain",
             "score": 0.2206882702894053
           },
           {
-            "rank": 5,
+            "rank": 7,
+            "movie_id": "35592739",
+            "title": "Return to home Gori",
+            "score": 0.21661667724748424
+          },
+          {
+            "rank": 8,
             "movie_id": "24645176",
             "title": "Went to Coney Island on a Mission from God: Be Back By Five",
             "score": 0.21400443148560155
           },
           {
-            "rank": 6,
+            "rank": 9,
             "movie_id": "3837132",
             "title": "Back-Room Boy",
             "score": 0.20681030073043094
           },
           {
-            "rank": 7,
+            "rank": 10,
             "movie_id": "5088118",
             "title": "Evil speak",
             "score": 0.19913693075556016
-          },
-          {
-            "rank": 8,
-            "movie_id": "16725177",
-            "title": "Gone",
-            "score": 0.1968359861569421
-          },
-          {
-            "rank": 9,
-            "movie_id": "1766226",
-            "title": "Return to the Blue Lagoon",
-            "score": 0.19616569899525094
-          },
-          {
-            "rank": 10,
-            "movie_id": "20812616",
-            "title": "Backroads",
-            "score": 0.19241966650368802
           }
         ],
         "production_hybrid": [
@@ -12873,57 +13487,71 @@
           },
           {
             "rank": 2,
+            "movie_id": "34344124",
+            "title": "Terminator 2: Judgment Day",
+            "score": 0.06557377049180328
+          },
+          {
+            "rank": 3,
+            "movie_id": "30327",
+            "title": "The Terminator",
+            "score": 0.06451612903225806
+          },
+          {
+            "rank": 4,
             "movie_id": "5207053",
             "title": "Ankahee",
             "score": 0.061095890410958906
           },
           {
-            "rank": 3,
+            "rank": 5,
             "movie_id": "21132240",
             "title": "Teeth",
             "score": 0.05868847754340652
           },
           {
-            "rank": 4,
+            "rank": 6,
             "movie_id": "31922328",
             "title": "Neeraba Jhada",
             "score": 0.05165816326530612
           },
           {
-            "rank": 5,
+            "rank": 7,
             "movie_id": "35189883",
             "title": "Abraham Lincoln vs. Zombies",
             "score": 0.05104333868378812
           },
           {
-            "rank": 6,
+            "rank": 8,
             "movie_id": "6283620",
             "title": "Save The Last Dance for Me",
             "score": 0.04918032786885246
           },
           {
-            "rank": 7,
+            "rank": 9,
             "movie_id": "13167033",
             "title": "Attack of the Sabretooth",
             "score": 0.04838709677419355
           },
           {
-            "rank": 8,
+            "rank": 10,
             "movie_id": "32301635",
             "title": "Buddha Mountain",
             "score": 0.047619047619047616
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "34344124",
+            "title": "Terminator 2: Judgment Day",
+            "score": 0.5
           },
           {
-            "rank": 9,
-            "movie_id": "23851782",
-            "title": "The Ghost Train",
-            "score": 0.046875
-          },
-          {
-            "rank": 10,
-            "movie_id": "20869369",
-            "title": "Three: After life",
-            "score": 0.046153846153846156
+            "rank": 2,
+            "movie_id": "30327",
+            "title": "The Terminator",
+            "score": 0.5
           }
         ]
       }
@@ -12932,31 +13560,50 @@
       "id": "q044_dialogue_truth",
       "query": "you cant handle the truth",
       "intent": "dialogue_memory",
-      "classification": "candidate_recall_failure",
-      "review_hint": "The relevant movie was absent from every production candidate source. Reranking cannot fix this.",
+      "classification": "success",
+      "review_hint": "No investigation required.",
       "guard_suppressed": false,
-      "production_result_count": 2,
+      "production_result_count": 3,
       "candidate_presence": {
         "full_text": false,
         "broad_full_text": false,
         "accepted_vector": false,
         "raw_vector": false,
-        "accepted_candidate_pool": false,
-        "raw_candidate_pool": false
+        "accepted_candidate_pool": true,
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": null
+        "production_hybrid": 2,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [],
         "raw_vector": [],
         "accepted_vector": [],
-        "production_hybrid": []
+        "production_hybrid": [
+          {
+            "rank": 2,
+            "movie_id": "20691749",
+            "title": "A Few Good Men",
+            "grade": 3,
+            "score": 0.06557377049180328
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "20691749",
+            "title": "A Few Good Men",
+            "grade": 3,
+            "score": 0.5
+          }
+        ]
       },
       "relevant_movie_evidence": [
         {
@@ -13064,9 +13711,23 @@
           },
           {
             "rank": 2,
+            "movie_id": "20691749",
+            "title": "A Few Good Men",
+            "score": 0.06557377049180328
+          },
+          {
+            "rank": 3,
             "movie_id": "11843004",
             "title": "Particles of Truth",
             "score": 0.01639344262295082
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "20691749",
+            "title": "A Few Good Men",
+            "score": 0.5
           }
         ]
       }
@@ -13075,8 +13736,8 @@
       "id": "q045_dialogue_chocolates",
       "query": "life is like a box of chocolates",
       "intent": "dialogue_memory",
-      "classification": "candidate_recall_failure",
-      "review_hint": "The relevant movie was absent from every production candidate source. Reranking cannot fix this.",
+      "classification": "success",
+      "review_hint": "No investigation required.",
       "guard_suppressed": false,
       "production_result_count": 50,
       "candidate_presence": {
@@ -13084,22 +13745,41 @@
         "broad_full_text": false,
         "accepted_vector": false,
         "raw_vector": false,
-        "accepted_candidate_pool": false,
-        "raw_candidate_pool": false
+        "accepted_candidate_pool": true,
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": null
+        "production_hybrid": 4,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [],
         "raw_vector": [],
         "accepted_vector": [],
-        "production_hybrid": []
+        "production_hybrid": [
+          {
+            "rank": 4,
+            "movie_id": "41528",
+            "title": "Forrest Gump",
+            "grade": 3,
+            "score": 0.06557377049180328
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "41528",
+            "title": "Forrest Gump",
+            "grade": 3,
+            "score": 0.25
+          }
+        ]
       },
       "relevant_movie_evidence": [
         {
@@ -13284,45 +13964,53 @@
           },
           {
             "rank": 4,
+            "movie_id": "41528",
+            "title": "Forrest Gump",
+            "score": 0.06557377049180328
+          },
+          {
+            "rank": 5,
             "movie_id": "174560",
             "title": "Willy Wonka & the Chocolate Factory",
             "score": 0.06132756132756133
           },
           {
-            "rank": 5,
+            "rank": 6,
             "movie_id": "6283620",
             "title": "Save The Last Dance for Me",
             "score": 0.046875
           },
           {
-            "rank": 6,
+            "rank": 7,
             "movie_id": "1955275",
             "title": "Dragon Fist Explosion!! If Gok\u016b Can't Do It, Who Will?",
             "score": 0.046153846153846156
           },
           {
-            "rank": 7,
+            "rank": 8,
             "movie_id": "23654661",
             "title": "Assault in the Ring",
             "score": 0.04477611940298507
           },
           {
-            "rank": 8,
+            "rank": 9,
             "movie_id": "23605553",
             "title": "Demonic Toys: Personal Demons",
             "score": 0.04411764705882353
           },
           {
-            "rank": 9,
+            "rank": 10,
             "movie_id": "8813317",
             "title": "Bawarchi",
             "score": 0.043478260869565216
-          },
+          }
+        ],
+        "memory_clue": [
           {
-            "rank": 10,
-            "movie_id": "30879026",
-            "title": "My Brother's Wedding",
-            "score": 0.04285714285714286
+            "rank": 1,
+            "movie_id": "41528",
+            "title": "Forrest Gump",
+            "score": 0.25
           }
         ]
       }
@@ -13341,14 +14029,16 @@
         "accepted_vector": false,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 1,
         "raw_vector": 30,
         "accepted_vector": null,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -13387,7 +14077,8 @@
             "grade": 3,
             "score": 0.0819672131147541
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -13600,38 +14291,86 @@
             "title": "Slick Hare",
             "score": 0.04285714285714286
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
       "id": "q047_character_archaeologist",
       "query": "archaeologist whip fedora",
       "intent": "character_memory",
-      "classification": "candidate_recall_failure",
-      "review_hint": "The relevant movie was absent from every production candidate source. Reranking cannot fix this.",
-      "guard_suppressed": true,
-      "production_result_count": 0,
+      "classification": "success",
+      "review_hint": "No investigation required.",
+      "guard_suppressed": false,
+      "production_result_count": 4,
       "candidate_presence": {
         "full_text": false,
         "broad_full_text": false,
         "accepted_vector": false,
         "raw_vector": false,
-        "accepted_candidate_pool": false,
-        "raw_candidate_pool": false
+        "accepted_candidate_pool": true,
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": null
+        "production_hybrid": 1,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [],
         "raw_vector": [],
         "accepted_vector": [],
-        "production_hybrid": []
+        "production_hybrid": [
+          {
+            "rank": 1,
+            "movie_id": "51888",
+            "title": "Indiana Jones and the Last Crusade",
+            "grade": 2,
+            "score": 0.06557377049180328
+          },
+          {
+            "rank": 2,
+            "movie_id": "54166",
+            "title": "Indiana Jones and the Raiders of the Lost Ark",
+            "grade": 3,
+            "score": 0.06451612903225806
+          },
+          {
+            "rank": 3,
+            "movie_id": "81503",
+            "title": "Indiana Jones and the Temple of Doom",
+            "grade": 2,
+            "score": 0.06349206349206349
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "51888",
+            "title": "Indiana Jones and the Last Crusade",
+            "grade": 2,
+            "score": 1.0
+          },
+          {
+            "rank": 2,
+            "movie_id": "54166",
+            "title": "Indiana Jones and the Raiders of the Lost Ark",
+            "grade": 3,
+            "score": 1.0
+          },
+          {
+            "rank": 3,
+            "movie_id": "81503",
+            "title": "Indiana Jones and the Temple of Doom",
+            "grade": 2,
+            "score": 1.0
+          }
+        ]
       },
       "relevant_movie_evidence": [
         {
@@ -13744,15 +14483,60 @@
             "score": 0.35417451212710005
           }
         ],
-        "production_hybrid": []
+        "production_hybrid": [
+          {
+            "rank": 1,
+            "movie_id": "51888",
+            "title": "Indiana Jones and the Last Crusade",
+            "score": 0.06557377049180328
+          },
+          {
+            "rank": 2,
+            "movie_id": "54166",
+            "title": "Indiana Jones and the Raiders of the Lost Ark",
+            "score": 0.06451612903225806
+          },
+          {
+            "rank": 3,
+            "movie_id": "81503",
+            "title": "Indiana Jones and the Temple of Doom",
+            "score": 0.06349206349206349
+          },
+          {
+            "rank": 4,
+            "movie_id": "9110863",
+            "title": "Fedora",
+            "score": 0.01639344262295082
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "51888",
+            "title": "Indiana Jones and the Last Crusade",
+            "score": 1.0
+          },
+          {
+            "rank": 2,
+            "movie_id": "54166",
+            "title": "Indiana Jones and the Raiders of the Lost Ark",
+            "score": 1.0
+          },
+          {
+            "rank": 3,
+            "movie_id": "81503",
+            "title": "Indiana Jones and the Temple of Doom",
+            "score": 1.0
+          }
+        ]
       }
     },
     {
       "id": "q048_character_gotham_billionaire",
       "query": "masked vigilante gotham billionaire",
       "intent": "character_memory",
-      "classification": "ranking_failure",
-      "review_hint": "The relevant movie was retrieved but ranked below Hit@K. Inspect fusion and ranking.",
+      "classification": "success",
+      "review_hint": "No investigation required.",
       "guard_suppressed": false,
       "production_result_count": 40,
       "candidate_presence": {
@@ -13761,14 +14545,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": 6,
         "accepted_vector": 6,
-        "production_hybrid": 8
+        "production_hybrid": 3,
+        "memory_clue": 2
       },
       "relevant_matches": {
         "full_text": [],
@@ -13807,18 +14593,34 @@
         ],
         "production_hybrid": [
           {
-            "rank": 8,
-            "movie_id": "4276475",
-            "title": "The Dark Knight",
-            "grade": 3,
-            "score": 0.015151515151515152
-          },
-          {
-            "rank": 9,
+            "rank": 3,
             "movie_id": "481605",
             "title": "Batman Begins",
             "grade": 2,
-            "score": 0.014705882352941176
+            "score": 0.07922201138519924
+          },
+          {
+            "rank": 4,
+            "movie_id": "4276475",
+            "title": "The Dark Knight",
+            "grade": 3,
+            "score": 0.07864357864357864
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 2,
+            "movie_id": "481605",
+            "title": "Batman Begins",
+            "grade": 2,
+            "score": 1.0
+          },
+          {
+            "rank": 3,
+            "movie_id": "4276475",
+            "title": "The Dark Knight",
+            "grade": 3,
+            "score": 1.0
           }
         ]
       },
@@ -13886,7 +14688,7 @@
             "rank": 1,
             "movie_id": "311765",
             "title": "Batman: Mask of the Phantasm",
-            "score": 4.600000381469727
+            "score": 4.599999904632568
           },
           {
             "rank": 2,
@@ -13966,63 +14768,83 @@
         "production_hybrid": [
           {
             "rank": 1,
+            "movie_id": "4726",
+            "title": "Batman",
+            "score": 0.12958626073380172
+          },
+          {
+            "rank": 2,
             "movie_id": "311765",
             "title": "Batman: Mask of the Phantasm",
             "score": 0.09689258624908245
           },
           {
-            "rank": 2,
-            "movie_id": "4726",
-            "title": "Batman",
-            "score": 0.06401249024199844
+            "rank": 3,
+            "movie_id": "481605",
+            "title": "Batman Begins",
+            "score": 0.07922201138519924
           },
           {
-            "rank": 3,
+            "rank": 4,
+            "movie_id": "4276475",
+            "title": "The Dark Knight",
+            "score": 0.07864357864357864
+          },
+          {
+            "rank": 5,
             "movie_id": "26340083",
             "title": "Batman: Under the Red Hood",
             "score": 0.06190061028770706
           },
           {
-            "rank": 4,
+            "rank": 6,
             "movie_id": "13569575",
             "title": "The Spider Returns",
             "score": 0.016129032258064516
           },
           {
-            "rank": 5,
+            "rank": 7,
             "movie_id": "1485962",
             "title": "The Mask",
             "score": 0.015873015873015872
           },
           {
-            "rank": 6,
+            "rank": 8,
             "movie_id": "29075630",
             "title": "The Dark Knight Rises",
             "score": 0.015625
           },
           {
-            "rank": 7,
+            "rank": 9,
             "movie_id": "4728",
             "title": "Batman Returns",
             "score": 0.015384615384615385
-          },
-          {
-            "rank": 8,
-            "movie_id": "4276475",
-            "title": "The Dark Knight",
-            "score": 0.015151515151515152
-          },
-          {
-            "rank": 9,
-            "movie_id": "481605",
-            "title": "Batman Begins",
-            "score": 0.014705882352941176
           },
           {
             "rank": 10,
             "movie_id": "3248338",
             "title": "The Masked Marvel",
             "score": 0.014492753623188406
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "4726",
+            "title": "Batman",
+            "score": 1.0
+          },
+          {
+            "rank": 2,
+            "movie_id": "481605",
+            "title": "Batman Begins",
+            "score": 1.0
+          },
+          {
+            "rank": 3,
+            "movie_id": "4276475",
+            "title": "The Dark Knight",
+            "score": 1.0
           }
         ]
       }
@@ -14041,14 +14863,16 @@
         "accepted_vector": true,
         "raw_vector": true,
         "accepted_candidate_pool": true,
-        "raw_candidate_pool": true
+        "raw_candidate_pool": true,
+        "memory_clue": false
       },
       "relevant_ranks": {
         "full_text": 1,
         "broad_full_text": 1,
         "raw_vector": 3,
         "accepted_vector": 3,
-        "production_hybrid": 1
+        "production_hybrid": 1,
+        "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [
@@ -14073,7 +14897,7 @@
             "movie_id": "18717177",
             "title": "Shrek",
             "grade": 3,
-            "score": 9.600000381469727
+            "score": 9.59999942779541
           },
           {
             "rank": 5,
@@ -14130,7 +14954,8 @@
             "grade": 2,
             "score": 0.09322644568546208
           }
-        ]
+        ],
+        "memory_clue": []
       },
       "relevant_movie_evidence": [
         {
@@ -14228,13 +15053,13 @@
             "rank": 1,
             "movie_id": "18717177",
             "title": "Shrek",
-            "score": 9.600000381469727
+            "score": 9.59999942779541
           },
           {
             "rank": 2,
             "movie_id": "27193568",
             "title": "Shrek Forever After",
-            "score": 8.40000057220459
+            "score": 8.399999618530273
           },
           {
             "rank": 3,
@@ -14378,38 +15203,58 @@
             "title": "Dragon Hunters",
             "score": 0.014705882352941176
           }
-        ]
+        ],
+        "memory_clue": []
       }
     },
     {
       "id": "q050_character_chianti",
       "query": "serial killer chianti fava beans",
       "intent": "character_memory",
-      "classification": "candidate_recall_failure",
-      "review_hint": "The relevant movie was absent from every production candidate source. Reranking cannot fix this.",
+      "classification": "success",
+      "review_hint": "No investigation required.",
       "guard_suppressed": false,
-      "production_result_count": 25,
+      "production_result_count": 26,
       "candidate_presence": {
         "full_text": false,
         "broad_full_text": false,
         "accepted_vector": false,
         "raw_vector": false,
-        "accepted_candidate_pool": false,
-        "raw_candidate_pool": false
+        "accepted_candidate_pool": true,
+        "raw_candidate_pool": true,
+        "memory_clue": true
       },
       "relevant_ranks": {
         "full_text": null,
         "broad_full_text": null,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": null
+        "production_hybrid": 1,
+        "memory_clue": 1
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [],
         "raw_vector": [],
         "accepted_vector": [],
-        "production_hybrid": []
+        "production_hybrid": [
+          {
+            "rank": 1,
+            "movie_id": "30006",
+            "title": "The Silence of the Lambs",
+            "grade": 3,
+            "score": 0.06557377049180328
+          }
+        ],
+        "memory_clue": [
+          {
+            "rank": 1,
+            "movie_id": "30006",
+            "title": "The Silence of the Lambs",
+            "grade": 3,
+            "score": 1.0
+          }
+        ]
       },
       "relevant_movie_evidence": [
         {
@@ -14511,67 +15356,76 @@
         "production_hybrid": [
           {
             "rank": 1,
+            "movie_id": "30006",
+            "title": "The Silence of the Lambs",
+            "score": 0.06557377049180328
+          },
+          {
+            "rank": 2,
             "movie_id": "15383895",
             "title": "Baaz: A Bird in Danger",
             "score": 0.04918032786885246
           },
           {
-            "rank": 2,
+            "rank": 3,
             "movie_id": "21517630",
             "title": "Hillside Cannibals",
             "score": 0.04838709677419355
           },
           {
-            "rank": 3,
+            "rank": 4,
             "movie_id": "31518744",
             "title": "Killer Bean Forever",
             "score": 0.01639344262295082
           },
           {
-            "rank": 4,
+            "rank": 5,
             "movie_id": "18732813",
             "title": "Illustrious Corpses",
             "score": 0.016129032258064516
           },
           {
-            "rank": 5,
+            "rank": 6,
             "movie_id": "6808679",
             "title": "Manga Latina: Killer on the Loose",
             "score": 0.015873015873015872
           },
           {
-            "rank": 6,
+            "rank": 7,
             "movie_id": "1120730",
             "title": "Mr. Bean's Holiday",
             "score": 0.015625
           },
           {
-            "rank": 7,
+            "rank": 8,
             "movie_id": "25548266",
             "title": "Katha",
             "score": 0.015384615384615385
           },
           {
-            "rank": 8,
+            "rank": 9,
             "movie_id": "25496382",
             "title": "Anveshana",
             "score": 0.015151515151515152
           },
           {
-            "rank": 9,
+            "rank": 10,
             "movie_id": "31250146",
             "title": "Assassin for Hire",
             "score": 0.014925373134328358
-          },
+          }
+        ],
+        "memory_clue": [
           {
-            "rank": 10,
-            "movie_id": "1482832",
-            "title": "Freebie and The Bean",
-            "score": 0.014705882352941176
+            "rank": 1,
+            "movie_id": "30006",
+            "title": "The Silence of the Lambs",
+            "score": 1.0
           }
         ]
       }
     }
   ],
-  "broad_weight": 3.0
+  "broad_weight": 3.0,
+  "clue_weight": 4.0
 }
