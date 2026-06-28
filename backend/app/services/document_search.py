@@ -13,27 +13,36 @@ from backend.app.services.movie_results import movie_result_from_row
 document_candidate_multiplier = 10
 minimum_document_candidate_limit = 50
 maximum_document_candidate_limit = 150
+document_scan_multiplier = 4
+minimum_document_scan_limit = 100
+maximum_document_scan_limit = 600
 
 
 document_full_text_search_sql = """
     with search_query as (
         select websearch_to_tsquery('english', %(query)s) as query
     ),
-    document_matches as (
+    top_documents as (
         select
             document.movie_id,
-            max(
-                ts_rank_cd(
-                    document.search_vector,
-                    search_query.query
-                )
-            ) as score
+            ts_rank_cd(
+                document.search_vector,
+                search_query.query
+            )::double precision as document_score
         from movie_search_documents document
         cross join search_query
         where document.search_vector @@ search_query.query
-        group by document.movie_id
+        order by document_score desc
+        limit %(document_limit)s
+    ),
+    movie_matches as (
+        select
+            movie_id,
+            max(document_score) as score
+        from top_documents
+        group by movie_id
         order by score desc
-        limit %(limit)s
+        limit %(movie_limit)s
     )
     select
         movie.wikipedia_movie_id,
@@ -44,35 +53,40 @@ document_full_text_search_sql = """
         movie.tmdb_id,
         movie.poster_path,
         movie.metadata_source,
-        document_matches.score
-    from document_matches
+        movie_matches.score
+    from movie_matches
     join movies movie
-        on movie.id = document_matches.movie_id
+        on movie.id = movie_matches.movie_id
     order by
-        document_matches.score desc,
+        movie_matches.score desc,
         movie.title
-    limit %(limit)s;
+    limit %(movie_limit)s;
 """
 
 
 document_vector_search_sql = """
-    with document_matches as (
+    with top_documents as (
         select
             document.movie_id,
-            max(
-                1 - (
-                    embedding.embedding <=> %(embedding)s::vector
-                )
-            ) as score,
-            min(
+            1 - (
                 embedding.embedding <=> %(embedding)s::vector
-            ) as distance
+            ) as document_score,
+            embedding.embedding <=> %(embedding)s::vector as distance
         from movie_search_document_embeddings embedding
         join movie_search_documents document
             on document.id = embedding.document_id
-        group by document.movie_id
+        order by embedding.embedding <=> %(embedding)s::vector
+        limit %(document_limit)s
+    ),
+    movie_matches as (
+        select
+            movie_id,
+            max(document_score) as score,
+            min(distance) as distance
+        from top_documents
+        group by movie_id
         order by distance asc
-        limit %(limit)s
+        limit %(movie_limit)s
     )
     select
         movie.wikipedia_movie_id,
@@ -83,14 +97,14 @@ document_vector_search_sql = """
         movie.tmdb_id,
         movie.poster_path,
         movie.metadata_source,
-        document_matches.score
-    from document_matches
+        movie_matches.score
+    from movie_matches
     join movies movie
-        on movie.id = document_matches.movie_id
+        on movie.id = movie_matches.movie_id
     order by
-        document_matches.score desc,
+        movie_matches.score desc,
         movie.title
-    limit %(limit)s;
+    limit %(movie_limit)s;
 """
 
 
@@ -102,18 +116,27 @@ def get_document_candidate_limit(limit: int) -> int:
     )
     return min(candidate_limit, maximum_document_candidate_limit)
 
+def get_document_scan_limit(movie_limit: int) -> int:
+    document_limit = movie_limit * document_scan_multiplier
+    document_limit = max(
+        document_limit,
+        minimum_document_scan_limit,
+    )
+    return min(document_limit, maximum_document_scan_limit)
 
 def search_movie_documents_full_text(
     query: str,
     limit: int = 5,
 ) -> list[dict[str, object]]:
+    document_limit = get_document_scan_limit(limit)
     with get_connection() as connection:
         with connection.cursor() as cursor:
             cursor.execute(
                 document_full_text_search_sql,
                 {
                     "query": query,
-                    "limit": limit,
+                    "movie_limit": limit,
+                    "document_limit": document_limit,
                 },
             )
             rows = cursor.fetchall()
@@ -131,6 +154,7 @@ def search_movie_documents_by_embedding(
     query_embedding = to_pgvector_literal(
         embed_text(query)
     )
+    document_limit = get_document_scan_limit(limit)
 
     with get_connection() as connection:
         with connection.cursor() as cursor:
@@ -138,7 +162,8 @@ def search_movie_documents_by_embedding(
                 document_vector_search_sql,
                 {
                     "embedding": query_embedding,
-                    "limit": limit,
+                    "movie_limit": limit,
+                    "document_limit": document_limit,
                 },
             )
             rows = cursor.fetchall()
