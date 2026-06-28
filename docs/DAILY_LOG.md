@@ -259,7 +259,7 @@ retrieval metrics:
 - kept `/search` stable on the existing production hybrid pipeline
 - added evaluation support for `document-hybrid`
 
-## 28/6/6
+## 28/6/26
 - optimized document retrieval to retrieve top matching documents before grouping to movies
 - added experimental `hybrid-v2` search using movie-level and document-level candidates
 - added `/search/hybrid-v2` without changing the stable `/search` endpoint
@@ -267,3 +267,12 @@ retrieval metrics:
 - added regression analysis for `hybrid` vs `hybrid-v2`
 - tested hybrid-v2 fusion, no-result guard behavior, and API response behavior
 - documented the production, document, and hybrid-v2 search paths
+
+## 28/6/26 
+- decided not to promote `hybrid-v2` because it had no improvements, one regression, and higher latency
+- added `movie_memory_clues` as a production hybrid candidate source
+- seeded memory clues for iconic quotes, objects, scenes, franchise aliases, and character memories
+- fused memory clue results into the existing `/search` hybrid ranking
+- updated candidate recall analysis to include memory clue evidence
+- evaluated current `hybrid` again after memory clue fusion
+- kept `/search/documents` and `/search/hybrid-v2` experimental
