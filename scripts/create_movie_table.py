@@ -118,6 +118,46 @@ create_movie_search_document_embeddings_index_sql = """
     on movie_search_document_embeddings
     using hnsw (embedding vector_cosine_ops);
 """
+create_movie_memory_clues_table_sql = """
+    create table if not exists movie_memory_clues (
+        id bigserial primary key,
+        movie_id bigint not null references movies(id) on delete cascade,
+        wikipedia_movie_id text not null,
+        clue_type text not null,
+        source text not null,
+        clue_text text not null,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+    );
+"""
+
+add_movie_memory_clues_vector_sql = """
+    alter table movie_memory_clues
+    add column if not exists search_vector tsvector
+    generated always as (
+        setweight(to_tsvector('english', coalesce(clue_text, '')), 'A')
+    ) stored;
+"""
+
+create_movie_memory_clues_unique_index_sql = """
+    create unique index if not exists movie_memory_clues_source_uidx
+    on movie_memory_clues (
+        wikipedia_movie_id,
+        clue_type,
+        source,
+        clue_text
+    );
+"""
+
+create_movie_memory_clues_movie_index_sql = """
+    create index if not exists movie_memory_clues_movie_idx
+    on movie_memory_clues (movie_id, clue_type);
+"""
+
+create_movie_memory_clues_vector_index_sql = """
+    create index if not exists movie_memory_clues_vector_idx
+    on movie_memory_clues using gin (search_vector);
+"""
 
 def main()-> None:
     with get_connection() as conn:
@@ -138,6 +178,11 @@ def main()-> None:
             cur.execute(create_movie_search_documents_vector_index_sql)
             cur.execute(create_movie_search_document_embeddings_table_sql)
             cur.execute(create_movie_search_document_embeddings_index_sql)
+            cur.execute(create_movie_memory_clues_table_sql)
+            cur.execute(add_movie_memory_clues_vector_sql)
+            cur.execute(create_movie_memory_clues_unique_index_sql)
+            cur.execute(create_movie_memory_clues_movie_index_sql)
+            cur.execute(create_movie_memory_clues_vector_index_sql)
             
         conn.commit()
 
