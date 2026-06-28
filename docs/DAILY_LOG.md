@@ -258,3 +258,12 @@ retrieval metrics:
 - added `/search/documents` as an experimental v2 retrieval endpoint
 - kept `/search` stable on the existing production hybrid pipeline
 - added evaluation support for `document-hybrid`
+
+## 28/6/6
+- optimized document retrieval to retrieve top matching documents before grouping to movies
+- added experimental `hybrid-v2` search using movie-level and document-level candidates
+- added `/search/hybrid-v2` without changing the stable `/search` endpoint
+- added `hybrid-v2` to search evaluation and comparison tooling
+- added regression analysis for `hybrid` vs `hybrid-v2`
+- tested hybrid-v2 fusion, no-result guard behavior, and API response behavior
+- documented the production, document, and hybrid-v2 search paths
