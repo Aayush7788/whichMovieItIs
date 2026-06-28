@@ -8,6 +8,7 @@ from .services.reranker import search_movies_reranked
 from fastapi.middleware.cors import CORSMiddleware
 from .config import settings
 from .services.document_search import search_movies_document_hybrid
+from .services.hybrid_v2_search import search_movies_hybrid_v2
 
 app = FastAPI()
 app.add_middleware(
@@ -114,6 +115,25 @@ def document_search(q: str, limit: int = 5):
         raise HTTPException(status_code=400, detail="limit must be between 1 to 20")
 
     results = search_movies_document_hybrid(
+        cleaned_query,
+        limit=limit,
+    )
+
+    return {
+        "query": cleaned_query,
+        "results": results,
+    }
+
+@app.get("/search/hybrid-v2", response_model=MovieSearchResponse)
+def hybrid_v2_search(q: str, limit: int = 5):
+    cleaned_query = q.strip()
+
+    if cleaned_query == "":
+        raise HTTPException(status_code=400, detail="query cannot be empty")
+    if limit < 1 or limit > 20:
+        raise HTTPException(status_code=400, detail="limit must be between 1 to 20")
+
+    results = search_movies_hybrid_v2(
         cleaned_query,
         limit=limit,
     )
