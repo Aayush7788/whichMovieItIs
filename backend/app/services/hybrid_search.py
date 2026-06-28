@@ -11,7 +11,7 @@ minimum_vector_only_score = 0.50
 full_text_weight = 2.0
 vector_weight = 1.0
 broad_weight = 3.0
-clue_weight = 4.0
+clue_weight = 6.0
 
 def get_candidate_limit(limit: int) -> int:
     candidate_limit = limit * candidate_multiplier
