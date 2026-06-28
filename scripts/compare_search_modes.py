@@ -13,6 +13,7 @@ from backend.app.services.broad_search import (
     search_movies_broad_full_text,
 )
 from backend.app.services.document_search import search_movies_document_hybrid
+from backend.app.services.hybrid_v2_search import search_movies_hybrid_v2
 
 default_limit = 5
 
@@ -23,6 +24,7 @@ search_modes = [
     ("hybrid", search_movies_hybrid),
     ("reranked", search_movies_reranked),
     ("document-hybrid", search_movies_document_hybrid),
+    ("hybrid-v2", search_movies_hybrid_v2),
 ]
 
 def parse_args():

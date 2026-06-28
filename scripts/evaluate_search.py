@@ -9,6 +9,7 @@ from backend.app.services.reranker import search_movies_reranked
 from math import log2
 from time import perf_counter
 from backend.app.services.document_search import search_movies_document_hybrid
+from backend.app.services.hybrid_v2_search import search_movies_hybrid_v2
 
 for stream in (sys.stdout, sys.stderr):
     if hasattr(stream, "reconfigure"):
@@ -27,6 +28,7 @@ search_modes = {
     "hybrid": search_movies_hybrid,
     "reranked": search_movies_reranked,
     "document-hybrid": search_movies_document_hybrid,
+    "hybrid-v2": search_movies_hybrid_v2,
 }
 
 def parse_args():
