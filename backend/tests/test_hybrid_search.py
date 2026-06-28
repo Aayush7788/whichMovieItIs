@@ -83,6 +83,11 @@ def test_search_movies_hybrid_queries_broad_source(
         "search_movies_by_embedding",
         lambda query, limit: [],
     )
+    monkeypatch.setattr(
+        hybrid_search,
+        "search_movies_by_memory_clues",
+        lambda query, limit: [],
+    )
 
     def fake_broad_search(query, limit):
         broad_calls.append((query, limit))
@@ -109,3 +114,53 @@ def test_search_movies_hybrid_queries_broad_source(
         ("hockey mask summer camp", 25),
     ]
     assert results[0]["wikipedia_movie_id"] == "13053911"
+
+def test_rank_hybrid_results_includes_memory_clues():
+    clue_results = [
+        build_movie("30007", "The Matrix", 1.0),
+    ]
+
+    results = hybrid_search.rank_hybrid_results(
+        full_text_results=[],
+        vector_results=[],
+        broad_results=[],
+        clue_results=clue_results,
+        limit=5,
+    )
+
+    assert results[0]["wikipedia_movie_id"] == "30007"
+
+
+def test_search_movies_hybrid_uses_memory_clue_source(
+    monkeypatch,
+):
+    monkeypatch.setattr(
+        hybrid_search,
+        "search_movies",
+        lambda query, limit: [],
+    )
+    monkeypatch.setattr(
+        hybrid_search,
+        "search_movies_by_embedding",
+        lambda query, limit: [],
+    )
+    monkeypatch.setattr(
+        hybrid_search,
+        "search_movies_broad_full_text",
+        lambda query, limit: [],
+    )
+    monkeypatch.setattr(
+        hybrid_search,
+        "search_movies_by_memory_clues",
+        lambda query, limit: [
+            build_movie("30007", "The Matrix", 1.0),
+        ],
+    )
+
+    results = hybrid_search.search_movies_hybrid(
+        "red pill blue pill",
+        limit=5,
+    )
+
+    assert results[0]["wikipedia_movie_id"] == "30007"
+

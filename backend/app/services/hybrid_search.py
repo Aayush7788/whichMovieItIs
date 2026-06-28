@@ -98,6 +98,14 @@ def rank_hybrid_results(
             weight=broad_weight_value,
             rrf_k_value=rrf_k_value,
         )
+    if clue_results:
+        add_ranked_results(
+        combined=combined,
+        results=clue_results,
+        weight=clue_weight_value,
+        rrf_k_value=rrf_k_value,
+    )
+
     ranked_results = sorted(
         combined.values(),
         key=lambda movie: (
@@ -105,13 +113,6 @@ def rank_hybrid_results(
             str(movie["title"]),
         ),
     )
-    if clue_results:
-        add_ranked_results(
-            combined=combined,
-            results=clue_results,
-            weight=clue_weight_value,
-            rrf_k_value=rrf_k_value,
-        )
 
     return ranked_results[:limit]
 
