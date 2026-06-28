@@ -1,7 +1,7 @@
 from backend.app.services.search import search_movies
 from backend.app.services.vector_search import search_movies_by_embedding
 from backend.app.services.broad_search import search_movies_broad_full_text
-
+from backend.app.services.clue_search import search_movies_by_memory_clues
 rrf_k = 60
 candidate_multiplier = 5
 minimum_candidate_limit = 20
@@ -11,6 +11,7 @@ minimum_vector_only_score = 0.50
 full_text_weight = 2.0
 vector_weight = 1.0
 broad_weight = 3.0
+clue_weight = 6.0
 
 def get_candidate_limit(limit: int) -> int:
     candidate_limit = limit * candidate_multiplier
@@ -66,11 +67,13 @@ def rank_hybrid_results(
     vector_results: list[dict[str, object]],
     limit: int,
     broad_results: list[dict[str, object]] | None = None,
+    clue_results: list[dict[str, object]] | None = None,
     rrf_k_value: int = rrf_k,
     minimum_vector_score_value: float = minimum_vector_score,
     full_text_weight_value: float = full_text_weight,
     vector_weight_value: float = vector_weight,
     broad_weight_value: float = broad_weight,
+    clue_weight_value: float = clue_weight,
 ) -> list[dict[str, object]]:
     combined: dict[str, dict[str, object]] = {}
 
@@ -95,6 +98,14 @@ def rank_hybrid_results(
             weight=broad_weight_value,
             rrf_k_value=rrf_k_value,
         )
+    if clue_results:
+        add_ranked_results(
+        combined=combined,
+        results=clue_results,
+        weight=clue_weight_value,
+        rrf_k_value=rrf_k_value,
+    )
+
     ranked_results = sorted(
         combined.values(),
         key=lambda movie: (
@@ -112,11 +123,20 @@ def search_movies_hybrid(query: str, limit: int = 5) -> list[dict[str, object]]:
     full_text_results = search_movies(query, candidate_limit)
     vector_results = search_movies_by_embedding(query, candidate_limit)
     broad_results = search_movies_broad_full_text(query, candidate_limit)
+    clue_results = search_movies_by_memory_clues(
+        query,
+        candidate_limit,
+    )
+
+    lexical_results = [
+        *full_text_results,
+        *clue_results,
+    ]
 
     if should_return_no_results(
-    full_text_results=full_text_results,
-    vector_results=vector_results,
-    broad_results=broad_results
+        full_text_results=lexical_results,
+        vector_results=vector_results,
+        broad_results=broad_results
     ):
         return []
 
@@ -125,5 +145,6 @@ def search_movies_hybrid(query: str, limit: int = 5) -> list[dict[str, object]]:
         vector_results=vector_results,
         broad_results=broad_results,
         limit=limit,
+        clue_results=clue_results,
     )
 
