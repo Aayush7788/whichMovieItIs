@@ -25,6 +25,7 @@ def test_search_returns_poster_metadata(
         "search_movies_hybrid",
         lambda query, limit: [
             {
+                "movie_key": "cmu:30007",
                 "wikipedia_movie_id": "30007",
                 "title": "The Matrix",
                 "release_date": "1999-03-31",

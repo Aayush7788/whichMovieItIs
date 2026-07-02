@@ -2,6 +2,7 @@ from backend.app.services.search import search_movies
 from backend.app.services.vector_search import search_movies_by_embedding
 from backend.app.services.broad_search import search_movies_broad_full_text
 from backend.app.services.clue_search import search_movies_by_memory_clues
+from backend.app.services.tmdb_runtime_import import import_tmdb_title_if_needed
 rrf_k = 60
 candidate_multiplier = 5
 minimum_candidate_limit = 20
@@ -120,7 +121,7 @@ def rank_hybrid_results(
     return ranked_results[:limit]
 
 
-def search_movies_hybrid(query: str, limit: int = 5) -> list[dict[str, object]]:
+def search_movies_hybrid_local(query: str, limit: int = 5) -> list[dict[str, object]]:
     candidate_limit = get_candidate_limit(limit)
 
     full_text_results = search_movies(query, candidate_limit)
@@ -150,4 +151,16 @@ def search_movies_hybrid(query: str, limit: int = 5) -> list[dict[str, object]]:
         limit=limit,
         clue_results=clue_results,
     )
+
+
+def search_movies_hybrid(query: str, limit: int = 5) -> list[dict[str, object]]:
+    results = search_movies_hybrid_local(query, limit)
+
+    if import_tmdb_title_if_needed(
+        query=query,
+        local_results=results,
+    ):
+        return search_movies_hybrid_local(query, limit)
+
+    return results
 
