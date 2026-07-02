@@ -16,10 +16,13 @@ search_movie_sql = """
         m.tmdb_id,
         m.poster_path,
         m.metadata_source,
-        ts_rank_cd(m.search_vector, search_query.query)::double precision as score
+        ( ts_rank_cd(m.search_vector, search_query.query)
+         + ts_rank_cd(m.search_boost_vector, search_query.query)
+        )::double precision as score
         from movies m
         cross join search_query
         where m.search_vector @@ search_query.query
+        or m.search_boost_vector @@ search_query.query
         order by
             score desc,
             m.title

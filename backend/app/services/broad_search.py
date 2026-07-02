@@ -29,10 +29,8 @@ broad_search_sql = """
             movie.id,
             count(*)::integer as matched_terms,
             sum(
-                ts_rank_cd(
-                    movie.search_vector,
-                    query_terms.query
-                )
+                ts_rank_cd(movie.search_vector, query_terms.query)
+                + ts_rank_cd(movie.search_boost_vector, query_terms.query) 
             )::double precision as score
         from query_terms
         join movies movie
@@ -52,7 +50,8 @@ broad_search_sql = """
         candidate_matches.score
     from candidate_matches
     join movies movie
-        on movie.id = candidate_matches.id
+        on movie.search_vector @@ query_terms.query
+        or movie.search_boost_vector @@ query_terms.query
     where candidate_matches.matched_terms >= least(
         %(maximum_required_matches)s,
         (
