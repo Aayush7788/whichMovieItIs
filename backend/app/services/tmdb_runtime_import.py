@@ -32,6 +32,7 @@ default_language = "en-US"
 maximum_runtime_title_words = 8
 maximum_runtime_title_chars = 80
 tmdb_source = "tmdb"
+minimum_runtime_budget_seconds = 0.25
 runtime_title_marker_words = {
     "chapter",
     "episode",
@@ -621,6 +622,17 @@ def acquire_runtime_fallback_slot(query: str) -> bool:
     return True
 
 
+def remaining_runtime_budget_seconds(deadline: float) -> float:
+    return max(deadline - monotonic(), 0.0)
+
+
+def has_runtime_budget(
+    deadline: float,
+    minimum_seconds: float = minimum_runtime_budget_seconds,
+) -> bool:
+    return remaining_runtime_budget_seconds(deadline) > minimum_seconds
+
+
 def should_try_tmdb_title_fallback(
     query: str,
     local_results: list[dict[str, object]],
@@ -878,6 +890,22 @@ def import_tmdb_title_if_needed(
         return False
 
     try:
+        fallback_started_at = monotonic()
+        timeout_budget_seconds = (
+            settings.tmdb_runtime_fallback_timeout_seconds
+        )
+
+        if timeout_budget_seconds <= 0:
+            logger.info(
+                (
+                    "tmdb runtime fallback skipped query=%r "
+                    "reason=timeout_disabled"
+                ),
+                query,
+            )
+            return False
+
+        deadline = fallback_started_at + timeout_budget_seconds
         maximum_attempts = max(
             settings.tmdb_runtime_fallback_max_attempts,
             1,
@@ -885,7 +913,7 @@ def import_tmdb_title_if_needed(
 
         with create_tmdb_client(
             timeout_seconds=(
-                settings.tmdb_runtime_fallback_timeout_seconds
+                remaining_runtime_budget_seconds(deadline)
             ),
         ) as client:
             match = search_tmdb_movie(
@@ -905,11 +933,36 @@ def import_tmdb_title_if_needed(
                 )
                 return False
 
+        if not has_runtime_budget(deadline):
+            logger.info(
+                (
+                    "tmdb runtime fallback skipped query=%r "
+                    "reason=deadline_exhausted stage=details"
+                ),
+                query,
+            )
+            return False
+
+        with create_tmdb_client(
+            timeout_seconds=(
+                remaining_runtime_budget_seconds(deadline)
+            ),
+        ) as client:
             movie_payload = fetch_movie_details(
                 client=client,
                 tmdb_id=int(match["id"]),
                 maximum_attempts=maximum_attempts,
             )
+
+        if not has_runtime_budget(deadline):
+            logger.info(
+                (
+                    "tmdb runtime fallback skipped query=%r "
+                    "reason=deadline_exhausted stage=db_import"
+                ),
+                query,
+            )
+            return False
 
         with get_connection() as connection:
             with connection.cursor() as cursor:
@@ -924,11 +977,12 @@ def import_tmdb_title_if_needed(
             logger.info(
                 (
                     "tmdb runtime fallback imported query=%r "
-                    "tmdb_id=%s movie_id=%s"
+                    "tmdb_id=%s movie_id=%s latency_ms=%.1f"
                 ),
                 query,
                 movie_payload.get("id"),
                 movie_id,
+                (monotonic() - fallback_started_at) * 1000,
             )
 
         return movie_id is not None

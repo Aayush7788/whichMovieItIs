@@ -159,7 +159,9 @@ def test_runtime_fallback_uses_strict_timeout_and_schedules_documents(
     monkeypatch,
 ):
     clear_runtime_fallback_state()
-    captured = {}
+    captured = {
+        "timeouts": [],
+    }
 
     monkeypatch.setattr(
         tmdb_runtime_import,
@@ -205,7 +207,7 @@ def test_runtime_fallback_uses_strict_timeout_and_schedules_documents(
             captured["committed"] = True
 
     def fake_create_tmdb_client(timeout_seconds=None):
-        captured["timeout_seconds"] = timeout_seconds
+        captured["timeouts"].append(timeout_seconds)
         return FakeClient()
 
     def fake_search_tmdb_movie(client, title, release_date, maximum_attempts):
@@ -251,10 +253,31 @@ def test_runtime_fallback_uses_strict_timeout_and_schedules_documents(
         query="Shrek 5",
         local_results=[],
     )
-    assert captured == {
-        "timeout_seconds": 2.5,
-        "search_attempts": 1,
-        "detail_attempts": 1,
-        "committed": True,
-        "scheduled_movie_id": 123,
-    }
+    assert len(captured["timeouts"]) == 2
+    assert all(
+        0 < timeout <= 2.5
+        for timeout in captured["timeouts"]
+    )
+    assert captured["search_attempts"] == 1
+    assert captured["detail_attempts"] == 1
+    assert captured["committed"] is True
+    assert captured["scheduled_movie_id"] == 123
+
+
+def test_runtime_fallback_skips_when_timeout_disabled(monkeypatch):
+    clear_runtime_fallback_state()
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "should_try_tmdb_title_fallback",
+        lambda query, local_results: True,
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_runtime_fallback_timeout_seconds",
+        0,
+    )
+
+    assert not tmdb_runtime_import.import_tmdb_title_if_needed(
+        query="Shrek 5",
+        local_results=[],
+    )
