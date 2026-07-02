@@ -24,6 +24,8 @@ logging.basicConfig(
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    settings.validate_production_settings()
+
     if settings.preload_embedding_model_on_startup:
         preload_embedding_model()
 

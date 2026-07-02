@@ -3,6 +3,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    app_env: str = "development"
     database_url: PostgresDsn | None=None
 
     db_host: str = "localhost"
@@ -25,12 +26,51 @@ class Settings(BaseSettings):
 
     frontend_origins: str = "http://localhost:5173"
 
+    def is_production(self) -> bool:
+        return self.app_env.casefold() == "production"
+
     def get_frontend_origins(self) -> list[str]:
         return [
             origin.strip()
             for origin in self.frontend_origins.split(",")
             if origin.strip()
         ]
+
+    def validate_production_settings(self) -> None:
+        if not self.is_production():
+            return
+
+        errors = []
+        frontend_origins = self.get_frontend_origins()
+
+        if self.database_url is None:
+            errors.append("DATABASE_URL is required")
+
+        if not self.tmdb_read_access_token:
+            errors.append("TMDB_READ_ACCESS_TOKEN is required")
+
+        if not frontend_origins:
+            errors.append("FRONTEND_ORIGINS must contain at least one origin")
+
+        if "*" in frontend_origins:
+            errors.append("FRONTEND_ORIGINS cannot include '*' in production")
+
+        localhost_origins = [
+            origin
+            for origin in frontend_origins
+            if "localhost" in origin or "127.0.0.1" in origin
+        ]
+
+        if localhost_origins:
+            errors.append(
+                "FRONTEND_ORIGINS cannot use localhost in production"
+            )
+
+        if errors:
+            raise ValueError(
+                "invalid production settings: "
+                + "; ".join(errors)
+            )
 
     def build_database_url(self) -> str:
         if self.database_url:
