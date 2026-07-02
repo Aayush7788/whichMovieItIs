@@ -40,6 +40,7 @@ broad_search_sql = """
         group by movie.id
     )
     select
+        movie.movie_key,
         movie.wikipedia_movie_id,
         movie.title,
         movie.release_date,

@@ -36,7 +36,8 @@ def search_movies_by_embedding(query: str, limit: int = 5) -> list[dict[str, obj
     ]
 
 vector_search_sql = """
-    select 
+    select
+        movie_key,
         wikipedia_movie_id,
         title,
         release_date,
@@ -51,4 +52,3 @@ vector_search_sql = """
     order by search_embedding <=> %(embedding)s::vector, title
     limit %(limit)s;
 """
-

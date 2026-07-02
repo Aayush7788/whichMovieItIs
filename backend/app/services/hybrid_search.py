@@ -54,7 +54,10 @@ def add_ranked_results(
             if raw_score is None or float(raw_score) < minimum_score:
                 continue
 
-        movie_id = str(movie["wikipedia_movie_id"])
+        movie_id = str(
+            movie.get("movie_key")
+            or movie.get("wikipedia_movie_id")
+        )
 
         if movie_id not in combined:
             combined[movie_id] = dict(movie)

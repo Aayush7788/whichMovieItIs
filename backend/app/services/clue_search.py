@@ -24,6 +24,7 @@ memory_clue_search_sql = """
         limit %(limit)s
     )
     select
+        movie.movie_key,
         movie.wikipedia_movie_id,
         movie.title,
         movie.release_date,
