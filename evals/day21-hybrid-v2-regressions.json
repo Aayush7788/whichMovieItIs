@@ -1,0 +1,1142 @@
+{
+  "baseline": "hybrid",
+  "candidate": "document-hybrid",
+  "limit": 10,
+  "baseline_summary": {
+    "mode": "hybrid",
+    "cases": 50,
+    "ranked_cases": 45,
+    "no_result_cases": 5,
+    "hit@5": 1.0,
+    "mrr@10": 0.9007407407407407,
+    "recall@10": 0.9592592592592594,
+    "ndcg@10": 0.8818976278884348,
+    "no_result_correct": 1.0,
+    "avg_latency_ms": 418.9472519999982,
+    "p95_latency_ms": 558.5141999999905
+  },
+  "candidate_summary": {
+    "mode": "document-hybrid",
+    "cases": 50,
+    "ranked_cases": 45,
+    "no_result_cases": 5,
+    "hit@5": 0.6,
+    "mrr@10": 0.4619135802469136,
+    "recall@10": 0.6296296296296297,
+    "ndcg@10": 0.4952578002214708,
+    "no_result_correct": 1.0,
+    "avg_latency_ms": 85.8020279999937,
+    "p95_latency_ms": 126.01539999991473
+  },
+  "status_counts": {
+    "regression": 18,
+    "same_pass": 32
+  },
+  "cases": [
+    {
+      "id": "q001_exact_hunger_games",
+      "intent": "exact_title",
+      "query": "hunger games",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "The Hunger Games",
+        "The Hunger Games: Catching Fire",
+        "Resurrection of the Little Match Girl",
+        "The Aqua Teen Hunger Force Movie Film for Theatres",
+        "Winnie the Pooh and a Day for Eeyore"
+      ],
+      "candidate_titles": [
+        "The Hunger Games: Catching Fire",
+        "The Hunger Games",
+        "The Aqua Teen Hunger Force Movie Film for Theatres",
+        "Iluminados Por El Fuego",
+        "Winnie the Pooh and a Day for Eeyore"
+      ]
+    },
+    {
+      "id": "q002_object_lightsaber",
+      "intent": "object_scene",
+      "query": "lightsaber",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 2,
+      "baseline_titles": [
+        "Star Wars Episode III: Revenge of the Sith",
+        "Star Wars Episode II: Attack of the Clones",
+        "Star Wars Episode I: The Phantom Menace",
+        "The Formula",
+        "LEGO Star Wars: Revenge of the Brick"
+      ],
+      "candidate_titles": [
+        "The Formula",
+        "LEGO Star Wars: Revenge of the Brick",
+        "Star Wars Episode III: Revenge of the Sith",
+        "Duality",
+        "Starcrash"
+      ]
+    },
+    {
+      "id": "q003_exact_god_of_love",
+      "intent": "exact_title",
+      "query": "god of love",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "God of Love",
+        "Oh My God",
+        "The Magic Pipe",
+        "Amadeus",
+        "The Last Temptation of Christ"
+      ],
+      "candidate_titles": [
+        "God of Love",
+        "The Love God?",
+        "And Thou Shalt Love",
+        "Oh My God",
+        "Kamen Rider Kabuto: God Speed Love"
+      ]
+    },
+    {
+      "id": "q004_punctuation_title",
+      "intent": "exact_title",
+      "query": "oh what a lovely war",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "Oh! What a Lovely War",
+        "Khan Kluay 2",
+        "Merlin",
+        "Oh Shucks! Here Comes UNTAG",
+        "The Adventures of Picasso"
+      ],
+      "candidate_titles": [
+        "Oh! What a Lovely War",
+        "Khan Kluay 2",
+        "Oh Shucks! Here Comes UNTAG",
+        "Merlin",
+        "The Hand of Fear"
+      ]
+    },
+    {
+      "id": "q005_no_result_noise",
+      "intent": "no_result",
+      "query": "zzzxxy",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": null,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [],
+      "candidate_titles": []
+    },
+    {
+      "id": "q006_franchise_matrix",
+      "intent": "franchise_title",
+      "query": "matrix",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 2,
+      "baseline_titles": [
+        "The Matrix",
+        "The Animatrix",
+        "Commando",
+        "The Matrix Reloaded",
+        "The Matrix Revolutions"
+      ],
+      "candidate_titles": [
+        "The Animatrix",
+        "The Matrix",
+        "Commando",
+        "The Matrix Reloaded",
+        "The Matrix Revolutions"
+      ]
+    },
+    {
+      "id": "q007_semantic_boy_wizard",
+      "intent": "semantic_plot",
+      "query": "boy wizard school",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 2,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "Rock School",
+        "Harry Potter and the Philosopher's Stone",
+        "At the End of the Rainbow",
+        "Harry Potter and the Chamber of Secrets",
+        "August Rush"
+      ],
+      "candidate_titles": [
+        "Harry Potter and the Philosopher's Stone",
+        "Harry Potter and the Chamber of Secrets",
+        "At the End of the Rainbow",
+        "Rock School",
+        "August Rush"
+      ]
+    },
+    {
+      "id": "q008_object_one_ring",
+      "intent": "object_scene",
+      "query": "one ring",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 2,
+      "candidate_first_relevant_rank": 2,
+      "baseline_titles": [
+        "The Lord of the Rings",
+        "The Lord of the Rings: The Fellowship of the Ring",
+        "Rings",
+        "The Lord of the Rings: The Two Towers",
+        "The Naked City"
+      ],
+      "candidate_titles": [
+        "The Lord of the Rings",
+        "The Lord of the Rings: The Fellowship of the Ring",
+        "Rings",
+        "Paranoid",
+        "The Lord of the Rings: The Two Towers"
+      ]
+    },
+    {
+      "id": "q009_event_ship_iceberg",
+      "intent": "semantic_plot",
+      "query": "ship hits iceberg",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 10,
+      "baseline_titles": [
+        "A Night to Remember",
+        "Titanic",
+        "Souls at Sea",
+        "Titanic II",
+        "Titanic"
+      ],
+      "candidate_titles": [
+        "Souls at Sea",
+        "Titanic II",
+        "Titanic",
+        "No Greater Love",
+        "Titanic"
+      ]
+    },
+    {
+      "id": "q010_semantic_dreams",
+      "intent": "semantic_plot",
+      "query": "dream inside dream",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 2,
+      "baseline_titles": [
+        "Paprika",
+        "A Nightmare on Elm Street 4: The Dream Master",
+        "Ju-on: The Grudge",
+        "Barbarella",
+        "Incubus"
+      ],
+      "candidate_titles": [
+        "A Nightmare on Elm Street 4: The Dream Master",
+        "Paprika",
+        "Berlin Alexanderplatz",
+        "Barbarella",
+        "Incubus"
+      ]
+    },
+    {
+      "id": "q011_semantic_toys",
+      "intent": "semantic_plot",
+      "query": "toys come alive",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 2,
+      "candidate_first_relevant_rank": 3,
+      "baseline_titles": [
+        "Demonic Toys",
+        "Toy Story",
+        "Dolls",
+        "Tom and Jerry: A Nutcracker Tale",
+        "Babes in Toyland"
+      ],
+      "candidate_titles": [
+        "Demonic Toys",
+        "Dolls",
+        "Toy Story",
+        "Babes in Toyland",
+        "Tom and Jerry: A Nutcracker Tale"
+      ]
+    },
+    {
+      "id": "q012_object_shark",
+      "intent": "object_scene",
+      "query": "shark beach",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "Jaws",
+        "Malibu Shark Attack",
+        "Jaws 2",
+        "Oceans",
+        "Mega Shark Vs. Giant Octopus"
+      ],
+      "candidate_titles": [
+        "Jaws",
+        "Oceans",
+        "Malibu Shark Attack",
+        "Deep Blood",
+        "Jaws 2"
+      ]
+    },
+    {
+      "id": "q013_semantic_time_car",
+      "intent": "semantic_plot",
+      "query": "time travel car",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "Back to the Future",
+        "A Sound of Thunder",
+        "The Time Traveler's Wife",
+        "Butterfly Effect: Revelation",
+        "Wind Chill"
+      ],
+      "candidate_titles": [
+        "Back to the Future",
+        "Timecrimes",
+        "Toki o Kakeru Sh\u014djo",
+        "The Time Traveler's Wife",
+        "A Sound of Thunder"
+      ]
+    },
+    {
+      "id": "q014_exact_dark_knight",
+      "intent": "exact_title",
+      "query": "the dark knight",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "The Dark Knight",
+        "The Dark Knight Rises",
+        "Batman: Revenge",
+        "Kiba Gaiden",
+        "Sword of the Valiant: The Legend of Sir Gawain and the Green Knight"
+      ],
+      "candidate_titles": [
+        "The Dark Knight",
+        "The Dark Knight Rises",
+        "Batman: Revenge",
+        "Robin's Big Date",
+        "Superman/Batman: Apocalypse"
+      ]
+    },
+    {
+      "id": "q015_exact_finding_nemo",
+      "intent": "exact_title",
+      "query": "finding nemo",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "Finding Nemo",
+        "Mr. Nobody",
+        "Little Nemo: Adventures in Slumberland",
+        "20,000 Leagues Under the Sea",
+        "20,000 Leagues Under the Sea"
+      ],
+      "candidate_titles": [
+        "Finding Nemo",
+        "Little Nemo: Adventures in Slumberland",
+        "Mysterious Island",
+        "Mr. Nobody",
+        "Looking for Comedy in the Muslim World"
+      ]
+    },
+    {
+      "id": "q016_exact_jurassic_park",
+      "intent": "exact_title",
+      "query": "jurassic park",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 3,
+      "baseline_titles": [
+        "Jurassic Park",
+        "The Lost World: Jurassic Park",
+        "Jurassic Park III",
+        "Jole Jongole",
+        "Dinosaurs! - A Fun-Filled Trip Back in Time!"
+      ],
+      "candidate_titles": [
+        "The Lost World: Jurassic Park",
+        "Jurassic Park III",
+        "Jurassic Park",
+        "Jole Jongole",
+        "Dinosaurs! - A Fun-Filled Trip Back in Time!"
+      ]
+    },
+    {
+      "id": "q017_exact_shawshank",
+      "intent": "exact_title",
+      "query": "shawshank redemption",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "The Shawshank Redemption",
+        "Puff, Puff, Pass",
+        "King of Sorrow",
+        "Gidh",
+        "Twilight in the Sierras"
+      ],
+      "candidate_titles": [
+        "The Shawshank Redemption",
+        "Puff, Puff, Pass",
+        "Ayul Kaithi",
+        "Twilight in the Sierras",
+        "The Pilgrim"
+      ]
+    },
+    {
+      "id": "q018_exact_eternal_sunshine",
+      "intent": "exact_title",
+      "query": "eternal sunshine spotless mind",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "Eternal Sunshine of the Spotless Mind",
+        "There\u2019s Only One Sun",
+        "In the Heat of the Sun",
+        "Shadows in the Sun",
+        "Apolinar"
+      ],
+      "candidate_titles": [
+        "Eternal Sunshine of the Spotless Mind",
+        "There\u2019s Only One Sun",
+        "The Sun of the Sleepless",
+        "The Dark Side of the Sun",
+        "In the Heat of the Sun"
+      ]
+    },
+    {
+      "id": "q019_franchise_star_wars",
+      "intent": "franchise_title",
+      "query": "star wars",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 10,
+      "baseline_titles": [
+        "Star Wars Episode IV: A New Hope",
+        "Star Wars Episode VI: Return of the Jedi",
+        "Star Wars Episode V: The Empire Strikes Back",
+        "Star Wars Episode III: Revenge of the Sith",
+        "Star Wars Episode II: Attack of the Clones"
+      ],
+      "candidate_titles": [
+        "Saving Star Wars",
+        "From Star Wars to Jedi: The Making of a Saga",
+        "LEGO Star Wars: Revenge of the Brick",
+        "Robot Chicken: Star Wars Episode II",
+        "Lego Star Wars: The Quest for R2-D2"
+      ]
+    },
+    {
+      "id": "q020_franchise_harry_potter",
+      "intent": "franchise_title",
+      "query": "harry potter",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 2,
+      "baseline_titles": [
+        "Harry Potter and the Philosopher's Stone",
+        "Harry Potter and the Order of the Phoenix",
+        "Harry Potter and the Half-Blood Prince",
+        "Harry Potter and the Chamber of Secrets",
+        "Harry Potter and the Prisoner of Azkaban"
+      ],
+      "candidate_titles": [
+        "Harry Potter and the Deathly Hallows \u2013 Part 2",
+        "Harry Potter and the Philosopher's Stone",
+        "Harry Potter and the Order of the Phoenix",
+        "Harry Potter and the Goblet of Fire",
+        "Harry Potter and the Half-Blood Prince"
+      ]
+    },
+    {
+      "id": "q021_franchise_indiana_jones",
+      "intent": "franchise_title",
+      "query": "indiana jones",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 2,
+      "baseline_titles": [
+        "Indiana Jones and the Last Crusade",
+        "Indiana Jones and the Raiders of the Lost Ark",
+        "Indiana Jones and the Temple of Doom",
+        "Indiana Jones and the Kingdom of the Crystal Skull",
+        "Lego Indiana Jones and the Raiders of the Lost Brick"
+      ],
+      "candidate_titles": [
+        "Lego Indiana Jones and the Raiders of the Lost Brick",
+        "Indiana Jones and the Temple of Doom",
+        "Indiana Jones and the Last Crusade",
+        "Indiana Jones and the Kingdom of the Crystal Skull",
+        "Indiana Jones and the Raiders of the Lost Ark"
+      ]
+    },
+    {
+      "id": "q022_franchise_pirates",
+      "intent": "franchise_title",
+      "query": "pirates of the caribbean",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "Pirates of the Caribbean: The Curse of the Black Pearl",
+        "Pirates of the Caribbean: At World's End",
+        "Pirates of the Caribbean: Dead Man's Chest",
+        "Pirates of the Caribbean: On Stranger Tides",
+        "The Crimson Pirate"
+      ],
+      "candidate_titles": [
+        "Pirates of the Caribbean: At World's End",
+        "Pirates of the Caribbean: On Stranger Tides",
+        "Pirates of the Caribbean: Dead Man's Chest",
+        "Pirates of the Caribbean: The Curse of the Black Pearl",
+        "Pirates"
+      ]
+    },
+    {
+      "id": "q023_object_spinning_top",
+      "intent": "object_scene",
+      "query": "spinning top dream",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "Inception",
+        "Poor White Trash",
+        "Beat Street",
+        "A Tale of the Wind",
+        "Ready, Set, Zoom!"
+      ],
+      "candidate_titles": [
+        "Inception",
+        "Poor White Trash",
+        "A Tale of the Wind",
+        "Ready, Set, Zoom!",
+        "Beat Street"
+      ]
+    },
+    {
+      "id": "q024_object_red_blue_pill",
+      "intent": "object_scene",
+      "query": "red pill blue pill",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [
+        "The Matrix",
+        "Three Colors: Blue",
+        "The 51st State",
+        "Blue Sunshine"
+      ],
+      "candidate_titles": [
+        "The 51st State",
+        "Three Colors: Blue",
+        "Blue Sunshine"
+      ]
+    },
+    {
+      "id": "q025_object_glass_slipper",
+      "intent": "object_scene",
+      "query": "glass slipper pumpkin carriage",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "Cinderella",
+        "Cinderella",
+        "Cinderella III: A Twist in Time",
+        "Hey, Cinderella!",
+        "Cinderella"
+      ],
+      "candidate_titles": [
+        "Cinderella",
+        "Cinderella III: A Twist in Time",
+        "Cinderella",
+        "The Glass Slipper"
+      ]
+    },
+    {
+      "id": "q026_object_magic_carpet",
+      "intent": "object_scene",
+      "query": "magic carpet genie",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 2,
+      "baseline_titles": [
+        "Aladdin",
+        "A-Lad-In His Lamp",
+        "The Thief of Bagdad",
+        "Arabian Nights",
+        "Magic Carpet Ride"
+      ],
+      "candidate_titles": [
+        "A-Lad-In His Lamp",
+        "Aladdin",
+        "The Thief of Bagdad",
+        "Arabian Nights",
+        "A Lad an' a Lamp"
+      ]
+    },
+    {
+      "id": "q027_object_hockey_mask",
+      "intent": "object_scene",
+      "query": "hockey mask summer camp",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 3,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [
+        "Bloody Murder",
+        "Meatballs",
+        "Friday the 13th",
+        "Recess: School's Out",
+        "The Parent Trap"
+      ],
+      "candidate_titles": [
+        "Bloody Murder",
+        "The Mask",
+        "The Mask",
+        "The Mask of Sheba",
+        "K-20: Legend of the Mask"
+      ]
+    },
+    {
+      "id": "q028_semantic_island_volleyball",
+      "intent": "semantic_plot",
+      "query": "man stranded island volleyball",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [
+        "Cast Away",
+        "Mr. Robinson Crusoe",
+        "Die Stra\u00dfe",
+        "The Missing Link",
+        "Conquest"
+      ],
+      "candidate_titles": [
+        "Mr. Robinson Crusoe",
+        "No Man Is an Island",
+        "Survival Island",
+        "Lost Flight",
+        "Island of Lost Men"
+      ]
+    },
+    {
+      "id": "q029_semantic_dinosaur_park",
+      "intent": "semantic_plot",
+      "query": "dinosaurs escape theme park",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "Jurassic Park",
+        "Clifford",
+        "The Lost World: Jurassic Park",
+        "Jurassic Park III",
+        "Night at the Museum"
+      ],
+      "candidate_titles": [
+        "Jurassic Park",
+        "Clifford",
+        "Dinosaurs! - A Fun-Filled Trip Back in Time!",
+        "When Dinosaurs Roamed America",
+        "The Lost World: Jurassic Park"
+      ]
+    },
+    {
+      "id": "q030_semantic_simulated_reality",
+      "intent": "semantic_plot",
+      "query": "hacker discovers reality simulation",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 2,
+      "candidate_first_relevant_rank": 4,
+      "baseline_titles": [
+        "The Animatrix",
+        "The Matrix",
+        "The Thirteenth Floor",
+        "WarGames",
+        "Lawnmower Man 2: Beyond Cyberspace"
+      ],
+      "candidate_titles": [
+        "The Animatrix",
+        "Avatar",
+        "Arcade",
+        "The Matrix",
+        "EXistenZ"
+      ]
+    },
+    {
+      "id": "q031_semantic_fish_father",
+      "intent": "semantic_plot",
+      "query": "fish father searches ocean son",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [
+        "Finding Nemo",
+        "Cabin Boy",
+        "Warlords of Atlantis",
+        "Journey to the Center of the Earth",
+        "The House of Sand"
+      ],
+      "candidate_titles": [
+        "Cabin Boy",
+        "Warlords of Atlantis",
+        "The Last Airbender",
+        "Journey to the Center of the Earth",
+        "The House of Sand"
+      ]
+    },
+    {
+      "id": "q032_semantic_flying_house",
+      "intent": "semantic_plot",
+      "query": "old man flying house balloons",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [
+        "Up",
+        "Tom and Jerry and the Wizard of Oz",
+        "Banned From Television",
+        "Casper: A Spirited Beginning",
+        "L'eclisse"
+      ],
+      "candidate_titles": [
+        "Tom and Jerry and the Wizard of Oz",
+        "Skidoo",
+        "Casper: A Spirited Beginning",
+        "L'eclisse",
+        "Banned From Television"
+      ]
+    },
+    {
+      "id": "q033_semantic_memory_tattoos",
+      "intent": "semantic_plot",
+      "query": "man tattoos clues memory loss",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [
+        "Memento",
+        "The Memory Thief",
+        "Ghajini",
+        "Ghajini",
+        "Gothika"
+      ],
+      "candidate_titles": []
+    },
+    {
+      "id": "q034_semantic_beast_castle",
+      "intent": "semantic_plot",
+      "query": "woman loves beast enchanted castle",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 2,
+      "candidate_first_relevant_rank": 3,
+      "baseline_titles": [
+        "La Dolce Vita",
+        "Beauty and the Beast",
+        "Beauty and the Beast: The Enchanted Christmas",
+        "The Last Unicorn",
+        "Sleeping Beauty"
+      ],
+      "candidate_titles": [
+        "La Dolce Vita",
+        "Beauty and the Beast: The Enchanted Christmas",
+        "Beauty and the Beast",
+        "Enchanted",
+        "The Swan Princess III: The Mystery of the Enchanted Kingdom"
+      ]
+    },
+    {
+      "id": "q035_semantic_lion_father",
+      "intent": "semantic_plot",
+      "query": "young lion avenges father",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 8,
+      "baseline_titles": [
+        "The Lion King",
+        "The Lion King II: Simba's Pride",
+        "African Cats",
+        "For the Term of his Natural Life",
+        "Next Avengers: Heroes of Tomorrow"
+      ],
+      "candidate_titles": [
+        "The Young Lions",
+        "Father's Lion",
+        "The Lion in Winter",
+        "The Lion Has Wings",
+        "Androcles and the Lion"
+      ]
+    },
+    {
+      "id": "q036_semantic_russian_boxer",
+      "intent": "semantic_plot",
+      "query": "boxer fights russian champion",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 5,
+      "candidate_first_relevant_rank": 10,
+      "baseline_titles": [
+        "Undisputed II: Last Man Standing",
+        "Undisputed",
+        "Rocky V",
+        "Street Fighter II: The Animated Movie",
+        "Rocky IV"
+      ],
+      "candidate_titles": [
+        "Undisputed II: Last Man Standing",
+        "Streets of Gold",
+        "Boy S Tenyu",
+        "A Fighter's Blues",
+        "Undisputed"
+      ]
+    },
+    {
+      "id": "q037_semantic_alien_bicycle",
+      "intent": "semantic_plot",
+      "query": "alien child bicycle moon",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [
+        "E.T. the Extra-Terrestrial",
+        "Arthur Christmas",
+        "Enemy Mine",
+        "2001: A Space Odyssey",
+        "American Flyers"
+      ],
+      "candidate_titles": []
+    },
+    {
+      "id": "q038_no_result_nonsense_objects",
+      "intent": "no_result",
+      "query": "purple toaster moon detective",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": null,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [],
+      "candidate_titles": []
+    },
+    {
+      "id": "q039_no_result_random_token",
+      "intent": "no_result",
+      "query": "zzqvplm cinema memory",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": null,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [],
+      "candidate_titles": []
+    },
+    {
+      "id": "q040_no_result_mixed_scene",
+      "intent": "no_result",
+      "query": "banana spaceship courtroom",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": null,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [],
+      "candidate_titles": []
+    },
+    {
+      "id": "q041_no_result_impossible_job",
+      "intent": "no_result",
+      "query": "invisible penguin tax office",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": null,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [],
+      "candidate_titles": []
+    },
+    {
+      "id": "q042_dialogue_force",
+      "intent": "dialogue_memory",
+      "query": "may the force be with you",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [
+        "Star Wars Episode IV: A New Hope",
+        "Star Wars Episode VI: Return of the Jedi",
+        "Star Wars Episode V: The Empire Strikes Back",
+        "Home Sweet Home",
+        "Pok\u00e9mon Ranger and the Prince of the Sea: Manaphy"
+      ],
+      "candidate_titles": [
+        "Battle of Britain",
+        "Angel Cop",
+        "The Big Easy",
+        "Battle of the Bulge",
+        "Bright Young Things"
+      ]
+    },
+    {
+      "id": "q043_dialogue_ill_be_back",
+      "intent": "dialogue_memory",
+      "query": "ill be back",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [
+        "Terminator 2: Judgment Day",
+        "The Terminator",
+        "Goodnight Mister Tom",
+        "Ankahee",
+        "Teeth"
+      ],
+      "candidate_titles": [
+        "Down Will Come Baby",
+        "Waves",
+        "Back Street",
+        "Proof",
+        "The Maid"
+      ]
+    },
+    {
+      "id": "q044_dialogue_truth",
+      "intent": "dialogue_memory",
+      "query": "you cant handle the truth",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [
+        "A Few Good Men",
+        "Underworld: Rise of the Lycans",
+        "Particles of Truth"
+      ],
+      "candidate_titles": [
+        "Underworld: Rise of the Lycans"
+      ]
+    },
+    {
+      "id": "q045_dialogue_chocolates",
+      "intent": "dialogue_memory",
+      "query": "life is like a box of chocolates",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [
+        "Forrest Gump",
+        "Family Guy Presents: Stewie Griffin: The Untold Story",
+        "Shorts",
+        "Mickey's Twice Upon a Christmas",
+        "Willy Wonka & the Chocolate Factory"
+      ],
+      "candidate_titles": [
+        "The Stuff",
+        "Family Guy Presents: Stewie Griffin: The Untold Story",
+        "Mickey's Twice Upon a Christmas",
+        "Shorts",
+        "Willy Wonka & the Chocolate Factory"
+      ]
+    },
+    {
+      "id": "q046_dialogue_baby_corner",
+      "intent": "dialogue_memory",
+      "query": "nobody puts baby in a corner",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 1,
+      "baseline_titles": [
+        "Dirty Dancing",
+        "Baby's Day Out",
+        "Shake, Rattle & Roll 13",
+        "Avenging Angel",
+        "Quigley Down Under"
+      ],
+      "candidate_titles": [
+        "Dirty Dancing",
+        "Baby on Board",
+        "Street Corner",
+        "Baby",
+        "Baby"
+      ]
+    },
+    {
+      "id": "q047_character_archaeologist",
+      "intent": "character_memory",
+      "query": "archaeologist whip fedora",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [
+        "Indiana Jones and the Last Crusade",
+        "Indiana Jones and the Raiders of the Lost Ark",
+        "Indiana Jones and the Temple of Doom",
+        "Fedora"
+      ],
+      "candidate_titles": []
+    },
+    {
+      "id": "q048_character_gotham_billionaire",
+      "intent": "character_memory",
+      "query": "masked vigilante gotham billionaire",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 2,
+      "candidate_first_relevant_rank": 9,
+      "baseline_titles": [
+        "Batman",
+        "Batman Begins",
+        "The Dark Knight",
+        "Batman: Mask of the Phantasm",
+        "Batman: Under the Red Hood"
+      ],
+      "candidate_titles": [
+        "Batman: Mask of the Phantasm",
+        "Batman",
+        "The Spider Returns",
+        "Batman Returns",
+        "The Dark Knight Rises"
+      ]
+    },
+    {
+      "id": "q049_character_ogre_donkey",
+      "intent": "character_memory",
+      "query": "ogre donkey princess",
+      "status": "same_pass",
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": 2,
+      "baseline_titles": [
+        "Shrek",
+        "Shrek the Third",
+        "Shrek Forever After",
+        "Shrek 2",
+        "Shrek the Halls"
+      ],
+      "candidate_titles": [
+        "Shrek the Third",
+        "Shrek",
+        "Shrek 2",
+        "Shrek Forever After",
+        "Shrek the Halls"
+      ]
+    },
+    {
+      "id": "q050_character_chianti",
+      "intent": "character_memory",
+      "query": "serial killer chianti fava beans",
+      "status": "regression",
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "baseline_first_relevant_rank": 1,
+      "candidate_first_relevant_rank": null,
+      "baseline_titles": [
+        "The Silence of the Lambs",
+        "Baaz: A Bird in Danger",
+        "Hillside Cannibals",
+        "Killer Bean Forever",
+        "Illustrious Corpses"
+      ],
+      "candidate_titles": []
+    }
+  ]
+}
