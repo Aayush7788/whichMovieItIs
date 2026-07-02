@@ -5,6 +5,7 @@ from backend.app.services.movie_results import (
 
 def test_movie_result_builds_poster_url():
     row = (
+        "cmu:123",
         "123",
         "Test Movie",
         "2000-01-01",
@@ -18,6 +19,7 @@ def test_movie_result_builds_poster_url():
 
     result = movie_result_from_row(row)
 
+    assert result["movie_key"] == "cmu:123"
     assert result["wikipedia_movie_id"] == "123"
     assert result["tmdb_id"] == 456
     assert result["poster_url"] == (
@@ -29,6 +31,7 @@ def test_movie_result_builds_poster_url():
 
 def test_movie_result_handles_missing_poster():
     row = (
+        "cmu:123",
         "123",
         "Test Movie",
         None,

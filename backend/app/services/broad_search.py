@@ -35,6 +35,7 @@ broad_search_sql = """
         from query_terms
         join movies movie
             on movie.search_vector @@ query_terms.query
+            or movie.search_boost_vector @@ query_terms.query
         group by movie.id
     )
     select
@@ -50,8 +51,7 @@ broad_search_sql = """
         candidate_matches.score
     from candidate_matches
     join movies movie
-        on movie.search_vector @@ query_terms.query
-        or movie.search_boost_vector @@ query_terms.query
+        on movie.id = candidate_matches.id
     where candidate_matches.matched_terms >= least(
         %(maximum_required_matches)s,
         (

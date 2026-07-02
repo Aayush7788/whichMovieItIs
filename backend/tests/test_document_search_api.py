@@ -15,6 +15,7 @@ def test_document_search_endpoint_returns_results(
         "search_movies_document_hybrid",
         lambda query, limit: [
             {
+                "movie_key": "cmu:603",
                 "wikipedia_movie_id": "603",
                 "title": "The Matrix",
                 "release_date": "1999-03-31",
@@ -52,6 +53,7 @@ def test_hybrid_v2_search_endpoint_returns_results(
         "search_movies_hybrid_v2",
         lambda query, limit: [
             {
+                "movie_key": "cmu:13053911",
                 "wikipedia_movie_id": "13053911",
                 "title": "Friday the 13th",
                 "release_date": "1980-05-09",

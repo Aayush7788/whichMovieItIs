@@ -17,19 +17,7 @@ def search_movies_by_embedding(query: str, limit: int = 5) -> list[dict[str, obj
                 },
             )
             rows = cur.fetchall()
-    results = []
-    for row in rows:
-        results.append(
-            {
-                "wikipedia_movie_id": row[0],
-                "title": row[1],
-                "release_date": row[2],
-                "genres": row[3],
-                "plot_summary": row[4],
-                "score": float(row[5]) if row[5] is not None else None,
-            }
-        )
-    # return results
+
     return [
         movie_result_from_row(row)
         for row in rows
