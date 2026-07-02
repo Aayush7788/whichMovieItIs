@@ -13,8 +13,12 @@ def get_embedding_model():
 def normalize_text(text: str) -> str:
     return " ".join(text.split())
 
-def build_movie_embedding_text(title: str, plot_summary: str) -> str:
-    text = f"{title}.{plot_summary}"
+def build_movie_embedding_text(
+    title: str,
+    plot_summary: str,
+    search_boost_text: str = "",
+) -> str:
+    text = f"{title}. {plot_summary}. {search_boost_text}"
     return normalize_text(text)[:embedding_text_max_chars]
 
 def _validate_embedding(embedding: list[float]) -> list[float]:
