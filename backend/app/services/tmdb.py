@@ -55,7 +55,9 @@ def build_poster_url(
     )
 
 
-def create_tmdb_client() -> httpx.Client:
+def create_tmdb_client(
+    timeout_seconds: float | None = None,
+) -> httpx.Client:
     if not settings.tmdb_read_access_token:
         raise RuntimeError(
             "TMDB_READ_ACCESS_TOKEN is not configured"
@@ -70,7 +72,11 @@ def create_tmdb_client() -> httpx.Client:
             ),
             "accept": "application/json",
         },
-        timeout=settings.tmdb_timeout_seconds,
+        timeout=(
+            timeout_seconds
+            if timeout_seconds is not None
+            else settings.tmdb_timeout_seconds
+        ),
     )
 
 
@@ -171,6 +177,7 @@ def search_tmdb_movie(
     client: httpx.Client,
     title: str,
     release_date: str | None,
+    maximum_attempts: int = 4,
 ) -> dict[str, object] | None:
     payload = request_tmdb_json(
         client=client,
@@ -181,6 +188,7 @@ def search_tmdb_movie(
             "language": "en-US",
             "page": 1,
         },
+        maximum_attempts=maximum_attempts,
     )
 
     raw_results = payload.get("results")

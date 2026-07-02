@@ -10,6 +10,9 @@ embedding_text_max_chars = 4000
 def get_embedding_model():
     return SentenceTransformer(embedding_model_name)
 
+def preload_embedding_model() -> None:
+    get_embedding_model()
+
 def normalize_text(text: str) -> str:
     return " ".join(text.split())
 

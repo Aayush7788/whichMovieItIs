@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+from threading import Lock, Thread
+from time import monotonic
 from typing import Any
 
 import httpx
@@ -45,6 +47,9 @@ runtime_title_number_words = {
     "nine",
     "ten",
 }
+runtime_fallback_lock = Lock()
+runtime_fallback_request_times: list[float] = []
+runtime_fallback_query_attempts: dict[str, float] = {}
 
 
 find_movie_by_tmdb_external_id_sql = """
@@ -247,6 +252,24 @@ select_movie_embedding_text_sql = """
     select title, plot_summary, search_boost_text
     from movies
     where id = %(movie_id)s;
+"""
+
+
+select_unembedded_movie_documents_sql = """
+    select
+        document.id,
+        document.title,
+        document.document_type,
+        document.content
+    from movie_search_documents document
+    left join movie_search_document_embeddings embedding
+        on embedding.document_id = document.id
+    where document.movie_id = %(movie_id)s
+        and (
+            embedding.document_id is null
+            or embedding.embedding_model is distinct from %(model)s
+        )
+    order by document.id;
 """
 
 
@@ -549,6 +572,52 @@ def query_has_runtime_title_marker(query: str) -> bool:
     )
 
 
+def prune_runtime_fallback_state(now: float) -> None:
+    request_window_seconds = (
+        settings.tmdb_runtime_fallback_rate_limit_window_seconds
+    )
+    query_cache_seconds = (
+        settings.tmdb_runtime_fallback_query_cache_seconds
+    )
+
+    runtime_fallback_request_times[:] = [
+        request_time
+        for request_time in runtime_fallback_request_times
+        if now - request_time < request_window_seconds
+    ]
+
+    expired_queries = [
+        query
+        for query, request_time in runtime_fallback_query_attempts.items()
+        if now - request_time >= query_cache_seconds
+    ]
+
+    for query in expired_queries:
+        runtime_fallback_query_attempts.pop(query, None)
+
+
+def acquire_runtime_fallback_slot(query: str) -> bool:
+    query_key = normalize_title(query)
+    now = monotonic()
+
+    with runtime_fallback_lock:
+        prune_runtime_fallback_state(now)
+
+        if query_key in runtime_fallback_query_attempts:
+            return False
+
+        if (
+            len(runtime_fallback_request_times)
+            >= settings.tmdb_runtime_fallback_max_requests_per_window
+        ):
+            return False
+
+        runtime_fallback_query_attempts[query_key] = now
+        runtime_fallback_request_times.append(now)
+
+    return True
+
+
 def should_try_tmdb_title_fallback(
     query: str,
     local_results: list[dict[str, object]],
@@ -574,6 +643,7 @@ def should_try_tmdb_title_fallback(
 def fetch_movie_details(
     client: httpx.Client,
     tmdb_id: int,
+    maximum_attempts: int = 4,
 ) -> dict[str, Any]:
     payload = request_tmdb_json(
         client=client,
@@ -582,6 +652,7 @@ def fetch_movie_details(
             "append_to_response": "keywords,credits",
             "language": default_language,
         },
+        maximum_attempts=maximum_attempts,
     )
 
     payload["id"] = tmdb_id
@@ -680,6 +751,39 @@ def upsert_document_embedding(
     )
 
 
+def backfill_document_embeddings_for_movie(movie_id: int) -> None:
+    with get_connection() as connection:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                select_unembedded_movie_documents_sql,
+                {
+                    "movie_id": movie_id,
+                    "model": embedding_model_name,
+                },
+            )
+            rows = cursor.fetchall()
+
+            for row in rows:
+                upsert_document_embedding(
+                    cursor=cursor,
+                    document_id=int(row[0]),
+                    title=str(row[1] or ""),
+                    document_type=str(row[2] or ""),
+                    content=str(row[3] or ""),
+                )
+
+            connection.commit()
+
+
+def schedule_document_embedding_backfill(movie_id: int) -> None:
+    thread = Thread(
+        target=backfill_document_embeddings_for_movie,
+        args=(movie_id,),
+        daemon=True,
+    )
+    thread.start()
+
+
 def upsert_tmdb_movie(
     cursor,
     movie_payload: dict[str, Any],
@@ -737,14 +841,7 @@ def upsert_tmdb_movie(
                 "metadata": Jsonb(document["metadata"]),
             },
         )
-        document_id, document_type, content = cursor.fetchone()
-        upsert_document_embedding(
-            cursor=cursor,
-            document_id=int(document_id),
-            title=str(record["title"]),
-            document_type=str(document_type),
-            content=str(content),
-        )
+        cursor.fetchone()
 
     return movie_id
 
@@ -759,12 +856,25 @@ def import_tmdb_title_if_needed(
     ):
         return False
 
+    if not acquire_runtime_fallback_slot(query):
+        return False
+
     try:
-        with create_tmdb_client() as client:
+        maximum_attempts = max(
+            settings.tmdb_runtime_fallback_max_attempts,
+            1,
+        )
+
+        with create_tmdb_client(
+            timeout_seconds=(
+                settings.tmdb_runtime_fallback_timeout_seconds
+            ),
+        ) as client:
             match = search_tmdb_movie(
                 client=client,
                 title=query,
                 release_date=None,
+                maximum_attempts=maximum_attempts,
             )
 
             if match is None:
@@ -773,6 +883,7 @@ def import_tmdb_title_if_needed(
             movie_payload = fetch_movie_details(
                 client=client,
                 tmdb_id=int(match["id"]),
+                maximum_attempts=maximum_attempts,
             )
 
         with get_connection() as connection:
@@ -782,6 +893,9 @@ def import_tmdb_title_if_needed(
                     movie_payload=movie_payload,
                 )
                 connection.commit()
+
+        if movie_id is not None:
+            schedule_document_embedding_backfill(movie_id)
 
         return movie_id is not None
     except (

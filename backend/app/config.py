@@ -15,6 +15,12 @@ class Settings(BaseSettings):
     tmdb_image_base_url: str = "https://image.tmdb.org/t/p"
     tmdb_poster_size: str = "w342"
     tmdb_timeout_seconds: float = 10.0
+    tmdb_runtime_fallback_timeout_seconds: float = 3.0
+    tmdb_runtime_fallback_max_attempts: int = 1
+    tmdb_runtime_fallback_rate_limit_window_seconds: int = 60
+    tmdb_runtime_fallback_max_requests_per_window: int = 10
+    tmdb_runtime_fallback_query_cache_seconds: int = 1800
+    preload_embedding_model_on_startup: bool = True
 
     frontend_origins: str = "http://localhost:5173"
 
