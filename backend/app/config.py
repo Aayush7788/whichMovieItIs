@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     tmdb_runtime_fallback_max_requests_per_window: int = 10
     tmdb_runtime_fallback_query_cache_seconds: int = 1800
     preload_embedding_model_on_startup: bool = True
+    log_level: str = "INFO"
 
     frontend_origins: str = "http://localhost:5173"
 

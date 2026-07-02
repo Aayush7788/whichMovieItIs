@@ -1,8 +1,14 @@
+import logging
+from time import perf_counter
+
 from backend.app.services.search import search_movies
 from backend.app.services.vector_search import search_movies_by_embedding
 from backend.app.services.broad_search import search_movies_broad_full_text
 from backend.app.services.clue_search import search_movies_by_memory_clues
 from backend.app.services.tmdb_runtime_import import import_tmdb_title_if_needed
+
+logger = logging.getLogger(__name__)
+
 rrf_k = 60
 candidate_multiplier = 5
 minimum_candidate_limit = 20
@@ -154,13 +160,29 @@ def search_movies_hybrid_local(query: str, limit: int = 5) -> list[dict[str, obj
 
 
 def search_movies_hybrid(query: str, limit: int = 5) -> list[dict[str, object]]:
+    started_at = perf_counter()
     results = search_movies_hybrid_local(query, limit)
+    fallback_imported = False
 
     if import_tmdb_title_if_needed(
         query=query,
         local_results=results,
     ):
-        return search_movies_hybrid_local(query, limit)
+        fallback_imported = True
+        results = search_movies_hybrid_local(query, limit)
+
+    latency_ms = (perf_counter() - started_at) * 1000
+    logger.info(
+        (
+            "search completed query=%r limit=%s "
+            "results=%s fallback_imported=%s latency_ms=%.1f"
+        ),
+        query,
+        limit,
+        len(results),
+        fallback_imported,
+        latency_ms,
+    )
 
     return results
 

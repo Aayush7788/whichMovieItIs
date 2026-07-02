@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+import logging
 
 from fastapi import FastAPI, HTTPException
 import psycopg
@@ -13,6 +14,13 @@ from .services.document_search import search_movies_document_hybrid
 from .services.embeddings import preload_embedding_model
 from .services.hybrid_v2_search import search_movies_hybrid_v2
 
+logging.basicConfig(
+    level=settings.log_level.upper(),
+    format=(
+        "%(asctime)s %(levelname)s "
+        "%(name)s %(message)s"
+    ),
+)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

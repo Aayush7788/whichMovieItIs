@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 from collections.abc import Iterable
 from threading import Lock, Thread
 from time import monotonic
@@ -24,6 +25,8 @@ from backend.app.services.tmdb import (
     search_tmdb_movie,
 )
 
+
+logger = logging.getLogger(__name__)
 
 default_language = "en-US"
 maximum_runtime_title_words = 8
@@ -854,9 +857,24 @@ def import_tmdb_title_if_needed(
         query=query,
         local_results=local_results,
     ):
+        logger.info(
+            (
+                "tmdb runtime fallback skipped query=%r "
+                "reason=not_title_fallback_candidate local_results=%s"
+            ),
+            query,
+            len(local_results),
+        )
         return False
 
     if not acquire_runtime_fallback_slot(query):
+        logger.info(
+            (
+                "tmdb runtime fallback skipped query=%r "
+                "reason=rate_limited_or_cached"
+            ),
+            query,
+        )
         return False
 
     try:
@@ -878,6 +896,13 @@ def import_tmdb_title_if_needed(
             )
 
             if match is None:
+                logger.info(
+                    (
+                        "tmdb runtime fallback completed query=%r "
+                        "result=no_exact_match"
+                    ),
+                    query,
+                )
                 return False
 
             movie_payload = fetch_movie_details(
@@ -896,11 +921,25 @@ def import_tmdb_title_if_needed(
 
         if movie_id is not None:
             schedule_document_embedding_backfill(movie_id)
+            logger.info(
+                (
+                    "tmdb runtime fallback imported query=%r "
+                    "tmdb_id=%s movie_id=%s"
+                ),
+                query,
+                movie_payload.get("id"),
+                movie_id,
+            )
 
         return movie_id is not None
     except (
         httpx.HTTPError,
         RuntimeError,
         ValueError,
-    ):
+    ) as error:
+        logger.warning(
+            "tmdb runtime fallback failed query=%r error=%s",
+            query,
+            error,
+        )
         return False
