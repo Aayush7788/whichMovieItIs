@@ -1,0 +1,260 @@
+from backend.app.services import tmdb_runtime_import
+
+
+def clear_runtime_fallback_state() -> None:
+    with tmdb_runtime_import.runtime_fallback_lock:
+        tmdb_runtime_import.runtime_fallback_request_times.clear()
+        tmdb_runtime_import.runtime_fallback_query_attempts.clear()
+
+
+def build_movie(title: str) -> dict[str, object]:
+    return {
+        "movie_key": "cmu:1",
+        "wikipedia_movie_id": "1",
+        "title": title,
+        "release_date": None,
+        "genres": [],
+        "plot_summary": "",
+        "score": 1.0,
+    }
+
+
+def test_runtime_fallback_skips_when_local_exact_title_exists(
+    monkeypatch,
+):
+    clear_runtime_fallback_state()
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_read_access_token",
+        "token",
+    )
+
+    assert not tmdb_runtime_import.should_try_tmdb_title_fallback(
+        query="The Matrix",
+        local_results=[build_movie("The Matrix")],
+    )
+
+
+def test_runtime_fallback_allows_missing_title_like_query(
+    monkeypatch,
+):
+    clear_runtime_fallback_state()
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_read_access_token",
+        "token",
+    )
+
+    assert tmdb_runtime_import.should_try_tmdb_title_fallback(
+        query="Toy Story 5",
+        local_results=[build_movie("Toy Story")],
+    )
+
+
+def test_runtime_fallback_skips_non_marker_query_with_local_results(
+    monkeypatch,
+):
+    clear_runtime_fallback_state()
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_read_access_token",
+        "token",
+    )
+
+    assert not tmdb_runtime_import.should_try_tmdb_title_fallback(
+        query="red pill blue pill",
+        local_results=[build_movie("The Matrix")],
+    )
+
+
+def test_runtime_fallback_allows_empty_local_results(
+    monkeypatch,
+):
+    clear_runtime_fallback_state()
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_read_access_token",
+        "token",
+    )
+
+    assert tmdb_runtime_import.should_try_tmdb_title_fallback(
+        query="Oppenheimer",
+        local_results=[],
+    )
+
+
+def test_runtime_fallback_skips_when_tmdb_token_missing(
+    monkeypatch,
+):
+    clear_runtime_fallback_state()
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_read_access_token",
+        None,
+    )
+
+    assert not tmdb_runtime_import.should_try_tmdb_title_fallback(
+        query="Toy Story 5",
+        local_results=[],
+    )
+
+
+def test_import_tmdb_title_returns_false_when_tmdb_has_no_exact_match(
+    monkeypatch,
+):
+    clear_runtime_fallback_state()
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "should_try_tmdb_title_fallback",
+        lambda query, local_results: True,
+    )
+
+    class FakeClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            return None
+
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "create_tmdb_client",
+        lambda timeout_seconds=None: FakeClient(),
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "search_tmdb_movie",
+        lambda client, title, release_date, maximum_attempts: None,
+    )
+
+    assert not tmdb_runtime_import.import_tmdb_title_if_needed(
+        query="red pill blue pill",
+        local_results=[],
+    )
+
+
+def test_runtime_fallback_rate_limits_requests(monkeypatch):
+    clear_runtime_fallback_state()
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_runtime_fallback_max_requests_per_window",
+        1,
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_runtime_fallback_rate_limit_window_seconds",
+        60,
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_runtime_fallback_query_cache_seconds",
+        1800,
+    )
+
+    assert tmdb_runtime_import.acquire_runtime_fallback_slot("Shrek 5")
+    assert not tmdb_runtime_import.acquire_runtime_fallback_slot("Scream 7")
+
+
+def test_runtime_fallback_uses_strict_timeout_and_schedules_documents(
+    monkeypatch,
+):
+    clear_runtime_fallback_state()
+    captured = {}
+
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "should_try_tmdb_title_fallback",
+        lambda query, local_results: True,
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_runtime_fallback_timeout_seconds",
+        2.5,
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_runtime_fallback_max_attempts",
+        1,
+    )
+
+    class FakeClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            return None
+
+    class FakeCursor:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            return None
+
+    class FakeConnection:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            return None
+
+        def cursor(self):
+            return FakeCursor()
+
+        def commit(self):
+            captured["committed"] = True
+
+    def fake_create_tmdb_client(timeout_seconds=None):
+        captured["timeout_seconds"] = timeout_seconds
+        return FakeClient()
+
+    def fake_search_tmdb_movie(client, title, release_date, maximum_attempts):
+        captured["search_attempts"] = maximum_attempts
+        return {"id": 421892}
+
+    def fake_fetch_movie_details(client, tmdb_id, maximum_attempts):
+        captured["detail_attempts"] = maximum_attempts
+        return {"id": tmdb_id}
+
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "create_tmdb_client",
+        fake_create_tmdb_client,
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "search_tmdb_movie",
+        fake_search_tmdb_movie,
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "fetch_movie_details",
+        fake_fetch_movie_details,
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "get_connection",
+        lambda: FakeConnection(),
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "upsert_tmdb_movie",
+        lambda cursor, movie_payload: 123,
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "schedule_document_embedding_backfill",
+        lambda movie_id: captured.update({"scheduled_movie_id": movie_id}),
+    )
+
+    assert tmdb_runtime_import.import_tmdb_title_if_needed(
+        query="Shrek 5",
+        local_results=[],
+    )
+    assert captured == {
+        "timeout_seconds": 2.5,
+        "search_attempts": 1,
+        "detail_attempts": 1,
+        "committed": True,
+        "scheduled_movie_id": 123,
+    }

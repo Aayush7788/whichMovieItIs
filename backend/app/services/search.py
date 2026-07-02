@@ -6,24 +6,28 @@ search_movie_sql = """
     with search_query as (
         select websearch_to_tsquery('english', %(query)s) as query
     )
-    select 
-        m.wikipedia_movie_id, 
-        m.title, 
+    select
+        m.movie_key,
+        m.wikipedia_movie_id,
+        m.title,
         m.release_date,
         m.genres,
         m.plot_summary,
         m.tmdb_id,
         m.poster_path,
         m.metadata_source,
-        ts_rank_cd(m.search_vector, search_query.query) as score
-    from movies m 
-    cross join search_query
-    where m.search_vector @@ search_query.query
-    order by 
-        score desc, 
-        m.title
-    limit %(limit)s;
-"""
+        ( ts_rank_cd(m.search_vector, search_query.query)
+         + ts_rank_cd(m.search_boost_vector, search_query.query)
+        )::double precision as score
+        from movies m
+        cross join search_query
+        where m.search_vector @@ search_query.query
+        or m.search_boost_vector @@ search_query.query
+        order by
+            score desc,
+            m.title
+        limit %(limit)s;
+    """
 
 def search_movies(query: str, limit: int = 5) -> list[dict[str, object]]:
 

@@ -276,3 +276,13 @@ retrieval metrics:
 - updated candidate recall analysis to include memory clue evidence
 - evaluated current `hybrid` again after memory clue fusion
 - kept `/search/documents` and `/search/hybrid-v2` experimental
+
+## 30-2/7/26
+- added final TMDB movie ingestion for new TMDB-only movies
+- added stable movie identity using `movie_key` and external TMDB IDs
+- imported TMDB overview, tagline, keywords, credits, posters, and metadata into local search tables
+- fixed TMDB importer update-path bug and insert/update control flow
+- fixed search result row shape across vector, broad, and document search after adding `movie_key`
+- added runtime TMDB exact-title fallback for missing movies
+- verified runtime fallback with missing TMDB titles and confirmed next searches use the local database
+- measured optimized runtime import latency at about `1.6s` for first missing-title import and about `160ms` after import

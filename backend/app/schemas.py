@@ -1,7 +1,8 @@
 from pydantic import BaseModel
 
 class MovieSearchResult(BaseModel):
-    wikipedia_movie_id: str
+    movie_key: str
+    wikipedia_movie_id: str | None = None
     title: str
     release_date: str | None = None
     genres: list[str]

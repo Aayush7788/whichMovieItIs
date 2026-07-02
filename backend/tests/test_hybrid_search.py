@@ -6,6 +6,7 @@ def build_movie(
     score: float,
 ) -> dict[str, object]:
     return {
+        "movie_key": f"cmu:{movie_id}",
         "wikipedia_movie_id": movie_id,
         "title": title,
         "release_date": None,
@@ -88,6 +89,11 @@ def test_search_movies_hybrid_queries_broad_source(
         "search_movies_by_memory_clues",
         lambda query, limit: [],
     )
+    monkeypatch.setattr(
+        hybrid_search,
+        "import_tmdb_title_if_needed",
+        lambda query, local_results: False,
+    )
 
     def fake_broad_search(query, limit):
         broad_calls.append((query, limit))
@@ -151,6 +157,11 @@ def test_search_movies_hybrid_uses_memory_clue_source(
     )
     monkeypatch.setattr(
         hybrid_search,
+        "import_tmdb_title_if_needed",
+        lambda query, local_results: False,
+    )
+    monkeypatch.setattr(
+        hybrid_search,
         "search_movies_by_memory_clues",
         lambda query, limit: [
             build_movie("30007", "The Matrix", 1.0),
@@ -163,4 +174,57 @@ def test_search_movies_hybrid_uses_memory_clue_source(
     )
 
     assert results[0]["wikipedia_movie_id"] == "30007"
+
+
+def test_search_movies_hybrid_reruns_after_tmdb_runtime_import(
+    monkeypatch,
+):
+    search_calls = []
+
+    def fake_search_movies(query, limit):
+        search_calls.append((query, limit))
+
+        if len(search_calls) == 1:
+            return []
+
+        return [
+            build_movie("90001", "Toy Story 5", 1.0),
+        ]
+
+    monkeypatch.setattr(
+        hybrid_search,
+        "search_movies",
+        fake_search_movies,
+    )
+    monkeypatch.setattr(
+        hybrid_search,
+        "search_movies_by_embedding",
+        lambda query, limit: [],
+    )
+    monkeypatch.setattr(
+        hybrid_search,
+        "search_movies_broad_full_text",
+        lambda query, limit: [],
+    )
+    monkeypatch.setattr(
+        hybrid_search,
+        "search_movies_by_memory_clues",
+        lambda query, limit: [],
+    )
+    monkeypatch.setattr(
+        hybrid_search,
+        "import_tmdb_title_if_needed",
+        lambda query, local_results: True,
+    )
+
+    results = hybrid_search.search_movies_hybrid(
+        "Toy Story 5",
+        limit=5,
+    )
+
+    assert search_calls == [
+        ("Toy Story 5", 25),
+        ("Toy Story 5", 25),
+    ]
+    assert results[0]["title"] == "Toy Story 5"
 

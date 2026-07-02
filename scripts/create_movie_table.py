@@ -20,6 +20,151 @@ create table if not exists movies (
 );
 """
 
+add_movie_identity_columns_sql = """
+    alter table movies
+    add column if not exists movie_key text,
+    add column if not exists search_boost_text text not null default '';
+
+    update movies
+    set movie_key = case
+        when wikipedia_movie_id is not null
+            then 'cmu:' || wikipedia_movie_id
+        when tmdb_id is not null
+            then 'tmdb:' || tmdb_id::text
+        else 'legacy:' || id::text
+    end
+    where movie_key is null;
+
+    alter table movies
+    alter column wikipedia_movie_id drop not null;
+
+    alter table movies
+    alter column movie_key set not null;
+"""
+
+create_movie_key_index_sql = """
+    create unique index if not exists movies_movie_key_uidx
+    on movies (movie_key);
+"""
+
+add_movie_search_boost_vector_sql = """
+    alter table movies
+    add column if not exists search_boost_vector tsvector
+    generated always as (
+        setweight(
+            to_tsvector('english', coalesce(search_boost_text, '')),
+            'C'
+        )
+    ) stored;
+"""
+
+create_movie_search_boost_vector_index_sql = """
+    create index if not exists movies_search_boost_vector_idx
+    on movies using gin (search_boost_vector);
+"""
+
+create_movie_external_ids_table_sql = """
+    create table if not exists movie_external_ids (
+        id bigserial primary key,
+        movie_id bigint not null references movies(id) on delete cascade,
+        source text not null,
+        external_id text not null,
+        metadata jsonb not null default '{}'::jsonb,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now(),
+        unique (source, external_id)
+    );
+"""
+
+create_movie_external_ids_movie_index_sql = """
+    create index if not exists movie_external_ids_movie_idx
+    on movie_external_ids (movie_id, source);
+"""
+
+backfill_cmu_external_ids_sql = """
+    insert into movie_external_ids (
+        movie_id,
+        source,
+        external_id,
+        updated_at
+    )
+    select
+        id,
+        'cmu_wikipedia_movie_id',
+        wikipedia_movie_id,
+        now()
+    from movies
+    where wikipedia_movie_id is not null
+    on conflict (source, external_id)
+    do update set
+        movie_id = excluded.movie_id,
+        updated_at = now();
+"""
+
+backfill_tmdb_external_ids_sql = """
+    with ranked_tmdb_movies as (
+        select
+            id,
+            tmdb_id::text as external_id,
+            row_number() over (
+                partition by tmdb_id
+                order by
+                    case
+                        when metadata_match_status = 'matched'
+                        then 0
+                        else 1
+                    end,
+                    case
+                        when poster_path is not null
+                        then 0
+                        else 1
+                    end,
+                    id
+            ) as match_rank
+        from movies
+        where tmdb_id is not null
+    )
+    insert into movie_external_ids (
+        movie_id,
+        source,
+        external_id,
+        updated_at
+    )
+    select
+        id,
+        'tmdb',
+        external_id,
+        now()
+    from ranked_tmdb_movies
+    where match_rank = 1
+    on conflict (source, external_id)
+    do update set
+        movie_id = excluded.movie_id,
+        updated_at = now();
+"""
+
+add_movie_search_documents_identity_sql = """
+    alter table movie_search_documents
+    add column if not exists movie_key text;
+
+    update movie_search_documents document
+    set movie_key = movie.movie_key
+    from movies movie
+    where document.movie_id = movie.id
+        and document.movie_key is null;
+
+    alter table movie_search_documents
+    alter column wikipedia_movie_id drop not null;
+
+    alter table movie_search_documents
+    alter column movie_key set not null;
+"""
+
+create_movie_search_documents_key_index_sql = """
+    create index if not exists movie_search_documents_movie_key_idx
+    on movie_search_documents (movie_key, document_type);
+"""
+
 add_search_vector_column_sql = """
     alter table movies
     add column if not exists search_vector tsvector
@@ -183,6 +328,17 @@ def main()-> None:
             cur.execute(create_movie_memory_clues_unique_index_sql)
             cur.execute(create_movie_memory_clues_movie_index_sql)
             cur.execute(create_movie_memory_clues_vector_index_sql)
+            cur.execute(add_movie_identity_columns_sql)
+            cur.execute(create_movie_key_index_sql)
+            cur.execute(add_movie_search_boost_vector_sql)
+            cur.execute(create_movie_search_boost_vector_index_sql)
+            cur.execute(create_movie_external_ids_table_sql)
+            cur.execute(create_movie_external_ids_movie_index_sql)
+            cur.execute(backfill_cmu_external_ids_sql)
+            cur.execute(backfill_tmdb_external_ids_sql)
+
+            cur.execute(add_movie_search_documents_identity_sql)
+            cur.execute(create_movie_search_documents_key_index_sql)
             
         conn.commit()
 

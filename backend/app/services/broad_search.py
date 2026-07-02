@@ -29,17 +29,17 @@ broad_search_sql = """
             movie.id,
             count(*)::integer as matched_terms,
             sum(
-                ts_rank_cd(
-                    movie.search_vector,
-                    query_terms.query
-                )
+                ts_rank_cd(movie.search_vector, query_terms.query)
+                + ts_rank_cd(movie.search_boost_vector, query_terms.query) 
             )::double precision as score
         from query_terms
         join movies movie
             on movie.search_vector @@ query_terms.query
+            or movie.search_boost_vector @@ query_terms.query
         group by movie.id
     )
     select
+        movie.movie_key,
         movie.wikipedia_movie_id,
         movie.title,
         movie.release_date,

@@ -11,7 +11,7 @@ from backend.app.services.embeddings import (
 default_batch_size = 64
 
 select_movie_sql = """
-    select id, title, plot_summary
+    select id, title, plot_summary, search_boost_text
     from movies
     where search_embedding is null
         or embedding_model is distinct from %(model)s
@@ -46,7 +46,11 @@ def fetch_batch(cur, batch_size:int):
 
 def update_batch(cur, rows):
     texts = [
-        build_movie_embedding_text(title=row[1], plot_summary=row[2])
+        build_movie_embedding_text(
+            title=row[1],
+            plot_summary=row[2],
+            search_boost_text=row[3] or "",
+        )
         for row in rows
     ]
     embeddings = embed_texts(texts)

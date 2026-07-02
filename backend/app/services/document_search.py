@@ -45,6 +45,7 @@ document_full_text_search_sql = """
         limit %(movie_limit)s
     )
     select
+        movie.movie_key,
         movie.wikipedia_movie_id,
         movie.title,
         movie.release_date,
@@ -89,6 +90,7 @@ document_vector_search_sql = """
         limit %(movie_limit)s
     )
     select
+        movie.movie_key,
         movie.wikipedia_movie_id,
         movie.title,
         movie.release_date,

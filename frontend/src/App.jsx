@@ -90,7 +90,7 @@ function App(){
             {result.map((movie, index) => (
             <article
             className="movie-card"
-            key={movie.wikipedia_movie_id}
+            key={movie.movie_key || movie.wikipedia_movie_id}
             >
                 <div className="poster-frame">
                   {movie.poster_url ? (

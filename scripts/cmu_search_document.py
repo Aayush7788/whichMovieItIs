@@ -26,6 +26,7 @@ maximum_corenlp_content_chars = 12000
 upsert_document_sql = """
     insert into movie_search_documents (
         movie_id,
+        movie_key,
         wikipedia_movie_id,
         title,
         document_type,
@@ -37,6 +38,7 @@ upsert_document_sql = """
     )
     values (
         %(movie_id)s,
+        %(movie_key)s,
         %(wikipedia_movie_id)s,
         %(title)s,
         %(document_type)s,
@@ -49,6 +51,7 @@ upsert_document_sql = """
     on conflict (source, document_type, source_document_id)
     do update set
         movie_id = excluded.movie_id,
+        movie_key = excluded.movie_key,
         wikipedia_movie_id = excluded.wikipedia_movie_id,
         title = excluded.title,
         content = excluded.content,
@@ -92,7 +95,7 @@ def read_movie_records(path: Path, limit: int) -> list[dict[str, object]]:
 def fetch_movie_lookup(cursor) -> dict[str, dict[str, object]]:
     cursor.execute(
         """
-        select id, wikipedia_movie_id, title
+        select id, movie_key, wikipedia_movie_id, title
         from movies;
         """
     )
@@ -100,9 +103,10 @@ def fetch_movie_lookup(cursor) -> dict[str, dict[str, object]]:
     return {
         str(wikipedia_movie_id): {
             "movie_id": movie_id,
+            "movie_key": movie_key,
             "title": title,
         }
-        for movie_id, wikipedia_movie_id, title in cursor.fetchall()
+        for movie_id, movie_key, wikipedia_movie_id, title in cursor.fetchall()
     }
 
 
@@ -420,6 +424,7 @@ def upsert_document(
         upsert_document_sql,
         {
             "movie_id": movie["movie_id"],
+            "movie_key": movie["movie_key"],
             "wikipedia_movie_id": wikipedia_movie_id,
             "title": title,
             "document_type": document["document_type"],

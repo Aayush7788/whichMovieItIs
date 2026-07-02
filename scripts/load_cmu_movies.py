@@ -13,6 +13,7 @@ def parse_args() -> argparse.Namespace:
 
 insert_movie_sql = """
     insert into movies (
+        movie_key,
         wikipedia_movie_id, 
         freebase_movie_id, 
         title, 
@@ -26,6 +27,7 @@ insert_movie_sql = """
         source
     ) 
     values (
+        %(movie_key)s,
         %(wikipedia_movie_id)s,
         %(freebase_movie_id)s,
         %(title)s,
@@ -39,6 +41,7 @@ insert_movie_sql = """
         %(source)s
     )
     on conflict (wikipedia_movie_id) do update set
+        movie_key = excluded.movie_key,
         freebase_movie_id = excluded.freebase_movie_id, 
         title = excluded.title,
         release_date = excluded.release_date,
@@ -68,6 +71,10 @@ def main() -> None:
         with conn.cursor() as cur:
             for record in records:
                 db_record = record.copy()
+                db_record["movie_key"] = (
+                    "cmu:"
+                    f"{db_record['wikipedia_movie_id']}"
+                )
                 db_record["languages"] = Jsonb(db_record["languages"])
                 db_record["countries"] = Jsonb(db_record["countries"])
                 db_record["genres"] = Jsonb(db_record["genres"])

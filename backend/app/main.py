@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, HTTPException
 import psycopg
 from .schemas import MovieSearchResponse
@@ -8,9 +10,19 @@ from .services.reranker import search_movies_reranked
 from fastapi.middleware.cors import CORSMiddleware
 from .config import settings
 from .services.document_search import search_movies_document_hybrid
+from .services.embeddings import preload_embedding_model
 from .services.hybrid_v2_search import search_movies_hybrid_v2
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    if settings.preload_embedding_model_on_startup:
+        preload_embedding_model()
+
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.get_frontend_origins(),
