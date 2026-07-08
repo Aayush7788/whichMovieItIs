@@ -1,151 +1,240 @@
-import { useState } from "react";
-import "./App.css"
+import { useEffect, useMemo, useState } from "react";
 
-function App(){
+import { FaqSection } from "./components/FaqSection";
+import { Footer } from "./components/Footer";
+import { Header } from "./components/Header";
+import { HeroSearch } from "./components/HeroSearch";
+import { HowItWorks } from "./components/HowItWorks";
+import { MovieDetailModal } from "./components/MovieDetailModal";
+import { MovieShelf } from "./components/MovieShelf";
+import { SearchResultsSection } from "./components/SearchResultsSection";
+import { getMovieDetail, getMovies, searchMovies } from "./lib/api";
 
+const moviePageSize = 18;
+
+function App() {
   const [query, setQuery] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [result, setResult] = useState([]);
-  const [status, setStatus] = useState("idle");
+  const [searchStatus, setSearchStatus] = useState("idle");
+  const [searchError, setSearchError] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const [movies, setMovies] = useState([]);
+  const [movieTotal, setMovieTotal] = useState(0);
+  const [moviesStatus, setMoviesStatus] = useState("idle");
+  const [moviesError, setMoviesError] = useState("");
+
+  const [activeSection, setActiveSection] = useState("home");
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [detailStatus, setDetailStatus] = useState("idle");
+  const [detailError, setDetailError] = useState("");
+
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "/api";
+  const featuredMovies = useMemo(() => movies.slice(0, 6), [movies]);
+  const hasMoreMovies = movies.length < movieTotal;
 
-  async function handleSearch(event) {
-    event.preventDefault();
+  useEffect(() => {
+    let cancelled = false;
 
-    const cleanedQuery = query.trim();
-    if(!cleanedQuery){
-      setStatus("error");
-      setErrorMessage("Search for a movie or scene first");
-      setResult([]);
+    async function loadInitialMovies() {
+      setMoviesStatus("loading");
+      setMoviesError("");
+
+      try {
+        const data = await getMovies(apiBaseUrl, {
+          limit: moviePageSize,
+          offset: 0,
+        });
+
+        if (cancelled) {
+          return;
+        }
+
+        setMovies(data.results);
+        setMovieTotal(data.total);
+        setMoviesStatus("success");
+      } catch (error) {
+        if (cancelled) {
+          return;
+        }
+
+        setMovies([]);
+        setMoviesStatus("error");
+        setMoviesError(error.message);
+      }
+    }
+
+    loadInitialMovies();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [apiBaseUrl]);
+
+  useEffect(() => {
+    function closeOnEscape(event) {
+      if (event.key === "Escape") {
+        setSelectedMovie(null);
+        setDetailStatus("idle");
+        setDetailError("");
+      }
+    }
+
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, []);
+
+  async function runSearch(rawQuery) {
+    const cleanedQuery = rawQuery.trim();
+
+    if (!cleanedQuery) {
+      setSearchStatus("error");
+      setSearchError("Describe a movie scene or title first.");
+      setSearchResults([]);
       return;
     }
-    setStatus("loading");
-    setErrorMessage("");
 
-    try{
-      const params = new URLSearchParams({
-        q: cleanedQuery,
-        limit: "5",
-      });
+    setSearchStatus("loading");
+    setSearchError("");
+    setActiveSection("search");
 
-      const response = await fetch(`${apiBaseUrl}/search?${params.toString()}`);
-      if (!response.ok) {
-        const errorData = await response
-        .json()
-        .catch(() => null);
+    try {
+      const data = await searchMovies(apiBaseUrl, cleanedQuery);
 
-      throw new Error(
-        errorData?.detail ||
-        `Search failed with status ${response.status}`
-      );
-      }
-
-      const data = await response.json();
-      setResult(data.results);
-      setStatus("success");
+      setSearchResults(data.results);
+      setSearchStatus("success");
     } catch (error) {
-      setResult([]);
-      setStatus("error");
-      setErrorMessage(error.message);
+      setSearchResults([]);
+      setSearchStatus("error");
+      setSearchError(error.message);
     }
-    
   }
 
-  return(
+  function runExampleSearch(exampleQuery) {
+    setQuery(exampleQuery);
+    runSearch(exampleQuery);
+  }
+
+  async function loadMoreMovies() {
+    setMoviesStatus("loading");
+    setMoviesError("");
+
+    try {
+      const data = await getMovies(apiBaseUrl, {
+        limit: moviePageSize,
+        offset: movies.length,
+      });
+
+      setMovies((currentMovies) => [
+        ...currentMovies,
+        ...data.results,
+      ]);
+      setMovieTotal(data.total);
+      setMoviesStatus("success");
+    } catch (error) {
+      setMoviesStatus("error");
+      setMoviesError(error.message);
+    }
+  }
+
+  async function openMovieDetail(movieKey) {
+    setSelectedMovie(null);
+    setDetailError("");
+    setDetailStatus("loading");
+
+    try {
+      const movie = await getMovieDetail(apiBaseUrl, movieKey);
+
+      setSelectedMovie(movie);
+      setDetailStatus("success");
+    } catch (error) {
+      setDetailError(error.message);
+      setDetailStatus("error");
+    }
+  }
+
+  function closeMovieDetail() {
+    setSelectedMovie(null);
+    setDetailStatus("idle");
+    setDetailError("");
+  }
+
+  function showFilms() {
+    setActiveSection("films");
+    requestAnimationFrame(() => {
+      document
+        .getElementById("films")
+        ?.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  return (
     <main className="app-shell">
-      <section>
-        <p className="eyebrow">WhichMovieItIs</p>
-        <h1>Find the movie from a scene you remember</h1>
-        <p className="subtitle">
-          Search by rough plot, memory, or partial movie description.
-        </p>
+      <Header activeSection={activeSection} onFilmsClick={showFilms} />
 
-        <form className="search-form" onSubmit={handleSearch}>
-          <input type="text" 
-            value={query} 
-            onChange={(event) => setQuery(event.target.value)} 
-            placeholder="Example: Spaceship enter in wormhole." 
-          />
-          <button type="submit" disabled={status === "loading"}>
-            {status === "loading" ? "searching...": "search"}  
-          </button>
-        </form>
-      </section>
+      <HeroSearch
+        query={query}
+        status={searchStatus}
+        onQueryChange={setQuery}
+        onSearch={runSearch}
+        onExampleClick={runExampleSearch}
+      />
 
-      <section className="results-section">
-        { status === "idle" && (
-          <p className="muted"> Search results </p>
-        )}
-        {status === "loading" && (
-          <p className="muted">Searching movies...</p>
-        )}
-        {status === "error" && (
-          <p className="error-message">{errorMessage}</p>
-        )}
-        {status === "success" && result.length === 0 && (
-          <p className="muted">No confident match found in the current movie database.</p>
-        )}
-        {status === "success" && result.length > 0 && (
-          <div className="result-list">
-            {result.map((movie, index) => (
-            <article
-            className="movie-card"
-            key={movie.movie_key || movie.wikipedia_movie_id}
-            >
-                <div className="poster-frame">
-                  {movie.poster_url ? (
-                    <img
-                      className="movie-poster"
-                      src={movie.poster_url}
-                      alt={`${movie.title} poster`}
-                      loading="lazy"
-                    />
-                  ) : (
-                  <div className="poster-placeholder">
-                    Poster unavailable
-                  </div>
-                )}
-              </div>
+      <SearchResultsSection
+        status={searchStatus}
+        errorMessage={searchError}
+        results={searchResults}
+        onMovieClick={openMovieDetail}
+      />
 
-              <div className="movie-content">
-                <div className="movie-title-row">
-                  <span className="result-rank">
-                    {index + 1}
-                  </span>
+      <MovieShelf
+        eyebrow="Featured from database"
+        title="Poster-backed films"
+        movies={featuredMovies}
+        status={moviesStatus}
+        error={moviesError}
+        actionLabel="Open Films"
+        onActionClick={showFilms}
+        onMovieClick={openMovieDetail}
+      />
 
-                  <div>
-                    <h2>{movie.title}</h2>
+      <div id="films">
+        <MovieShelf
+          eyebrow={`${movieTotal.toLocaleString()} movies indexed`}
+          title="Films"
+          description="Browse movies currently stored in your PostgreSQL database."
+          movies={movies}
+          status={moviesStatus}
+          error={moviesError}
+          onMovieClick={openMovieDetail}
+        >
+          {hasMoreMovies && (
+            <div className="load-more-row">
+              <button
+                type="button"
+                className="secondary-button"
+                onClick={loadMoreMovies}
+                disabled={moviesStatus === "loading"}
+              >
+                {moviesStatus === "loading"
+                  ? "Loading more films"
+                  : "Load more films"}
+              </button>
+            </div>
+          )}
+        </MovieShelf>
+      </div>
 
-                    {movie.release_date && (
-                      <p className="release-year">
-                        {movie.release_date.slice(0, 4)}
-                      </p>
-                    )}
-                  </div>
-                </div>
+      <HowItWorks />
+      <FaqSection />
+      <Footer onFilmsClick={showFilms} />
 
-                {movie.genres?.length > 0 && (
-                  <div className="genre-list">
-                    {movie.genres.slice(0, 4).map((genre) => (
-                      <span
-                        className="genre-chip"
-                        key={genre}
-                      >
-                        {genre}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
-                <p className="plot-summary">
-                  {movie.plot_summary}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
-      )}
-      </section>
+      <MovieDetailModal
+        movie={selectedMovie}
+        status={detailStatus}
+        error={detailError}
+        onClose={closeMovieDetail}
+      />
     </main>
   );
 }

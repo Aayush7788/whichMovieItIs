@@ -3,7 +3,11 @@ import logging
 
 from fastapi import FastAPI, HTTPException
 import psycopg
-from .schemas import MovieSearchResponse
+from .schemas import (
+    MovieCatalogResponse,
+    MovieDetail,
+    MovieSearchResponse,
+)
 from .services.vector_search import search_movies_by_embedding
 from .db import get_connection
 from .services.hybrid_search import search_movies_hybrid
@@ -13,6 +17,7 @@ from .config import settings
 from .services.document_search import search_movies_document_hybrid
 from .services.embeddings import preload_embedding_model
 from .services.hybrid_v2_search import search_movies_hybrid_v2
+from .services.movies import get_movie_detail, list_movies
 
 logging.basicConfig(
     level=settings.log_level.upper(),
@@ -21,6 +26,13 @@ logging.basicConfig(
         "%(name)s %(message)s"
     ),
 )
+for logger_name in (
+    "httpx",
+    "httpcore",
+    "huggingface_hub",
+    "sentence_transformers",
+):
+    logging.getLogger(logger_name).setLevel(logging.WARNING)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -62,6 +74,33 @@ def health_db():
         "database": "ok",
         "pgvector": row[0] if row else None,
     }
+
+@app.get("/movies", response_model=MovieCatalogResponse)
+def movies(limit: int = 24, offset: int = 0):
+    if limit < 1 or limit > 60:
+        raise HTTPException(
+            status_code=400,
+            detail="limit must be between 1 and 60",
+        )
+    if offset < 0:
+        raise HTTPException(
+            status_code=400,
+            detail="offset must be greater than or equal to 0",
+        )
+
+    return list_movies(limit=limit, offset=offset)
+
+@app.get("/movies/{movie_key}", response_model=MovieDetail)
+def movie_detail(movie_key: str):
+    movie = get_movie_detail(movie_key)
+
+    if movie is None:
+        raise HTTPException(
+            status_code=404,
+            detail="movie not found",
+        )
+
+    return movie
 
 @app.get("/search", response_model=MovieSearchResponse)
 def search(q:str, limit: int = 5):
