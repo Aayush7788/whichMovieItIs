@@ -1,4 +1,5 @@
 import { formatSource, getReleaseYear } from "../lib/format";
+import { MoviePoster } from "./MoviePoster";
 
 export function MovieCard({ movie, rank, onClick }) {
   const releaseYear = getReleaseYear(movie.release_date);
@@ -13,18 +14,7 @@ export function MovieCard({ movie, rank, onClick }) {
       <div className="poster-area">
         {rank && <span className="rank-badge">{rank}</span>}
 
-        {movie.poster_url ? (
-          <img
-            src={movie.poster_url}
-            alt={`${movie.title} poster`}
-            loading="lazy"
-          />
-        ) : (
-          <div className="poster-fallback">
-            <strong>{movie.title.slice(0, 1)}</strong>
-            <span>Poster unavailable</span>
-          </div>
-        )}
+        <MoviePoster src={movie.poster_url} title={movie.title} />
       </div>
 
       <div className="movie-card-body">

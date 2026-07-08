@@ -67,6 +67,22 @@ def test_runtime_fallback_skips_non_marker_query_with_local_results(
     )
 
 
+def test_runtime_fallback_allows_article_title_with_weak_local_results(
+    monkeypatch,
+):
+    clear_runtime_fallback_state()
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_read_access_token",
+        "token",
+    )
+
+    assert tmdb_runtime_import.should_try_tmdb_title_fallback(
+        query="The Life of Chuck",
+        local_results=[build_movie("Cast Away")],
+    )
+
+
 def test_runtime_fallback_allows_empty_local_results(
     monkeypatch,
 ):

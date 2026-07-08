@@ -39,6 +39,11 @@ runtime_title_marker_words = {
     "part",
     "volume",
 }
+runtime_title_article_words = {
+    "a",
+    "an",
+    "the",
+}
 runtime_title_number_words = {
     "one",
     "two",
@@ -576,6 +581,18 @@ def query_has_runtime_title_marker(query: str) -> bool:
     )
 
 
+def query_has_runtime_title_shape(query: str) -> bool:
+    if query_has_runtime_title_marker(query):
+        return True
+
+    words = normalize_title(query).split()
+
+    return bool(
+        2 <= len(words) <= 5
+        and words[0] in runtime_title_article_words
+    )
+
+
 def prune_runtime_fallback_state(now: float) -> None:
     request_window_seconds = (
         settings.tmdb_runtime_fallback_rate_limit_window_seconds
@@ -649,7 +666,7 @@ def should_try_tmdb_title_fallback(
     ):
         return False
 
-    if local_results and not query_has_runtime_title_marker(query):
+    if local_results and not query_has_runtime_title_shape(query):
         return False
 
     return True

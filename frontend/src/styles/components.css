@@ -195,10 +195,18 @@
   background: var(--color-surface-warm);
 }
 
-.poster-area img {
+.poster-image {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.poster-image.loaded {
+  opacity: 1;
 }
 
 .rank-badge {
@@ -217,6 +225,8 @@
 }
 
 .poster-fallback {
+  position: absolute;
+  inset: 0;
   display: grid;
   height: 100%;
   place-items: center;
@@ -460,16 +470,12 @@
 }
 
 .detail-poster {
+  position: relative;
   align-self: start;
   overflow: hidden;
+  aspect-ratio: 2 / 3;
   border: 1px solid var(--color-border);
   background: var(--color-surface-warm);
-}
-
-.detail-poster img {
-  width: 100%;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
 }
 
 .poster-fallback.large {

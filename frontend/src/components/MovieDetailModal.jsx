@@ -5,6 +5,7 @@ import {
   formatSource,
   getReleaseYear,
 } from "../lib/format";
+import { MoviePoster } from "./MoviePoster";
 
 export function MovieDetailModal({
   movie,
@@ -45,14 +46,11 @@ export function MovieDetailModal({
     <DetailFrame onClose={onClose}>
       <div className="detail-layout">
         <div className="detail-poster">
-          {movie.poster_url ? (
-            <img src={movie.poster_url} alt={`${movie.title} poster`} />
-          ) : (
-            <div className="poster-fallback large">
-              <strong>{movie.title.slice(0, 1)}</strong>
-              <span>Poster unavailable</span>
-            </div>
-          )}
+          <MoviePoster
+            src={movie.poster_url}
+            title={movie.title}
+            size="large"
+          />
         </div>
 
         <div className="detail-content">
