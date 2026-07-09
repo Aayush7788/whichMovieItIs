@@ -17,6 +17,12 @@ movie_catalog_sql = """
     from movies
     order by
         (poster_path is null),
+        case
+            when release_date ~ '^\d{4}-\d{2}-\d{2}$'
+                and release_date::date > current_date
+            then 1
+            else 0
+        end,
         release_date desc nulls last,
         title
     limit %(limit)s
