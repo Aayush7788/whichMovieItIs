@@ -17,6 +17,9 @@ from backend.app.services.tmdb import (
 
 default_delay_ms = 250
 default_language = "en-US"
+default_minimum_overview_length = 80
+default_minimum_vote_count = 25
+recent_release_window_days = 365
 tmdb_source = "tmdb"
 
 
@@ -51,6 +54,29 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=None,
         help="Last TMDB discover page to read when --source discover is used.",
+    )
+    parser.add_argument(
+        "--discover-mode",
+        choices=["popular", "recent"],
+        default="popular",
+    )
+    parser.add_argument(
+        "--minimum-vote-count",
+        type=int,
+        default=default_minimum_vote_count,
+    )
+    parser.add_argument(
+        "--minimum-overview-length",
+        type=int,
+        default=default_minimum_overview_length,
+    )
+    parser.add_argument(
+        "--release-date-from",
+        default=None,
+    )
+    parser.add_argument(
+        "--release-date-to",
+        default=None,
     )
     parser.add_argument(
         "--start-date",
@@ -311,24 +337,45 @@ def fetch_discover_movie_ids(
     limit: int,
     page_start: int = 1,
     page_end: int | None = None,
+    discover_mode: str = "popular",
+    minimum_vote_count: int = default_minimum_vote_count,
+    release_date_from: str | None = None,
+    release_date_to: str | None = None,
 ) -> list[int]:
     movie_ids: list[int] = []
     page = page_start
+    release_date_to = release_date_to or date.today().isoformat()
+
+    if discover_mode == "recent" and release_date_from is None:
+        release_date_from = (
+            date.today() - timedelta(days=recent_release_window_days)
+        ).isoformat()
 
     while len(movie_ids) < limit:
         if page_end is not None and page > page_end:
             break
 
+        params = {
+            "include_adult": "false",
+            "include_video": "false",
+            "language": default_language,
+            "page": page,
+            "sort_by": (
+                "primary_release_date.desc"
+                if discover_mode == "recent"
+                else "popularity.desc"
+            ),
+            "vote_count.gte": minimum_vote_count,
+            "primary_release_date.lte": release_date_to,
+        }
+
+        if release_date_from:
+            params["primary_release_date.gte"] = release_date_from
+
         payload = request_tmdb_json(
             client=client,
             path="/discover/movie",
-            params={
-                "include_adult": "false",
-                "include_video": "false",
-                "language": default_language,
-                "page": page,
-                "sort_by": "popularity.desc",
-            },
+            params=params,
         )
 
         results = payload.get("results")
@@ -686,6 +733,7 @@ def upsert_movie(
     cursor,
     movie_payload: dict[str, Any],
     include_missing_overview: bool,
+    minimum_overview_length: int = default_minimum_overview_length,
 ) -> int | None:
     record = movie_payload_to_db_record(movie_payload)
 
@@ -693,8 +741,17 @@ def upsert_movie(
         print(f"skipped missing title: {record['tmdb_id']}")
         return None
 
-    if not record["plot_summary"] and not include_missing_overview:
-        print(f"skipped missing overview: {record['tmdb_id']} {record['title']}")
+    overview_length = len(str(record["plot_summary"]))
+
+    if (
+        overview_length < minimum_overview_length
+        and not include_missing_overview
+    ):
+        print(
+            "skipped weak overview: "
+            f"{record['tmdb_id']} {record['title']} "
+            f"({overview_length} chars)"
+        )
         return None
 
     tmdb_id = int(record["tmdb_id"])
@@ -772,6 +829,10 @@ def collect_tmdb_ids(
             limit=args.limit,
             page_start=args.page_start,
             page_end=args.page_end,
+            discover_mode=args.discover_mode,
+            minimum_vote_count=args.minimum_vote_count,
+            release_date_from=args.release_date_from,
+            release_date_to=args.release_date_to,
         )
 
     if args.source == "changes":
@@ -799,6 +860,12 @@ def main() -> None:
 
     if args.page_end is not None and args.page_end < args.page_start:
         raise ValueError("page-end must be greater than or equal to page-start")
+
+    if args.minimum_vote_count < 0:
+        raise ValueError("minimum-vote-count must be zero or greater")
+
+    if args.minimum_overview_length < 0:
+        raise ValueError("minimum-overview-length must be zero or greater")
 
     statistics = {
         "seen": 0,
@@ -835,6 +902,9 @@ def main() -> None:
                             movie_payload=movie_payload,
                             include_missing_overview=(
                                 args.include_missing_overview
+                            ),
+                            minimum_overview_length=(
+                                args.minimum_overview_length
                             ),
                         )
 
