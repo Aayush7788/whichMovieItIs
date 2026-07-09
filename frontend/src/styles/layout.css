@@ -64,13 +64,13 @@
 .hero-section {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(380px, 1.1fr);
-  gap: 48px;
+  gap: 42px;
   align-items: center;
-  padding: 86px 0 60px;
+  padding: 64px 0 42px;
 }
 
 .content-section {
-  padding: 42px 0;
+  padding: 48px 0;
 }
 
 .site-footer {

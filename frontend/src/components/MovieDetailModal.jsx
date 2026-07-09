@@ -132,7 +132,7 @@ function DetailFrame({ children, onClose, compact = false }) {
           onClick={onClose}
           aria-label="Close movie details"
         >
-          x
+          ×
         </button>
         {children}
       </article>
