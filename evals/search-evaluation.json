@@ -9,12 +9,12 @@
         "ranked_cases": 45,
         "no_result_cases": 5,
         "hit@5": 1.0,
-        "mrr@10": 0.9433333333333334,
+        "mrr@10": 0.9462962962962962,
         "recall@10": 0.9592592592592594,
-        "ndcg@10": 0.9026386415293233,
+        "ndcg@10": 0.9039462106073213,
         "no_result_correct": 1.0,
-        "avg_latency_ms": 490.6231259999913,
-        "p95_latency_ms": 1696.9383000000562
+        "avg_latency_ms": 340.1838359999965,
+        "p95_latency_ms": 570.6509000001461
       },
       "intent_summaries": {
         "character_memory": {
@@ -27,8 +27,8 @@
           "recall@10": 1.0,
           "ndcg@10": 0.9042858353825638,
           "no_result_correct": null,
-          "avg_latency_ms": 227.16272499997103,
-          "p95_latency_ms": 245.95339999996213
+          "avg_latency_ms": 225.88287500025217,
+          "p95_latency_ms": 285.4803999998694
         },
         "dialogue_memory": {
           "mode": "hybrid",
@@ -40,8 +40,8 @@
           "recall@10": 1.0,
           "ndcg@10": 0.9667982464796298,
           "no_result_correct": null,
-          "avg_latency_ms": 369.159480000053,
-          "p95_latency_ms": 438.67150000005495
+          "avg_latency_ms": 347.91586000010284,
+          "p95_latency_ms": 424.3783000001713
         },
         "exact_title": {
           "mode": "hybrid",
@@ -53,8 +53,8 @@
           "recall@10": 1.0,
           "ndcg@10": 0.9792489040497686,
           "no_result_correct": null,
-          "avg_latency_ms": 1113.3310874999438,
-          "p95_latency_ms": 3567.8117000002203
+          "avg_latency_ms": 454.0487500000836,
+          "p95_latency_ms": 923.599099999592
         },
         "franchise_title": {
           "mode": "hybrid",
@@ -66,8 +66,8 @@
           "recall@10": 1.0,
           "ndcg@10": 0.9784110706231604,
           "no_result_correct": null,
-          "avg_latency_ms": 296.50048000003153,
-          "p95_latency_ms": 424.7898999997233
+          "avg_latency_ms": 237.69613999975263,
+          "p95_latency_ms": 283.70559999984835
         },
         "no_result": {
           "mode": "hybrid",
@@ -79,8 +79,8 @@
           "recall@10": null,
           "ndcg@10": null,
           "no_result_correct": 1.0,
-          "avg_latency_ms": 306.81841999994504,
-          "p95_latency_ms": 514.2575999998371
+          "avg_latency_ms": 238.81819999987783,
+          "p95_latency_ms": 292.99189999983355
         },
         "object_scene": {
           "mode": "hybrid",
@@ -88,12 +88,12 @@
           "ranked_cases": 8,
           "no_result_cases": 0,
           "hit@5": 1.0,
-          "mrr@10": 0.84375,
+          "mrr@10": 0.8541666666666666,
           "recall@10": 0.8958333333333333,
-          "ndcg@10": 0.826016330239528,
+          "ndcg@10": 0.8289396302256552,
           "no_result_correct": null,
-          "avg_latency_ms": 357.6991750000502,
-          "p95_latency_ms": 858.1282999998621
+          "avg_latency_ms": 296.010874999979,
+          "p95_latency_ms": 559.9743000002491
         },
         "semantic_plot": {
           "mode": "hybrid",
@@ -101,12 +101,12 @@
           "ranked_cases": 15,
           "no_result_cases": 0,
           "hit@5": 1.0,
-          "mrr@10": 0.9133333333333333,
+          "mrr@10": 0.9166666666666666,
           "recall@10": 0.9333333333333333,
-          "ndcg@10": 0.8555618044973982,
+          "ndcg@10": 0.8579254184054578,
           "no_result_correct": null,
-          "avg_latency_ms": 466.1247599999721,
-          "p95_latency_ms": 1016.401599999881
+          "avg_latency_ms": 398.86881999997667,
+          "p95_latency_ms": 566.2443000001076
         }
       },
       "reports": [
@@ -185,7 +185,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.8339912323981488,
           "no_result_correct": null,
-          "latency_ms": 1987.6884999998765
+          "latency_ms": 923.599099999592
         },
         {
           "id": "q002_object_lightsaber",
@@ -262,7 +262,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.8871962530284576,
           "no_result_correct": null,
-          "latency_ms": 404.43679999998494
+          "latency_ms": 308.4921999998187
         },
         {
           "id": "q003_exact_god_of_love",
@@ -339,7 +339,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 3567.8117000002203
+          "latency_ms": 753.1285000004573
         },
         {
           "id": "q004_punctuation_title",
@@ -416,7 +416,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 1696.9383000000562
+          "latency_ms": 570.6509000001461
         },
         {
           "id": "q005_no_result_noise",
@@ -430,7 +430,7 @@
           "recall@10": null,
           "ndcg@10": null,
           "no_result_correct": true,
-          "latency_ms": 514.2575999998371
+          "latency_ms": 260.2297000003091
         },
         {
           "id": "q006_franchise_matrix",
@@ -507,7 +507,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.9316348402922772,
           "no_result_correct": null,
-          "latency_ms": 424.7898999997233
+          "latency_ms": 225.02289999920322
         },
         {
           "id": "q007_semantic_boy_wizard",
@@ -584,7 +584,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.9176601606601069,
           "no_result_correct": null,
-          "latency_ms": 1016.401599999881
+          "latency_ms": 507.72349999988364
         },
         {
           "id": "q008_object_one_ring",
@@ -661,7 +661,7 @@
           "recall@10": 0.6666666666666666,
           "ndcg@10": 0.6198142130753956,
           "no_result_correct": null,
-          "latency_ms": 858.1282999998621
+          "latency_ms": 559.9743000002491
         },
         {
           "id": "q009_event_ship_iceberg",
@@ -738,7 +738,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.8339912323981488,
           "no_result_correct": null,
-          "latency_ms": 411.6259999996146
+          "latency_ms": 292.1699999997145
         },
         {
           "id": "q010_semantic_dreams",
@@ -815,7 +815,7 @@
           "recall@10": 0.5,
           "ndcg@10": 0.3373519727104165,
           "no_result_correct": null,
-          "latency_ms": 401.33239999977377
+          "latency_ms": 323.262099999738
         },
         {
           "id": "q011_semantic_toys",
@@ -828,10 +828,10 @@
             "6417790",
             "365905",
             "3024248",
-            "534792",
             "6777103",
+            "534792",
             "18410798",
-            "12741677"
+            "24048670"
           ],
           "results": [
             {
@@ -859,20 +859,20 @@
               "title": "Stay Alive"
             },
             {
-              "movie_id": "534792",
-              "title": "Child's Play"
-            },
-            {
               "movie_id": "6777103",
               "title": "The Fastest Gun Alive"
+            },
+            {
+              "movie_id": "534792",
+              "title": "Child's Play"
             },
             {
               "movie_id": "18410798",
               "title": "Amusement"
             },
             {
-              "movie_id": "12741677",
-              "title": "Pin..."
+              "movie_id": "24048670",
+              "title": "Skull Heads"
             }
           ],
           "result_titles": [
@@ -882,17 +882,17 @@
             "Dolls",
             "Babes in Toyland",
             "Stay Alive",
-            "Child's Play",
             "The Fastest Gun Alive",
+            "Child's Play",
             "Amusement",
-            "Pin..."
+            "Skull Heads"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 1.0,
-          "ndcg@10": 0.9610012895088121,
+          "ndcg@10": 0.9586597063564786,
           "no_result_correct": null,
-          "latency_ms": 446.50729999966643
+          "latency_ms": 381.5745000001698
         },
         {
           "id": "q012_object_shark",
@@ -969,7 +969,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.95583058934618,
           "no_result_correct": null,
-          "latency_ms": 294.7392999999465
+          "latency_ms": 230.13859999991837
         },
         {
           "id": "q013_semantic_time_car",
@@ -1046,7 +1046,7 @@
           "recall@10": 0.5,
           "ndcg@10": 0.7871546029909718,
           "no_result_correct": null,
-          "latency_ms": 528.2916999999543
+          "latency_ms": 518.1772000005367
         },
         {
           "id": "q014_exact_dark_knight",
@@ -1123,7 +1123,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 321.5424999998504
+          "latency_ms": 228.62520000035147
         },
         {
           "id": "q015_exact_finding_nemo",
@@ -1200,7 +1200,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 476.3590999996268
+          "latency_ms": 435.0062999992588
         },
         {
           "id": "q016_exact_jurassic_park",
@@ -1277,7 +1277,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 276.6483000000335
+          "latency_ms": 241.69530000017403
         },
         {
           "id": "q017_exact_shawshank",
@@ -1354,7 +1354,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 276.51849999983824
+          "latency_ms": 215.7922000005783
         },
         {
           "id": "q018_exact_eternal_sunshine",
@@ -1431,7 +1431,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 303.14180000004853
+          "latency_ms": 263.8925000001109
         },
         {
           "id": "q019_franchise_star_wars",
@@ -1508,7 +1508,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.9766038071230477,
           "no_result_correct": null,
-          "latency_ms": 309.74909999986266
+          "latency_ms": 283.70559999984835
         },
         {
           "id": "q020_franchise_harry_potter",
@@ -1585,7 +1585,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.9950681639600043,
           "no_result_correct": null,
-          "latency_ms": 257.54830000005313
+          "latency_ms": 246.19149999944057
         },
         {
           "id": "q021_franchise_indiana_jones",
@@ -1662,7 +1662,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 255.60130000030767
+          "latency_ms": 217.82470000016474
         },
         {
           "id": "q022_franchise_pirates",
@@ -1739,7 +1739,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.9887485417404723,
           "no_result_correct": null,
-          "latency_ms": 234.8138000002109
+          "latency_ms": 215.7360000001063
         },
         {
           "id": "q023_object_spinning_top",
@@ -1816,7 +1816,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 291.668600000321
+          "latency_ms": 285.3949999998804
         },
         {
           "id": "q024_object_red_blue_pill",
@@ -1857,7 +1857,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 262.4638000002051
+          "latency_ms": 261.41269999970973
         },
         {
           "id": "q025_object_glass_slipper",
@@ -1922,7 +1922,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 248.66719999999987
+          "latency_ms": 211.72260000003007
         },
         {
           "id": "q026_object_magic_carpet",
@@ -1999,7 +1999,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 231.77119999991191
+          "latency_ms": 244.6737000000212
         },
         {
           "id": "q027_object_hockey_mask",
@@ -2008,8 +2008,8 @@
           "result_ids": [
             "10069804",
             "1470989",
-            "1748482",
             "13053911",
+            "1748482",
             "2236329",
             "18115086",
             "442333",
@@ -2027,12 +2027,12 @@
               "title": "Meatballs"
             },
             {
-              "movie_id": "1748482",
-              "title": "Recess: School's Out"
-            },
-            {
               "movie_id": "13053911",
               "title": "Friday the 13th"
+            },
+            {
+              "movie_id": "1748482",
+              "title": "Recess: School's Out"
             },
             {
               "movie_id": "2236329",
@@ -2062,8 +2062,8 @@
           "result_titles": [
             "Bloody Murder",
             "Meatballs",
-            "Recess: School's Out",
             "Friday the 13th",
+            "Recess: School's Out",
             "The Parent Trap",
             "Violent Shit III",
             "Mask",
@@ -2072,11 +2072,11 @@
             "The Mask"
           ],
           "hit@5": true,
-          "mrr@10": 0.25,
+          "mrr@10": 0.3333333333333333,
           "recall@10": 0.5,
-          "ndcg@10": 0.14528958646619142,
+          "ndcg@10": 0.16867598635520825,
           "no_result_correct": null,
-          "latency_ms": 269.7182000001703
+          "latency_ms": 266.2779000002047
         },
         {
           "id": "q028_semantic_island_volleyball",
@@ -2153,7 +2153,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 370.0708000001214
+          "latency_ms": 369.9274999999034
         },
         {
           "id": "q029_semantic_dinosaur_park",
@@ -2230,7 +2230,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 382.941800000026
+          "latency_ms": 411.0378999994282
         },
         {
           "id": "q030_semantic_simulated_reality",
@@ -2307,7 +2307,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.7098097413968655,
           "no_result_correct": null,
-          "latency_ms": 354.0334999997867
+          "latency_ms": 331.8724000000657
         },
         {
           "id": "q031_semantic_fish_father",
@@ -2384,7 +2384,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 491.4766000001691
+          "latency_ms": 451.7844000001787
         },
         {
           "id": "q032_semantic_flying_house",
@@ -2461,7 +2461,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 575.5661000002874
+          "latency_ms": 566.2443000001076
         },
         {
           "id": "q033_semantic_memory_tattoos",
@@ -2538,7 +2538,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 428.07870000024195
+          "latency_ms": 369.2062000000078
         },
         {
           "id": "q034_semantic_beast_castle",
@@ -2551,10 +2551,10 @@
             "313002",
             "5326183",
             "2287636",
-            "1226363",
             "7133616",
+            "1226363",
             "18717177",
-            "6719022"
+            "15087473"
           ],
           "results": [
             {
@@ -2582,20 +2582,20 @@
               "title": "Sleeping Beauty"
             },
             {
-              "movie_id": "1226363",
-              "title": "Beauty and the Beast"
-            },
-            {
               "movie_id": "7133616",
               "title": "Ella Enchanted"
+            },
+            {
+              "movie_id": "1226363",
+              "title": "Beauty and the Beast"
             },
             {
               "movie_id": "18717177",
               "title": "Shrek"
             },
             {
-              "movie_id": "6719022",
-              "title": "Barbie in the 12 Dancing Princesses"
+              "movie_id": "15087473",
+              "title": "The Swan Princess III: The Mystery of the Enchanted Kingdom"
             }
           ],
           "result_titles": [
@@ -2605,17 +2605,17 @@
             "The Last Unicorn",
             "Belle's Magical World",
             "Sleeping Beauty",
-            "Beauty and the Beast",
             "Ella Enchanted",
+            "Beauty and the Beast",
             "Shrek",
-            "Barbie in the 12 Dancing Princesses"
+            "The Swan Princess III: The Mystery of the Enchanted Kingdom"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 1.0,
-          "ndcg@10": 0.8996052605611106,
+          "ndcg@10": 0.8935773014954859,
           "no_result_correct": null,
-          "latency_ms": 481.9416000000274
+          "latency_ms": 422.43430000053195
         },
         {
           "id": "q035_semantic_lion_father",
@@ -2631,7 +2631,7 @@
             "7454401",
             "5210039",
             "3653120",
-            "1944643"
+            "2318516"
           ],
           "results": [
             {
@@ -2671,8 +2671,8 @@
               "title": "The Young Lions"
             },
             {
-              "movie_id": "1944643",
-              "title": "Duma"
+              "movie_id": "2318516",
+              "title": "The Magic Serpent"
             }
           ],
           "result_titles": [
@@ -2685,14 +2685,14 @@
             "Alraune",
             "Khan Kluay",
             "The Young Lions",
-            "Duma"
+            "The Magic Serpent"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 481.9612999999663
+          "latency_ms": 469.1979999997784
         },
         {
           "id": "q036_semantic_russian_boxer",
@@ -2702,8 +2702,8 @@
             "10348583",
             "3699931",
             "153435",
-            "1585387",
             "104984",
+            "1585387",
             "45772",
             "7988853",
             "27702708",
@@ -2724,12 +2724,12 @@
               "title": "Rocky V"
             },
             {
-              "movie_id": "1585387",
-              "title": "Street Fighter II: The Animated Movie"
-            },
-            {
               "movie_id": "104984",
               "title": "Rocky IV"
+            },
+            {
+              "movie_id": "1585387",
+              "title": "Street Fighter II: The Animated Movie"
             },
             {
               "movie_id": "45772",
@@ -2756,8 +2756,8 @@
             "Undisputed II: Last Man Standing",
             "Undisputed",
             "Rocky V",
-            "Street Fighter II: The Animated Movie",
             "Rocky IV",
+            "Street Fighter II: The Animated Movie",
             "Rocky",
             "Belarmino",
             "Real Steel",
@@ -2765,11 +2765,11 @@
             "Gladiator"
           ],
           "hit@5": true,
-          "mrr@10": 0.2,
+          "mrr@10": 0.25,
           "recall@10": 1.0,
-          "ndcg@10": 0.38685280723454163,
+          "ndcg@10": 0.43067655807339306,
           "no_result_correct": null,
-          "latency_ms": 346.751999999924
+          "latency_ms": 304.7200000000885
         },
         {
           "id": "q037_semantic_alien_bicycle",
@@ -2846,7 +2846,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 274.8900000001413
+          "latency_ms": 263.6999999995169
         },
         {
           "id": "q038_no_result_nonsense_objects",
@@ -2860,7 +2860,7 @@
           "recall@10": null,
           "ndcg@10": null,
           "no_result_correct": true,
-          "latency_ms": 246.6193000000203
+          "latency_ms": 235.14669999985927
         },
         {
           "id": "q039_no_result_random_token",
@@ -2874,7 +2874,7 @@
           "recall@10": null,
           "ndcg@10": null,
           "no_result_correct": true,
-          "latency_ms": 248.15269999999146
+          "latency_ms": 200.57189999988623
         },
         {
           "id": "q040_no_result_mixed_scene",
@@ -2888,7 +2888,7 @@
           "recall@10": null,
           "ndcg@10": null,
           "no_result_correct": true,
-          "latency_ms": 231.3693000000967
+          "latency_ms": 205.15079999950103
         },
         {
           "id": "q041_no_result_impossible_job",
@@ -2902,7 +2902,7 @@
           "recall@10": null,
           "ndcg@10": null,
           "no_result_correct": true,
-          "latency_ms": 293.6931999997796
+          "latency_ms": 292.99189999983355
         },
         {
           "id": "q042_dialogue_force",
@@ -2979,7 +2979,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 365.47539999992296
+          "latency_ms": 351.215300000149
         },
         {
           "id": "q043_dialogue_ill_be_back",
@@ -3056,7 +3056,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.8339912323981488,
           "no_result_correct": null,
-          "latency_ms": 416.7341000002125
+          "latency_ms": 424.3783000001713
         },
         {
           "id": "q044_dialogue_truth",
@@ -3091,7 +3091,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 283.00490000037826
+          "latency_ms": 260.44550000005984
         },
         {
           "id": "q045_dialogue_chocolates",
@@ -3168,7 +3168,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 438.67150000005495
+          "latency_ms": 397.2030000004452
         },
         {
           "id": "q046_dialogue_baby_corner",
@@ -3245,7 +3245,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 341.9114999996964
+          "latency_ms": 306.3371999996889
         },
         {
           "id": "q047_character_archaeologist",
@@ -3286,7 +3286,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.8579514172105233,
           "no_result_correct": null,
-          "latency_ms": 218.46820000018852
+          "latency_ms": 209.99440000014147
         },
         {
           "id": "q048_character_gotham_billionaire",
@@ -3363,7 +3363,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.7591919243197319,
           "no_result_correct": null,
-          "latency_ms": 235.3634000000966
+          "latency_ms": 206.8622000006144
         },
         {
           "id": "q049_character_ogre_donkey",
@@ -3440,7 +3440,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 208.8658999996369
+          "latency_ms": 201.1945000003834
         },
         {
           "id": "q050_character_chianti",
@@ -3517,7 +3517,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 245.95339999996213
+          "latency_ms": 285.4803999998694
         }
       ]
     }

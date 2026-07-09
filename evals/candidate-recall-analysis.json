@@ -2978,7 +2978,7 @@
             "rank": 1,
             "movie_id": "33462689",
             "title": "The Legend of the Titanic",
-            "score": 5.199999809265137
+            "score": 5.200000286102295
           },
           {
             "rank": 2,
@@ -3108,19 +3108,19 @@
             "rank": 3,
             "movie_id": "9049407",
             "title": "Souls at Sea",
-            "score": 0.1303452892995143
+            "score": 0.13034528799727352
           },
           {
             "rank": 4,
             "movie_id": "27405104",
             "title": "Titanic II",
-            "score": 0.12639775025420558
+            "score": 0.1263977489716957
           },
           {
             "rank": 5,
             "movie_id": "2052143",
             "title": "Titanic",
-            "score": 0.12511682290111945
+            "score": 0.12511682135809987
           },
           {
             "rank": 6,
@@ -3132,25 +3132,25 @@
             "rank": 7,
             "movie_id": "1203778",
             "title": "Titanic",
-            "score": 0.11441424221813035
+            "score": 0.11441424065061825
           },
           {
             "rank": 8,
             "movie_id": "1101306",
             "title": "The Wild",
-            "score": 0.10648788192586182
+            "score": 0.10648788033306728
           },
           {
             "rank": 9,
             "movie_id": "23761430",
             "title": "No Greater Love",
-            "score": 0.10377487846869347
+            "score": 0.10377487765086112
           },
           {
             "rank": 10,
             "movie_id": "27359584",
             "title": "Titanic: The Animated Movie",
-            "score": 0.09750684527863437
+            "score": 0.09750684401526645
           }
         ],
         "memory_clue": [
@@ -3545,8 +3545,8 @@
       "relevant_ranks": {
         "full_text": 12,
         "broad_full_text": 1,
-        "raw_vector": 15,
-        "accepted_vector": 15,
+        "raw_vector": 16,
+        "accepted_vector": 16,
         "production_hybrid": 1,
         "memory_clue": null
       },
@@ -3571,7 +3571,7 @@
         ],
         "raw_vector": [
           {
-            "rank": 15,
+            "rank": 16,
             "movie_id": "53085",
             "title": "Toy Story",
             "grade": 3,
@@ -3580,7 +3580,7 @@
         ],
         "accepted_vector": [
           {
-            "rank": 15,
+            "rank": 16,
             "movie_id": "53085",
             "title": "Toy Story",
             "grade": 3,
@@ -3593,7 +3593,7 @@
             "movie_id": "53085",
             "title": "Toy Story",
             "grade": 3,
-            "score": 0.14303422731444476
+            "score": 0.14272187251062526
           }
         ],
         "memory_clue": []
@@ -3703,13 +3703,13 @@
             "rank": 2,
             "movie_id": "11450530",
             "title": "Demonic Toys",
-            "score": 7.399999618530273
+            "score": 7.400000095367432
           },
           {
             "rank": 3,
             "movie_id": "13851011",
             "title": "Tom and Jerry: A Nutcracker Tale",
-            "score": 5.599999904632568
+            "score": 5.600000381469727
           },
           {
             "rank": 4,
@@ -3725,21 +3725,21 @@
           },
           {
             "rank": 6,
-            "movie_id": "18410798",
-            "title": "Amusement",
+            "movie_id": "24048670",
+            "title": "Skull Heads",
             "score": 3.200000286102295
           },
           {
             "rank": 7,
-            "movie_id": "534792",
-            "title": "Child's Play",
-            "score": 3.200000286102295
+            "movie_id": "18410798",
+            "title": "Amusement",
+            "score": 3.200000047683716
           },
           {
             "rank": 8,
-            "movie_id": "24048670",
-            "title": "Skull Heads",
-            "score": 3.200000286102295
+            "movie_id": "534792",
+            "title": "Child's Play",
+            "score": 3.200000047683716
           },
           {
             "rank": 9,
@@ -3821,19 +3821,19 @@
             "rank": 1,
             "movie_id": "53085",
             "title": "Toy Story",
-            "score": 0.14303422731444476
+            "score": 0.14272187251062526
           },
           {
             "rank": 2,
             "movie_id": "11450530",
             "title": "Demonic Toys",
-            "score": 0.13519364207369236
+            "score": 0.13519364342297696
           },
           {
             "rank": 3,
             "movie_id": "13851011",
             "title": "Tom and Jerry: A Nutcracker Tale",
-            "score": 0.11597185156028933
+            "score": 0.1159718528881567
           },
           {
             "rank": 4,
@@ -3855,27 +3855,27 @@
           },
           {
             "rank": 7,
-            "movie_id": "534792",
-            "title": "Child's Play",
-            "score": 0.09144469955852799
-          },
-          {
-            "rank": 8,
             "movie_id": "6777103",
             "title": "The Fastest Gun Alive",
             "score": 0.09078354321827985
           },
           {
+            "rank": 8,
+            "movie_id": "534792",
+            "title": "Child's Play",
+            "score": 0.09044351290791006
+          },
+          {
             "rank": 9,
             "movie_id": "18410798",
             "title": "Amusement",
-            "score": 0.08657172055252595
+            "score": 0.08554019492195439
           },
           {
             "rank": 10,
-            "movie_id": "12741677",
-            "title": "Pin...",
-            "score": 0.08472795862257726
+            "movie_id": "24048670",
+            "title": "Skull Heads",
+            "score": 0.08542561238040466
           }
         ],
         "memory_clue": []
@@ -4471,7 +4471,7 @@
             "rank": 5,
             "movie_id": "3927125",
             "title": "Wind Chill",
-            "score": 9.59999942779541
+            "score": 9.600000381469727
           },
           {
             "rank": 6,
@@ -4489,7 +4489,7 @@
             "rank": 8,
             "movie_id": "8160760",
             "title": "Olsenbanden tar gull",
-            "score": 7.200000286102295
+            "score": 7.199999809265137
           },
           {
             "rank": 9,
@@ -4595,7 +4595,7 @@
             "rank": 5,
             "movie_id": "3927125",
             "title": "Wind Chill",
-            "score": 0.1085899497196868
+            "score": 0.10858995208612439
           },
           {
             "rank": 6,
@@ -4625,7 +4625,7 @@
             "rank": 10,
             "movie_id": "28986107",
             "title": "Gingerdead Man 3: Saturday Night Cleaver",
-            "score": 0.08111206332684365
+            "score": 0.08356204392850879
           }
         ],
         "memory_clue": []
@@ -9342,32 +9342,32 @@
       },
       "relevant_ranks": {
         "full_text": null,
-        "broad_full_text": 4,
+        "broad_full_text": 3,
         "raw_vector": null,
         "accepted_vector": null,
-        "production_hybrid": 4,
+        "production_hybrid": 3,
         "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [
           {
-            "rank": 4,
+            "rank": 3,
             "movie_id": "13053911",
             "title": "Friday the 13th",
             "grade": 2,
-            "score": 3.200000047683716
+            "score": 3.6000001430511475
           }
         ],
         "raw_vector": [],
         "accepted_vector": [],
         "production_hybrid": [
           {
-            "rank": 4,
+            "rank": 3,
             "movie_id": "13053911",
             "title": "Friday the 13th",
             "grade": 2,
-            "score": 0.08035714342734036
+            "score": 0.08390022791586613
           }
         ],
         "memory_clue": []
@@ -9430,14 +9430,14 @@
           },
           {
             "rank": 3,
-            "movie_id": "1748482",
-            "title": "Recess: School's Out",
-            "score": 3.200000286102295
+            "movie_id": "13053911",
+            "title": "Friday the 13th",
+            "score": 3.6000001430511475
           },
           {
             "rank": 4,
-            "movie_id": "13053911",
-            "title": "Friday the 13th",
+            "movie_id": "1748482",
+            "title": "Recess: School's Out",
             "score": 3.200000047683716
           },
           {
@@ -9548,14 +9548,14 @@
           },
           {
             "rank": 3,
-            "movie_id": "1748482",
-            "title": "Recess: School's Out",
-            "score": 0.08163265499205201
+            "movie_id": "13053911",
+            "title": "Friday the 13th",
+            "score": 0.08390022791586613
           },
           {
             "rank": 4,
-            "movie_id": "13053911",
-            "title": "Friday the 13th",
+            "movie_id": "1748482",
+            "title": "Recess: School's Out",
             "score": 0.08035714342734036
           },
           {
@@ -9721,7 +9721,7 @@
             "rank": 8,
             "movie_id": "10745657",
             "title": "Rabbitson Crusoe",
-            "score": 3.5999999046325684
+            "score": 3.6000001430511475
           },
           {
             "rank": 9,
@@ -9851,7 +9851,7 @@
             "rank": 9,
             "movie_id": "10745657",
             "title": "Rabbitson Crusoe",
-            "score": 0.06684491968950794
+            "score": 0.06684492022074365
           },
           {
             "rank": 10,
@@ -10028,13 +10028,13 @@
             "rank": 9,
             "movie_id": "568034",
             "title": "Free Willy",
-            "score": 2.8000001907348633
+            "score": 2.799999952316284
           },
           {
             "rank": 10,
             "movie_id": "1318335",
             "title": "Twilight Zone: The Movie",
-            "score": 2.8000001907348633
+            "score": 2.799999952316284
           }
         ],
         "raw_vector": [
@@ -10276,7 +10276,7 @@
             "rank": 1,
             "movie_id": "180606",
             "title": "The Animatrix",
-            "score": 5.199999809265137
+            "score": 5.200000286102295
           },
           {
             "rank": 2,
@@ -10294,7 +10294,7 @@
             "rank": 4,
             "movie_id": "2065944",
             "title": "Megazone 23",
-            "score": 3.5999999046325684
+            "score": 3.6000001430511475
           },
           {
             "rank": 5,
@@ -10400,7 +10400,7 @@
             "rank": 1,
             "movie_id": "180606",
             "title": "The Animatrix",
-            "score": 0.12489214645495926
+            "score": 0.12489214851206511
           },
           {
             "rank": 2,
@@ -10430,7 +10430,7 @@
             "rank": 6,
             "movie_id": "2065944",
             "title": "Megazone 23",
-            "score": 0.07730263044381741
+            "score": 0.07730263142415691
           },
           {
             "rank": 7,
@@ -10574,7 +10574,7 @@
             "rank": 1,
             "movie_id": "99948",
             "title": "Cabin Boy",
-            "score": 3.200000047683716
+            "score": 3.200000286102295
           },
           {
             "rank": 2,
@@ -10622,7 +10622,7 @@
             "rank": 9,
             "movie_id": "8382241",
             "title": "Bidasari",
-            "score": 8.40000057220459
+            "score": 8.399999618530273
           },
           {
             "rank": 10,
@@ -10704,7 +10704,7 @@
             "rank": 2,
             "movie_id": "99948",
             "title": "Cabin Boy",
-            "score": 0.11120218592263312
+            "score": 0.11120218657404998
           },
           {
             "rank": 3,
@@ -10885,7 +10885,7 @@
             "rank": 2,
             "movie_id": "33592211",
             "title": "Tom and Jerry and the Wizard of Oz",
-            "score": 6.400000095367432
+            "score": 6.40000057220459
           },
           {
             "rank": 3,
@@ -10903,7 +10903,7 @@
             "rank": 5,
             "movie_id": "3511101",
             "title": "Skidoo",
-            "score": 3.200000047683716
+            "score": 3.200000286102295
           },
           {
             "rank": 6,
@@ -10921,7 +10921,7 @@
             "rank": 8,
             "movie_id": "18735140",
             "title": "Barefoot Gen",
-            "score": 8.80000114440918
+            "score": 8.800000190734863
           },
           {
             "rank": 9,
@@ -11015,13 +11015,13 @@
             "rank": 3,
             "movie_id": "33592211",
             "title": "Tom and Jerry and the Wizard of Oz",
-            "score": 0.1139898883961981
+            "score": 0.11398988933411543
           },
           {
             "rank": 4,
             "movie_id": "3511101",
             "title": "Skidoo",
-            "score": 0.10041315960792527
+            "score": 0.1004131600552397
           },
           {
             "rank": 5,
@@ -11051,7 +11051,7 @@
             "rank": 9,
             "movie_id": "18735140",
             "title": "Barefoot Gen",
-            "score": 0.07460545435634915
+            "score": 0.07460545264602932
           },
           {
             "rank": 10,
@@ -11179,7 +11179,7 @@
             "rank": 4,
             "movie_id": "21918632",
             "title": "The Hangover",
-            "score": 2.799999952316284
+            "score": 2.8000001907348633
           },
           {
             "rank": 5,
@@ -11327,7 +11327,7 @@
             "rank": 8,
             "movie_id": "21918632",
             "title": "The Hangover",
-            "score": 0.07536764647876104
+            "score": 0.07536764757443463
           },
           {
             "rank": 9,
@@ -11361,7 +11361,7 @@
       "guard_suppressed": false,
       "production_result_count": 50,
       "candidate_presence": {
-        "full_text": false,
+        "full_text": true,
         "broad_full_text": true,
         "accepted_vector": true,
         "raw_vector": true,
@@ -11370,29 +11370,37 @@
         "memory_clue": false
       },
       "relevant_ranks": {
-        "full_text": null,
-        "broad_full_text": 3,
+        "full_text": 1,
+        "broad_full_text": 1,
         "raw_vector": 4,
         "accepted_vector": 4,
         "production_hybrid": 1,
         "memory_clue": null
       },
       "relevant_matches": {
-        "full_text": [],
-        "broad_full_text": [
+        "full_text": [
           {
-            "rank": 3,
+            "rank": 1,
             "movie_id": "133462",
             "title": "Beauty and the Beast",
             "grade": 3,
-            "score": 18.19999885559082
+            "score": 0.006060606334358454
+          }
+        ],
+        "broad_full_text": [
+          {
+            "rank": 1,
+            "movie_id": "133462",
+            "title": "Beauty and the Beast",
+            "grade": 3,
+            "score": 20.600000381469727
           },
           {
             "rank": 5,
             "movie_id": "1226363",
             "title": "Beauty and the Beast",
             "grade": 2,
-            "score": 11.800000190734863
+            "score": 11.799999237060547
           }
         ],
         "raw_vector": [
@@ -11419,14 +11427,14 @@
             "movie_id": "133462",
             "title": "Beauty and the Beast",
             "grade": 3,
-            "score": 0.12361404163695215
+            "score": 0.16362184803820118
           },
           {
-            "rank": 7,
+            "rank": 8,
             "movie_id": "1226363",
             "title": "Beauty and the Beast",
             "grade": 2,
-            "score": 0.08148774460306764
+            "score": 0.07916355342576367
           }
         ],
         "memory_clue": []
@@ -11471,6 +11479,12 @@
         "full_text": [
           {
             "rank": 1,
+            "movie_id": "133462",
+            "title": "Beauty and the Beast",
+            "score": 0.006060606334358454
+          },
+          {
+            "rank": 2,
             "movie_id": "557036",
             "title": "La Dolce Vita",
             "score": 0.00046674447366967797
@@ -11479,21 +11493,21 @@
         "broad_full_text": [
           {
             "rank": 1,
+            "movie_id": "133462",
+            "title": "Beauty and the Beast",
+            "score": 20.600000381469727
+          },
+          {
+            "rank": 2,
             "movie_id": "557036",
             "title": "La Dolce Vita",
             "score": 6.0
           },
           {
-            "rank": 2,
+            "rank": 3,
             "movie_id": "18717177",
             "title": "Shrek",
             "score": 6.0
-          },
-          {
-            "rank": 3,
-            "movie_id": "133462",
-            "title": "Beauty and the Beast",
-            "score": 18.19999885559082
           },
           {
             "rank": 4,
@@ -11505,7 +11519,7 @@
             "rank": 5,
             "movie_id": "1226363",
             "title": "Beauty and the Beast",
-            "score": 11.800000190734863
+            "score": 11.799999237060547
           },
           {
             "rank": 6,
@@ -11605,61 +11619,61 @@
             "rank": 1,
             "movie_id": "133462",
             "title": "Beauty and the Beast",
-            "score": 0.12361404163695215
+            "score": 0.16362184803820118
           },
           {
             "rank": 2,
             "movie_id": "481293",
             "title": "Beauty and the Beast: The Enchanted Christmas",
-            "score": 0.11521572696803237
+            "score": 0.11265517912924461
           },
           {
             "rank": 3,
             "movie_id": "557036",
             "title": "La Dolce Vita",
-            "score": 0.1132678803409796
+            "score": 0.099036836888148
           },
           {
             "rank": 4,
             "movie_id": "313002",
             "title": "The Last Unicorn",
-            "score": 0.09417729371056832
+            "score": 0.09303077959344785
           },
           {
             "rank": 5,
             "movie_id": "5326183",
             "title": "Belle's Magical World",
-            "score": 0.08814058365913968
+            "score": 0.0867439198207673
           },
           {
             "rank": 6,
             "movie_id": "2287636",
             "title": "Sleeping Beauty",
-            "score": 0.08597964435888632
+            "score": 0.0851632377352349
           },
           {
             "rank": 7,
-            "movie_id": "1226363",
-            "title": "Beauty and the Beast",
-            "score": 0.08148774460306764
+            "movie_id": "7133616",
+            "title": "Ella Enchanted",
+            "score": 0.08048799856879714
           },
           {
             "rank": 8,
-            "movie_id": "7133616",
-            "title": "Ella Enchanted",
-            "score": 0.08094398655054157
+            "movie_id": "1226363",
+            "title": "Beauty and the Beast",
+            "score": 0.07916355342576367
           },
           {
             "rank": 9,
             "movie_id": "18717177",
             "title": "Shrek",
-            "score": 0.07515065646451217
+            "score": 0.07273848033424613
           },
           {
             "rank": 10,
-            "movie_id": "6719022",
-            "title": "Barbie in the 12 Dancing Princesses",
-            "score": 0.0712620720909042
+            "movie_id": "15087473",
+            "title": "The Swan Princess III: The Mystery of the Enchanted Kingdom",
+            "score": 0.07060047697722989
           }
         ],
         "memory_clue": []
@@ -11781,7 +11795,7 @@
             "rank": 4,
             "movie_id": "10644072",
             "title": "Bhagwan Dada",
-            "score": 5.600000381469727
+            "score": 5.599999904632568
           },
           {
             "rank": 5,
@@ -11917,7 +11931,7 @@
             "rank": 6,
             "movie_id": "10644072",
             "title": "Bhagwan Dada",
-            "score": 0.08614864995481324
+            "score": 0.08614864794114283
           },
           {
             "rank": 7,
@@ -11939,9 +11953,9 @@
           },
           {
             "rank": 10,
-            "movie_id": "1944643",
-            "title": "Duma",
-            "score": 0.07661140026044443
+            "movie_id": "2318516",
+            "title": "The Magic Serpent",
+            "score": 0.07631160587703685
           }
         ],
         "memory_clue": [
@@ -11973,21 +11987,21 @@
       },
       "relevant_ranks": {
         "full_text": null,
-        "broad_full_text": 10,
+        "broad_full_text": 6,
         "raw_vector": 23,
         "accepted_vector": 23,
-        "production_hybrid": 5,
+        "production_hybrid": 4,
         "memory_clue": null
       },
       "relevant_matches": {
         "full_text": [],
         "broad_full_text": [
           {
-            "rank": 10,
+            "rank": 6,
             "movie_id": "104984",
             "title": "Rocky IV",
             "grade": 3,
-            "score": 4.800000190734863
+            "score": 6.0
           }
         ],
         "raw_vector": [
@@ -12010,11 +12024,11 @@
         ],
         "production_hybrid": [
           {
-            "rank": 5,
+            "rank": 4,
             "movie_id": "104984",
             "title": "Rocky IV",
             "grade": 3,
-            "score": 0.09659300647686467
+            "score": 0.10593454112208811
           }
         ],
         "memory_clue": []
@@ -12056,7 +12070,7 @@
             "rank": 3,
             "movie_id": "153435",
             "title": "Rocky V",
-            "score": 7.199999809265137
+            "score": 7.200000286102295
           },
           {
             "rank": 4,
@@ -12072,32 +12086,32 @@
           },
           {
             "rank": 6,
+            "movie_id": "104984",
+            "title": "Rocky IV",
+            "score": 6.0
+          },
+          {
+            "rank": 7,
             "movie_id": "1585387",
             "title": "Street Fighter II: The Animated Movie",
             "score": 5.600000381469727
           },
           {
-            "rank": 7,
+            "rank": 8,
             "movie_id": "6804043",
             "title": "Gladiator",
             "score": 5.200000286102295
           },
           {
-            "rank": 8,
+            "rank": 9,
             "movie_id": "20913539",
             "title": "Pacquiao: The Movie",
             "score": 4.800000190734863
           },
           {
-            "rank": 9,
+            "rank": 10,
             "movie_id": "152328",
             "title": "Rocky III",
-            "score": 4.800000190734863
-          },
-          {
-            "rank": 10,
-            "movie_id": "104984",
-            "title": "Rocky IV",
             "score": 4.800000190734863
           }
         ],
@@ -12180,19 +12194,19 @@
             "rank": 3,
             "movie_id": "153435",
             "title": "Rocky V",
-            "score": 0.12030830895265157
+            "score": 0.12030831094445248
           },
           {
             "rank": 4,
-            "movie_id": "1585387",
-            "title": "Street Fighter II: The Animated Movie",
-            "score": 0.10379146892433484
+            "movie_id": "104984",
+            "title": "Rocky IV",
+            "score": 0.10593454112208811
           },
           {
             "rank": 5,
-            "movie_id": "104984",
-            "title": "Rocky IV",
-            "score": 0.09659300647686467
+            "movie_id": "1585387",
+            "title": "Street Fighter II: The Animated Movie",
+            "score": 0.1025536389295488
           },
           {
             "rank": 6,
@@ -12222,7 +12236,7 @@
             "rank": 10,
             "movie_id": "6804043",
             "title": "Gladiator",
-            "score": 0.08012568745128315
+            "score": 0.07894736851817605
           }
         ],
         "memory_clue": []
@@ -14134,7 +14148,7 @@
             "movie_id": "680361",
             "title": "Dirty Dancing",
             "grade": 3,
-            "score": 12.40000057220459
+            "score": 12.399999618530273
           }
         ],
         "raw_vector": [
@@ -14189,13 +14203,13 @@
             "rank": 1,
             "movie_id": "680361",
             "title": "Dirty Dancing",
-            "score": 12.40000057220459
+            "score": 12.399999618530273
           },
           {
             "rank": 2,
             "movie_id": "33931331",
             "title": "Shake, Rattle & Roll 13",
-            "score": 6.000000476837158
+            "score": 6.0
           },
           {
             "rank": 3,
@@ -14219,7 +14233,7 @@
             "rank": 6,
             "movie_id": "1493245",
             "title": "Baby's Day Out",
-            "score": 4.200000286102295
+            "score": 4.199999809265137
           },
           {
             "rank": 7,
@@ -14319,55 +14333,55 @@
             "rank": 2,
             "movie_id": "1493245",
             "title": "Baby's Day Out",
-            "score": 0.09387675912638245
+            "score": 0.09387675875048206
           },
           {
             "rank": 3,
             "movie_id": "33931331",
             "title": "Shake, Rattle & Roll 13",
-            "score": 0.08012487044735682
+            "score": 0.08012487040734165
           },
           {
             "rank": 4,
             "movie_id": "12746552",
             "title": "Avenging Angel",
-            "score": 0.07475678415854352
+            "score": 0.07475678502490442
           },
           {
             "rank": 5,
             "movie_id": "2688769",
             "title": "Quigley Down Under",
-            "score": 0.07358870940606628
+            "score": 0.07358871025889029
           },
           {
             "rank": 6,
             "movie_id": "17798387",
             "title": "The Guard Post",
-            "score": 0.07245657541520373
+            "score": 0.07245657625490737
           },
           {
             "rank": 7,
             "movie_id": "8396653",
             "title": "Ahmad Albab",
-            "score": 0.06836783817267028
+            "score": 0.06836783883919217
           },
           {
             "rank": 8,
             "movie_id": "2821645",
             "title": "Stanley and Iris",
-            "score": 0.06736242822226914
+            "score": 0.0673624288789892
           },
           {
             "rank": 9,
             "movie_id": "35099643",
             "title": "Banned From Television",
-            "score": 0.06451612917608082
+            "score": 0.0645161296794605
           },
           {
             "rank": 10,
             "movie_id": "3893827",
             "title": "Slick Hare",
-            "score": 0.06359447018785108
+            "score": 0.06359447068403963
           }
         ],
         "memory_clue": []
@@ -14616,7 +14630,7 @@
       "classification": "success",
       "review_hint": "No investigation required.",
       "guard_suppressed": false,
-      "production_result_count": 40,
+      "production_result_count": 39,
       "candidate_presence": {
         "full_text": false,
         "broad_full_text": true,
@@ -14642,7 +14656,7 @@
             "movie_id": "481605",
             "title": "Batman Begins",
             "grade": 2,
-            "score": 3.8000001907348633
+            "score": 3.799999952316284
           }
         ],
         "raw_vector": [
@@ -14683,7 +14697,7 @@
             "movie_id": "481605",
             "title": "Batman Begins",
             "grade": 2,
-            "score": 0.2613171203171791
+            "score": 0.26131711871490376
           },
           {
             "rank": 3,
@@ -14774,13 +14788,13 @@
             "rank": 1,
             "movie_id": "311765",
             "title": "Batman: Mask of the Phantasm",
-            "score": 4.599999904632568
+            "score": 4.600000381469727
           },
           {
             "rank": 2,
             "movie_id": "481605",
             "title": "Batman Begins",
-            "score": 3.8000001907348633
+            "score": 3.799999952316284
           },
           {
             "rank": 3,
@@ -14868,7 +14882,7 @@
             "rank": 1,
             "movie_id": "481605",
             "title": "Batman Begins",
-            "score": 0.2613171203171791
+            "score": 0.26131711871490376
           },
           {
             "rank": 2,
@@ -14886,7 +14900,7 @@
             "rank": 4,
             "movie_id": "311765",
             "title": "Batman: Mask of the Phantasm",
-            "score": 0.16037862094196115
+            "score": 0.16037862419904544
           },
           {
             "rank": 5,
@@ -14995,7 +15009,7 @@
             "movie_id": "18717177",
             "title": "Shrek",
             "grade": 3,
-            "score": 11.799999237060547
+            "score": 11.800000190734863
           },
           {
             "rank": 4,
@@ -15050,7 +15064,7 @@
             "movie_id": "525314",
             "title": "Shrek 2",
             "grade": 2,
-            "score": 0.14164514685637764
+            "score": 0.14164514552935642
           }
         ],
         "memory_clue": []
@@ -15157,13 +15171,13 @@
             "rank": 1,
             "movie_id": "18717177",
             "title": "Shrek",
-            "score": 11.799999237060547
+            "score": 11.800000190734863
           },
           {
             "rank": 2,
             "movie_id": "27193568",
             "title": "Shrek Forever After",
-            "score": 8.40000057220459
+            "score": 8.399999618530273
           },
           {
             "rank": 3,
@@ -15263,31 +15277,31 @@
             "rank": 2,
             "movie_id": "525314",
             "title": "Shrek 2",
-            "score": 0.14164514685637764
+            "score": 0.14164514552935642
           },
           {
             "rank": 3,
             "movie_id": "27193568",
             "title": "Shrek Forever After",
-            "score": 0.13890329363218626
+            "score": 0.1389032891691978
           },
           {
             "rank": 4,
             "movie_id": "903383",
             "title": "Shrek the Third",
-            "score": 0.137635535709849
+            "score": 0.13763553423130429
           },
           {
             "rank": 5,
             "movie_id": "9031071",
             "title": "Shrek the Halls",
-            "score": 0.11822696089205807
+            "score": 0.1182269597961956
           },
           {
             "rank": 6,
             "movie_id": "None",
             "title": "Shrek 5",
-            "score": 0.09072870063411198
+            "score": 0.0907287003850523
           },
           {
             "rank": 7,
