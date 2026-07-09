@@ -6,9 +6,20 @@ embedding_model_name = "sentence-transformers/all-MiniLM-L6-v2"
 embedding_dimension = 384
 embedding_text_max_chars = 4000
 
+
+def _load_embedding_model():
+    try:
+        return SentenceTransformer(
+            embedding_model_name,
+            local_files_only=True,
+        )
+    except OSError:
+        return SentenceTransformer(embedding_model_name)
+
+
 @lru_cache(maxsize=1)
 def get_embedding_model():
-    return SentenceTransformer(embedding_model_name)
+    return _load_embedding_model()
 
 def preload_embedding_model() -> None:
     get_embedding_model()
