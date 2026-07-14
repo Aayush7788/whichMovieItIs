@@ -8,13 +8,13 @@
         "cases": 50,
         "ranked_cases": 45,
         "no_result_cases": 5,
-        "hit@5": 0.6666666666666666,
-        "mrr@10": 0.5557407407407408,
-        "recall@10": 0.6481481481481481,
-        "ndcg@10": 0.5591641971017163,
+        "hit@5": 1.0,
+        "mrr@10": 0.9462962962962962,
+        "recall@10": 0.9592592592592594,
+        "ndcg@10": 0.9039462106073213,
         "no_result_correct": 1.0,
-        "avg_latency_ms": 435.24268000011944,
-        "p95_latency_ms": 979.9579999998969
+        "avg_latency_ms": 340.1838359999965,
+        "p95_latency_ms": 570.6509000001461
       },
       "intent_summaries": {
         "character_memory": {
@@ -22,26 +22,26 @@
           "cases": 4,
           "ranked_cases": 4,
           "no_result_cases": 0,
-          "hit@5": 0.25,
-          "mrr@10": 0.28125,
-          "recall@10": 0.5,
-          "ndcg@10": 0.33941237365313154,
+          "hit@5": 1.0,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 0.9042858353825638,
           "no_result_correct": null,
-          "avg_latency_ms": 170.08037499999773,
-          "p95_latency_ms": 204.39930000065942
+          "avg_latency_ms": 225.88287500025217,
+          "p95_latency_ms": 285.4803999998694
         },
         "dialogue_memory": {
           "mode": "hybrid",
           "cases": 5,
           "ranked_cases": 5,
           "no_result_cases": 0,
-          "hit@5": 0.2,
-          "mrr@10": 0.2,
-          "recall@10": 0.2,
-          "ndcg@10": 0.2,
+          "hit@5": 1.0,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 0.9667982464796298,
           "no_result_correct": null,
-          "avg_latency_ms": 284.4030600004771,
-          "p95_latency_ms": 417.3051999987365
+          "avg_latency_ms": 347.91586000010284,
+          "p95_latency_ms": 424.3783000001713
         },
         "exact_title": {
           "mode": "hybrid",
@@ -51,10 +51,10 @@
           "hit@5": 1.0,
           "mrr@10": 1.0,
           "recall@10": 1.0,
-          "ndcg@10": 1.0,
+          "ndcg@10": 0.9792489040497686,
           "no_result_correct": null,
-          "avg_latency_ms": 1357.299087499996,
-          "p95_latency_ms": 7599.010100000669
+          "avg_latency_ms": 454.0487500000836,
+          "p95_latency_ms": 923.599099999592
         },
         "franchise_title": {
           "mode": "hybrid",
@@ -62,12 +62,12 @@
           "ranked_cases": 5,
           "no_result_cases": 0,
           "hit@5": 1.0,
-          "mrr@10": 0.85,
-          "recall@10": 0.9,
-          "ndcg@10": 0.8502610649310738,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 0.9784110706231604,
           "no_result_correct": null,
-          "avg_latency_ms": 210.28255999990506,
-          "p95_latency_ms": 339.5295000009355
+          "avg_latency_ms": 237.69613999975263,
+          "p95_latency_ms": 283.70559999984835
         },
         "no_result": {
           "mode": "hybrid",
@@ -79,34 +79,34 @@
           "recall@10": null,
           "ndcg@10": null,
           "no_result_correct": 1.0,
-          "avg_latency_ms": 201.85291999987385,
-          "p95_latency_ms": 300.6775000012567
+          "avg_latency_ms": 238.81819999987783,
+          "p95_latency_ms": 292.99189999983355
         },
         "object_scene": {
           "mode": "hybrid",
           "cases": 8,
           "ranked_cases": 8,
           "no_result_cases": 0,
-          "hit@5": 0.875,
-          "mrr@10": 0.6666666666666666,
-          "recall@10": 0.7708333333333333,
-          "ndcg@10": 0.6705392532297983,
+          "hit@5": 1.0,
+          "mrr@10": 0.8541666666666666,
+          "recall@10": 0.8958333333333333,
+          "ndcg@10": 0.8289396302256552,
           "no_result_correct": null,
-          "avg_latency_ms": 246.57326250007827,
-          "p95_latency_ms": 603.0549000006431
+          "avg_latency_ms": 296.010874999979,
+          "p95_latency_ms": 559.9743000002491
         },
         "semantic_plot": {
           "mode": "hybrid",
           "cases": 15,
           "ranked_cases": 15,
           "no_result_cases": 0,
-          "hit@5": 0.5333333333333333,
-          "mrr@10": 0.35333333333333333,
-          "recall@10": 0.5,
-          "ndcg@10": 0.3459413349647301,
+          "hit@5": 1.0,
+          "mrr@10": 0.9166666666666666,
+          "recall@10": 0.9333333333333333,
+          "ndcg@10": 0.8579254184054578,
           "no_result_correct": null,
-          "avg_latency_ms": 317.87606666694046,
-          "p95_latency_ms": 504.8891000005824
+          "avg_latency_ms": 398.86881999997667,
+          "p95_latency_ms": 566.2443000001076
         }
       },
       "reports": [
@@ -115,49 +115,49 @@
           "query": "hunger games",
           "intent": "exact_title",
           "result_ids": [
-            "31186339",
             "36012788",
+            "31186339",
             "3849638",
-            "6697503",
             "3619421",
+            "6697503",
             "97740",
-            "19316811",
             "20756695",
+            "19316811",
             "7976591",
             "19931021"
           ],
           "results": [
             {
-              "movie_id": "31186339",
-              "title": "The Hunger Games"
-            },
-            {
               "movie_id": "36012788",
               "title": "The Hunger Games: Catching Fire"
+            },
+            {
+              "movie_id": "31186339",
+              "title": "The Hunger Games"
             },
             {
               "movie_id": "3849638",
               "title": "Resurrection of the Little Match Girl"
             },
             {
-              "movie_id": "6697503",
-              "title": "The Aqua Teen Hunger Force Movie Film for Theatres"
-            },
-            {
               "movie_id": "3619421",
               "title": "Winnie the Pooh and a Day for Eeyore"
+            },
+            {
+              "movie_id": "6697503",
+              "title": "The Aqua Teen Hunger Force Movie Film for Theatres"
             },
             {
               "movie_id": "97740",
               "title": "Darling"
             },
             {
-              "movie_id": "19316811",
-              "title": "Iluminados Por El Fuego"
-            },
-            {
               "movie_id": "20756695",
               "title": "Shorts"
+            },
+            {
+              "movie_id": "19316811",
+              "title": "Iluminados Por El Fuego"
             },
             {
               "movie_id": "7976591",
@@ -169,100 +169,100 @@
             }
           ],
           "result_titles": [
-            "The Hunger Games",
             "The Hunger Games: Catching Fire",
+            "The Hunger Games",
             "Resurrection of the Little Match Girl",
-            "The Aqua Teen Hunger Force Movie Film for Theatres",
             "Winnie the Pooh and a Day for Eeyore",
+            "The Aqua Teen Hunger Force Movie Film for Theatres",
             "Darling",
-            "Iluminados Por El Fuego",
             "Shorts",
+            "Iluminados Por El Fuego",
             "Crusade in Jeans",
             "Kaal"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 1.0,
-          "ndcg@10": 1.0,
+          "ndcg@10": 0.8339912323981488,
           "no_result_correct": null,
-          "latency_ms": 7599.010100000669
+          "latency_ms": 923.599099999592
         },
         {
           "id": "q002_object_lightsaber",
           "query": "lightsaber",
           "intent": "object_scene",
           "result_ids": [
-            "4300779",
-            "1883373",
             "55447",
+            "50957",
+            "50793",
+            "4300779",
             "10157628",
-            "3185702",
-            "52549",
             "53964",
-            "15726696",
             "2041686",
-            "21768047"
+            "1883373",
+            "14278837",
+            "50744"
           ],
           "results": [
             {
-              "movie_id": "4300779",
-              "title": "The Formula"
-            },
-            {
-              "movie_id": "1883373",
-              "title": "LEGO Star Wars: Revenge of the Brick"
-            },
-            {
               "movie_id": "55447",
               "title": "Star Wars Episode III: Revenge of the Sith"
+            },
+            {
+              "movie_id": "50957",
+              "title": "Star Wars Episode II: Attack of the Clones"
+            },
+            {
+              "movie_id": "50793",
+              "title": "Star Wars Episode I: The Phantom Menace"
+            },
+            {
+              "movie_id": "4300779",
+              "title": "The Formula"
             },
             {
               "movie_id": "10157628",
               "title": "Duality"
             },
             {
-              "movie_id": "3185702",
-              "title": "Starcrash"
-            },
-            {
-              "movie_id": "52549",
-              "title": "Star Wars Episode IV: A New Hope"
-            },
-            {
               "movie_id": "53964",
               "title": "Star Wars Episode V: The Empire Strikes Back"
-            },
-            {
-              "movie_id": "15726696",
-              "title": "Star Wars: The Clone Wars"
             },
             {
               "movie_id": "2041686",
               "title": "Hardware Wars"
             },
             {
-              "movie_id": "21768047",
-              "title": "Keroro Gunso the Super Movie 3: Keroro vs. Keroro Great Sky Duel"
+              "movie_id": "1883373",
+              "title": "LEGO Star Wars: Revenge of the Brick"
+            },
+            {
+              "movie_id": "14278837",
+              "title": "Something, Something, Something Dark Side"
+            },
+            {
+              "movie_id": "50744",
+              "title": "Star Wars Episode VI: Return of the Jedi"
             }
           ],
           "result_titles": [
-            "The Formula",
-            "LEGO Star Wars: Revenge of the Brick",
             "Star Wars Episode III: Revenge of the Sith",
+            "Star Wars Episode II: Attack of the Clones",
+            "Star Wars Episode I: The Phantom Menace",
+            "The Formula",
             "Duality",
-            "Starcrash",
-            "Star Wars Episode IV: A New Hope",
             "Star Wars Episode V: The Empire Strikes Back",
-            "Star Wars: The Clone Wars",
             "Hardware Wars",
-            "Keroro Gunso the Super Movie 3: Keroro vs. Keroro Great Sky Duel"
+            "LEGO Star Wars: Revenge of the Brick",
+            "Something, Something, Something Dark Side",
+            "Star Wars Episode VI: Return of the Jedi"
           ],
           "hit@5": true,
-          "mrr@10": 0.5,
+          "mrr@10": 1.0,
           "recall@10": 1.0,
-          "ndcg@10": 0.619993237061603,
+          "ndcg@10": 0.8871962530284576,
           "no_result_correct": null,
-          "latency_ms": 268.61230000031355
+          "latency_ms": 308.4921999998187
         },
         {
           "id": "q003_exact_god_of_love",
@@ -274,11 +274,11 @@
             "8512105",
             "1065214",
             "7832768",
+            "10993005",
+            "2492199",
             "15315354",
             "11937073",
-            "2492199",
-            "20529023",
-            "22321588"
+            "20529023"
           ],
           "results": [
             {
@@ -302,6 +302,14 @@
               "title": "The Last Temptation of Christ"
             },
             {
+              "movie_id": "10993005",
+              "title": "Love's Unending Legacy"
+            },
+            {
+              "movie_id": "2492199",
+              "title": "Winter Light"
+            },
+            {
               "movie_id": "15315354",
               "title": "The Color of Paradise"
             },
@@ -310,16 +318,8 @@
               "title": "Coming Out"
             },
             {
-              "movie_id": "2492199",
-              "title": "Winter Light"
-            },
-            {
               "movie_id": "20529023",
               "title": "The Little Troll Prince: A Christmas Parable"
-            },
-            {
-              "movie_id": "22321588",
-              "title": "Minnesota Cuke and The Search For Noah's Umbrella"
             }
           ],
           "result_titles": [
@@ -328,18 +328,18 @@
             "The Magic Pipe",
             "Amadeus",
             "The Last Temptation of Christ",
+            "Love's Unending Legacy",
+            "Winter Light",
             "The Color of Paradise",
             "Coming Out",
-            "Winter Light",
-            "The Little Troll Prince: A Christmas Parable",
-            "Minnesota Cuke and The Search For Noah's Umbrella"
+            "The Little Troll Prince: A Christmas Parable"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 1179.4965999997657
+          "latency_ms": 753.1285000004573
         },
         {
           "id": "q004_punctuation_title",
@@ -347,12 +347,13 @@
           "intent": "exact_title",
           "result_ids": [
             "174437",
-            "34954932",
             "1323663",
-            "26196717",
+            "34954932",
             "18790154",
             "20904181",
+            "26196717",
             "1801472",
+            "None",
             "34023810",
             "34954100"
           ],
@@ -362,16 +363,12 @@
               "title": "Oh! What a Lovely War"
             },
             {
-              "movie_id": "34954932",
-              "title": "Khan Kluay 2"
-            },
-            {
               "movie_id": "1323663",
               "title": "Merlin"
             },
             {
-              "movie_id": "26196717",
-              "title": "Oh Shucks! Here Comes UNTAG"
+              "movie_id": "34954932",
+              "title": "Khan Kluay 2"
             },
             {
               "movie_id": "18790154",
@@ -382,8 +379,16 @@
               "title": "Palkon Ki Chhaon Mein"
             },
             {
+              "movie_id": "26196717",
+              "title": "Oh Shucks! Here Comes UNTAG"
+            },
+            {
               "movie_id": "1801472",
               "title": "The Hand of Fear"
+            },
+            {
+              "movie_id": "None",
+              "title": "Obsessed"
             },
             {
               "movie_id": "34023810",
@@ -396,12 +401,13 @@
           ],
           "result_titles": [
             "Oh! What a Lovely War",
-            "Khan Kluay 2",
             "Merlin",
-            "Oh Shucks! Here Comes UNTAG",
+            "Khan Kluay 2",
             "The Adventures of Picasso",
             "Palkon Ki Chhaon Mein",
+            "Oh Shucks! Here Comes UNTAG",
             "The Hand of Fear",
+            "Obsessed",
             "In Love and War",
             "Le Jeu"
           ],
@@ -410,7 +416,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 979.9579999998969
+          "latency_ms": 570.6509000001461
         },
         {
           "id": "q005_no_result_noise",
@@ -424,7 +430,7 @@
           "recall@10": null,
           "ndcg@10": null,
           "no_result_correct": true,
-          "latency_ms": 300.6775000012567
+          "latency_ms": 260.2297000003091
         },
         {
           "id": "q006_franchise_matrix",
@@ -501,18 +507,18 @@
           "recall@10": 1.0,
           "ndcg@10": 0.9316348402922772,
           "no_result_correct": null,
-          "latency_ms": 339.5295000009355
+          "latency_ms": 225.02289999920322
         },
         {
           "id": "q007_semantic_boy_wizard",
           "query": "boy wizard school",
           "intent": "semantic_plot",
           "result_ids": [
-            "4527590",
             "667361",
+            "4527590",
             "35735268",
-            "667368",
             "2236976",
+            "667368",
             "23013924",
             "1172207",
             "19103898",
@@ -521,24 +527,24 @@
           ],
           "results": [
             {
-              "movie_id": "4527590",
-              "title": "Rock School"
-            },
-            {
               "movie_id": "667361",
               "title": "Harry Potter and the Philosopher's Stone"
+            },
+            {
+              "movie_id": "4527590",
+              "title": "Rock School"
             },
             {
               "movie_id": "35735268",
               "title": "At the End of the Rainbow"
             },
             {
-              "movie_id": "667368",
-              "title": "Harry Potter and the Chamber of Secrets"
-            },
-            {
               "movie_id": "2236976",
               "title": "August Rush"
+            },
+            {
+              "movie_id": "667368",
+              "title": "Harry Potter and the Chamber of Secrets"
             },
             {
               "movie_id": "23013924",
@@ -562,11 +568,11 @@
             }
           ],
           "result_titles": [
-            "Rock School",
             "Harry Potter and the Philosopher's Stone",
+            "Rock School",
             "At the End of the Rainbow",
-            "Harry Potter and the Chamber of Secrets",
             "August Rush",
+            "Harry Potter and the Chamber of Secrets",
             "Wizards on Deck With Hannah Montana",
             "Voodoo Academy",
             "Girls' School",
@@ -574,11 +580,11 @@
             "If..."
           ],
           "hit@5": true,
-          "mrr@10": 0.5,
+          "mrr@10": 1.0,
           "recall@10": 1.0,
-          "ndcg@10": 0.6419288461539238,
+          "ndcg@10": 0.9176601606601069,
           "no_result_correct": null,
-          "latency_ms": 504.8891000005824
+          "latency_ms": 507.72349999988364
         },
         {
           "id": "q008_object_one_ring",
@@ -589,12 +595,12 @@
             "173941",
             "2542052",
             "173944",
-            "1981790",
             "561006",
+            "22175264",
             "33896582",
             "22635683",
-            "5499192",
-            "245515"
+            "1981790",
+            "5499192"
           ],
           "results": [
             {
@@ -614,12 +620,12 @@
               "title": "The Lord of the Rings: The Two Towers"
             },
             {
-              "movie_id": "1981790",
-              "title": "The Naked City"
-            },
-            {
               "movie_id": "561006",
               "title": "What's the Worst That Could Happen?"
+            },
+            {
+              "movie_id": "22175264",
+              "title": "Wishology"
             },
             {
               "movie_id": "33896582",
@@ -630,12 +636,12 @@
               "title": "St. Trinian's, The Legend of Fritton's Gold"
             },
             {
-              "movie_id": "5499192",
-              "title": "The H-Man"
+              "movie_id": "1981790",
+              "title": "The Naked City"
             },
             {
-              "movie_id": "245515",
-              "title": "Twin Peaks: Fire Walk With Me"
+              "movie_id": "5499192",
+              "title": "The H-Man"
             }
           ],
           "result_titles": [
@@ -643,37 +649,45 @@
             "The Lord of the Rings: The Fellowship of the Ring",
             "Rings",
             "The Lord of the Rings: The Two Towers",
-            "The Naked City",
             "What's the Worst That Could Happen?",
+            "Wishology",
             "Oomai Vizhigal",
             "St. Trinian's, The Legend of Fritton's Gold",
-            "The H-Man",
-            "Twin Peaks: Fire Walk With Me"
+            "The Naked City",
+            "The H-Man"
           ],
           "hit@5": true,
           "mrr@10": 0.5,
           "recall@10": 0.6666666666666666,
           "ndcg@10": 0.6198142130753956,
           "no_result_correct": null,
-          "latency_ms": 603.0549000006431
+          "latency_ms": 559.9743000002491
         },
         {
           "id": "q009_event_ship_iceberg",
           "query": "ship hits iceberg",
           "intent": "semantic_plot",
           "result_ids": [
+            "6524086",
+            "52371",
             "9049407",
             "27405104",
             "2052143",
+            "33462689",
             "1203778",
             "1101306",
-            "33462689",
             "23761430",
-            "27359584",
-            "14573581",
-            "6524086"
+            "27359584"
           ],
           "results": [
+            {
+              "movie_id": "6524086",
+              "title": "A Night to Remember"
+            },
+            {
+              "movie_id": "52371",
+              "title": "Titanic"
+            },
             {
               "movie_id": "9049407",
               "title": "Souls at Sea"
@@ -687,6 +701,10 @@
               "title": "Titanic"
             },
             {
+              "movie_id": "33462689",
+              "title": "The Legend of the Titanic"
+            },
+            {
               "movie_id": "1203778",
               "title": "Titanic"
             },
@@ -695,44 +713,32 @@
               "title": "The Wild"
             },
             {
-              "movie_id": "33462689",
-              "title": "The Legend of the Titanic"
-            },
-            {
               "movie_id": "23761430",
               "title": "No Greater Love"
             },
             {
               "movie_id": "27359584",
               "title": "Titanic: The Animated Movie"
-            },
-            {
-              "movie_id": "14573581",
-              "title": "Yogi Bear and the Magical Flight of the Spruce Goose"
-            },
-            {
-              "movie_id": "6524086",
-              "title": "A Night to Remember"
             }
           ],
           "result_titles": [
+            "A Night to Remember",
+            "Titanic",
             "Souls at Sea",
             "Titanic II",
             "Titanic",
+            "The Legend of the Titanic",
             "Titanic",
             "The Wild",
-            "The Legend of the Titanic",
             "No Greater Love",
-            "Titanic: The Animated Movie",
-            "Yogi Bear and the Magical Flight of the Spruce Goose",
-            "A Night to Remember"
+            "Titanic: The Animated Movie"
           ],
-          "hit@5": false,
-          "mrr@10": 0.1,
-          "recall@10": 0.5,
-          "ndcg@10": 0.09751658939953338,
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 0.8339912323981488,
           "no_result_correct": null,
-          "latency_ms": 302.4015999999392
+          "latency_ms": 292.1699999997145
         },
         {
           "id": "q010_semantic_dreams",
@@ -741,14 +747,14 @@
           "result_ids": [
             "6527176",
             "3038038",
-            "2033359",
-            "1930290",
-            "7583011",
-            "3037946",
             "6283620",
+            "3037946",
+            "2033359",
+            "7583011",
+            "1930290",
+            "3028191",
             "745100",
-            "5281893",
-            "5033320"
+            "5281893"
           ],
           "results": [
             {
@@ -760,24 +766,28 @@
               "title": "A Nightmare on Elm Street 4: The Dream Master"
             },
             {
-              "movie_id": "2033359",
-              "title": "Ju-on: The Grudge"
-            },
-            {
-              "movie_id": "1930290",
-              "title": "Barbarella"
-            },
-            {
-              "movie_id": "7583011",
-              "title": "Incubus"
+              "movie_id": "6283620",
+              "title": "Save The Last Dance for Me"
             },
             {
               "movie_id": "3037946",
               "title": "A Nightmare on Elm Street 3: Dream Warriors"
             },
             {
-              "movie_id": "6283620",
-              "title": "Save The Last Dance for Me"
+              "movie_id": "2033359",
+              "title": "Ju-on: The Grudge"
+            },
+            {
+              "movie_id": "7583011",
+              "title": "Incubus"
+            },
+            {
+              "movie_id": "1930290",
+              "title": "Barbarella"
+            },
+            {
+              "movie_id": "3028191",
+              "title": "A Nightmare on Elm Street"
             },
             {
               "movie_id": "745100",
@@ -786,107 +796,103 @@
             {
               "movie_id": "5281893",
               "title": "The Science of Sleep"
-            },
-            {
-              "movie_id": "5033320",
-              "title": "Dagon"
             }
           ],
           "result_titles": [
             "Paprika",
             "A Nightmare on Elm Street 4: The Dream Master",
-            "Ju-on: The Grudge",
-            "Barbarella",
-            "Incubus",
-            "A Nightmare on Elm Street 3: Dream Warriors",
             "Save The Last Dance for Me",
+            "A Nightmare on Elm Street 3: Dream Warriors",
+            "Ju-on: The Grudge",
+            "Incubus",
+            "Barbarella",
+            "A Nightmare on Elm Street",
             "James and the Giant Peach",
-            "The Science of Sleep",
-            "Dagon"
+            "The Science of Sleep"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 0.5,
           "ndcg@10": 0.3373519727104165,
           "no_result_correct": null,
-          "latency_ms": 281.22310000071593
+          "latency_ms": 323.262099999738
         },
         {
           "id": "q011_semantic_toys",
           "query": "toys come alive",
           "intent": "semantic_plot",
           "result_ids": [
-            "11450530",
             "53085",
-            "6417790",
+            "11450530",
             "13851011",
+            "6417790",
             "365905",
-            "534792",
-            "12741677",
-            "6777103",
             "3024248",
-            "18410798"
+            "6777103",
+            "534792",
+            "18410798",
+            "24048670"
           ],
           "results": [
-            {
-              "movie_id": "11450530",
-              "title": "Demonic Toys"
-            },
             {
               "movie_id": "53085",
               "title": "Toy Story"
             },
             {
-              "movie_id": "6417790",
-              "title": "Dolls"
+              "movie_id": "11450530",
+              "title": "Demonic Toys"
             },
             {
               "movie_id": "13851011",
               "title": "Tom and Jerry: A Nutcracker Tale"
             },
             {
+              "movie_id": "6417790",
+              "title": "Dolls"
+            },
+            {
               "movie_id": "365905",
               "title": "Babes in Toyland"
-            },
-            {
-              "movie_id": "534792",
-              "title": "Child's Play"
-            },
-            {
-              "movie_id": "12741677",
-              "title": "Pin..."
-            },
-            {
-              "movie_id": "6777103",
-              "title": "The Fastest Gun Alive"
             },
             {
               "movie_id": "3024248",
               "title": "Stay Alive"
             },
             {
+              "movie_id": "6777103",
+              "title": "The Fastest Gun Alive"
+            },
+            {
+              "movie_id": "534792",
+              "title": "Child's Play"
+            },
+            {
               "movie_id": "18410798",
               "title": "Amusement"
+            },
+            {
+              "movie_id": "24048670",
+              "title": "Skull Heads"
             }
           ],
           "result_titles": [
-            "Demonic Toys",
             "Toy Story",
-            "Dolls",
+            "Demonic Toys",
             "Tom and Jerry: A Nutcracker Tale",
+            "Dolls",
             "Babes in Toyland",
-            "Child's Play",
-            "Pin...",
-            "The Fastest Gun Alive",
             "Stay Alive",
-            "Amusement"
+            "The Fastest Gun Alive",
+            "Child's Play",
+            "Amusement",
+            "Skull Heads"
           ],
           "hit@5": true,
-          "mrr@10": 0.5,
+          "mrr@10": 1.0,
           "recall@10": 1.0,
-          "ndcg@10": 0.6254435063924523,
+          "ndcg@10": 0.9586597063564786,
           "no_result_correct": null,
-          "latency_ms": 346.53009999965434
+          "latency_ms": 381.5745000001698
         },
         {
           "id": "q012_object_shark",
@@ -896,11 +902,11 @@
             "74830",
             "32490842",
             "352795",
-            "32711189",
             "22031391",
+            "32711189",
+            "1780940",
             "25643143",
             "1714944",
-            "1780940",
             "31710893",
             "11996536"
           ],
@@ -918,12 +924,16 @@
               "title": "Jaws 2"
             },
             {
+              "movie_id": "22031391",
+              "title": "Mega Shark Vs. Giant Octopus"
+            },
+            {
               "movie_id": "32711189",
               "title": "Oceans"
             },
             {
-              "movie_id": "22031391",
-              "title": "Mega Shark Vs. Giant Octopus"
+              "movie_id": "1780940",
+              "title": "Tintorera"
             },
             {
               "movie_id": "25643143",
@@ -932,10 +942,6 @@
             {
               "movie_id": "1714944",
               "title": "Great White"
-            },
-            {
-              "movie_id": "1780940",
-              "title": "Tintorera"
             },
             {
               "movie_id": "31710893",
@@ -950,11 +956,11 @@
             "Jaws",
             "Malibu Shark Attack",
             "Jaws 2",
-            "Oceans",
             "Mega Shark Vs. Giant Octopus",
+            "Oceans",
+            "Tintorera",
             "Shark",
             "Great White",
-            "Tintorera",
             "Swamp Shark",
             "Deep Blood"
           ],
@@ -963,7 +969,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.95583058934618,
           "no_result_correct": null,
-          "latency_ms": 197.5631000004796
+          "latency_ms": 230.13859999991837
         },
         {
           "id": "q013_semantic_time_car",
@@ -971,15 +977,15 @@
           "intent": "semantic_plot",
           "result_ids": [
             "42993",
-            "1128175",
             "10753947",
+            "1128175",
             "18901478",
             "3927125",
-            "17346283",
+            "155921",
             "2753501",
-            "10771836",
-            "28986107",
-            "10965647"
+            "1131961",
+            "17346283",
+            "28986107"
           ],
           "results": [
             {
@@ -987,12 +993,12 @@
               "title": "Back to the Future"
             },
             {
-              "movie_id": "1128175",
-              "title": "A Sound of Thunder"
-            },
-            {
               "movie_id": "10753947",
               "title": "The Time Traveler's Wife"
+            },
+            {
+              "movie_id": "1128175",
+              "title": "A Sound of Thunder"
             },
             {
               "movie_id": "18901478",
@@ -1003,44 +1009,44 @@
               "title": "Wind Chill"
             },
             {
-              "movie_id": "17346283",
-              "title": "S. Darko"
+              "movie_id": "155921",
+              "title": "Time After Time"
             },
             {
               "movie_id": "2753501",
               "title": "Shuto Kousoku Trial"
             },
             {
-              "movie_id": "10771836",
-              "title": "Ajnabee"
+              "movie_id": "1131961",
+              "title": "Dead End"
+            },
+            {
+              "movie_id": "17346283",
+              "title": "S. Darko"
             },
             {
               "movie_id": "28986107",
               "title": "Gingerdead Man 3: Saturday Night Cleaver"
-            },
-            {
-              "movie_id": "10965647",
-              "title": "Love Story 2050"
             }
           ],
           "result_titles": [
             "Back to the Future",
-            "A Sound of Thunder",
             "The Time Traveler's Wife",
+            "A Sound of Thunder",
             "Butterfly Effect: Revelation",
             "Wind Chill",
-            "S. Darko",
+            "Time After Time",
             "Shuto Kousoku Trial",
-            "Ajnabee",
-            "Gingerdead Man 3: Saturday Night Cleaver",
-            "Love Story 2050"
+            "Dead End",
+            "S. Darko",
+            "Gingerdead Man 3: Saturday Night Cleaver"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 0.5,
           "ndcg@10": 0.7871546029909718,
           "no_result_correct": null,
-          "latency_ms": 406.825400001253
+          "latency_ms": 518.1772000005367
         },
         {
           "id": "q014_exact_dark_knight",
@@ -1048,15 +1054,15 @@
           "intent": "exact_title",
           "result_ids": [
             "4276475",
-            "29075630",
-            "7775221",
-            "32877145",
             "4702014",
-            "3493076",
+            "29075630",
+            "32877145",
+            "7775221",
+            "491757",
             "12668580",
-            "32362473",
+            "3493076",
             "12576817",
-            "20402406"
+            "32362473"
           ],
           "results": [
             {
@@ -1064,60 +1070,60 @@
               "title": "The Dark Knight"
             },
             {
-              "movie_id": "29075630",
-              "title": "The Dark Knight Rises"
+              "movie_id": "4702014",
+              "title": "Sword of the Valiant: The Legend of Sir Gawain and the Green Knight"
             },
             {
-              "movie_id": "7775221",
-              "title": "Batman: Revenge"
+              "movie_id": "29075630",
+              "title": "The Dark Knight Rises"
             },
             {
               "movie_id": "32877145",
               "title": "Kiba Gaiden"
             },
             {
-              "movie_id": "4702014",
-              "title": "Sword of the Valiant: The Legend of Sir Gawain and the Green Knight"
+              "movie_id": "7775221",
+              "title": "Batman: Revenge"
             },
             {
-              "movie_id": "3493076",
-              "title": "Camelot"
+              "movie_id": "491757",
+              "title": "Doom"
             },
             {
               "movie_id": "12668580",
               "title": "Luther"
             },
             {
-              "movie_id": "32362473",
-              "title": "Tensou Sentai Goseiger Returns"
+              "movie_id": "3493076",
+              "title": "Camelot"
             },
             {
               "movie_id": "12576817",
               "title": "Futurama: Bender's Game"
             },
             {
-              "movie_id": "20402406",
-              "title": "Season of the Witch"
+              "movie_id": "32362473",
+              "title": "Tensou Sentai Goseiger Returns"
             }
           ],
           "result_titles": [
             "The Dark Knight",
-            "The Dark Knight Rises",
-            "Batman: Revenge",
-            "Kiba Gaiden",
             "Sword of the Valiant: The Legend of Sir Gawain and the Green Knight",
-            "Camelot",
+            "The Dark Knight Rises",
+            "Kiba Gaiden",
+            "Batman: Revenge",
+            "Doom",
             "Luther",
-            "Tensou Sentai Goseiger Returns",
+            "Camelot",
             "Futurama: Bender's Game",
-            "Season of the Witch"
+            "Tensou Sentai Goseiger Returns"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 201.9638000001578
+          "latency_ms": 228.62520000035147
         },
         {
           "id": "q015_exact_finding_nemo",
@@ -1128,12 +1134,12 @@
             "12292280",
             "3476903",
             "5516824",
-            "16658874",
+            "5776856",
             "14760799",
+            "16658874",
             "3305132",
             "29561419",
-            "5776001",
-            "8509794"
+            "5776001"
           ],
           "results": [
             {
@@ -1153,12 +1159,16 @@
               "title": "20,000 Leagues Under the Sea"
             },
             {
-              "movie_id": "16658874",
-              "title": "20,000 Leagues Under the Sea"
+              "movie_id": "5776856",
+              "title": "Mysterious Island"
             },
             {
               "movie_id": "14760799",
               "title": "30,000 Leagues Under the Sea"
+            },
+            {
+              "movie_id": "16658874",
+              "title": "20,000 Leagues Under the Sea"
             },
             {
               "movie_id": "3305132",
@@ -1171,10 +1181,6 @@
             {
               "movie_id": "5776001",
               "title": "Mysterious Island"
-            },
-            {
-              "movie_id": "8509794",
-              "title": "Meet the Deedles"
             }
           ],
           "result_titles": [
@@ -1182,19 +1188,19 @@
             "Mr. Nobody",
             "Little Nemo: Adventures in Slumberland",
             "20,000 Leagues Under the Sea",
-            "20,000 Leagues Under the Sea",
+            "Mysterious Island",
             "30,000 Leagues Under the Sea",
+            "20,000 Leagues Under the Sea",
             "Looking for Comedy in the Muslim World",
             "Journey 2: The Mysterious Island",
-            "Mysterious Island",
-            "Meet the Deedles"
+            "Mysterious Island"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 339.5448999999644
+          "latency_ms": 435.0062999992588
         },
         {
           "id": "q016_exact_jurassic_park",
@@ -1207,10 +1213,10 @@
             "35259556",
             "8702038",
             "3239974",
+            "None",
             "23283544",
             "8528525",
-            "23395917",
-            "27663923"
+            "23395917"
           ],
           "results": [
             {
@@ -1238,6 +1244,10 @@
               "title": "Dinosaurus!"
             },
             {
+              "movie_id": "None",
+              "title": "Jurassic World Rebirth"
+            },
+            {
               "movie_id": "23283544",
               "title": "Granite Hotel"
             },
@@ -1248,10 +1258,6 @@
             {
               "movie_id": "23395917",
               "title": "Dennis the Menace: Dinosaur Hunter"
-            },
-            {
-              "movie_id": "27663923",
-              "title": "Dinoshark"
             }
           ],
           "result_titles": [
@@ -1261,17 +1267,17 @@
             "Jole Jongole",
             "Dinosaurs! - A Fun-Filled Trip Back in Time!",
             "Dinosaurus!",
+            "Jurassic World Rebirth",
             "Granite Hotel",
             "Adventures in Dinosaur City",
-            "Dennis the Menace: Dinosaur Hunter",
-            "Dinoshark"
+            "Dennis the Menace: Dinosaur Hunter"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 186.64720000015222
+          "latency_ms": 241.69530000017403
         },
         {
           "id": "q017_exact_shawshank",
@@ -1283,11 +1289,11 @@
             "4034543",
             "33419045",
             "23691191",
+            "31424077",
             "17239935",
-            "31119172",
             "29760708",
-            "19884979",
-            "27937333"
+            "27937333",
+            "10793784"
           ],
           "results": [
             {
@@ -1311,24 +1317,24 @@
               "title": "Twilight in the Sierras"
             },
             {
-              "movie_id": "17239935",
-              "title": "Caged Fury"
+              "movie_id": "31424077",
+              "title": "Dump Dicks"
             },
             {
-              "movie_id": "31119172",
-              "title": "Makkal Mahatmyam"
+              "movie_id": "17239935",
+              "title": "Caged Fury"
             },
             {
               "movie_id": "29760708",
               "title": "Dark Mountain"
             },
             {
-              "movie_id": "19884979",
-              "title": "The Last Producer"
-            },
-            {
               "movie_id": "27937333",
               "title": "The Tortured"
+            },
+            {
+              "movie_id": "10793784",
+              "title": "Sparkhouse"
             }
           ],
           "result_titles": [
@@ -1337,18 +1343,18 @@
             "King of Sorrow",
             "Gidh",
             "Twilight in the Sierras",
+            "Dump Dicks",
             "Caged Fury",
-            "Makkal Mahatmyam",
             "Dark Mountain",
-            "The Last Producer",
-            "The Tortured"
+            "The Tortured",
+            "Sparkhouse"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 172.85509999965143
+          "latency_ms": 215.7922000005783
         },
         {
           "id": "q018_exact_eternal_sunshine",
@@ -1360,11 +1366,11 @@
             "3554438",
             "30887985",
             "24511725",
-            "9552709",
             "13870077",
             "7353520",
             "3923568",
-            "794371"
+            "794371",
+            "6811552"
           ],
           "results": [
             {
@@ -1388,10 +1394,6 @@
               "title": "Apolinar"
             },
             {
-              "movie_id": "9552709",
-              "title": "Blue Sunshine"
-            },
-            {
               "movie_id": "13870077",
               "title": "The Sun in a Net"
             },
@@ -1406,6 +1408,10 @@
             {
               "movie_id": "794371",
               "title": "Man Behind the Sun"
+            },
+            {
+              "movie_id": "6811552",
+              "title": "Nightmare in the Sun"
             }
           ],
           "result_titles": [
@@ -1414,36 +1420,60 @@
             "In the Heat of the Sun",
             "Shadows in the Sun",
             "Apolinar",
-            "Blue Sunshine",
             "The Sun in a Net",
             "Midnight Sun",
             "Painting the Clouds with Sunshine",
-            "Man Behind the Sun"
+            "Man Behind the Sun",
+            "Nightmare in the Sun"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 198.91699999971024
+          "latency_ms": 263.8925000001109
         },
         {
           "id": "q019_franchise_star_wars",
           "query": "star wars",
           "intent": "franchise_title",
           "result_ids": [
+            "52549",
+            "50744",
+            "53964",
+            "55447",
+            "50957",
+            "50793",
             "20644472",
             "4300779",
             "1861566",
-            "52549",
-            "30325035",
-            "30385795",
-            "185264",
-            "32427108",
-            "50744",
-            "53964"
+            "30385795"
           ],
           "results": [
+            {
+              "movie_id": "52549",
+              "title": "Star Wars Episode IV: A New Hope"
+            },
+            {
+              "movie_id": "50744",
+              "title": "Star Wars Episode VI: Return of the Jedi"
+            },
+            {
+              "movie_id": "53964",
+              "title": "Star Wars Episode V: The Empire Strikes Back"
+            },
+            {
+              "movie_id": "55447",
+              "title": "Star Wars Episode III: Revenge of the Sith"
+            },
+            {
+              "movie_id": "50957",
+              "title": "Star Wars Episode II: Attack of the Clones"
+            },
+            {
+              "movie_id": "50793",
+              "title": "Star Wars Episode I: The Phantom Menace"
+            },
             {
               "movie_id": "20644472",
               "title": "Robot Chicken: Star Wars Episode II"
@@ -1457,52 +1487,28 @@
               "title": "Saving Star Wars"
             },
             {
-              "movie_id": "52549",
-              "title": "Star Wars Episode IV: A New Hope"
-            },
-            {
-              "movie_id": "30325035",
-              "title": "Robot Chicken: Star Wars Episode III"
-            },
-            {
               "movie_id": "30385795",
               "title": "Lego Star Wars: Bombad Bounty"
-            },
-            {
-              "movie_id": "185264",
-              "title": "The Star Wars Holiday Special"
-            },
-            {
-              "movie_id": "32427108",
-              "title": "From Star Wars to Jedi: The Making of a Saga"
-            },
-            {
-              "movie_id": "50744",
-              "title": "Star Wars Episode VI: Return of the Jedi"
-            },
-            {
-              "movie_id": "53964",
-              "title": "Star Wars Episode V: The Empire Strikes Back"
             }
           ],
           "result_titles": [
+            "Star Wars Episode IV: A New Hope",
+            "Star Wars Episode VI: Return of the Jedi",
+            "Star Wars Episode V: The Empire Strikes Back",
+            "Star Wars Episode III: Revenge of the Sith",
+            "Star Wars Episode II: Attack of the Clones",
+            "Star Wars Episode I: The Phantom Menace",
             "Robot Chicken: Star Wars Episode II",
             "The Formula",
             "Saving Star Wars",
-            "Star Wars Episode IV: A New Hope",
-            "Robot Chicken: Star Wars Episode III",
-            "Lego Star Wars: Bombad Bounty",
-            "The Star Wars Holiday Special",
-            "From Star Wars to Jedi: The Making of a Saga",
-            "Star Wars Episode VI: Return of the Jedi",
-            "Star Wars Episode V: The Empire Strikes Back"
+            "Lego Star Wars: Bombad Bounty"
           ],
           "hit@5": true,
-          "mrr@10": 0.25,
-          "recall@10": 0.5,
-          "ndcg@10": 0.3358537786626148,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 0.9766038071230477,
           "no_result_correct": null,
-          "latency_ms": 244.57170000096085
+          "latency_ms": 283.70559999984835
         },
         {
           "id": "q020_franchise_harry_potter",
@@ -1511,13 +1517,13 @@
           "result_ids": [
             "667361",
             "670407",
-            "858575",
             "667368",
+            "858575",
             "667371",
             "31941988",
             "667372",
             "9834441",
-            "1853602",
+            "None",
             "4083099"
           ],
           "results": [
@@ -1530,12 +1536,12 @@
               "title": "Harry Potter and the Order of the Phoenix"
             },
             {
-              "movie_id": "858575",
-              "title": "Harry Potter and the Half-Blood Prince"
-            },
-            {
               "movie_id": "667368",
               "title": "Harry Potter and the Chamber of Secrets"
+            },
+            {
+              "movie_id": "858575",
+              "title": "Harry Potter and the Half-Blood Prince"
             },
             {
               "movie_id": "667371",
@@ -1554,8 +1560,8 @@
               "title": "Harry Potter and the Deathly Hallows: Part I"
             },
             {
-              "movie_id": "1853602",
-              "title": "Troll"
+              "movie_id": "None",
+              "title": "Harry Potter and the Deathly Hallows: Part 1"
             },
             {
               "movie_id": "4083099",
@@ -1565,13 +1571,13 @@
           "result_titles": [
             "Harry Potter and the Philosopher's Stone",
             "Harry Potter and the Order of the Phoenix",
-            "Harry Potter and the Half-Blood Prince",
             "Harry Potter and the Chamber of Secrets",
+            "Harry Potter and the Half-Blood Prince",
             "Harry Potter and the Prisoner of Azkaban",
             "Harry Potter and the Deathly Hallows \u2013 Part 2",
             "Harry Potter and the Goblet of Fire",
             "Harry Potter and the Deathly Hallows: Part I",
-            "Troll",
+            "Harry Potter and the Deathly Hallows: Part 1",
             "Alone in the Dark"
           ],
           "hit@5": true,
@@ -1579,7 +1585,7 @@
           "recall@10": 1.0,
           "ndcg@10": 0.9950681639600043,
           "no_result_correct": null,
-          "latency_ms": 164.59199999917473
+          "latency_ms": 246.19149999944057
         },
         {
           "id": "q021_franchise_indiana_jones",
@@ -1587,14 +1593,14 @@
           "intent": "franchise_title",
           "result_ids": [
             "54166",
-            "1252914",
             "51888",
-            "17314883",
             "81503",
+            "1252914",
+            "17314883",
+            "33068811",
             "5396711",
             "35542282",
             "14767600",
-            "33068811",
             "30385795"
           ],
           "results": [
@@ -1603,20 +1609,24 @@
               "title": "Indiana Jones and the Raiders of the Lost Ark"
             },
             {
-              "movie_id": "1252914",
-              "title": "Indiana Jones and the Kingdom of the Crystal Skull"
-            },
-            {
               "movie_id": "51888",
               "title": "Indiana Jones and the Last Crusade"
+            },
+            {
+              "movie_id": "81503",
+              "title": "Indiana Jones and the Temple of Doom"
+            },
+            {
+              "movie_id": "1252914",
+              "title": "Indiana Jones and the Kingdom of the Crystal Skull"
             },
             {
               "movie_id": "17314883",
               "title": "Lego Indiana Jones and the Raiders of the Lost Brick"
             },
             {
-              "movie_id": "81503",
-              "title": "Indiana Jones and the Temple of Doom"
+              "movie_id": "33068811",
+              "title": "Er Conde Jones"
             },
             {
               "movie_id": "5396711",
@@ -1631,32 +1641,28 @@
               "title": "Aashayein"
             },
             {
-              "movie_id": "33068811",
-              "title": "Er Conde Jones"
-            },
-            {
               "movie_id": "30385795",
               "title": "Lego Star Wars: Bombad Bounty"
             }
           ],
           "result_titles": [
             "Indiana Jones and the Raiders of the Lost Ark",
-            "Indiana Jones and the Kingdom of the Crystal Skull",
             "Indiana Jones and the Last Crusade",
-            "Lego Indiana Jones and the Raiders of the Lost Brick",
             "Indiana Jones and the Temple of Doom",
+            "Indiana Jones and the Kingdom of the Crystal Skull",
+            "Lego Indiana Jones and the Raiders of the Lost Brick",
+            "Er Conde Jones",
             "Nate and Hayes",
             "Raiders of the Lost Ark: The Adaptation",
             "Aashayein",
-            "Er Conde Jones",
             "Lego Star Wars: Bombad Bounty"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 1.0,
-          "ndcg@10": 0.9887485417404723,
+          "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 158.92039999926055
+          "latency_ms": 217.82470000016474
         },
         {
           "id": "q022_franchise_pirates",
@@ -1666,13 +1672,13 @@
             "321496",
             "1689394",
             "999394",
-            "24314116",
             "2560949",
+            "24314116",
             "333735",
-            "24583584",
             "2853895",
+            "4179081",
             "6274712",
-            "4179081"
+            "23413256"
           ],
           "results": [
             {
@@ -1688,52 +1694,52 @@
               "title": "Pirates of the Caribbean: Dead Man's Chest"
             },
             {
-              "movie_id": "24314116",
-              "title": "Pirates of the Caribbean: On Stranger Tides"
-            },
-            {
               "movie_id": "2560949",
               "title": "The Crimson Pirate"
+            },
+            {
+              "movie_id": "24314116",
+              "title": "Pirates of the Caribbean: On Stranger Tides"
             },
             {
               "movie_id": "333735",
               "title": "Pirates"
             },
             {
-              "movie_id": "24583584",
-              "title": "The Road to Romance"
-            },
-            {
               "movie_id": "2853895",
               "title": "The Pirate"
+            },
+            {
+              "movie_id": "4179081",
+              "title": "Captain Ron"
             },
             {
               "movie_id": "6274712",
               "title": "The Black Swan"
             },
             {
-              "movie_id": "4179081",
-              "title": "Captain Ron"
+              "movie_id": "23413256",
+              "title": "The Secret of the Purple Reef"
             }
           ],
           "result_titles": [
             "Pirates of the Caribbean: The Curse of the Black Pearl",
             "Pirates of the Caribbean: At World's End",
             "Pirates of the Caribbean: Dead Man's Chest",
-            "Pirates of the Caribbean: On Stranger Tides",
             "The Crimson Pirate",
+            "Pirates of the Caribbean: On Stranger Tides",
             "Pirates",
-            "The Road to Romance",
             "The Pirate",
+            "Captain Ron",
             "The Black Swan",
-            "Captain Ron"
+            "The Secret of the Purple Reef"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 1.0,
-          "ndcg@10": 1.0,
+          "ndcg@10": 0.9887485417404723,
           "no_result_correct": null,
-          "latency_ms": 143.79919999919366
+          "latency_ms": 215.7360000001063
         },
         {
           "id": "q023_object_spinning_top",
@@ -1810,25 +1816,30 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 195.29030000012426
+          "latency_ms": 285.3949999998804
         },
         {
           "id": "q024_object_red_blue_pill",
           "query": "red pill blue pill",
           "intent": "object_scene",
           "result_ids": [
-            "154635",
+            "30007",
             "702217",
+            "154635",
             "9552709"
           ],
           "results": [
             {
-              "movie_id": "154635",
-              "title": "Three Colors: Blue"
+              "movie_id": "30007",
+              "title": "The Matrix"
             },
             {
               "movie_id": "702217",
               "title": "The 51st State"
+            },
+            {
+              "movie_id": "154635",
+              "title": "Three Colors: Blue"
             },
             {
               "movie_id": "9552709",
@@ -1836,16 +1847,17 @@
             }
           ],
           "result_titles": [
-            "Three Colors: Blue",
+            "The Matrix",
             "The 51st State",
+            "Three Colors: Blue",
             "Blue Sunshine"
           ],
-          "hit@5": false,
-          "mrr@10": 0.0,
-          "recall@10": 0.0,
-          "ndcg@10": 0.0,
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 188.43399999968824
+          "latency_ms": 261.41269999970973
         },
         {
           "id": "q025_object_glass_slipper",
@@ -1910,7 +1922,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 156.37509999942267
+          "latency_ms": 211.72260000003007
         },
         {
           "id": "q026_object_magic_carpet",
@@ -1987,7 +1999,7 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 156.62809999957972
+          "latency_ms": 244.6737000000212
         },
         {
           "id": "q027_object_hockey_mask",
@@ -2064,13 +2076,14 @@
           "recall@10": 0.5,
           "ndcg@10": 0.16867598635520825,
           "no_result_correct": null,
-          "latency_ms": 206.62830000037502
+          "latency_ms": 266.2779000002047
         },
         {
           "id": "q028_semantic_island_volleyball",
           "query": "man stranded island volleyball",
           "intent": "semantic_plot",
           "result_ids": [
+            "44501",
             "11709006",
             "2928949",
             "3913231",
@@ -2079,10 +2092,13 @@
             "2524297",
             "6954737",
             "10745657",
-            "99948",
-            "5516824"
+            "99948"
           ],
           "results": [
+            {
+              "movie_id": "44501",
+              "title": "Cast Away"
+            },
             {
               "movie_id": "11709006",
               "title": "Mr. Robinson Crusoe"
@@ -2118,13 +2134,10 @@
             {
               "movie_id": "99948",
               "title": "Cabin Boy"
-            },
-            {
-              "movie_id": "5516824",
-              "title": "20,000 Leagues Under the Sea"
             }
           ],
           "result_titles": [
+            "Cast Away",
             "Mr. Robinson Crusoe",
             "Die Stra\u00dfe",
             "The Missing Link",
@@ -2133,15 +2146,14 @@
             "Island of Terror",
             "Justice League: New Frontier",
             "Rabbitson Crusoe",
-            "Cabin Boy",
-            "20,000 Leagues Under the Sea"
+            "Cabin Boy"
           ],
-          "hit@5": false,
-          "mrr@10": 0.0,
-          "recall@10": 0.0,
-          "ndcg@10": 0.0,
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 279.8321999998734
+          "latency_ms": 369.9274999999034
         },
         {
           "id": "q029_semantic_dinosaur_park",
@@ -2155,9 +2167,9 @@
             "4167411",
             "25157921",
             "3222136",
+            "947616",
             "8776448",
-            "28370997",
-            "947616"
+            "28370997"
           ],
           "results": [
             {
@@ -2189,16 +2201,16 @@
               "title": "Alvin and the Chipmunks Meet Frankenstein"
             },
             {
+              "movie_id": "947616",
+              "title": "House on Haunted Hill"
+            },
+            {
               "movie_id": "8776448",
               "title": "A Dirty Carnival"
             },
             {
               "movie_id": "28370997",
               "title": "Hanna"
-            },
-            {
-              "movie_id": "947616",
-              "title": "House on Haunted Hill"
             }
           ],
           "result_titles": [
@@ -2209,16 +2221,16 @@
             "Night at the Museum",
             "Free Willy 4: Escape from Pirate Cove",
             "Alvin and the Chipmunks Meet Frankenstein",
+            "House on Haunted Hill",
             "A Dirty Carnival",
-            "Hanna",
-            "House on Haunted Hill"
+            "Hanna"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 247.5579000001744
+          "latency_ms": 411.0378999994282
         },
         {
           "id": "q030_semantic_simulated_reality",
@@ -2227,8 +2239,8 @@
           "result_ids": [
             "180606",
             "30007",
-            "1438861",
             "34130",
+            "1438861",
             "7596042",
             "2065944",
             "24518077",
@@ -2246,12 +2258,12 @@
               "title": "The Matrix"
             },
             {
-              "movie_id": "1438861",
-              "title": "The Thirteenth Floor"
-            },
-            {
               "movie_id": "34130",
               "title": "WarGames"
+            },
+            {
+              "movie_id": "1438861",
+              "title": "The Thirteenth Floor"
             },
             {
               "movie_id": "7596042",
@@ -2281,8 +2293,8 @@
           "result_titles": [
             "The Animatrix",
             "The Matrix",
-            "The Thirteenth Floor",
             "WarGames",
+            "The Thirteenth Floor",
             "Lawnmower Man 2: Beyond Cyberspace",
             "Megazone 23",
             "Cargo",
@@ -2295,25 +2307,29 @@
           "recall@10": 1.0,
           "ndcg@10": 0.7098097413968655,
           "no_result_correct": null,
-          "latency_ms": 238.85920000066108
+          "latency_ms": 331.8724000000657
         },
         {
           "id": "q031_semantic_fish_father",
           "query": "fish father searches ocean son",
           "intent": "semantic_plot",
           "result_ids": [
+            "239587",
             "99948",
             "3214698",
             "9617369",
             "4409408",
-            "16963505",
             "25750288",
+            "16963505",
             "19936431",
-            "31887671",
             "10418324",
             "28147804"
           ],
           "results": [
+            {
+              "movie_id": "239587",
+              "title": "Finding Nemo"
+            },
             {
               "movie_id": "99948",
               "title": "Cabin Boy"
@@ -2331,20 +2347,16 @@
               "title": "The House of Sand"
             },
             {
-              "movie_id": "16963505",
-              "title": "The Last Airbender"
-            },
-            {
               "movie_id": "25750288",
               "title": "Ocean Heaven"
             },
             {
-              "movie_id": "19936431",
-              "title": "Mermaid Got Married"
+              "movie_id": "16963505",
+              "title": "The Last Airbender"
             },
             {
-              "movie_id": "31887671",
-              "title": "Mother Fish"
+              "movie_id": "19936431",
+              "title": "Mermaid Got Married"
             },
             {
               "movie_id": "10418324",
@@ -2356,60 +2368,64 @@
             }
           ],
           "result_titles": [
+            "Finding Nemo",
             "Cabin Boy",
             "Warlords of Atlantis",
             "Journey to the Center of the Earth",
             "The House of Sand",
-            "The Last Airbender",
             "Ocean Heaven",
+            "The Last Airbender",
             "Mermaid Got Married",
-            "Mother Fish",
             "Michael Madhana Kamarajan",
             "Urumi"
           ],
-          "hit@5": false,
-          "mrr@10": 0.0,
-          "recall@10": 0.0,
-          "ndcg@10": 0.0,
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 335.54089999961434
+          "latency_ms": 451.7844000001787
         },
         {
           "id": "q032_semantic_flying_house",
           "query": "old man flying house balloons",
           "intent": "semantic_plot",
           "result_ids": [
-            "33592211",
+            "11659396",
             "35099643",
-            "1854612",
-            "3654231",
+            "33592211",
             "3511101",
+            "3654231",
+            "1854612",
             "1520023",
             "9260315",
             "18735140",
-            "32424995",
-            "25431279"
+            "32424995"
           ],
           "results": [
             {
-              "movie_id": "33592211",
-              "title": "Tom and Jerry and the Wizard of Oz"
+              "movie_id": "11659396",
+              "title": "Up"
             },
             {
               "movie_id": "35099643",
               "title": "Banned From Television"
             },
             {
-              "movie_id": "1854612",
-              "title": "Casper: A Spirited Beginning"
+              "movie_id": "33592211",
+              "title": "Tom and Jerry and the Wizard of Oz"
+            },
+            {
+              "movie_id": "3511101",
+              "title": "Skidoo"
             },
             {
               "movie_id": "3654231",
               "title": "L'eclisse"
             },
             {
-              "movie_id": "3511101",
-              "title": "Skidoo"
+              "movie_id": "1854612",
+              "title": "Casper: A Spirited Beginning"
             },
             {
               "movie_id": "1520023",
@@ -2426,48 +2442,48 @@
             {
               "movie_id": "32424995",
               "title": "Haunted"
-            },
-            {
-              "movie_id": "25431279",
-              "title": "Shake, Rattle & Roll XI"
             }
           ],
           "result_titles": [
-            "Tom and Jerry and the Wizard of Oz",
+            "Up",
             "Banned From Television",
-            "Casper: A Spirited Beginning",
-            "L'eclisse",
+            "Tom and Jerry and the Wizard of Oz",
             "Skidoo",
+            "L'eclisse",
+            "Casper: A Spirited Beginning",
             "Ninja Resurrection",
             "Message from Space",
             "Barefoot Gen",
-            "Haunted",
-            "Shake, Rattle & Roll XI"
+            "Haunted"
           ],
-          "hit@5": false,
-          "mrr@10": 0.0,
-          "recall@10": 0.0,
-          "ndcg@10": 0.0,
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 396.24730000105046
+          "latency_ms": 566.2443000001076
         },
         {
           "id": "q033_semantic_memory_tattoos",
           "query": "man tattoos clues memory loss",
           "intent": "semantic_plot",
           "result_ids": [
+            "2750041",
             "24269284",
             "3050395",
+            "24808130",
+            "14297339",
             "18640799",
-            "793025",
-            "35487517",
-            "667372",
+            "1343208",
             "21918632",
-            "2243769",
-            "23321343",
-            "11527681"
+            "17798387",
+            "793025"
           ],
           "results": [
+            {
+              "movie_id": "2750041",
+              "title": "Memento"
+            },
             {
               "movie_id": "24269284",
               "title": "The Memory Thief"
@@ -2477,78 +2493,70 @@
               "title": "Ghajini"
             },
             {
+              "movie_id": "24808130",
+              "title": "Kamen Rider \u00d7 Kamen Rider Double & Decade: Movie War 2010"
+            },
+            {
+              "movie_id": "14297339",
+              "title": "City of Rott"
+            },
+            {
               "movie_id": "18640799",
               "title": "Ghajini"
             },
             {
-              "movie_id": "793025",
-              "title": "Gothika"
-            },
-            {
-              "movie_id": "35487517",
-              "title": "Hammer of the Gods"
-            },
-            {
-              "movie_id": "667372",
-              "title": "Harry Potter and the Goblet of Fire"
+              "movie_id": "1343208",
+              "title": "Code 46"
             },
             {
               "movie_id": "21918632",
               "title": "The Hangover"
             },
             {
-              "movie_id": "2243769",
-              "title": "The FBI Story"
+              "movie_id": "17798387",
+              "title": "The Guard Post"
             },
             {
-              "movie_id": "23321343",
-              "title": "Murderer"
-            },
-            {
-              "movie_id": "11527681",
-              "title": "ELI"
+              "movie_id": "793025",
+              "title": "Gothika"
             }
           ],
           "result_titles": [
+            "Memento",
             "The Memory Thief",
             "Ghajini",
+            "Kamen Rider \u00d7 Kamen Rider Double & Decade: Movie War 2010",
+            "City of Rott",
             "Ghajini",
-            "Gothika",
-            "Hammer of the Gods",
-            "Harry Potter and the Goblet of Fire",
+            "Code 46",
             "The Hangover",
-            "The FBI Story",
-            "Murderer",
-            "ELI"
+            "The Guard Post",
+            "Gothika"
           ],
-          "hit@5": false,
-          "mrr@10": 0.0,
-          "recall@10": 0.0,
-          "ndcg@10": 0.0,
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 307.2167999998783
+          "latency_ms": 369.2062000000078
         },
         {
           "id": "q034_semantic_beast_castle",
           "query": "woman loves beast enchanted castle",
           "intent": "semantic_plot",
           "result_ids": [
-            "557036",
             "133462",
             "481293",
+            "557036",
             "313002",
+            "5326183",
             "2287636",
             "7133616",
-            "5326183",
             "1226363",
-            "6719022",
+            "18717177",
             "15087473"
           ],
           "results": [
-            {
-              "movie_id": "557036",
-              "title": "La Dolce Vita"
-            },
             {
               "movie_id": "133462",
               "title": "Beauty and the Beast"
@@ -2558,8 +2566,16 @@
               "title": "Beauty and the Beast: The Enchanted Christmas"
             },
             {
+              "movie_id": "557036",
+              "title": "La Dolce Vita"
+            },
+            {
               "movie_id": "313002",
               "title": "The Last Unicorn"
+            },
+            {
+              "movie_id": "5326183",
+              "title": "Belle's Magical World"
             },
             {
               "movie_id": "2287636",
@@ -2570,16 +2586,12 @@
               "title": "Ella Enchanted"
             },
             {
-              "movie_id": "5326183",
-              "title": "Belle's Magical World"
-            },
-            {
               "movie_id": "1226363",
               "title": "Beauty and the Beast"
             },
             {
-              "movie_id": "6719022",
-              "title": "Barbie in the 12 Dancing Princesses"
+              "movie_id": "18717177",
+              "title": "Shrek"
             },
             {
               "movie_id": "15087473",
@@ -2587,52 +2599,48 @@
             }
           ],
           "result_titles": [
-            "La Dolce Vita",
             "Beauty and the Beast",
             "Beauty and the Beast: The Enchanted Christmas",
+            "La Dolce Vita",
             "The Last Unicorn",
+            "Belle's Magical World",
             "Sleeping Beauty",
             "Ella Enchanted",
-            "Belle's Magical World",
             "Beauty and the Beast",
-            "Barbie in the 12 Dancing Princesses",
+            "Shrek",
             "The Swan Princess III: The Mystery of the Enchanted Kingdom"
           ],
           "hit@5": true,
-          "mrr@10": 0.5,
+          "mrr@10": 1.0,
           "recall@10": 1.0,
-          "ndcg@10": 0.6030619581922464,
+          "ndcg@10": 0.8935773014954859,
           "no_result_correct": null,
-          "latency_ms": 340.4365999995207
+          "latency_ms": 422.43430000053195
         },
         {
           "id": "q035_semantic_lion_father",
           "query": "young lion avenges father",
           "intent": "semantic_plot",
           "result_ids": [
+            "88678",
             "307553",
-            "27683146",
-            "26181579",
             "8619888",
             "536521",
+            "27683146",
             "10644072",
-            "3653120",
             "7454401",
             "5210039",
-            "1944643"
+            "3653120",
+            "2318516"
           ],
           "results": [
             {
+              "movie_id": "88678",
+              "title": "The Lion King"
+            },
+            {
               "movie_id": "307553",
               "title": "The Lion King II: Simba's Pride"
-            },
-            {
-              "movie_id": "27683146",
-              "title": "African Cats"
-            },
-            {
-              "movie_id": "26181579",
-              "title": "For the Term of his Natural Life"
             },
             {
               "movie_id": "8619888",
@@ -2643,12 +2651,12 @@
               "title": "Creepshow"
             },
             {
-              "movie_id": "10644072",
-              "title": "Bhagwan Dada"
+              "movie_id": "27683146",
+              "title": "African Cats"
             },
             {
-              "movie_id": "3653120",
-              "title": "The Young Lions"
+              "movie_id": "10644072",
+              "title": "Bhagwan Dada"
             },
             {
               "movie_id": "7454401",
@@ -2659,28 +2667,32 @@
               "title": "Khan Kluay"
             },
             {
-              "movie_id": "1944643",
-              "title": "Duma"
+              "movie_id": "3653120",
+              "title": "The Young Lions"
+            },
+            {
+              "movie_id": "2318516",
+              "title": "The Magic Serpent"
             }
           ],
           "result_titles": [
+            "The Lion King",
             "The Lion King II: Simba's Pride",
-            "African Cats",
-            "For the Term of his Natural Life",
             "Next Avengers: Heroes of Tomorrow",
             "Creepshow",
+            "African Cats",
             "Bhagwan Dada",
-            "The Young Lions",
             "Alraune",
             "Khan Kluay",
-            "Duma"
+            "The Young Lions",
+            "The Magic Serpent"
           ],
-          "hit@5": false,
-          "mrr@10": 0.0,
-          "recall@10": 0.0,
-          "ndcg@10": 0.0,
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 324.8338000012154
+          "latency_ms": 469.1979999997784
         },
         {
           "id": "q036_semantic_russian_boxer",
@@ -2690,13 +2702,13 @@
             "10348583",
             "3699931",
             "153435",
-            "1585387",
             "104984",
+            "1585387",
             "45772",
-            "7999304",
-            "6402018",
             "7988853",
-            "27702708"
+            "27702708",
+            "7999304",
+            "6804043"
           ],
           "results": [
             {
@@ -2712,24 +2724,16 @@
               "title": "Rocky V"
             },
             {
-              "movie_id": "1585387",
-              "title": "Street Fighter II: The Animated Movie"
-            },
-            {
               "movie_id": "104984",
               "title": "Rocky IV"
             },
             {
+              "movie_id": "1585387",
+              "title": "Street Fighter II: The Animated Movie"
+            },
+            {
               "movie_id": "45772",
               "title": "Rocky"
-            },
-            {
-              "movie_id": "7999304",
-              "title": "Duel of Fists"
-            },
-            {
-              "movie_id": "6402018",
-              "title": "Blood of a Champion"
             },
             {
               "movie_id": "7988853",
@@ -2738,32 +2742,41 @@
             {
               "movie_id": "27702708",
               "title": "Real Steel"
+            },
+            {
+              "movie_id": "7999304",
+              "title": "Duel of Fists"
+            },
+            {
+              "movie_id": "6804043",
+              "title": "Gladiator"
             }
           ],
           "result_titles": [
             "Undisputed II: Last Man Standing",
             "Undisputed",
             "Rocky V",
-            "Street Fighter II: The Animated Movie",
             "Rocky IV",
+            "Street Fighter II: The Animated Movie",
             "Rocky",
-            "Duel of Fists",
-            "Blood of a Champion",
             "Belarmino",
-            "Real Steel"
+            "Real Steel",
+            "Duel of Fists",
+            "Gladiator"
           ],
           "hit@5": true,
-          "mrr@10": 0.2,
+          "mrr@10": 0.25,
           "recall@10": 1.0,
-          "ndcg@10": 0.38685280723454163,
+          "ndcg@10": 0.43067655807339306,
           "no_result_correct": null,
-          "latency_ms": 259.0213000003132
+          "latency_ms": 304.7200000000885
         },
         {
           "id": "q037_semantic_alien_bicycle",
           "query": "alien child bicycle moon",
           "intent": "semantic_plot",
           "result_ids": [
+            "73441",
             "29471340",
             "6276691",
             "23941708",
@@ -2772,10 +2785,13 @@
             "12126877",
             "34707165",
             "22141846",
-            "34400393",
-            "26438397"
+            "35028178"
           ],
           "results": [
+            {
+              "movie_id": "73441",
+              "title": "E.T. the Extra-Terrestrial"
+            },
             {
               "movie_id": "29471340",
               "title": "Arthur Christmas"
@@ -2809,15 +2825,12 @@
               "title": "Pontiac Moon"
             },
             {
-              "movie_id": "34400393",
-              "title": "Alabama Moon"
-            },
-            {
-              "movie_id": "26438397",
-              "title": "Moonchild"
+              "movie_id": "35028178",
+              "title": "Fast Charlie... the Moonbeam Rider"
             }
           ],
           "result_titles": [
+            "E.T. the Extra-Terrestrial",
             "Arthur Christmas",
             "Enemy Mine",
             "2001: A Space Odyssey",
@@ -2826,15 +2839,14 @@
             "Iczer Reborn",
             "The Europa Report",
             "Pontiac Moon",
-            "Alabama Moon",
-            "Moonchild"
+            "Fast Charlie... the Moonbeam Rider"
           ],
-          "hit@5": false,
-          "mrr@10": 0.0,
-          "recall@10": 0.0,
-          "ndcg@10": 0.0,
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 196.72569999966072
+          "latency_ms": 263.6999999995169
         },
         {
           "id": "q038_no_result_nonsense_objects",
@@ -2848,7 +2860,7 @@
           "recall@10": null,
           "ndcg@10": null,
           "no_result_correct": true,
-          "latency_ms": 178.04489999980433
+          "latency_ms": 235.14669999985927
         },
         {
           "id": "q039_no_result_random_token",
@@ -2862,7 +2874,7 @@
           "recall@10": null,
           "ndcg@10": null,
           "no_result_correct": true,
-          "latency_ms": 168.50349999913306
+          "latency_ms": 200.57189999988623
         },
         {
           "id": "q040_no_result_mixed_scene",
@@ -2876,7 +2888,7 @@
           "recall@10": null,
           "ndcg@10": null,
           "no_result_correct": true,
-          "latency_ms": 142.447500000344
+          "latency_ms": 205.15079999950103
         },
         {
           "id": "q041_no_result_impossible_job",
@@ -2890,25 +2902,41 @@
           "recall@10": null,
           "ndcg@10": null,
           "no_result_correct": true,
-          "latency_ms": 219.59119999883114
+          "latency_ms": 292.99189999983355
         },
         {
           "id": "q042_dialogue_force",
           "query": "may the force be with you",
           "intent": "dialogue_memory",
           "result_ids": [
+            "52549",
+            "50744",
+            "53964",
+            "15002508",
             "7407098",
             "3368653",
             "2337370",
             "26669004",
-            "15002508",
-            "5875034",
-            "1024792",
-            "76387",
-            "2768565",
-            "961659"
+            "19936431",
+            "5875034"
           ],
           "results": [
+            {
+              "movie_id": "52549",
+              "title": "Star Wars Episode IV: A New Hope"
+            },
+            {
+              "movie_id": "50744",
+              "title": "Star Wars Episode VI: Return of the Jedi"
+            },
+            {
+              "movie_id": "53964",
+              "title": "Star Wars Episode V: The Empire Strikes Back"
+            },
+            {
+              "movie_id": "15002508",
+              "title": "Secret Heart Beat"
+            },
             {
               "movie_id": "7407098",
               "title": "Home Sweet Home"
@@ -2926,85 +2954,57 @@
               "title": "Saviour of the Soul"
             },
             {
-              "movie_id": "15002508",
-              "title": "Secret Heart Beat"
+              "movie_id": "19936431",
+              "title": "Mermaid Got Married"
             },
             {
               "movie_id": "5875034",
               "title": "The Kingdom"
-            },
-            {
-              "movie_id": "1024792",
-              "title": "Police Story 3: Super Cop"
-            },
-            {
-              "movie_id": "76387",
-              "title": "The Thing"
-            },
-            {
-              "movie_id": "2768565",
-              "title": "Police Story 2"
-            },
-            {
-              "movie_id": "961659",
-              "title": "Battle of the Bulge"
             }
           ],
           "result_titles": [
+            "Star Wars Episode IV: A New Hope",
+            "Star Wars Episode VI: Return of the Jedi",
+            "Star Wars Episode V: The Empire Strikes Back",
+            "Secret Heart Beat",
             "Home Sweet Home",
             "Pok\u00e9mon Ranger and the Prince of the Sea: Manaphy",
             "The Specialist",
             "Saviour of the Soul",
-            "Secret Heart Beat",
-            "The Kingdom",
-            "Police Story 3: Super Cop",
-            "The Thing",
-            "Police Story 2",
-            "Battle of the Bulge"
+            "Mermaid Got Married",
+            "The Kingdom"
           ],
-          "hit@5": false,
-          "mrr@10": 0.0,
-          "recall@10": 0.0,
-          "ndcg@10": 0.0,
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 272.0349000010174
+          "latency_ms": 351.215300000149
         },
         {
           "id": "q043_dialogue_ill_be_back",
           "query": "ill be back",
           "intent": "dialogue_memory",
           "result_ids": [
-            "14230475",
-            "5207053",
-            "21132240",
-            "31922328",
-            "35189883",
+            "34344124",
+            "30327",
             "6283620",
             "13167033",
             "32301635",
+            "14230475",
+            "5207053",
             "23851782",
-            "20869369"
+            "20869369",
+            "573288"
           ],
           "results": [
             {
-              "movie_id": "14230475",
-              "title": "Goodnight Mister Tom"
+              "movie_id": "34344124",
+              "title": "Terminator 2: Judgment Day"
             },
             {
-              "movie_id": "5207053",
-              "title": "Ankahee"
-            },
-            {
-              "movie_id": "21132240",
-              "title": "Teeth"
-            },
-            {
-              "movie_id": "31922328",
-              "title": "Neeraba Jhada"
-            },
-            {
-              "movie_id": "35189883",
-              "title": "Abraham Lincoln vs. Zombies"
+              "movie_id": "30327",
+              "title": "The Terminator"
             },
             {
               "movie_id": "6283620",
@@ -3019,42 +3019,59 @@
               "title": "Buddha Mountain"
             },
             {
+              "movie_id": "14230475",
+              "title": "Goodnight Mister Tom"
+            },
+            {
+              "movie_id": "5207053",
+              "title": "Ankahee"
+            },
+            {
               "movie_id": "23851782",
               "title": "The Ghost Train"
             },
             {
               "movie_id": "20869369",
               "title": "Three: After life"
+            },
+            {
+              "movie_id": "573288",
+              "title": "Babe: Pig in the City"
             }
           ],
           "result_titles": [
-            "Goodnight Mister Tom",
-            "Ankahee",
-            "Teeth",
-            "Neeraba Jhada",
-            "Abraham Lincoln vs. Zombies",
+            "Terminator 2: Judgment Day",
+            "The Terminator",
             "Save The Last Dance for Me",
             "Attack of the Sabretooth",
             "Buddha Mountain",
+            "Goodnight Mister Tom",
+            "Ankahee",
             "The Ghost Train",
-            "Three: After life"
+            "Three: After life",
+            "Babe: Pig in the City"
           ],
-          "hit@5": false,
-          "mrr@10": 0.0,
-          "recall@10": 0.0,
-          "ndcg@10": 0.0,
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 0.8339912323981488,
           "no_result_correct": null,
-          "latency_ms": 315.736200000174
+          "latency_ms": 424.3783000001713
         },
         {
           "id": "q044_dialogue_truth",
           "query": "you cant handle the truth",
           "intent": "dialogue_memory",
           "result_ids": [
+            "20691749",
             "15465392",
             "11843004"
           ],
           "results": [
+            {
+              "movie_id": "20691749",
+              "title": "A Few Good Men"
+            },
             {
               "movie_id": "15465392",
               "title": "Underworld: Rise of the Lycans"
@@ -3065,48 +3082,53 @@
             }
           ],
           "result_titles": [
+            "A Few Good Men",
             "Underworld: Rise of the Lycans",
             "Particles of Truth"
           ],
-          "hit@5": false,
-          "mrr@10": 0.0,
-          "recall@10": 0.0,
-          "ndcg@10": 0.0,
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 189.93200000113575
+          "latency_ms": 260.44550000005984
         },
         {
           "id": "q045_dialogue_chocolates",
           "query": "life is like a box of chocolates",
           "intent": "dialogue_memory",
           "result_ids": [
-            "6645089",
+            "41528",
             "20756695",
-            "1166822",
+            "6645089",
             "174560",
+            "1166822",
             "6283620",
             "1955275",
             "23654661",
             "23605553",
-            "8813317",
-            "30879026"
+            "8813317"
           ],
           "results": [
             {
-              "movie_id": "6645089",
-              "title": "Family Guy Presents: Stewie Griffin: The Untold Story"
+              "movie_id": "41528",
+              "title": "Forrest Gump"
             },
             {
               "movie_id": "20756695",
               "title": "Shorts"
             },
             {
-              "movie_id": "1166822",
-              "title": "Mickey's Twice Upon a Christmas"
+              "movie_id": "6645089",
+              "title": "Family Guy Presents: Stewie Griffin: The Untold Story"
             },
             {
               "movie_id": "174560",
               "title": "Willy Wonka & the Chocolate Factory"
+            },
+            {
+              "movie_id": "1166822",
+              "title": "Mickey's Twice Upon a Christmas"
             },
             {
               "movie_id": "6283620",
@@ -3127,30 +3149,26 @@
             {
               "movie_id": "8813317",
               "title": "Bawarchi"
-            },
-            {
-              "movie_id": "30879026",
-              "title": "My Brother's Wedding"
             }
           ],
           "result_titles": [
-            "Family Guy Presents: Stewie Griffin: The Untold Story",
+            "Forrest Gump",
             "Shorts",
-            "Mickey's Twice Upon a Christmas",
+            "Family Guy Presents: Stewie Griffin: The Untold Story",
             "Willy Wonka & the Chocolate Factory",
+            "Mickey's Twice Upon a Christmas",
             "Save The Last Dance for Me",
             "Dragon Fist Explosion!! If Gok\u016b Can't Do It, Who Will?",
             "Assault in the Ring",
             "Demonic Toys: Personal Demons",
-            "Bawarchi",
-            "My Brother's Wedding"
+            "Bawarchi"
           ],
-          "hit@5": false,
-          "mrr@10": 0.0,
-          "recall@10": 0.0,
-          "ndcg@10": 0.0,
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 417.3051999987365
+          "latency_ms": 397.2030000004452
         },
         {
           "id": "q046_dialogue_baby_corner",
@@ -3227,50 +3245,89 @@
           "recall@10": 1.0,
           "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 227.007000001322
+          "latency_ms": 306.3371999996889
         },
         {
           "id": "q047_character_archaeologist",
           "query": "archaeologist whip fedora",
           "intent": "character_memory",
-          "result_ids": [],
-          "results": [],
-          "result_titles": [],
-          "hit@5": false,
-          "mrr@10": 0.0,
-          "recall@10": 0.0,
-          "ndcg@10": 0.0,
+          "result_ids": [
+            "51888",
+            "54166",
+            "81503",
+            "9110863"
+          ],
+          "results": [
+            {
+              "movie_id": "51888",
+              "title": "Indiana Jones and the Last Crusade"
+            },
+            {
+              "movie_id": "54166",
+              "title": "Indiana Jones and the Raiders of the Lost Ark"
+            },
+            {
+              "movie_id": "81503",
+              "title": "Indiana Jones and the Temple of Doom"
+            },
+            {
+              "movie_id": "9110863",
+              "title": "Fedora"
+            }
+          ],
+          "result_titles": [
+            "Indiana Jones and the Last Crusade",
+            "Indiana Jones and the Raiders of the Lost Ark",
+            "Indiana Jones and the Temple of Doom",
+            "Fedora"
+          ],
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 0.8579514172105233,
           "no_result_correct": null,
-          "latency_ms": 143.55570000043372
+          "latency_ms": 209.99440000014147
         },
         {
           "id": "q048_character_gotham_billionaire",
           "query": "masked vigilante gotham billionaire",
           "intent": "character_memory",
           "result_ids": [
-            "311765",
+            "481605",
             "4726",
+            "4276475",
+            "311765",
             "26340083",
+            "None",
             "13569575",
             "1485962",
             "29075630",
-            "4728",
-            "4276475",
-            "481605",
-            "3248338"
+            "4728"
           ],
           "results": [
             {
-              "movie_id": "311765",
-              "title": "Batman: Mask of the Phantasm"
+              "movie_id": "481605",
+              "title": "Batman Begins"
             },
             {
               "movie_id": "4726",
               "title": "Batman"
             },
             {
+              "movie_id": "4276475",
+              "title": "The Dark Knight"
+            },
+            {
+              "movie_id": "311765",
+              "title": "Batman: Mask of the Phantasm"
+            },
+            {
               "movie_id": "26340083",
               "title": "Batman: Under the Red Hood"
+            },
+            {
+              "movie_id": "None",
+              "title": "The Batman"
             },
             {
               "movie_id": "13569575",
@@ -3287,38 +3344,26 @@
             {
               "movie_id": "4728",
               "title": "Batman Returns"
-            },
-            {
-              "movie_id": "4276475",
-              "title": "The Dark Knight"
-            },
-            {
-              "movie_id": "481605",
-              "title": "Batman Begins"
-            },
-            {
-              "movie_id": "3248338",
-              "title": "The Masked Marvel"
             }
           ],
           "result_titles": [
-            "Batman: Mask of the Phantasm",
+            "Batman Begins",
             "Batman",
+            "The Dark Knight",
+            "Batman: Mask of the Phantasm",
             "Batman: Under the Red Hood",
+            "The Batman",
             "The Spider Returns",
             "The Mask",
             "The Dark Knight Rises",
-            "Batman Returns",
-            "The Dark Knight",
-            "Batman Begins",
-            "The Masked Marvel"
+            "Batman Returns"
           ],
-          "hit@5": false,
-          "mrr@10": 0.125,
+          "hit@5": true,
+          "mrr@10": 1.0,
           "recall@10": 1.0,
-          "ndcg@10": 0.3984198701993323,
+          "ndcg@10": 0.7591919243197319,
           "no_result_correct": null,
-          "latency_ms": 156.03329999976268
+          "latency_ms": 206.8622000006144
         },
         {
           "id": "q049_character_ogre_donkey",
@@ -3326,13 +3371,13 @@
           "intent": "character_memory",
           "result_ids": [
             "18717177",
-            "903383",
-            "27193568",
             "525314",
+            "27193568",
+            "903383",
             "9031071",
+            "None",
             "3071676",
             "6141751",
-            "4410991",
             "24569006",
             "19843601"
           ],
@@ -3342,20 +3387,24 @@
               "title": "Shrek"
             },
             {
-              "movie_id": "903383",
-              "title": "Shrek the Third"
+              "movie_id": "525314",
+              "title": "Shrek 2"
             },
             {
               "movie_id": "27193568",
               "title": "Shrek Forever After"
             },
             {
-              "movie_id": "525314",
-              "title": "Shrek 2"
+              "movie_id": "903383",
+              "title": "Shrek the Third"
             },
             {
               "movie_id": "9031071",
               "title": "Shrek the Halls"
+            },
+            {
+              "movie_id": "None",
+              "title": "Shrek 5"
             },
             {
               "movie_id": "3071676",
@@ -3364,10 +3413,6 @@
             {
               "movie_id": "6141751",
               "title": "The Princess and the Frog"
-            },
-            {
-              "movie_id": "4410991",
-              "title": "O Pagador de Promessas"
             },
             {
               "movie_id": "24569006",
@@ -3380,40 +3425,44 @@
           ],
           "result_titles": [
             "Shrek",
-            "Shrek the Third",
-            "Shrek Forever After",
             "Shrek 2",
+            "Shrek Forever After",
+            "Shrek the Third",
             "Shrek the Halls",
+            "Shrek 5",
             "Peau d'\u00c2ne",
             "The Princess and the Frog",
-            "O Pagador de Promessas",
             "Scared Shrekless",
             "Dragon Hunters"
           ],
           "hit@5": true,
           "mrr@10": 1.0,
           "recall@10": 1.0,
-          "ndcg@10": 0.9592296244131938,
+          "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 204.39930000065942
+          "latency_ms": 201.1945000003834
         },
         {
           "id": "q050_character_chianti",
           "query": "serial killer chianti fava beans",
           "intent": "character_memory",
           "result_ids": [
+            "30006",
             "15383895",
             "21517630",
             "31518744",
             "18732813",
-            "6808679",
-            "1120730",
             "25548266",
             "25496382",
-            "31250146",
-            "1482832"
+            "18505633",
+            "2383581",
+            "18699834"
           ],
           "results": [
+            {
+              "movie_id": "30006",
+              "title": "The Silence of the Lambs"
+            },
             {
               "movie_id": "15383895",
               "title": "Baaz: A Bird in Danger"
@@ -3431,14 +3480,6 @@
               "title": "Illustrious Corpses"
             },
             {
-              "movie_id": "6808679",
-              "title": "Manga Latina: Killer on the Loose"
-            },
-            {
-              "movie_id": "1120730",
-              "title": "Mr. Bean's Holiday"
-            },
-            {
               "movie_id": "25548266",
               "title": "Katha"
             },
@@ -3447,32 +3488,36 @@
               "title": "Anveshana"
             },
             {
-              "movie_id": "31250146",
-              "title": "Assassin for Hire"
+              "movie_id": "18505633",
+              "title": "Forced Entry"
             },
             {
-              "movie_id": "1482832",
-              "title": "Freebie and The Bean"
+              "movie_id": "2383581",
+              "title": "Chiriyakhana"
+            },
+            {
+              "movie_id": "18699834",
+              "title": "Susana"
             }
           ],
           "result_titles": [
+            "The Silence of the Lambs",
             "Baaz: A Bird in Danger",
             "Hillside Cannibals",
             "Killer Bean Forever",
             "Illustrious Corpses",
-            "Manga Latina: Killer on the Loose",
-            "Mr. Bean's Holiday",
             "Katha",
             "Anveshana",
-            "Assassin for Hire",
-            "Freebie and The Bean"
+            "Forced Entry",
+            "Chiriyakhana",
+            "Susana"
           ],
-          "hit@5": false,
-          "mrr@10": 0.0,
-          "recall@10": 0.0,
-          "ndcg@10": 0.0,
+          "hit@5": true,
+          "mrr@10": 1.0,
+          "recall@10": 1.0,
+          "ndcg@10": 1.0,
           "no_result_correct": null,
-          "latency_ms": 176.3331999991351
+          "latency_ms": 285.4803999998694
         }
       ]
     }

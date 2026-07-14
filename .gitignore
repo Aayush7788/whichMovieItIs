@@ -5,3 +5,7 @@ dist/
 data/raw/
 data/processed/
 __pycache__
+.gstack/qa-reports/
+.local/
+.vite-local.log
+.vite-local.err.log

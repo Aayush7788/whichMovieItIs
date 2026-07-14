@@ -2,9 +2,10 @@ from __future__ import annotations
 
 import logging
 from collections.abc import Iterable
+from queue import Queue
 from threading import Lock, Thread
 from time import monotonic
-from typing import Any
+from typing import Any, Callable, TypeVar
 
 import httpx
 from psycopg.types.json import Jsonb
@@ -39,6 +40,11 @@ runtime_title_marker_words = {
     "part",
     "volume",
 }
+runtime_title_article_words = {
+    "a",
+    "an",
+    "the",
+}
 runtime_title_number_words = {
     "one",
     "two",
@@ -54,6 +60,11 @@ runtime_title_number_words = {
 runtime_fallback_lock = Lock()
 runtime_fallback_request_times: list[float] = []
 runtime_fallback_query_attempts: dict[str, float] = {}
+runtime_fallback_result_type = TypeVar("runtime_fallback_result_type")
+
+
+class RuntimeFallbackDeadlineExceeded(TimeoutError):
+    pass
 
 
 find_movie_by_tmdb_external_id_sql = """
@@ -576,6 +587,33 @@ def query_has_runtime_title_marker(query: str) -> bool:
     )
 
 
+def query_has_strong_runtime_title_shape(query: str) -> bool:
+    if query_has_runtime_title_marker(query):
+        return True
+
+    words = normalize_title(query).split()
+
+    return bool(
+        2 <= len(words) <= 5
+        and words[0] in runtime_title_article_words
+    )
+
+
+def query_has_runtime_title_shape(query: str) -> bool:
+    if query_has_strong_runtime_title_shape(query):
+        return True
+
+    words = normalize_title(query).split()
+
+    return bool(
+        len(words) == 1
+        and any(
+            vowel in words[0]
+            for vowel in "aeiou"
+        )
+    )
+
+
 def prune_runtime_fallback_state(now: float) -> None:
     request_window_seconds = (
         settings.tmdb_runtime_fallback_rate_limit_window_seconds
@@ -649,10 +687,47 @@ def should_try_tmdb_title_fallback(
     ):
         return False
 
-    if local_results and not query_has_runtime_title_marker(query):
+    if local_results and not query_has_strong_runtime_title_shape(query):
+        return False
+
+    if not local_results and not query_has_runtime_title_shape(query):
         return False
 
     return True
+
+
+def run_with_runtime_deadline(
+    callback: Callable[[], runtime_fallback_result_type],
+    deadline: float,
+) -> runtime_fallback_result_type:
+    result_queue: Queue[
+        tuple[bool, runtime_fallback_result_type | BaseException]
+    ] = Queue(maxsize=1)
+
+    def run_callback() -> None:
+        try:
+            result_queue.put((True, callback()))
+        except BaseException as error:
+            result_queue.put((False, error))
+
+    thread = Thread(
+        target=run_callback,
+        daemon=True,
+    )
+    thread.start()
+    thread.join(remaining_runtime_budget_seconds(deadline))
+
+    if thread.is_alive():
+        raise RuntimeFallbackDeadlineExceeded(
+            "TMDB runtime fallback exceeded its deadline"
+        )
+
+    succeeded, result = result_queue.get_nowait()
+
+    if not succeeded:
+        raise result
+
+    return result
 
 
 def fetch_movie_details(
@@ -911,27 +986,33 @@ def import_tmdb_title_if_needed(
             1,
         )
 
-        with create_tmdb_client(
-            timeout_seconds=(
-                remaining_runtime_budget_seconds(deadline)
-            ),
-        ) as client:
-            match = search_tmdb_movie(
-                client=client,
-                title=query,
-                release_date=None,
-                maximum_attempts=maximum_attempts,
-            )
-
-            if match is None:
-                logger.info(
-                    (
-                        "tmdb runtime fallback completed query=%r "
-                        "result=no_exact_match"
-                    ),
-                    query,
+        def search_for_match():
+            with create_tmdb_client(
+                timeout_seconds=(
+                    remaining_runtime_budget_seconds(deadline)
+                ),
+            ) as client:
+                return search_tmdb_movie(
+                    client=client,
+                    title=query,
+                    release_date=None,
+                    maximum_attempts=maximum_attempts,
                 )
-                return False
+
+        match = run_with_runtime_deadline(
+            search_for_match,
+            deadline,
+        )
+
+        if match is None:
+            logger.info(
+                (
+                    "tmdb runtime fallback completed query=%r "
+                    "result=no_exact_match"
+                ),
+                query,
+            )
+            return False
 
         if not has_runtime_budget(deadline):
             logger.info(
@@ -943,16 +1024,22 @@ def import_tmdb_title_if_needed(
             )
             return False
 
-        with create_tmdb_client(
-            timeout_seconds=(
-                remaining_runtime_budget_seconds(deadline)
-            ),
-        ) as client:
-            movie_payload = fetch_movie_details(
-                client=client,
-                tmdb_id=int(match["id"]),
-                maximum_attempts=maximum_attempts,
-            )
+        def fetch_details():
+            with create_tmdb_client(
+                timeout_seconds=(
+                    remaining_runtime_budget_seconds(deadline)
+                ),
+            ) as client:
+                return fetch_movie_details(
+                    client=client,
+                    tmdb_id=int(match["id"]),
+                    maximum_attempts=maximum_attempts,
+                )
+
+        movie_payload = run_with_runtime_deadline(
+            fetch_details,
+            deadline,
+        )
 
         if not has_runtime_budget(deadline):
             logger.info(
@@ -989,6 +1076,7 @@ def import_tmdb_title_if_needed(
     except (
         httpx.HTTPError,
         RuntimeError,
+        RuntimeFallbackDeadlineExceeded,
         ValueError,
     ) as error:
         logger.warning(

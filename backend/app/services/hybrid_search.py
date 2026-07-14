@@ -15,10 +15,11 @@ minimum_candidate_limit = 20
 maximum_candidate_limit = 50
 minimum_vector_score = 0.40
 minimum_vector_only_score = 0.50
-full_text_weight = 2.0
-vector_weight = 1.0
-broad_weight = 3.0
+full_text_weight = 1.5
+vector_weight = 1.25
+broad_weight = 4.0
 clue_weight = 6.0
+score_confidence_weight = 0.5
 
 def get_candidate_limit(limit: int) -> int:
     candidate_limit = limit * candidate_multiplier
@@ -50,17 +51,31 @@ def should_return_no_results(
 def add_ranked_results(
         combined: dict[str, dict[str, object]], 
         results: list[dict[str, object]], 
-        minimum_score: float | None = None, 
-        weight: float = 1.0,
-        rrf_k_value: int = rrf_k,
+    minimum_score: float | None = None,
+    weight: float = 1.0,
+    rrf_k_value: int = rrf_k,
+    score_confidence_weight_value: float = 0.0,
 ) -> None:
+    eligible_results = []
+
     for rank, movie in enumerate(results, start=1):
-        raw_score = movie.get("score")
-        
+        raw_score = float(movie.get("score") or 0.0)
+
         if minimum_score is not None:
-            if raw_score is None or float(raw_score) < minimum_score:
+            if raw_score < minimum_score:
                 continue
 
+        eligible_results.append((rank, movie, max(raw_score, 0.0)))
+
+    maximum_raw_score = max(
+        (
+            raw_score
+            for _, _, raw_score in eligible_results
+        ),
+        default=0.0,
+    )
+
+    for rank, movie, raw_score in eligible_results:
         movie_id = str(
             movie.get("movie_key")
             or movie.get("wikipedia_movie_id")
@@ -69,8 +84,27 @@ def add_ranked_results(
         if movie_id not in combined:
             combined[movie_id] = dict(movie)
             combined[movie_id]["score"] = 0.0
-        
-        combined[movie_id]["score"] = float(combined[movie_id]["score"]) + (weight / (rrf_k_value + rank))
+
+        normalized_score = (
+            raw_score / maximum_raw_score
+            if maximum_raw_score > 0
+            else 0.0
+        )
+        confidence_multiplier = (
+            1.0
+            + score_confidence_weight_value
+            * normalized_score
+        )
+        rank_score = (
+            weight
+            / (rrf_k_value + rank)
+            * confidence_multiplier
+        )
+
+        combined[movie_id]["score"] = (
+            float(combined[movie_id]["score"])
+            + rank_score
+        )
 
 def rank_hybrid_results(
     full_text_results: list[dict[str, object]],
@@ -84,6 +118,7 @@ def rank_hybrid_results(
     vector_weight_value: float = vector_weight,
     broad_weight_value: float = broad_weight,
     clue_weight_value: float = clue_weight,
+    score_confidence_weight_value: float = score_confidence_weight,
 ) -> list[dict[str, object]]:
     combined: dict[str, dict[str, object]] = {}
 
@@ -92,6 +127,7 @@ def rank_hybrid_results(
         results=full_text_results,
         weight=full_text_weight_value,
         rrf_k_value=rrf_k_value,
+        score_confidence_weight_value=score_confidence_weight_value,
     )
 
     add_ranked_results(
@@ -100,6 +136,7 @@ def rank_hybrid_results(
         minimum_score=minimum_vector_score_value,
         weight=vector_weight_value,
         rrf_k_value=rrf_k_value,
+        score_confidence_weight_value=score_confidence_weight_value,
     )
     if broad_results:
         add_ranked_results(
@@ -107,6 +144,7 @@ def rank_hybrid_results(
             results=broad_results,
             weight=broad_weight_value,
             rrf_k_value=rrf_k_value,
+            score_confidence_weight_value=score_confidence_weight_value,
         )
     if clue_results:
         add_ranked_results(
@@ -114,6 +152,7 @@ def rank_hybrid_results(
         results=clue_results,
         weight=clue_weight_value,
         rrf_k_value=rrf_k_value,
+        score_confidence_weight_value=score_confidence_weight_value,
     )
 
     ranked_results = sorted(

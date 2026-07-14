@@ -69,6 +69,25 @@ def test_rank_hybrid_results_fuses_three_sources():
     assert len(result_ids) == len(set(result_ids))
 
 
+def test_rank_hybrid_results_uses_source_score_confidence():
+    broad_results = [
+        build_movie("1", "Weak first result", 0.2),
+        build_movie("2", "Strong second result", 1.0),
+    ]
+
+    results = hybrid_search.rank_hybrid_results(
+        full_text_results=[],
+        vector_results=[],
+        broad_results=broad_results,
+        clue_results=[],
+        limit=2,
+        broad_weight_value=1.0,
+        score_confidence_weight_value=1.0,
+    )
+
+    assert results[0]["wikipedia_movie_id"] == "2"
+
+
 def test_search_movies_hybrid_queries_broad_source(
     monkeypatch,
 ):

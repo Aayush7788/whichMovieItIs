@@ -1,3 +1,5 @@
+from time import perf_counter, sleep
+
 from backend.app.services import tmdb_runtime_import
 
 
@@ -65,6 +67,26 @@ def test_runtime_fallback_skips_non_marker_query_with_local_results(
         query="red pill blue pill",
         local_results=[build_movie("The Matrix")],
     )
+    assert not tmdb_runtime_import.should_try_tmdb_title_fallback(
+        query="lightsaber",
+        local_results=[build_movie("Star Wars")],
+    )
+
+
+def test_runtime_fallback_allows_article_title_with_weak_local_results(
+    monkeypatch,
+):
+    clear_runtime_fallback_state()
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_read_access_token",
+        "token",
+    )
+
+    assert tmdb_runtime_import.should_try_tmdb_title_fallback(
+        query="The Life of Chuck",
+        local_results=[build_movie("Cast Away")],
+    )
 
 
 def test_runtime_fallback_allows_empty_local_results(
@@ -79,6 +101,26 @@ def test_runtime_fallback_allows_empty_local_results(
 
     assert tmdb_runtime_import.should_try_tmdb_title_fallback(
         query="Oppenheimer",
+        local_results=[],
+    )
+
+
+def test_runtime_fallback_skips_plot_like_empty_results(
+    monkeypatch,
+):
+    clear_runtime_fallback_state()
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_read_access_token",
+        "token",
+    )
+
+    assert not tmdb_runtime_import.should_try_tmdb_title_fallback(
+        query="invisible penguin tax office",
+        local_results=[],
+    )
+    assert not tmdb_runtime_import.should_try_tmdb_title_fallback(
+        query="zzzxxy",
         local_results=[],
     )
 
@@ -281,3 +323,50 @@ def test_runtime_fallback_skips_when_timeout_disabled(monkeypatch):
         query="Shrek 5",
         local_results=[],
     )
+
+
+def test_runtime_fallback_enforces_hard_deadline(monkeypatch):
+    clear_runtime_fallback_state()
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "should_try_tmdb_title_fallback",
+        lambda query, local_results: True,
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_runtime_fallback_timeout_seconds",
+        0.05,
+    )
+
+    class FakeClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            return None
+
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "create_tmdb_client",
+        lambda timeout_seconds=None: FakeClient(),
+    )
+
+    def slow_search(*args, **kwargs):
+        sleep(0.2)
+        return None
+
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "search_tmdb_movie",
+        slow_search,
+    )
+
+    started_at = perf_counter()
+    result = tmdb_runtime_import.import_tmdb_title_if_needed(
+        query="Shrek 5",
+        local_results=[],
+    )
+    elapsed_seconds = perf_counter() - started_at
+
+    assert result is False
+    assert elapsed_seconds < 0.15
