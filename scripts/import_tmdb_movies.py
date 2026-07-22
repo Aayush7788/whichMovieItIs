@@ -8,6 +8,7 @@ from typing import Any
 
 from psycopg.types.json import Jsonb
 
+from backend.app.config import settings
 from backend.app.db import get_connection
 from backend.app.services.tmdb import (
     create_tmdb_client,
@@ -94,6 +95,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--include-missing-overview",
         action="store_true",
+    )
+    parser.add_argument(
+        "--max-database-size-mb",
+        type=int,
+        default=settings.tmdb_runtime_persistence_max_database_mb,
+        help="Stop before inserting a new movie at this database size.",
     )
 
     return parser.parse_args()
@@ -652,9 +659,8 @@ upsert_search_document_sql = """
     returning id;
 """
 
-delete_document_embedding_sql = """
-    delete from movie_search_document_embeddings
-    where document_id = %(document_id)s;
+database_size_sql = """
+    select pg_database_size(current_database());
 """
 
 
@@ -729,6 +735,24 @@ def find_existing_movie(
     return None
 
 
+def has_import_storage_capacity(
+    cursor,
+    tmdb_id: int,
+    maximum_database_size_mb: int,
+) -> bool:
+    if find_existing_movie(cursor, tmdb_id) is not None:
+        return True
+
+    cursor.execute(database_size_sql)
+    row = cursor.fetchone()
+
+    if row is None or len(row) != 1:
+        raise ValueError(f"expected database size row, got {row!r}")
+
+    maximum_size_bytes = maximum_database_size_mb * 1024 * 1024
+    return int(row[0]) < maximum_size_bytes
+
+
 def upsert_movie(
     cursor,
     movie_payload: dict[str, Any],
@@ -771,8 +795,6 @@ def upsert_movie(
         print(f"updated existing movie: {tmdb_id} {record['title']}")
 
     movie_id = int(movie_identity["movie_id"])
-    movie_key = str(movie_identity["movie_key"])
-    wikipedia_movie_id = movie_identity["wikipedia_movie_id"]
 
     cursor.execute(
         upsert_external_id_sql,
@@ -789,31 +811,8 @@ def upsert_movie(
         },
     )
 
-    for document in build_tmdb_documents(movie_payload):
-        cursor.execute(
-            upsert_search_document_sql,
-            {
-                "movie_id": movie_id,
-                "movie_key": movie_key,
-                "wikipedia_movie_id": wikipedia_movie_id,
-                "title": record["title"],
-                "document_type": document["document_type"],
-                "source": tmdb_source,
-                "source_document_id": document["source_document_id"],
-                "content": document["content"],
-                "metadata": Jsonb(document["metadata"]),
-            },
-        )
-        document_id = int(cursor.fetchone()[0])
-
-        cursor.execute(
-            delete_document_embedding_sql,
-            {
-                "document_id": document_id,
-            },
-        )
-
     return movie_id
+
 
 
 def collect_tmdb_ids(
@@ -867,11 +866,15 @@ def main() -> None:
     if args.minimum_overview_length < 0:
         raise ValueError("minimum-overview-length must be zero or greater")
 
+    if args.max_database_size_mb < 1:
+        raise ValueError("max-database-size-mb must be at least one")
+
     statistics = {
         "seen": 0,
         "imported": 0,
         "skipped": 0,
         "failed": 0,
+        "storage_blocked": 0,
     }
 
     with create_tmdb_client() as client:
@@ -897,6 +900,20 @@ def main() -> None:
                             client=client,
                             tmdb_id=tmdb_id,
                         )
+                        if not has_import_storage_capacity(
+                            cursor=cursor,
+                            tmdb_id=tmdb_id,
+                            maximum_database_size_mb=(
+                                args.max_database_size_mb
+                            ),
+                        ):
+                            statistics["storage_blocked"] += 1
+                            print(
+                                "stopped import at database storage budget: "
+                                f"{args.max_database_size_mb} MB"
+                            )
+                            break
+
                         movie_id = upsert_movie(
                             cursor=cursor,
                             movie_payload=movie_payload,

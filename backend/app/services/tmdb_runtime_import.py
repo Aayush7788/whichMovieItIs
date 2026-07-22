@@ -971,8 +971,6 @@ def upsert_tmdb_movie(
         movie_identity = movie_identity_from_row(cursor.fetchone())
 
     movie_id = int(movie_identity["movie_id"])
-    movie_key = str(movie_identity["movie_key"])
-    wikipedia_movie_id = movie_identity["wikipedia_movie_id"]
 
     cursor.execute(
         upsert_external_id_sql,
@@ -990,23 +988,8 @@ def upsert_tmdb_movie(
 
     update_movie_embedding(cursor, movie_id)
 
-    for document in build_tmdb_documents(movie_payload):
-        cursor.execute(
-            upsert_search_document_sql,
-            {
-                "movie_id": movie_id,
-                "movie_key": movie_key,
-                "wikipedia_movie_id": wikipedia_movie_id,
-                "title": record["title"],
-                "document_type": document["document_type"],
-                "source_document_id": document["source_document_id"],
-                "content": document["content"],
-                "metadata": Jsonb(document["metadata"]),
-            },
-        )
-        cursor.fetchone()
-
     return movie_id
+
 
 
 def import_tmdb_title_if_needed(
@@ -1157,7 +1140,6 @@ def import_tmdb_title_if_needed(
                 connection.commit()
 
         if movie_id is not None:
-            schedule_document_embedding_backfill(movie_id)
             logger.info(
                 (
                     "tmdb runtime fallback imported query=%r "

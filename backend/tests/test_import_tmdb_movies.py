@@ -88,3 +88,42 @@ def test_fetch_recent_movie_ids_uses_release_filters(monkeypatch):
     assert captured_params["vote_count.gte"] == 50
     assert captured_params["primary_release_date.gte"] == "2026-01-01"
     assert captured_params["primary_release_date.lte"] == "2026-07-09"
+
+
+def test_import_storage_guard_blocks_new_movie_at_limit(monkeypatch):
+    class FakeCursor:
+        def execute(self, sql):
+            self.sql = sql
+
+        def fetchone(self):
+            return (450 * 1024 * 1024,)
+
+    monkeypatch.setattr(
+        import_tmdb_movies,
+        "find_existing_movie",
+        lambda cursor, tmdb_id: None,
+    )
+
+    assert not import_tmdb_movies.has_import_storage_capacity(
+        cursor=FakeCursor(),
+        tmdb_id=123,
+        maximum_database_size_mb=450,
+    )
+
+
+def test_import_storage_guard_allows_existing_movie(monkeypatch):
+    monkeypatch.setattr(
+        import_tmdb_movies,
+        "find_existing_movie",
+        lambda cursor, tmdb_id: {
+            "movie_id": 1,
+            "movie_key": "tmdb:123",
+            "wikipedia_movie_id": None,
+        },
+    )
+
+    assert import_tmdb_movies.has_import_storage_capacity(
+        cursor=object(),
+        tmdb_id=123,
+        maximum_database_size_mb=450,
+    )

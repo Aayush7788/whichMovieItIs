@@ -199,7 +199,7 @@ def test_runtime_fallback_rate_limits_requests(monkeypatch):
     assert not tmdb_runtime_import.acquire_runtime_fallback_slot("Scream 7")
 
 
-def test_runtime_fallback_uses_strict_timeout_and_schedules_documents(
+def test_runtime_fallback_uses_strict_timeout_and_persists_movie(
     monkeypatch,
 ):
     clear_runtime_fallback_state()
@@ -300,7 +300,9 @@ def test_runtime_fallback_uses_strict_timeout_and_schedules_documents(
     monkeypatch.setattr(
         tmdb_runtime_import,
         "schedule_document_embedding_backfill",
-        lambda movie_id: captured.update({"scheduled_movie_id": movie_id}),
+        lambda movie_id: (_ for _ in ()).throw(
+            AssertionError("stable runtime import must not write documents")
+        ),
     )
 
     result = tmdb_runtime_import.import_tmdb_title_if_needed(
@@ -318,7 +320,6 @@ def test_runtime_fallback_uses_strict_timeout_and_schedules_documents(
     assert captured["search_attempts"] == 1
     assert captured["detail_attempts"] == 1
     assert captured["committed"] is True
-    assert captured["scheduled_movie_id"] == 123
 
 
 def test_runtime_fallback_skips_when_timeout_disabled(monkeypatch):
