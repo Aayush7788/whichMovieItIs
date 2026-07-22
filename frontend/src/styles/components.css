@@ -104,6 +104,13 @@
   opacity: 0.65;
 }
 
+.search-engine-status {
+  margin: 12px 0 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 .example-block {
   grid-column: 1 / -1;
   display: grid;

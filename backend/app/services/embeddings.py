@@ -43,6 +43,10 @@ def preload_embedding_model() -> None:
     get_embedding_model()
 
 
+def is_embedding_model_ready() -> bool:
+    return _embedding_model is not None
+
+
 def _preload_embedding_model_safely() -> None:
     try:
         preload_embedding_model()

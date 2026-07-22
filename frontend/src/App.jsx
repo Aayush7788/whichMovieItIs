@@ -8,7 +8,12 @@ import { HowItWorks } from "./components/HowItWorks";
 import { MovieDetailModal } from "./components/MovieDetailModal";
 import { MovieShelf } from "./components/MovieShelf";
 import { SearchResultsSection } from "./components/SearchResultsSection";
-import { getMovieDetail, getMovies, searchMovies } from "./lib/api";
+import {
+  getMovieDetail,
+  getMovies,
+  getSearchHealth,
+  searchMovies,
+} from "./lib/api";
 
 const moviePageSize = 18;
 
@@ -17,6 +22,7 @@ function App() {
   const [searchStatus, setSearchStatus] = useState("idle");
   const [searchError, setSearchError] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [searchEngineStatus, setSearchEngineStatus] = useState("checking");
 
   const [movies, setMovies] = useState([]);
   const [movieTotal, setMovieTotal] = useState(0);
@@ -31,6 +37,38 @@ function App() {
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "/api";
   const featuredMovies = useMemo(() => movies.slice(0, 6), [movies]);
   const hasMoreMovies = movies.length < movieTotal;
+
+  useEffect(() => {
+    let cancelled = false;
+    let retryTimer;
+
+    async function checkSearchEngine() {
+      try {
+        const data = await getSearchHealth(apiBaseUrl);
+
+        if (cancelled) {
+          return;
+        }
+
+        setSearchEngineStatus(data.status);
+
+        if (data.status !== "ready") {
+          retryTimer = window.setTimeout(checkSearchEngine, 1500);
+        }
+      } catch {
+        if (!cancelled) {
+          setSearchEngineStatus("unknown");
+        }
+      }
+    }
+
+    checkSearchEngine();
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(retryTimer);
+    };
+  }, [apiBaseUrl]);
 
   useEffect(() => {
     let cancelled = false;
@@ -175,6 +213,7 @@ function App() {
       <HeroSearch
         query={query}
         status={searchStatus}
+        engineStatus={searchEngineStatus}
         onQueryChange={setQuery}
         onSearch={runSearch}
         onExampleClick={runExampleSearch}

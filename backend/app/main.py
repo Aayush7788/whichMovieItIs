@@ -15,7 +15,10 @@ from .services.reranker import search_movies_reranked
 from fastapi.middleware.cors import CORSMiddleware
 from .config import settings
 from .services.document_search import search_movies_document_hybrid
-from .services.embeddings import start_embedding_model_preload
+from .services.embeddings import (
+    is_embedding_model_ready,
+    start_embedding_model_preload,
+)
 from .services.hybrid_v2_search import search_movies_hybrid_v2
 from .services.movies import get_movie_detail, list_movies
 
@@ -81,6 +84,14 @@ def health_db():
         "database": "ok",
         "pgvector": row[0] if row else None,
     }
+
+
+@api_router.get("/health/search")
+def health_search():
+    return {
+        "status": "ready" if is_embedding_model_ready() else "warming",
+    }
+
 
 @api_router.get("/movies", response_model=MovieCatalogResponse)
 def movies(limit: int = 24, offset: int = 0):

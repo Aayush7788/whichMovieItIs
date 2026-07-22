@@ -6,6 +6,19 @@ from backend.app.main import app
 client = TestClient(app)
 
 
+def test_search_health_reports_model_status(monkeypatch):
+    monkeypatch.setattr(
+        main_module,
+        "is_embedding_model_ready",
+        lambda: False,
+    )
+
+    response = client.get("/api/health/search")
+
+    assert response.status_code == 200
+    assert response.json() == {"status": "warming"}
+
+
 def test_search_rejects_blank_query():
     response = client.get(
         "/api/search",

@@ -80,3 +80,7 @@ export function getMovieDetail(apiBaseUrl, movieKey) {
     `${apiBaseUrl}/movies/${encodeURIComponent(movieKey)}`,
   );
 }
+
+export function getSearchHealth(apiBaseUrl) {
+  return fetchJson(`${apiBaseUrl}/health/search`);
+}

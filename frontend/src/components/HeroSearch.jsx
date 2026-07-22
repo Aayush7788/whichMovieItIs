@@ -3,6 +3,7 @@ import { exampleQueries } from "../data/homeContent";
 export function HeroSearch({
   query,
   status,
+  engineStatus,
   onQueryChange,
   onSearch,
   onExampleClick,
@@ -51,6 +52,12 @@ export function HeroSearch({
           </button>
         </div>
       </form>
+
+      {(engineStatus === "checking" || engineStatus === "warming") && (
+        <p className="search-engine-status" role="status">
+          Warming search engine. The first search may take a few seconds.
+        </p>
+      )}
 
       <div className="example-block">
         <span>Example descriptions</span>
