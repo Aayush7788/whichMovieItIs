@@ -1,28 +1,65 @@
-from functools import lru_cache
-
-from sentence_transformers import SentenceTransformer
+import logging
+from threading import Lock, Thread
 
 embedding_model_name = "sentence-transformers/all-MiniLM-L6-v2"
 embedding_dimension = 384
 embedding_text_max_chars = 4000
 
+_embedding_model = None
+_embedding_model_lock = Lock()
+
+
+def _get_sentence_transformer_class():
+    from sentence_transformers import SentenceTransformer
+
+    return SentenceTransformer
+
 
 def _load_embedding_model():
+    sentence_transformer = _get_sentence_transformer_class()
+
     try:
-        return SentenceTransformer(
+        return sentence_transformer(
             embedding_model_name,
             local_files_only=True,
         )
     except OSError:
-        return SentenceTransformer(embedding_model_name)
+        return sentence_transformer(embedding_model_name)
 
 
-@lru_cache(maxsize=1)
 def get_embedding_model():
-    return _load_embedding_model()
+    global _embedding_model
+
+    if _embedding_model is not None:
+        return _embedding_model
+
+    with _embedding_model_lock:
+        if _embedding_model is None:
+            _embedding_model = _load_embedding_model()
+
+    return _embedding_model
 
 def preload_embedding_model() -> None:
     get_embedding_model()
+
+
+def _preload_embedding_model_safely() -> None:
+    try:
+        preload_embedding_model()
+    except Exception:
+        logging.getLogger(__name__).exception(
+            "background embedding model preload failed"
+        )
+
+
+def start_embedding_model_preload() -> Thread:
+    thread = Thread(
+        target=_preload_embedding_model_safely,
+        name="embedding-model-preload",
+        daemon=True,
+    )
+    thread.start()
+    return thread
 
 def normalize_text(text: str) -> str:
     return " ".join(text.split())

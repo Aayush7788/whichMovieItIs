@@ -1,6 +1,5 @@
 from functools import lru_cache
 
-from sentence_transformers import CrossEncoder
 from backend.app.services.hybrid_search import search_movies_hybrid
 
 reranker_model_name = "cross-encoder/ms-marco-MiniLM-L6-v2"
@@ -9,9 +8,15 @@ minimum_candidate_limit = 20
 maximum_candidate_limit = 30
 candiate_multiplier = 4
 
+def _get_cross_encoder_class():
+    from sentence_transformers import CrossEncoder
+
+    return CrossEncoder
+
 @lru_cache(maxsize=1)
 def get_reranker_model():
-    return CrossEncoder(reranker_model_name)
+    cross_encoder = _get_cross_encoder_class()
+    return cross_encoder(reranker_model_name)
 
 def get_reranker_candidate_limit(limit: int) -> int:
     candiate_limit = limit * candiate_multiplier

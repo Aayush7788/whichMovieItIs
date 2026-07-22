@@ -15,7 +15,7 @@ from .services.reranker import search_movies_reranked
 from fastapi.middleware.cors import CORSMiddleware
 from .config import settings
 from .services.document_search import search_movies_document_hybrid
-from .services.embeddings import preload_embedding_model
+from .services.embeddings import start_embedding_model_preload
 from .services.hybrid_v2_search import search_movies_hybrid_v2
 from .services.movies import get_movie_detail, list_movies
 
@@ -39,7 +39,7 @@ async def lifespan(app: FastAPI):
     settings.validate_production_settings()
 
     if settings.preload_embedding_model_on_startup:
-        preload_embedding_model()
+        app.state.embedding_preload_thread = start_embedding_model_preload()
 
     yield
 
