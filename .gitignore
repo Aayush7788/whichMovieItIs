@@ -9,3 +9,4 @@ __pycache__
 .local/
 .vite-local.log
 .vite-local.err.log
+.gstack/
