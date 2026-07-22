@@ -5,10 +5,10 @@
 ### Public Application
 
 - Live URL: https://whichmovieitis.vercel.app
-- Vercel deployment: dpl_AccdyZ8W7AHvBjVkK1QBYT8YXNEB
+- Verified Vercel deployment: dpl_81YaSu5ehqBV7QJdZpn3Ki5vm3kJ
 - Region: iad1
 - Deployment state: READY
-- Git commit: 291682bc4130a3eba4f0eab59a3330f93f56d6ac
+- Application code commit: c4f0f42dd3f94d01c7e046fe81fda033b45e3a14
 
 ### Automated Release Gate
 
@@ -47,6 +47,22 @@ visible to the user but cannot be guaranteed below three seconds.
 - Movie embedding: created synchronously.
 - Production document tables: remained empty.
 - Catalog after fallback: 42,602 movies with zero missing movie embeddings.
+
+### Production Browser QA
+
+The final Playwright browser pass verified:
+
+- Desktop homepage loaded with the catalog.
+- Films navigation scrolled to the catalog.
+- Load more increased rendered movie cards from 24 to 42.
+- Movie detail modal opened and closed correctly.
+- Rough-memory query red pill blue pill ranked The Matrix first.
+- Mobile layout at 390 by 844 had no horizontal overflow.
+- Favicon loaded successfully after the QA fix.
+- Console errors: zero.
+- Page errors: zero.
+- Failed requests: zero.
+- HTTP responses at or above 400: zero.
 
 ### Production Database
 
