@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from backend.app import main as main_module
+from backend.app import api as api_module
 from backend.app.main import app
 
 
@@ -25,7 +25,7 @@ def catalog_movie():
 
 def test_movies_endpoint_returns_catalog(monkeypatch):
     monkeypatch.setattr(
-        main_module,
+        api_module,
         "list_movies",
         lambda limit, offset: {
             "results": [catalog_movie()],
@@ -65,7 +65,7 @@ def test_movie_detail_endpoint_returns_database_fields(monkeypatch):
     }
 
     monkeypatch.setattr(
-        main_module,
+        api_module,
         "get_movie_detail",
         lambda movie_key: detail if movie_key == "cmu:30007" else None,
     )
@@ -81,7 +81,7 @@ def test_movie_detail_endpoint_returns_database_fields(monkeypatch):
 
 def test_movie_detail_endpoint_returns_404(monkeypatch):
     monkeypatch.setattr(
-        main_module,
+        api_module,
         "get_movie_detail",
         lambda movie_key: None,
     )

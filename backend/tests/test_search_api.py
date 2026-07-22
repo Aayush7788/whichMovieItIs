@@ -1,5 +1,5 @@
 from fastapi.testclient import TestClient
-from backend.app import main as main_module
+from backend.app import api as api_module
 from backend.app.main import app
 
 
@@ -8,7 +8,7 @@ client = TestClient(app)
 
 def test_search_health_reports_model_status(monkeypatch):
     monkeypatch.setattr(
-        main_module,
+        api_module,
         "is_embedding_model_ready",
         lambda: False,
     )
@@ -30,11 +30,23 @@ def test_search_rejects_blank_query():
         "detail": "query cannot be empty",
     }
 
+def test_search_rejects_query_over_character_limit():
+    response = client.get(
+        "/api/search",
+        params={"q": "x" * 1001},
+    )
+
+    assert response.status_code == 400
+    assert response.json() == {
+        "detail": "query cannot exceed 1000 characters",
+    }
+
+
 def test_search_returns_poster_metadata(
     monkeypatch,
 ):
     monkeypatch.setattr(
-        main_module,
+        api_module,
         "search_movies_hybrid",
         lambda query, limit: [
             {

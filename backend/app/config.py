@@ -23,6 +23,10 @@ class Settings(BaseSettings):
     tmdb_runtime_fallback_query_cache_seconds: int = 1800
     tmdb_runtime_persistence_max_database_mb: int = 450
     preload_embedding_model_on_startup: bool = True
+    public_api_rate_limit_enabled: bool = True
+    public_api_rate_limit_window_seconds: int = 60
+    public_api_search_max_requests_per_window: int = 30
+    public_api_catalog_max_requests_per_window: int = 120
     log_level: str = "INFO"
 
     frontend_origins: str = "http://localhost:5173"
@@ -54,6 +58,23 @@ class Settings(BaseSettings):
             errors.append(
                 "TMDB_RUNTIME_PERSISTENCE_MAX_DATABASE_MB must be positive"
             )
+
+        rate_limit_values = {
+            "PUBLIC_API_RATE_LIMIT_WINDOW_SECONDS": (
+                self.public_api_rate_limit_window_seconds
+            ),
+            "PUBLIC_API_SEARCH_MAX_REQUESTS_PER_WINDOW": (
+                self.public_api_search_max_requests_per_window
+            ),
+            "PUBLIC_API_CATALOG_MAX_REQUESTS_PER_WINDOW": (
+                self.public_api_catalog_max_requests_per_window
+            ),
+        }
+
+        if self.public_api_rate_limit_enabled:
+            for name, value in rate_limit_values.items():
+                if value < 1:
+                    errors.append(f"{name} must be positive")
 
         if not frontend_origins:
             errors.append("FRONTEND_ORIGINS must contain at least one origin")
