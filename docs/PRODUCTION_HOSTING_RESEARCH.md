@@ -33,27 +33,30 @@ Sources:
 
 ## Decision
 
-No researched free managed Postgres option safely supports the full current
-`1.4 GB` database as a durable production database.
+No researched free managed PostgreSQL provider safely supports the complete
+`1.4 GB` database. The selected completely free architecture therefore runs
+PostgreSQL with pgvector on the same Oracle Cloud Always Free VM as FastAPI.
 
-For a free public deployment, the practical path is:
+The production topology is:
 
-1. Deploy only the lean production database first.
-2. Keep stable `/search` on movie-level hybrid search.
-3. Keep `/search/documents` and document embeddings out of the first production database.
-4. Keep runtime TMDB exact-title import enabled.
-5. Avoid large TMDB bulk import until there is paid database storage or a reliable free provider with enough capacity.
+1. Vercel Hobby hosts the React frontend.
+2. Oracle Cloud Always Free runs one ARM VM with `2` OCPUs and `12 GB` RAM.
+3. Docker Compose runs PostgreSQL with pgvector, FastAPI, and Caddy on that VM.
+4. DuckDNS provides the free backend hostname.
+5. Caddy terminates HTTPS and keeps ports `5432` and `8000` private.
+6. Oracle Object Storage can hold compressed database backups.
+7. GitHub Actions provides a manual production deployment workflow.
 
-## Recommended First Attempt
+This architecture keeps the full database instead of deleting the document
+tables merely to fit a smaller managed-database quota.
 
-Try Aiven free PostgreSQL first because its `1 GB` storage limit gives more
-headroom than Supabase or Neon for the lean production database.
-
-If Aiven free is too unstable or inactive-sleeps too aggressively, try Supabase
-with the lean production database and strict catalog limits.
+Implementation and provisioning steps are in
+`docs/DEPLOYMENT_ORACLE_ALWAYS_FREE.md`.
 
 ## Not Recommended
 
 - Full local database upload to Supabase/Neon/Render free tiers.
 - Render free Postgres for durable production, because it expires after 30 days.
 - Vercel serverless backend for this Python API, because the embedding stack is too large and model loading is not a good serverless fit.
+- Exposing PostgreSQL directly to the public internet.
+- Treating Oracle trial credits as part of the permanent free architecture.

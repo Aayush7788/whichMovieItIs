@@ -1,0 +1,42 @@
+name: Deploy backend to Oracle Cloud
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Configure SSH
+        env:
+          ORACLE_HOST: ${{ secrets.ORACLE_HOST }}
+          ORACLE_SSH_KEY: ${{ secrets.ORACLE_SSH_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$ORACLE_SSH_KEY" > ~/.ssh/oracle
+          chmod 600 ~/.ssh/oracle
+          ssh-keyscan -H "$ORACLE_HOST" >> ~/.ssh/known_hosts
+
+      - name: Deploy current main branch
+        env:
+          ORACLE_APP_DIR: ${{ secrets.ORACLE_APP_DIR }}
+          ORACLE_HOST: ${{ secrets.ORACLE_HOST }}
+          ORACLE_USER: ${{ secrets.ORACLE_USER }}
+        run: |
+          ssh -i ~/.ssh/oracle "$ORACLE_USER@$ORACLE_HOST" \
+            "cd '$ORACLE_APP_DIR' && \
+             git fetch origin main && \
+             git checkout main && \
+             git pull --ff-only origin main && \
+             docker compose \
+               --file deploy/oracle/docker-compose.yml \
+               --env-file deploy/oracle/.env \
+               up --detach --build && \
+             docker compose \
+               --file deploy/oracle/docker-compose.yml \
+               --env-file deploy/oracle/.env \
+               ps"
