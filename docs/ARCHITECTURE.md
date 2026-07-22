@@ -9,7 +9,7 @@ Browser
   -> React + Vite frontend
   -> FastAPI API
   -> hybrid retrieval services
-  -> PostgreSQL 17 + pgvector
+  -> Neon PostgreSQL 18 + pgvector
   -> ranked JSON response
 ```
 
@@ -25,7 +25,7 @@ Editable source: [`runtime-search-architecture.excalidraw`](assets/diagrams/runt
 2. `frontend/src/App.jsx` owns search, catalog, and selected-movie state.
 3. `frontend/src/lib/api.js` requests `/api/search` during local development.
 4. During normal local development, Vite proxies `/api/*` unchanged to FastAPI on `127.0.0.1:8000`. In production, Vercel Services routes the same path to the backend container.
-5. `backend/app/main.py` validates `q` and `limit` and calls `search_movies_hybrid()`.
+5. `backend/app/api.py` validates `q` and `limit` and calls `search_movies_hybrid()`.
 6. The backend returns a Pydantic-validated `MovieSearchResponse`.
 7. The frontend renders ranked cards and requests `/api/movies/{movie_key}` when a card is opened.
 
@@ -77,7 +77,7 @@ Implementation: `backend/app/services/vector_search.py` and `backend/app/service
 - The HNSW index accelerates approximate nearest-neighbor lookup.
 - Vector candidates below `0.40` are excluded before fusion.
 
-The model is preloaded at backend startup by default to avoid a large first-search delay.
+The model begins loading in a daemon thread during backend startup. `GET /api/health/search` reports `warming` or `ready`, so the page can load immediately while the frontend explains a cold start.
 
 ### Auxiliary Clue Signal
 
@@ -134,10 +134,11 @@ The fallback is deliberately narrow:
 5. Acquire a rate-limit slot and query cache entry.
 6. Use one shared deadline, configured to three seconds, for TMDB search, detail fetch, database work, and synchronous movie embedding.
 7. Fetch movie details with keywords and credits.
-8. Upsert the movie, external TMDB ID, poster metadata, search-boost text, and TMDB search documents.
-9. Create the movie embedding synchronously so it is immediately searchable.
-10. Backfill detailed document embeddings in a background thread.
-11. Run local hybrid search again and return the local ranked response.
+8. Reject persistence when the TMDB overview is shorter than 80 characters.
+9. Check the 450 MB storage budget before creating a new catalog row.
+10. Upsert the movie, external TMDB ID, poster metadata, and search-boost text.
+11. Create the movie embedding synchronously so it is immediately searchable.
+12. Run local hybrid search again and return the local ranked response. If quality or storage checks fail, return a transient TMDB result without persisting it.
 
 Defaults from `backend/app/config.py`:
 
@@ -147,6 +148,8 @@ Defaults from `backend/app/config.py`:
 | Attempts | 1 |
 | Rate limit | 10 requests per 60 seconds |
 | Query cache | 1800 seconds |
+| Minimum persisted overview | 80 characters |
+| Storage ceiling | 450 MB |
 
 TMDB is therefore an ingestion fallback, not the primary search engine.
 
@@ -193,11 +196,11 @@ Maps a local movie to source-specific identifiers without making a provider ID t
 
 ### `movie_search_documents`
 
-Stores multiple searchable text documents per movie, including CMU plots, CoreNLP signals, character metadata, TMDB overviews, taglines, keywords, and credits.
+Stores reproducible CMU plot, CoreNLP, and character documents for local document-search experiments. The compact Neon production database intentionally leaves this table empty because the stable public route uses movie-level retrieval.
 
 ### `movie_search_document_embeddings`
 
-Stores one 384-dimensional embedding per search document with its model name.
+Stores one 384-dimensional embedding per experimental search document. The compact Neon production database intentionally leaves this table empty.
 
 ### `movie_memory_clues`
 
@@ -216,7 +219,9 @@ Stores the limited curated clue set used by the auxiliary branch.
 - Pydantic response models prevent accidental API-shape drift.
 - `/api/health` checks the process; `/api/health/db` checks PostgreSQL and reports the pgvector extension version.
 - Production settings reject missing database/TMDB configuration, wildcard CORS, and localhost origins.
-- Search and fallback latency are logged to the backend console.
+- Every API request logs method, path, status, and latency; hybrid search logs fallback decisions.
+- Search is limited to 30 requests per client per minute and catalog access to 120 per minute by default.
+- Responses include content-type, framing, referrer, and browser-permission security headers.
 - TMDB failures do not destroy the local result list.
 - New TMDB persistence stops at the configured database-size ceiling; the fetched exact-title result can still be returned transiently.
 - Changed TMDB rows invalidate stale embeddings before regeneration.
@@ -224,4 +229,4 @@ Stores the limited curated clue set used by the auxiliary branch.
 
 ## Deployment State
 
-The repository contains one Vercel Services project: the Vite frontend handles normal paths, the FastAPI container handles `/api/*`, and Neon supplies persistent PostgreSQL with pgvector. A compact production-database export and restore path is prepared. Public deployment is not claimed until the cloud database restore and production smoke test are complete; the executable runbook is `docs/DEPLOYMENT_VERCEL_FREE.md`.
+The live application is [whichmovieitis.vercel.app](https://whichmovieitis.vercel.app). One Vercel Services project routes normal paths to Vite and `/api/*` to the FastAPI container; Neon supplies PostgreSQL 18 with pgvector. Production audit, backup, controlled import, restore, CI, and smoke-test procedures are documented in `docs/DEPLOYMENT_VERCEL_FREE.md`.

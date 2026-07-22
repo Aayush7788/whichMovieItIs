@@ -5,7 +5,7 @@
 WhichMovieItIs deploys as one Vercel project and one public domain:
 
 ~~~text
-https://YOUR-PROJECT.vercel.app
+https://whichmovieitis.vercel.app
 ├── /                         React and Vite frontend
 ├── /api/health               FastAPI process health
 ├── /api/health/db            PostgreSQL and pgvector health
@@ -36,7 +36,11 @@ The repository already contains:
 - .vercelignore: excludes local datasets, dumps, caches, and build outputs
 - scripts/export_production_database.py: compact production export
 - scripts/restore_production_database.py: pgvector-aware restore
-- /api/* FastAPI routes and a 450 MB TMDB persistence guard
+- /api/* FastAPI routes, request limits, security headers, and a 450 MB TMDB persistence guard
+- scripts/audit_production_database.py: production storage and embedding checks
+- scripts/backup_production_database.py: PostgreSQL 18 compressed backups
+- scripts/production_maintenance.ps1: manual audit, import, and backup entrypoint
+- .github/workflows/ci.yml: backend and frontend validation on every push
 
 Do not commit a database URL, TMDB token, .env, or production dump.
 
@@ -141,8 +145,13 @@ Add these variables to the Vercel project's Production environment:
 APP_ENV=production
 DATABASE_URL=<NEON_POOLED_DATABASE_URL>
 TMDB_READ_ACCESS_TOKEN=<TMDB_READ_ACCESS_TOKEN>
-FRONTEND_ORIGINS=https://YOUR-PROJECT.vercel.app
+FRONTEND_ORIGINS=https://whichmovieitis.vercel.app
 LOG_LEVEL=INFO
+
+PUBLIC_API_RATE_LIMIT_ENABLED=true
+PUBLIC_API_RATE_LIMIT_WINDOW_SECONDS=60
+PUBLIC_API_SEARCH_MAX_REQUESTS_PER_WINDOW=30
+PUBLIC_API_CATALOG_MAX_REQUESTS_PER_WINDOW=120
 
 TMDB_RUNTIME_FALLBACK_TIMEOUT_SECONDS=3
 TMDB_RUNTIME_FALLBACK_MAX_ATTEMPTS=1
@@ -150,6 +159,7 @@ TMDB_RUNTIME_FALLBACK_RATE_LIMIT_WINDOW_SECONDS=60
 TMDB_RUNTIME_FALLBACK_MAX_REQUESTS_PER_WINDOW=10
 TMDB_RUNTIME_FALLBACK_QUERY_CACHE_SECONDS=1800
 TMDB_RUNTIME_PERSISTENCE_MAX_DATABASE_MB=450
+TMDB_RUNTIME_MINIMUM_OVERVIEW_LENGTH=80
 
 PRELOAD_EMBEDDING_MODEL_ON_STARTUP=true
 ~~~
@@ -185,10 +195,8 @@ PyTorch and downloads the embedding model.
 
 ## 7. Production Smoke Test
 
-Replace YOUR-PROJECT with the deployed project name:
-
 ~~~powershell
-$baseUrl = "https://YOUR-PROJECT.vercel.app"
+$baseUrl = "https://whichmovieitis.vercel.app"
 
 Invoke-RestMethod "$baseUrl/api/health"
 Invoke-RestMethod "$baseUrl/api/health/db"
@@ -199,8 +207,8 @@ Invoke-RestMethod "$baseUrl/api/search?q=ship%20hits%20iceberg&limit=5"
 Open these URLs in a browser:
 
 ~~~text
-https://YOUR-PROJECT.vercel.app/
-https://YOUR-PROJECT.vercel.app/api/docs
+https://whichmovieitis.vercel.app/
+https://whichmovieitis.vercel.app/api/docs
 ~~~
 
 Verify:
@@ -223,8 +231,10 @@ select pg_database_size(current_database());
 
 Behavior:
 
-- Below 450 MB: save the TMDB movie, embedding, identifiers, and searchable
-  documents.
+- Below 450 MB and at least 80 overview characters: save the TMDB movie,
+  identifiers, searchable boost text, and movie embedding.
+- Weak or missing overviews can be returned transiently for an exact-title
+  request but are not persisted.
 - At or above 450 MB: return the fetched movie for the current request but do
   not persist it.
 - Existing TMDB-linked movies may still be updated because they do not create a
@@ -233,6 +243,33 @@ Behavior:
 
 The guard protects free-tier headroom but is not a replacement for monitoring
 the Neon dashboard.
+
+
+## 9. Production Maintenance
+
+Run a read-only audit from a shell that has the pooled production DATABASE_URL:
+
+~~~powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\production_maintenance.ps1 -Mode audit
+~~~
+
+Create a compressed backup with NEON_DIRECT_DATABASE_URL set:
+
+~~~powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\production_maintenance.ps1 -Mode backup
+~~~
+
+Run a controlled recent or popular import only while storage permits:
+
+~~~powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\production_maintenance.ps1 -Mode recent -Limit 25
+powershell -ExecutionPolicy Bypass -File .\scripts\production_maintenance.ps1 -Mode popular -Limit 25
+~~~
+
+The first verified production backup was 118.8 MB compressed from a 362.2 MB
+database. Backup files remain under the ignored data/processed/backups/
+directory and must be copied to separate storage if off-machine durability is
+required.
 
 ## Troubleshooting
 

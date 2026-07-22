@@ -4,10 +4,12 @@
 
 ### Find a movie from the scene, plot, object, character, or dialogue you remember.
 
+[**Live Application**](https://whichmovieitis.vercel.app) | [API Health](https://whichmovieitis.vercel.app/api/health) | [Architecture](docs/ARCHITECTURE.md)
+
 [![React](https://img.shields.io/badge/React-19-20232a?logo=react&logoColor=61dafb)](frontend/package.json)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.136-009688?logo=fastapi&logoColor=white)](requirements.txt)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169e1?logo=postgresql&logoColor=white)](docker-compose.yml)
-[![pgvector](https://img.shields.io/badge/pgvector-0.8.2-f36f21)](docker-compose.yml)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-4169e1?logo=postgresql&logoColor=white)](https://neon.tech)
+[![pgvector](https://img.shields.io/badge/pgvector-0.8.1-f36f21)](https://github.com/pgvector/pgvector)
 [![Python](https://img.shields.io/badge/Python-3.10-3776ab?logo=python&logoColor=white)](requirements.txt)
 
 **Hybrid movie retrieval over a 42,000+ title catalog, with exact, lexical, and semantic signals fused into one ranked result list.**
@@ -21,6 +23,10 @@
 The user writes a rough memory such as **"red pill blue pill."** The application searches the local catalog, combines multiple retrieval signals, ranks the candidates, and opens a complete movie detail view.
 
 ![Rough-plot search demonstration](docs/assets/demo/search-demo.gif)
+
+## Live Production
+
+The application is deployed at **[whichmovieitis.vercel.app](https://whichmovieitis.vercel.app)** as one Vercel Services project: Vite serves the frontend, a FastAPI container serves /api/*, and Neon PostgreSQL 18 stores the 42,602-movie production catalog. The production database is 362.2 MB with all 42,602 movie embeddings present.
 
 ## Why This Project Exists
 
@@ -89,14 +95,14 @@ These numbers measure the maintained evaluation set, not every possible movie-me
 |---|---|---|
 | Frontend | React 19 + Vite 8 | Search UI, catalog browsing, result cards, movie detail modal |
 | API | FastAPI + Uvicorn | Validation, catalog endpoints, stable hybrid search orchestration |
-| Database | PostgreSQL 17 | Movie metadata, JSON fields, full-text vectors, external IDs |
+| Database | Neon PostgreSQL 18 | Movie metadata, JSON fields, full-text vectors, external IDs |
 | Semantic retrieval | pgvector + Sentence Transformers | 384-dimensional embeddings and cosine nearest-neighbor search |
 | External catalog | TMDB API/CDN | Posters, metadata enrichment, exact-title runtime fallback |
 | Evaluation | Pytest + custom qrels scripts | API tests, retrieval metrics, regression analysis |
 
 ## Data Sources
 
-- **CMU Movie Summary Corpus** supplies the base movie metadata, plot summaries, character metadata, and CoreNLP plot artifacts used to build local search documents.
+- **CMU Movie Summary Corpus** supplies the base movie metadata and rich plot summaries. Character metadata and CoreNLP artifacts support reproducible document-search experiments; the public stable search uses the movie-level catalog.
 - **TMDB** supplies poster paths, metadata enrichment, and newly requested title imports. Low-information bulk records can be skipped using the minimum-overview filter.
 
 The corpus and database dump are not committed to Git because of size and redistribution constraints. The repository contains the processing, loading, enrichment, embedding, and evaluation code needed to reproduce the system from authorized source data.
@@ -133,10 +139,10 @@ For first-time database construction and corpus commands, follow [`docs/LOCAL_SE
 
 ## Deploy Free
 
-The prepared production architecture uses one Vercel project for the React
+The live production architecture uses one Vercel project for the React
 frontend and FastAPI container, plus Neon PostgreSQL with pgvector. Follow the
 complete account setup, database restore, environment-variable, deployment,
-and smoke-test process in
+maintenance, and smoke-test process in
 [docs/DEPLOYMENT_VERCEL_FREE.md](docs/DEPLOYMENT_VERCEL_FREE.md).
 
 ## Stable API
@@ -145,6 +151,7 @@ and smoke-test process in
 |---|---|
 | `GET /api/health` | Backend process health |
 | `GET /api/health/db` | PostgreSQL and pgvector health |
+| `GET /api/health/search` | Embedding-model warmup status |
 | `GET /api/search?q=...&limit=5` | Stable hybrid movie search |
 | `GET /api/movies?limit=24&offset=0` | Paginated movie catalog |
 | `GET /api/movies/{movie_key}` | Complete movie detail record |
@@ -163,6 +170,7 @@ scripts/                     Data ingestion, embeddings, evaluation, local start
 data/evaluation/             Search queries and graded relevance judgments
 evals/                       Generated evaluation and regression reports
 docs/                        Architecture, evaluation, setup, and deployment notes
+.github/workflows/            Backend and frontend continuous integration
 ```
 
 ## Honest Limitations
@@ -170,7 +178,7 @@ docs/                        Architecture, evaluation, setup, and deployment not
 - Retrieval quality is measured on a curated 50-query set and needs broader real-user judgments before making universal accuracy claims.
 - TMDB runtime fallback is intentionally limited to title-shaped queries; it does not turn arbitrary rough plots into live TMDB searches.
 - TMDB overview text is shorter and less descriptive than the CMU plot corpus, so fresh TMDB-only movies may have weaker rough-plot recall.
-- The one-project Vercel Services configuration is prepared, but this README does not claim a live URL until the Neon restore and production smoke test are completed.
+- Free-tier scale-to-zero can make the first search after inactivity slower than the sub-three-second warm-search target; the UI reports model warmup instead of appearing frozen.
 - The current product is English-first and has no accounts, collections, or personalization.
 
 ## Attribution
