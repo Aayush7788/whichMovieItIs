@@ -3,60 +3,71 @@
 ## Current Database Size
 
 - Full local PostgreSQL database: about `1.4 GB`.
-- Lean production-critical tables for current stable `/search`:
-  - `movies`
-  - `movie_external_ids`
-  - `movie_memory_clues`
-- Lean production-critical table size: about `380 MB`.
-- Document-search experimental tables add about `1.0 GB`:
-  - `movie_search_documents`
-  - `movie_search_document_embeddings`
+- Stable production tables: about `384 MB`.
+- Experimental document-search tables: about `1.0 GB`.
 
-## Free Database Findings
+The stable production tables are `movies`, `movie_external_ids`, and
+`movie_memory_clues`. The large experimental tables are
+`movie_search_documents` and `movie_search_document_embeddings`.
 
-| Provider | Free DB Limit | pgvector | Production Fit |
-| --- | ---: | --- | --- |
-| Supabase | `500 MB` database quota before read-only mode | Yes | Lean production DB may fit, full `1.4 GB` DB does not fit |
-| Neon | `0.5 GB` storage per free project | Yes | Lean production DB may fit tightly, full DB does not fit |
-| Aiven | `1 GB` storage, `1 GB` RAM, `1 CPU` | Yes | Lean production DB fits, full DB does not fit |
-| Render Postgres | `1 GB`, expires after `30 days` | Unknown for final use | Not suitable for durable production data |
+## Current Free Hosting Decision
 
-Sources:
-
-- Supabase database size docs: https://supabase.com/docs/guides/platform/database-size
-- Supabase pgvector docs: https://supabase.com/docs/guides/database/extensions/pgvector
-- Neon pricing: https://neon.com/pricing
-- Neon pgvector docs: https://neon.com/docs/extensions/pgvector
-- Aiven free PostgreSQL: https://aiven.io/free-postgresql-database
-- Aiven pgvector: https://aiven.io/blog/aiven-for-postgres-supports-pgvector
-- Render free limits: https://render.com/docs/free
-
-## Decision
-
-No researched free managed PostgreSQL provider safely supports the complete
-`1.4 GB` database. The selected completely free architecture therefore runs
-PostgreSQL with pgvector on the same Oracle Cloud Always Free VM as FastAPI.
-
-The production topology is:
+The project can now keep both application layers on Vercel:
 
 1. Vercel Hobby hosts the React frontend.
-2. Oracle Cloud Always Free runs one ARM VM with `2` OCPUs and `12 GB` RAM.
-3. Docker Compose runs PostgreSQL with pgvector, FastAPI, and Caddy on that VM.
-4. DuckDNS provides the free backend hostname.
-5. Caddy terminates HTTPS and keeps ports `5432` and `8000` private.
-6. Oracle Object Storage can hold compressed database backups.
-7. GitHub Actions provides a manual production deployment workflow.
+2. Vercel Hobby deploys FastAPI from `Dockerfile.vercel` as a container-based
+   Vercel Function on Fluid compute.
+3. Neon Free provides persistent PostgreSQL with pgvector through the Vercel
+   Marketplace.
+4. TMDB provides runtime title fallback data and poster images.
 
-This architecture keeps the full database instead of deleting the document
-tables merely to fit a smaller managed-database quota.
+PostgreSQL is not stored inside the Vercel container because container
+instances are stateless. Neon is the persistent database attached to the
+backend Vercel project.
 
-Implementation and provisioning steps are in
-`docs/DEPLOYMENT_ORACLE_ALWAYS_FREE.md`.
+## Why This Changed
 
-## Not Recommended
+The previous plan used an Oracle Always Free VM because the complete database
+was too large for free managed PostgreSQL and the Python embedding stack was
+too large for the old Vercel Function bundle limit.
 
-- Full local database upload to Supabase/Neon/Render free tiers.
-- Render free Postgres for durable production, because it expires after 30 days.
-- Vercel serverless backend for this Python API, because the embedding stack is too large and model loading is not a good serverless fit.
-- Exposing PostgreSQL directly to the public internet.
-- Treating Oracle trial credits as part of the permanent free architecture.
+Vercel added Dockerfile-based HTTP server deployments and large Functions up
+to `5 GB` in June 2026. That makes the FastAPI, PyTorch, and MiniLM backend
+technically deployable on Vercel. The production database is reduced safely by
+excluding historical rows from document-search tables that the stable
+`/search` route does not use.
+
+The complete local database is not deleted. The compact export is a separate
+production snapshot, and the document table schemas remain available for new
+runtime TMDB imports.
+
+## Free Database Comparison
+
+| Provider | Free DB Limit | pgvector | Fit |
+| --- | ---: | --- | --- |
+| Neon | `0.5 GB` per project | Yes | Selected; production snapshot fits tightly |
+| Supabase | `500 MB` database quota | Yes | Similar limit, less headroom flexibility |
+| Aiven | Free availability can change | Yes | Not selected |
+| Render Postgres | Free database is temporary | Not selected | Not durable enough |
+
+## Important Limits
+
+- The validated compact restore is `362 MB`, leaving about `150 MB` of headroom.
+- Runtime TMDB imports must skip weak movies and avoid uncontrolled bulk import.
+- Vercel Hobby provides `2 GB` memory and `1 vCPU` for Functions.
+- Vercel Hobby Fluid compute includes limited monthly active CPU and memory.
+- Container instances scale to zero and cannot hold persistent data locally.
+
+## Runbooks
+
+- Current Vercel and Neon path: `docs/DEPLOYMENT_VERCEL_FREE.md`.
+- Oracle VM path retained as a fallback: `docs/DEPLOYMENT_ORACLE_ALWAYS_FREE.md`.
+
+## Primary Sources
+
+- Vercel Dockerfile deployment: https://vercel.com/changelog/bring-your-dockerfile-to-vercel-functions
+- Vercel container behavior: https://vercel.com/kb/guide/does-vercel-support-docker-deployments
+- Vercel Function limits: https://vercel.com/docs/functions/limitations
+- Vercel Function pricing: https://vercel.com/docs/functions/usage-and-pricing
+- Neon pricing: https://neon.com/pricing
+- Neon pgvector: https://neon.com/docs/extensions/pgvector
