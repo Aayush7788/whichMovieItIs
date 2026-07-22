@@ -548,6 +548,16 @@ def build_movie_record(
     }
 
 
+def movie_has_searchable_runtime_overview(
+    movie_payload: dict[str, Any],
+) -> bool:
+    overview = clean_text(movie_payload.get("overview"))
+    return (
+        len(overview)
+        >= settings.tmdb_runtime_minimum_overview_length
+    )
+
+
 def build_transient_movie_result(
     movie_payload: dict[str, Any],
 ) -> dict[str, object]:
@@ -1098,6 +1108,21 @@ def import_tmdb_title_if_needed(
             fetch_details,
             deadline,
         )
+
+        if not movie_has_searchable_runtime_overview(movie_payload):
+            logger.info(
+                (
+                    "tmdb runtime fallback persistence skipped query=%r "
+                    "reason=weak_overview overview_length=%s"
+                ),
+                query,
+                len(clean_text(movie_payload.get("overview"))),
+            )
+            return RuntimeTmdbFallbackResult(
+                transient_movie=build_transient_movie_result(
+                    movie_payload
+                ),
+            )
 
         if not has_runtime_budget(deadline):
             logger.info(

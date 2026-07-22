@@ -260,7 +260,11 @@ def test_runtime_fallback_uses_strict_timeout_and_persists_movie(
 
     def fake_fetch_movie_details(client, tmdb_id, maximum_attempts):
         captured["detail_attempts"] = maximum_attempts
-        return {"id": tmdb_id}
+        return {
+            "id": tmdb_id,
+            "title": "Shrek 5",
+            "overview": "A" * 80,
+        }
 
     monkeypatch.setattr(
         tmdb_runtime_import,
@@ -519,3 +523,18 @@ def test_runtime_persistence_denies_new_movie_at_storage_limit(
 
     assert not decision.allowed
     assert decision.database_size_bytes == 450 * 1024 * 1024
+
+
+def test_runtime_overview_quality_gate(monkeypatch):
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_runtime_minimum_overview_length",
+        80,
+    )
+
+    assert not tmdb_runtime_import.movie_has_searchable_runtime_overview(
+        {"overview": "Too short"}
+    )
+    assert tmdb_runtime_import.movie_has_searchable_runtime_overview(
+        {"overview": "A" * 80}
+    )

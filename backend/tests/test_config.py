@@ -99,3 +99,18 @@ def test_production_validation_rejects_invalid_api_rate_limit():
 
     with pytest.raises(ValueError, match="PUBLIC_API_SEARCH"):
         settings.validate_production_settings()
+
+def test_production_validation_rejects_weak_tmdb_overview_gate():
+    settings = build_settings(
+        app_env="production",
+        database_url=(
+            "postgresql://postgres:password@example.com:5432/"
+            "whichmovie"
+        ),
+        tmdb_read_access_token="token",
+        frontend_origins="https://whichmovie.vercel.app",
+        tmdb_runtime_minimum_overview_length=0,
+    )
+
+    with pytest.raises(ValueError, match="MINIMUM_OVERVIEW"):
+        settings.validate_production_settings()

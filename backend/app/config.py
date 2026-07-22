@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     tmdb_runtime_fallback_max_requests_per_window: int = 10
     tmdb_runtime_fallback_query_cache_seconds: int = 1800
     tmdb_runtime_persistence_max_database_mb: int = 450
+    tmdb_runtime_minimum_overview_length: int = 80
     preload_embedding_model_on_startup: bool = True
     public_api_rate_limit_enabled: bool = True
     public_api_rate_limit_window_seconds: int = 60
@@ -57,6 +58,11 @@ class Settings(BaseSettings):
         if self.tmdb_runtime_persistence_max_database_mb < 1:
             errors.append(
                 "TMDB_RUNTIME_PERSISTENCE_MAX_DATABASE_MB must be positive"
+            )
+
+        if self.tmdb_runtime_minimum_overview_length < 1:
+            errors.append(
+                "TMDB_RUNTIME_MINIMUM_OVERVIEW_LENGTH must be positive"
             )
 
         rate_limit_values = {
