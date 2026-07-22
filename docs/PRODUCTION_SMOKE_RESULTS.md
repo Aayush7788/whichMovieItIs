@@ -1,60 +1,57 @@
 # Production Smoke Results
 
-## 2026-07-02
+## Latest Local Verification — 2026-07-22
 
-### Git State
-
-- Branch: `main`
-- Latest production-hardening commits:
-  - `Record production readiness decisions`
-  - `Add production search fallback logging`
-  - `Enforce runtime TMDB fallback budget`
-  - `Add production environment validation`
-  - `Add backend production Dockerfile`
-  - `Document free production database options`
-
-### Validation Commands
+### Commands
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest backend\tests -q
+
 cd frontend
 npm.cmd run lint
 npm.cmd run build
+cd ..
+
 .\.venv\Scripts\python.exe -m scripts.evaluate_search --mode hybrid
 ```
 
-### Results
+### Automated Results
 
-- Backend tests: `38 passed, 2 skipped`.
-- Frontend lint: passed.
-- Frontend production build: passed.
-- `/health`: `200`.
-- `/health/db`: `200`, pgvector `0.8.2`.
-- Local `/search` smoke query: `The Matrix`.
-- Runtime TMDB fallback smoke query: `M3GAN 2.0`.
-- Runtime TMDB fallback request latency: about `2804 ms`.
-- Runtime TMDB fallback imported `M3GAN 2.0` as TMDB movie `1071585`.
+- Backend tests: `48 passed, 2 skipped`.
+- Frontend ESLint: passed.
+- Frontend production build: passed with Vite 8.0.14.
+- Production bundle: 205.39 kB JavaScript and 10.88 kB CSS before gzip.
 
-### Current Hybrid Metrics
+### Live Local API
+
+- `GET /health`: `200`, status `ok`.
+- `GET /health/db`: `200`, database `ok`, pgvector `0.8.2`.
+- `GET /movies?limit=1&offset=0`: total `42,601` movies.
+- `GET /search?q=red%20pill%20blue%20pill&limit=5`: first result `The Matrix`.
+
+### Stable Hybrid Metrics
 
 - `hit@5=1.0000`
-- `mrr@10=0.9063`
+- `mrr@10=0.9285`
 - `recall@10=0.9593`
-- `ndcg@10=0.8850`
+- `ndcg@10=0.8859`
 - `no_result=1.0000`
-- `avg_latency_ms=591.4617`
-- `p95_latency_ms=1310.7650`
+- `avg_latency_ms=406.0909`
+- `p95_latency_ms=930.2597`
 
-### Current Database Counts
+These metrics cover 50 maintained evaluation cases: 45 ranked queries and five no-result queries.
 
-- Movies: `42,577`
-- TMDB-only movies: `370`
-- Runtime-imported movies: `5`
-- Missing movie embeddings: `0`
-- Missing document embeddings: `7`
+## Runtime TMDB Fallback Verification — 2026-07-02
 
-### Notes
+- Smoke query: `M3GAN 2.0`.
+- Request latency: approximately `2804 ms`.
+- Imported TMDB movie ID: `1071585`.
+- The request completed under the configured three-second fallback target after startup embedding-model preload.
 
-- The first request in a fresh process still pays model startup cost unless the backend host keeps the process warm.
-- The measured runtime fallback request was under the approved `3s` target after FastAPI startup preload.
-- The first free-cloud production database should use the lean production table set, not the full document-search database.
+This network-dependent fallback was not repeated during the 2026-07-22 documentation pass to avoid adding another movie solely for a smoke test.
+
+## Deployment Status
+
+- The compact production-database export and Vercel configuration are prepared.
+- The product is verified locally.
+- No public deployment URL is claimed yet.
