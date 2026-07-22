@@ -33,14 +33,14 @@ Traditional title search fails when a person remembers the story but not the nam
 - a vague plot: "man wakes up with tattoos and memory loss"
 ## How Search Works
 
-The public `/search` route uses the stable hybrid pipeline:
+The public `/api/search` route uses the stable hybrid pipeline:
 
 1. **Strict full-text retrieval** rewards precise PostgreSQL matches.
 2. **Broad lexical retrieval** normalizes individual terms and recovers partial plot matches.
 3. **Semantic vector retrieval** embeds the query with `all-MiniLM-L6-v2` and compares it with movie embeddings through pgvector cosine distance.
 4. **Weighted reciprocal-rank fusion** merges candidates with the current weights `1.5` strict, `4.0` broad, and `1.25` vector.
 5. **A no-result guard** rejects weak vector-only matches.
-6. **TMDB title fallback** runs only for title-shaped missing queries, imports the selected movie, embeds it, and searches locally again.
+6. **TMDB title fallback** runs only for title-shaped missing queries. It imports and embeds the selected movie when storage permits; at the production storage ceiling it returns the fetched movie without persisting it.
 
 ![Runtime hybrid search architecture](docs/assets/diagrams/runtime-search-architecture.png)
 
@@ -131,17 +131,25 @@ powershell -ExecutionPolicy Bypass -File .\scripts\stop_local.ps1 -StopDatabase
 
 For first-time database construction and corpus commands, follow [`docs/LOCAL_SETUP.md`](docs/LOCAL_SETUP.md).
 
+## Deploy Free
+
+The prepared production architecture uses one Vercel project for the React
+frontend and FastAPI container, plus Neon PostgreSQL with pgvector. Follow the
+complete account setup, database restore, environment-variable, deployment,
+and smoke-test process in
+[docs/DEPLOYMENT_VERCEL_FREE.md](docs/DEPLOYMENT_VERCEL_FREE.md).
+
 ## Stable API
 
 | Endpoint | Purpose |
 |---|---|
-| `GET /health` | Backend process health |
-| `GET /health/db` | PostgreSQL and pgvector health |
-| `GET /search?q=...&limit=5` | Stable hybrid movie search |
-| `GET /movies?limit=24&offset=0` | Paginated movie catalog |
-| `GET /movies/{movie_key}` | Complete movie detail record |
+| `GET /api/health` | Backend process health |
+| `GET /api/health/db` | PostgreSQL and pgvector health |
+| `GET /api/search?q=...&limit=5` | Stable hybrid movie search |
+| `GET /api/movies?limit=24&offset=0` | Paginated movie catalog |
+| `GET /api/movies/{movie_key}` | Complete movie detail record |
 
-FastAPI's interactive documentation is available locally at `http://127.0.0.1:8000/docs`.
+FastAPI's interactive documentation is available locally at `http://127.0.0.1:8000/api/docs`.
 
 ## Repository Map
 
@@ -162,7 +170,7 @@ docs/                        Architecture, evaluation, setup, and deployment not
 - Retrieval quality is measured on a curated 50-query set and needs broader real-user judgments before making universal accuracy claims.
 - TMDB runtime fallback is intentionally limited to title-shaped queries; it does not turn arbitrary rough plots into live TMDB searches.
 - TMDB overview text is shorter and less descriptive than the CMU plot corpus, so fresh TMDB-only movies may have weaker rough-plot recall.
-- The public deployment configuration is prepared, but this README does not claim a live deployment yet.
+- The one-project Vercel Services configuration is prepared, but this README does not claim a live URL until the Neon restore and production smoke test are completed.
 - The current product is English-first and has no accounts, collections, or personalization.
 
 ## Attribution

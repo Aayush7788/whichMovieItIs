@@ -153,7 +153,7 @@ Services:
 
 - frontend: `http://127.0.0.1:5173`
 - backend: `http://127.0.0.1:8000`
-- API docs: `http://127.0.0.1:8000/docs`
+- API docs: `http://127.0.0.1:8000/api/docs`
 - PostgreSQL: `127.0.0.1:15432`
 
 Stop managed processes and the database:
@@ -165,10 +165,10 @@ powershell -ExecutionPolicy Bypass -File .\scripts\stop_local.ps1 -StopDatabase
 ## 9. Verify Health
 
 ```powershell
-Invoke-RestMethod http://127.0.0.1:8000/health
-Invoke-RestMethod http://127.0.0.1:8000/health/db
-Invoke-RestMethod "http://127.0.0.1:8000/search?q=red%20pill%20blue%20pill&limit=5"
-Invoke-RestMethod "http://127.0.0.1:8000/movies?limit=5&offset=0"
+Invoke-RestMethod http://127.0.0.1:8000/api/health
+Invoke-RestMethod http://127.0.0.1:8000/api/health/db
+Invoke-RestMethod "http://127.0.0.1:8000/api/search?q=red%20pill%20blue%20pill&limit=5"
+Invoke-RestMethod "http://127.0.0.1:8000/api/movies?limit=5&offset=0"
 ```
 
 ## 10. Inspect PostgreSQL

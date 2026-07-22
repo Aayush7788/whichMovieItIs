@@ -3,7 +3,11 @@
   "fluid": true,
   "services": {
     "frontend": {
-      "root": "frontend/"
+      "root": "frontend/",
+      "framework": "vite",
+      "buildCommand": "npm run build",
+      "devCommand": "node scripts/vercel-dev.mjs",
+      "outputDirectory": "dist"
     },
     "backend": {
       "root": "backend/",

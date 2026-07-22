@@ -1,73 +1,60 @@
 # Production Hosting Research
 
-## Current Database Size
+## Selected Architecture
 
-- Full local PostgreSQL database: about `1.4 GB`.
-- Stable production tables: about `384 MB`.
-- Experimental document-search tables: about `1.0 GB`.
+The selected free-first deployment architecture is:
 
-The stable production tables are `movies`, `movie_external_ids`, and
-`movie_memory_clues`. The large experimental tables are
-`movie_search_documents` and `movie_search_document_embeddings`.
+| Component | Platform | Reason |
+|---|---|---|
+| React and Vite frontend | Vercel Service | Static delivery and Git previews |
+| FastAPI backend | Vercel container Service | Supports Python, PyTorch, MiniLM, and one shared domain |
+| PostgreSQL and pgvector | Neon Free | Persistent managed PostgreSQL with vector support |
+| Posters and new-title metadata | TMDB API and CDN | Existing project integration |
 
-## Current Free Hosting Decision
+Both application services deploy inside one Vercel project. Ordered rewrites
+route /api/* to the FastAPI container and all other paths to the frontend.
+The database remains in Neon because Vercel containers are stateless.
 
-The project can now keep both application layers on Vercel:
+## Why the Database Fits
 
-1. Vercel Hobby hosts the React frontend.
-2. Vercel Hobby deploys FastAPI from `Dockerfile.vercel` as a container-based
-   Vercel Function on Fluid compute.
-3. Neon Free provides persistent PostgreSQL with pgvector through the Vercel
-   Marketplace.
-4. TMDB provides runtime title fallback data and poster images.
+The original local database included historical document-search rows that are
+not required by the stable production hybrid route. The compact production
+export retains the core catalog, movie embeddings, full-text indexes, external
+IDs, and small production clue table while leaving the experimental document
+tables empty.
 
-PostgreSQL is not stored inside the Vercel container because container
-instances are stateless. Neon is the persistent database attached to the
-backend Vercel project.
+The previously validated compact restore was approximately 362 MB. This fits
+inside Neon's 0.5 GB free-project storage limit, but headroom is tight.
 
-## Why This Changed
+Runtime TMDB persistence is therefore guarded at 450 MB:
 
-The previous plan used an Oracle Always Free VM because the complete database
-was too large for free managed PostgreSQL and the Python embedding stack was
-too large for the old Vercel Function bundle limit.
+- below the threshold, eligible missing titles can be persisted;
+- at or above the threshold, the current TMDB result is returned without a
+  database write;
+- bulk TMDB ingestion is not part of the initial free deployment.
 
-Vercel added Dockerfile-based HTTP server deployments and large Functions up
-to `5 GB` in June 2026. That makes the FastAPI, PyTorch, and MiniLM backend
-technically deployable on Vercel. The production database is reduced safely by
-excluding historical rows from document-search tables that the stable
-`/search` route does not use.
+## Operational Constraints
 
-The complete local database is not deleted. The compact export is a separate
-production snapshot, and the document table schemas remain available for new
-runtime TMDB imports.
+- Vercel Services and container Functions use Fluid compute and can scale to
+  zero.
+- Cold requests may be slower than warm requests even though MiniLM is baked
+  into the backend image.
+- Vercel containers cannot persist local files between instances.
+- Neon connection pooling must be used by the deployed application.
+- Database size and Vercel usage must be monitored in their dashboards.
+- Search evaluation metrics describe the maintained judged query set, not
+  universal accuracy.
 
-## Free Database Comparison
+## Deployment Runbook
 
-| Provider | Free DB Limit | pgvector | Fit |
-| --- | ---: | --- | --- |
-| Neon | `0.5 GB` per project | Yes | Selected; production snapshot fits tightly |
-| Supabase | `500 MB` database quota | Yes | Similar limit, less headroom flexibility |
-| Aiven | Free availability can change | Yes | Not selected |
-| Render Postgres | Free database is temporary | Not selected | Not durable enough |
-
-## Important Limits
-
-- The validated compact restore is `362 MB`, leaving about `150 MB` of headroom.
-- Runtime TMDB imports must skip weak movies and avoid uncontrolled bulk import.
-- Vercel Hobby provides `2 GB` memory and `1 vCPU` for Functions.
-- Vercel Hobby Fluid compute includes limited monthly active CPU and memory.
-- Container instances scale to zero and cannot hold persistent data locally.
-
-## Runbooks
-
-- Current Vercel and Neon path: `docs/DEPLOYMENT_VERCEL_FREE.md`.
-- Oracle VM path retained as a fallback: `docs/DEPLOYMENT_ORACLE_ALWAYS_FREE.md`.
+Use docs/DEPLOYMENT_VERCEL_FREE.md for the executable deployment and smoke-test
+process.
 
 ## Primary Sources
 
-- Vercel Dockerfile deployment: https://vercel.com/changelog/bring-your-dockerfile-to-vercel-functions
-- Vercel container behavior: https://vercel.com/kb/guide/does-vercel-support-docker-deployments
+- Vercel Services: https://vercel.com/kb/guide/vercel-services
+- Vercel containers: https://vercel.com/blog/dockerfile-on-vercel
 - Vercel Function limits: https://vercel.com/docs/functions/limitations
-- Vercel Function pricing: https://vercel.com/docs/functions/usage-and-pricing
+- Vercel Function usage: https://vercel.com/docs/functions/usage-and-pricing
 - Neon pricing: https://neon.com/pricing
 - Neon pgvector: https://neon.com/docs/extensions/pgvector

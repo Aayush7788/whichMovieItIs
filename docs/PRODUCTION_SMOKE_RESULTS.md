@@ -17,17 +17,27 @@ cd ..
 
 ### Automated Results
 
-- Backend tests: `48 passed, 2 skipped`.
+- Backend tests: `53 passed, 2 skipped`.
 - Frontend ESLint: passed.
 - Frontend production build: passed with Vite 8.0.14.
 - Production bundle: 205.39 kB JavaScript and 10.88 kB CSS before gzip.
 
 ### Live Local API
 
-- `GET /health`: `200`, status `ok`.
-- `GET /health/db`: `200`, database `ok`, pgvector `0.8.2`.
-- `GET /movies?limit=1&offset=0`: total `42,601` movies.
-- `GET /search?q=red%20pill%20blue%20pill&limit=5`: first result `The Matrix`.
+- `GET /api/health`: `200`, status `ok`.
+- `GET /api/health/db`: `200`, database `ok`, pgvector `0.8.2`.
+- `GET /api/movies?limit=1&offset=0`: total `42,601` movies.
+- `GET /api/search?q=red%20pill%20blue%20pill&limit=5`: first result `The Matrix`.
+
+### Deployment Packaging
+
+- backend/Dockerfile.vercel built successfully.
+- Local image size: 471,334,381 bytes.
+- The image loaded MiniLM from its cached offline model files.
+- The temporary container returned 200 from /api/health.
+- Vercel CLI 56.5.0 detected frontend as Vite and backend as container.
+- Vercel local Services routing returned 200 for the frontend and /api/health
+  through one port.
 
 ### Stable Hybrid Metrics
 

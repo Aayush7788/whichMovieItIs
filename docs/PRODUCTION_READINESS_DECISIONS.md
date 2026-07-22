@@ -42,3 +42,14 @@
 - Additional health endpoint: do not add `/health/search` now.
 - Search logging: print logs to backend console for now instead of writing search activity to a database table.
 - Product goal: real user-ready product, not only a resume/demo project.
+
+## Final Deployment Decision
+
+- Public surface: one Vercel project and one domain.
+- Frontend: React and Vite Vercel Service at normal paths.
+- Backend: FastAPI container Service at /api/*.
+- Database: compact Neon PostgreSQL and pgvector restore.
+- Runtime catalog growth: exact-title TMDB fallback, with persistence blocked at
+  450 MB and transient return preserved above the limit.
+- Deployment is not considered complete until the Neon restore and public smoke
+  test pass.

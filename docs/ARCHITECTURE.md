@@ -1,6 +1,6 @@
 # Architecture
 
-This document describes the code that currently runs in WhichMovieItIs. The production-facing search path is the stable `GET /search` route; experimental comparison routes are not part of this architecture.
+This document describes the code that currently runs in WhichMovieItIs. The production-facing search path is the stable `GET /api/search` route; experimental comparison routes are not part of this architecture.
 
 ## System Boundary
 
@@ -24,10 +24,10 @@ Editable source: [`runtime-search-architecture.excalidraw`](assets/diagrams/runt
 1. `frontend/src/components/HeroSearch.jsx` captures the query.
 2. `frontend/src/App.jsx` owns search, catalog, and selected-movie state.
 3. `frontend/src/lib/api.js` requests `/api/search` during local development.
-4. Vite proxies `/api/*` to FastAPI on `127.0.0.1:8000` and removes the `/api` prefix.
+4. During normal local development, Vite proxies `/api/*` unchanged to FastAPI on `127.0.0.1:8000`. In production, Vercel Services routes the same path to the backend container.
 5. `backend/app/main.py` validates `q` and `limit` and calls `search_movies_hybrid()`.
 6. The backend returns a Pydantic-validated `MovieSearchResponse`.
-7. The frontend renders ranked cards and requests `/movies/{movie_key}` when a card is opened.
+7. The frontend renders ranked cards and requests `/api/movies/{movie_key}` when a card is opened.
 
 The browser never connects directly to PostgreSQL or TMDB.
 
@@ -214,13 +214,14 @@ Stores the limited curated clue set used by the auxiliary branch.
 ## Reliability and Failure Behavior
 
 - Pydantic response models prevent accidental API-shape drift.
-- `/health` checks the process; `/health/db` checks PostgreSQL and reports the pgvector extension version.
+- `/api/health` checks the process; `/api/health/db` checks PostgreSQL and reports the pgvector extension version.
 - Production settings reject missing database/TMDB configuration, wildcard CORS, and localhost origins.
 - Search and fallback latency are logged to the backend console.
 - TMDB failures do not destroy the local result list.
+- New TMDB persistence stops at the configured database-size ceiling; the fetched exact-title result can still be returned transiently.
 - Changed TMDB rows invalidate stale embeddings before regeneration.
 - Local startup uses managed PID files and log files under `.local/`.
 
 ## Deployment State
 
-The repository contains a Vercel-compatible frontend/backend configuration and a compact production-database export path. Public deployment is not claimed yet. The current verified product runs locally; deployment instructions remain in `docs/DEPLOYMENT_VERCEL_FREE.md`.
+The repository contains one Vercel Services project: the Vite frontend handles normal paths, the FastAPI container handles `/api/*`, and Neon supplies persistent PostgreSQL with pgvector. A compact production-database export and restore path is prepared. Public deployment is not claimed until the cloud database restore and production smoke test are complete; the executable runbook is `docs/DEPLOYMENT_VERCEL_FREE.md`.
