@@ -169,10 +169,12 @@ def test_import_tmdb_title_returns_false_when_tmdb_has_no_exact_match(
         lambda client, title, release_date, maximum_attempts: None,
     )
 
-    assert not tmdb_runtime_import.import_tmdb_title_if_needed(
+    result = tmdb_runtime_import.import_tmdb_title_if_needed(
         query="red pill blue pill",
         local_results=[],
     )
+
+    assert result == tmdb_runtime_import.RuntimeTmdbFallbackResult()
 
 
 def test_runtime_fallback_rate_limits_requests(monkeypatch):
@@ -282,6 +284,16 @@ def test_runtime_fallback_uses_strict_timeout_and_schedules_documents(
     )
     monkeypatch.setattr(
         tmdb_runtime_import,
+        "assess_runtime_persistence",
+        lambda cursor, tmdb_id: (
+            tmdb_runtime_import.RuntimePersistenceDecision(
+                allowed=True,
+                database_size_bytes=100 * 1024 * 1024,
+            )
+        ),
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import,
         "upsert_tmdb_movie",
         lambda cursor, movie_payload: 123,
     )
@@ -291,10 +303,13 @@ def test_runtime_fallback_uses_strict_timeout_and_schedules_documents(
         lambda movie_id: captured.update({"scheduled_movie_id": movie_id}),
     )
 
-    assert tmdb_runtime_import.import_tmdb_title_if_needed(
+    result = tmdb_runtime_import.import_tmdb_title_if_needed(
         query="Shrek 5",
         local_results=[],
     )
+
+    assert result.imported
+    assert result.transient_movie is None
     assert len(captured["timeouts"]) == 2
     assert all(
         0 < timeout <= 2.5
@@ -319,10 +334,12 @@ def test_runtime_fallback_skips_when_timeout_disabled(monkeypatch):
         0,
     )
 
-    assert not tmdb_runtime_import.import_tmdb_title_if_needed(
+    result = tmdb_runtime_import.import_tmdb_title_if_needed(
         query="Shrek 5",
         local_results=[],
     )
+
+    assert result == tmdb_runtime_import.RuntimeTmdbFallbackResult()
 
 
 def test_runtime_fallback_enforces_hard_deadline(monkeypatch):
@@ -368,5 +385,136 @@ def test_runtime_fallback_enforces_hard_deadline(monkeypatch):
     )
     elapsed_seconds = perf_counter() - started_at
 
-    assert result is False
+    assert result == tmdb_runtime_import.RuntimeTmdbFallbackResult()
     assert elapsed_seconds < 0.15
+
+def test_runtime_fallback_returns_transient_movie_over_storage_budget(
+    monkeypatch,
+):
+    clear_runtime_fallback_state()
+    captured = {}
+
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "should_try_tmdb_title_fallback",
+        lambda query, local_results: True,
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_runtime_fallback_timeout_seconds",
+        2.5,
+    )
+
+    class FakeClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            return None
+
+    class FakeCursor:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            return None
+
+    class FakeConnection:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            return None
+
+        def cursor(self):
+            return FakeCursor()
+
+        def commit(self):
+            captured["committed"] = True
+
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "create_tmdb_client",
+        lambda timeout_seconds=None: FakeClient(),
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "search_tmdb_movie",
+        lambda client, title, release_date, maximum_attempts: {
+            "id": 123456,
+        },
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "fetch_movie_details",
+        lambda client, tmdb_id, maximum_attempts: {
+            "id": tmdb_id,
+            "title": "Storage Budget Movie",
+            "release_date": "2026-07-01",
+            "overview": "A movie returned without database persistence.",
+            "genres": [{"name": "Drama"}],
+            "poster_path": "/poster.jpg",
+        },
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "get_connection",
+        lambda: FakeConnection(),
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "assess_runtime_persistence",
+        lambda cursor, tmdb_id: (
+            tmdb_runtime_import.RuntimePersistenceDecision(
+                allowed=False,
+                database_size_bytes=460 * 1024 * 1024,
+            )
+        ),
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "upsert_tmdb_movie",
+        lambda cursor, movie_payload: (_ for _ in ()).throw(
+            AssertionError("over-budget movie must not be persisted")
+        ),
+    )
+
+    result = tmdb_runtime_import.import_tmdb_title_if_needed(
+        query="Storage Budget Movie",
+        local_results=[],
+    )
+
+    assert not result.imported
+    assert result.transient_movie is not None
+    assert result.transient_movie["movie_key"] == "tmdb:123456"
+    assert result.transient_movie["title"] == "Storage Budget Movie"
+    assert "committed" not in captured
+
+def test_runtime_persistence_denies_new_movie_at_storage_limit(
+    monkeypatch,
+):
+    class FakeCursor:
+        def execute(self, sql):
+            self.sql = sql
+
+        def fetchone(self):
+            return (450 * 1024 * 1024,)
+
+    monkeypatch.setattr(
+        tmdb_runtime_import,
+        "find_existing_movie",
+        lambda cursor, tmdb_id: None,
+    )
+    monkeypatch.setattr(
+        tmdb_runtime_import.settings,
+        "tmdb_runtime_persistence_max_database_mb",
+        450,
+    )
+
+    decision = tmdb_runtime_import.assess_runtime_persistence(
+        cursor=FakeCursor(),
+        tmdb_id=123456,
+    )
+
+    assert not decision.allowed
+    assert decision.database_size_bytes == 450 * 1024 * 1024

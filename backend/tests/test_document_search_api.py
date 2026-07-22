@@ -34,7 +34,7 @@ def test_document_search_endpoint_returns_results(
     )
 
     response = client.get(
-        "/search/documents",
+        "/api/search/documents",
         params={
             "q": "computer simulation hacker",
             "limit": 5,
@@ -72,7 +72,7 @@ def test_hybrid_v2_search_endpoint_returns_results(
     )
 
     response = client.get(
-        "/search/hybrid-v2",
+        "/api/search/hybrid-v2",
         params={
             "q": "hockey mask summer camp",
             "limit": 5,

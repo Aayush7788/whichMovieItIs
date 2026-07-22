@@ -8,7 +8,7 @@ client = TestClient(app)
 
 def test_search_rejects_blank_query():
     response = client.get(
-        "/search",
+        "/api/search",
         params={"q": "   "},
     )
 
@@ -44,7 +44,7 @@ def test_search_returns_poster_metadata(
     )
 
     response = client.get(
-        "/search",
+        "/api/search",
         params={
             "q": "reality simulation",
             "limit": 5,
@@ -60,3 +60,11 @@ def test_search_returns_poster_metadata(
     assert movie["poster_url"].endswith(
         "/w342/poster.jpg"
     )
+
+def test_unprefixed_search_route_is_not_exposed():
+    response = client.get(
+        "/search",
+        params={"q": "The Matrix"},
+    )
+
+    assert response.status_code == 404

@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     tmdb_runtime_fallback_rate_limit_window_seconds: int = 60
     tmdb_runtime_fallback_max_requests_per_window: int = 10
     tmdb_runtime_fallback_query_cache_seconds: int = 1800
+    tmdb_runtime_persistence_max_database_mb: int = 450
     preload_embedding_model_on_startup: bool = True
     log_level: str = "INFO"
 
@@ -48,6 +49,11 @@ class Settings(BaseSettings):
 
         if not self.tmdb_read_access_token:
             errors.append("TMDB_READ_ACCESS_TOKEN is required")
+
+        if self.tmdb_runtime_persistence_max_database_mb < 1:
+            errors.append(
+                "TMDB_RUNTIME_PERSISTENCE_MAX_DATABASE_MB must be positive"
+            )
 
         if not frontend_origins:
             errors.append("FRONTEND_ORIGINS must contain at least one origin")

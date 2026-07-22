@@ -201,27 +201,38 @@ def search_movies_hybrid_local(query: str, limit: int = 5) -> list[dict[str, obj
 def search_movies_hybrid(query: str, limit: int = 5) -> list[dict[str, object]]:
     started_at = perf_counter()
     results = search_movies_hybrid_local(query, limit)
-    fallback_imported = False
-
-    if import_tmdb_title_if_needed(
+    fallback_result = import_tmdb_title_if_needed(
         query=query,
         local_results=results,
-    ):
-        fallback_imported = True
+    )
+    fallback_imported = fallback_result.imported
+    fallback_transient = fallback_result.transient_movie is not None
+
+    if fallback_imported:
         results = search_movies_hybrid_local(query, limit)
+    elif fallback_result.transient_movie is not None:
+        transient_movie = fallback_result.transient_movie
+        results = [
+            transient_movie,
+            *[
+                movie
+                for movie in results
+                if movie["movie_key"] != transient_movie["movie_key"]
+            ],
+        ][:limit]
 
     latency_ms = (perf_counter() - started_at) * 1000
     logger.info(
         (
-            "search completed query=%r limit=%s "
-            "results=%s fallback_imported=%s latency_ms=%.1f"
+            "search completed query=%r limit=%s results=%s "
+            "fallback_imported=%s fallback_transient=%s latency_ms=%.1f"
         ),
         query,
         limit,
         len(results),
         fallback_imported,
+        fallback_transient,
         latency_ms,
     )
 
     return results
-

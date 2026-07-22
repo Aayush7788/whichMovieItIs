@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 from collections.abc import Iterable
+from dataclasses import dataclass
 from queue import Queue
 from threading import Lock, Thread
 from time import monotonic
@@ -20,6 +21,7 @@ from backend.app.services.embeddings import (
     to_pgvector_literal,
 )
 from backend.app.services.tmdb import (
+    build_poster_url,
     create_tmdb_client,
     normalize_title,
     request_tmdb_json,
@@ -67,6 +69,17 @@ class RuntimeFallbackDeadlineExceeded(TimeoutError):
     pass
 
 
+@dataclass(frozen=True)
+class RuntimeTmdbFallbackResult:
+    imported: bool = False
+    transient_movie: dict[str, object] | None = None
+
+
+@dataclass(frozen=True)
+class RuntimePersistenceDecision:
+    allowed: bool
+    database_size_bytes: int
+
 find_movie_by_tmdb_external_id_sql = """
     select
         movie.id,
@@ -91,6 +104,10 @@ find_movie_by_tmdb_id_sql = """
     limit 1;
 """
 
+
+database_size_sql = """
+    select pg_database_size(current_database());
+"""
 
 insert_tmdb_movie_sql = """
     insert into movies (
@@ -531,6 +548,31 @@ def build_movie_record(
     }
 
 
+def build_transient_movie_result(
+    movie_payload: dict[str, Any],
+) -> dict[str, object]:
+    record = build_movie_record(movie_payload)
+    poster_path = (
+        str(record["poster_path"])
+        if record["poster_path"] is not None
+        else None
+    )
+
+    return {
+        "movie_key": str(record["movie_key"]),
+        "wikipedia_movie_id": None,
+        "title": str(record["title"]),
+        "release_date": record["release_date"],
+        "genres": extract_genres(movie_payload),
+        "plot_summary": str(record["plot_summary"]),
+        "tmdb_id": int(record["tmdb_id"]),
+        "poster_path": poster_path,
+        "poster_url": build_poster_url(poster_path),
+        "metadata_source": tmdb_source,
+        "score": 1.0,
+    }
+
+
 def movie_identity_from_row(row) -> dict[str, object]:
     if row is None or len(row) != 3:
         raise ValueError(f"expected movie identity row with 3 columns, got {row!r}")
@@ -778,6 +820,37 @@ def find_existing_movie(
     return None
 
 
+def assess_runtime_persistence(
+    cursor,
+    tmdb_id: int,
+) -> RuntimePersistenceDecision:
+    if find_existing_movie(cursor, tmdb_id) is not None:
+        return RuntimePersistenceDecision(
+            allowed=True,
+            database_size_bytes=0,
+        )
+
+    cursor.execute(database_size_sql)
+    row = cursor.fetchone()
+
+    if row is None or len(row) != 1:
+        raise ValueError(
+            f"expected database size row with 1 column, got {row!r}"
+        )
+
+    database_size_bytes = int(row[0])
+    maximum_size_bytes = (
+        settings.tmdb_runtime_persistence_max_database_mb
+        * 1024
+        * 1024
+    )
+
+    return RuntimePersistenceDecision(
+        allowed=database_size_bytes < maximum_size_bytes,
+        database_size_bytes=database_size_bytes,
+    )
+
+
 def build_document_embedding_text(
     title: str,
     document_type: str,
@@ -939,7 +1012,9 @@ def upsert_tmdb_movie(
 def import_tmdb_title_if_needed(
     query: str,
     local_results: list[dict[str, object]],
-) -> bool:
+) -> RuntimeTmdbFallbackResult:
+    empty_result = RuntimeTmdbFallbackResult()
+
     if not should_try_tmdb_title_fallback(
         query=query,
         local_results=local_results,
@@ -952,7 +1027,7 @@ def import_tmdb_title_if_needed(
             query,
             len(local_results),
         )
-        return False
+        return empty_result
 
     if not acquire_runtime_fallback_slot(query):
         logger.info(
@@ -962,7 +1037,7 @@ def import_tmdb_title_if_needed(
             ),
             query,
         )
-        return False
+        return empty_result
 
     try:
         fallback_started_at = monotonic()
@@ -978,7 +1053,7 @@ def import_tmdb_title_if_needed(
                 ),
                 query,
             )
-            return False
+            return empty_result
 
         deadline = fallback_started_at + timeout_budget_seconds
         maximum_attempts = max(
@@ -1012,7 +1087,7 @@ def import_tmdb_title_if_needed(
                 ),
                 query,
             )
-            return False
+            return empty_result
 
         if not has_runtime_budget(deadline):
             logger.info(
@@ -1022,7 +1097,7 @@ def import_tmdb_title_if_needed(
                 ),
                 query,
             )
-            return False
+            return empty_result
 
         def fetch_details():
             with create_tmdb_client(
@@ -1049,10 +1124,32 @@ def import_tmdb_title_if_needed(
                 ),
                 query,
             )
-            return False
+            return empty_result
 
         with get_connection() as connection:
             with connection.cursor() as cursor:
+                persistence = assess_runtime_persistence(
+                    cursor=cursor,
+                    tmdb_id=int(movie_payload["id"]),
+                )
+
+                if not persistence.allowed:
+                    logger.warning(
+                        (
+                            "tmdb runtime fallback persistence skipped "
+                            "query=%r reason=database_storage_budget "
+                            "database_size_mb=%.1f limit_mb=%s"
+                        ),
+                        query,
+                        persistence.database_size_bytes / 1024 / 1024,
+                        settings.tmdb_runtime_persistence_max_database_mb,
+                    )
+                    return RuntimeTmdbFallbackResult(
+                        transient_movie=build_transient_movie_result(
+                            movie_payload
+                        ),
+                    )
+
                 movie_id = upsert_tmdb_movie(
                     cursor=cursor,
                     movie_payload=movie_payload,
@@ -1072,7 +1169,9 @@ def import_tmdb_title_if_needed(
                 (monotonic() - fallback_started_at) * 1000,
             )
 
-        return movie_id is not None
+        return RuntimeTmdbFallbackResult(
+            imported=movie_id is not None,
+        )
     except (
         httpx.HTTPError,
         RuntimeError,
@@ -1084,4 +1183,4 @@ def import_tmdb_title_if_needed(
             query,
             error,
         )
-        return False
+        return empty_result

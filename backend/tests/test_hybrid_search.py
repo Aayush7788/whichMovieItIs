@@ -1,4 +1,7 @@
 from backend.app.services import hybrid_search
+from backend.app.services.tmdb_runtime_import import (
+    RuntimeTmdbFallbackResult,
+)
 
 def build_movie(
     movie_id: str,
@@ -111,7 +114,7 @@ def test_search_movies_hybrid_queries_broad_source(
     monkeypatch.setattr(
         hybrid_search,
         "import_tmdb_title_if_needed",
-        lambda query, local_results: False,
+        lambda query, local_results: RuntimeTmdbFallbackResult(),
     )
 
     def fake_broad_search(query, limit):
@@ -177,7 +180,7 @@ def test_search_movies_hybrid_uses_memory_clue_source(
     monkeypatch.setattr(
         hybrid_search,
         "import_tmdb_title_if_needed",
-        lambda query, local_results: False,
+        lambda query, local_results: RuntimeTmdbFallbackResult(),
     )
     monkeypatch.setattr(
         hybrid_search,
@@ -233,7 +236,9 @@ def test_search_movies_hybrid_reruns_after_tmdb_runtime_import(
     monkeypatch.setattr(
         hybrid_search,
         "import_tmdb_title_if_needed",
-        lambda query, local_results: True,
+        lambda query, local_results: RuntimeTmdbFallbackResult(
+            imported=True,
+        ),
     )
 
     results = hybrid_search.search_movies_hybrid(
@@ -247,3 +252,32 @@ def test_search_movies_hybrid_reruns_after_tmdb_runtime_import(
     ]
     assert results[0]["title"] == "Toy Story 5"
 
+def test_search_movies_hybrid_returns_transient_tmdb_result(
+    monkeypatch,
+):
+    transient_movie = {
+        **build_movie("123456", "Storage Budget Movie", 1.0),
+        "movie_key": "tmdb:123456",
+        "wikipedia_movie_id": None,
+        "tmdb_id": 123456,
+    }
+
+    monkeypatch.setattr(
+        hybrid_search,
+        "search_movies_hybrid_local",
+        lambda query, limit: [],
+    )
+    monkeypatch.setattr(
+        hybrid_search,
+        "import_tmdb_title_if_needed",
+        lambda query, local_results: RuntimeTmdbFallbackResult(
+            transient_movie=transient_movie,
+        ),
+    )
+
+    results = hybrid_search.search_movies_hybrid(
+        "Storage Budget Movie",
+        limit=5,
+    )
+
+    assert results == [transient_movie]

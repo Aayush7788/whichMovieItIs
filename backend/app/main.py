@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 import logging
 
-from fastapi import FastAPI, HTTPException
+from fastapi import APIRouter, FastAPI, HTTPException
 import psycopg
 from .schemas import (
     MovieCatalogResponse,
@@ -44,7 +44,14 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(
+    lifespan=lifespan,
+    docs_url="/api/docs",
+    openapi_url="/api/openapi.json",
+    redoc_url="/api/redoc",
+    swagger_ui_oauth2_redirect_url="/api/docs/oauth2-redirect",
+)
+api_router = APIRouter(prefix="/api")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.get_frontend_origins(),
@@ -53,13 +60,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/health")
+@api_router.get("/health")
 def health():
     return {
         "status": "ok"
     }
 
-@app.get("/health/db")
+@api_router.get("/health/db")
 def health_db():
     try:
         with get_connection() as conn:
@@ -75,7 +82,7 @@ def health_db():
         "pgvector": row[0] if row else None,
     }
 
-@app.get("/movies", response_model=MovieCatalogResponse)
+@api_router.get("/movies", response_model=MovieCatalogResponse)
 def movies(limit: int = 24, offset: int = 0):
     if limit < 1 or limit > 60:
         raise HTTPException(
@@ -90,7 +97,7 @@ def movies(limit: int = 24, offset: int = 0):
 
     return list_movies(limit=limit, offset=offset)
 
-@app.get("/movies/{movie_key}", response_model=MovieDetail)
+@api_router.get("/movies/{movie_key}", response_model=MovieDetail)
 def movie_detail(movie_key: str):
     movie = get_movie_detail(movie_key)
 
@@ -102,7 +109,7 @@ def movie_detail(movie_key: str):
 
     return movie
 
-@app.get("/search", response_model=MovieSearchResponse)
+@api_router.get("/search", response_model=MovieSearchResponse)
 def search(q:str, limit: int = 5):
     cleaned_query = q.strip()
 
@@ -118,7 +125,7 @@ def search(q:str, limit: int = 5):
         "results": results,
     }
 
-@app.get("/search/vector", response_model=MovieSearchResponse)
+@api_router.get("/search/vector", response_model=MovieSearchResponse)
 def vector_search(q: str, limit: int = 5):
     cleaned_query = q.strip()
 
@@ -133,7 +140,7 @@ def vector_search(q: str, limit: int = 5):
         "results": result,
     }
 
-@app.get("/search/hybrid", response_model=MovieSearchResponse)
+@api_router.get("/search/hybrid", response_model=MovieSearchResponse)
 def hybrid_search(q: str, limit: int = 5):
     cleaned_query = q.strip()
 
@@ -149,7 +156,7 @@ def hybrid_search(q: str, limit: int = 5):
         "results": results,
     }
 
-@app.get("/search/reranked", response_model=MovieSearchResponse)
+@api_router.get("/search/reranked", response_model=MovieSearchResponse)
 def reranked_search(q: str, limit: int = 5):
     cleaned_query = q.strip()
 
@@ -166,7 +173,7 @@ def reranked_search(q: str, limit: int = 5):
     }
 
 
-@app.get("/search/documents", response_model=MovieSearchResponse)
+@api_router.get("/search/documents", response_model=MovieSearchResponse)
 def document_search(q: str, limit: int = 5):
     cleaned_query = q.strip()
 
@@ -185,7 +192,7 @@ def document_search(q: str, limit: int = 5):
         "results": results,
     }
 
-@app.get("/search/hybrid-v2", response_model=MovieSearchResponse)
+@api_router.get("/search/hybrid-v2", response_model=MovieSearchResponse)
 def hybrid_v2_search(q: str, limit: int = 5):
     cleaned_query = q.strip()
 
@@ -203,3 +210,5 @@ def hybrid_v2_search(q: str, limit: int = 5):
         "query": cleaned_query,
         "results": results,
     }
+
+app.include_router(api_router)

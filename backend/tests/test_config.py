@@ -68,3 +68,18 @@ def test_production_validation_accepts_external_config():
     )
 
     settings.validate_production_settings()
+
+def test_production_validation_rejects_invalid_storage_budget():
+    settings = build_settings(
+        app_env="production",
+        database_url=(
+            "postgresql://postgres:password@example.com:5432/"
+            "whichmovie"
+        ),
+        tmdb_read_access_token="token",
+        frontend_origins="https://whichmovie.vercel.app",
+        tmdb_runtime_persistence_max_database_mb=0,
+    )
+
+    with pytest.raises(ValueError, match="must be positive"):
+        settings.validate_production_settings()

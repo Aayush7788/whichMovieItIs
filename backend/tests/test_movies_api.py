@@ -36,7 +36,7 @@ def test_movies_endpoint_returns_catalog(monkeypatch):
     )
 
     response = client.get(
-        "/movies",
+        "/api/movies",
         params={
             "limit": 12,
             "offset": 0,
@@ -70,7 +70,7 @@ def test_movie_detail_endpoint_returns_database_fields(monkeypatch):
         lambda movie_key: detail if movie_key == "cmu:30007" else None,
     )
 
-    response = client.get("/movies/cmu:30007")
+    response = client.get("/api/movies/cmu:30007")
 
     assert response.status_code == 200
     payload = response.json()
@@ -86,7 +86,7 @@ def test_movie_detail_endpoint_returns_404(monkeypatch):
         lambda movie_key: None,
     )
 
-    response = client.get("/movies/cmu:missing")
+    response = client.get("/api/movies/cmu:missing")
 
     assert response.status_code == 404
     assert response.json() == {"detail": "movie not found"}
